@@ -1,11 +1,42 @@
-.DS_Store
+# Grails + Angular2 gitignore file :)
+
+# server dependencies
 .gradle
+
+# client dependencies
+client/node_modules
+
+# server compiled output
 build/
+
+# client compiled output
+client/dist
+client/tmp
+
+# IDE and editors
 .idea
+.project
+.settings
+.classpath
+client/.vscode/
+
+
+# misc
+client/.sass-cache
+client/connect.lock
+client/coverage/*
+client/libpeerconnection.log
+client/npm-debug.log
+client/testem.log
+client/typings
 *.iml
 *.ipr
 *.iws
 *.db
-.project
-.settings
-.classpath
+
+# e2e
+client/e2e/*js
+client/e2e/*.map
+
+# System Files
+.DS_Store
