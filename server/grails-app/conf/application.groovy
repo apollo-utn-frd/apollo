@@ -34,7 +34,7 @@ grails {
             rest {
                 oauth {
                     /* TO-DO: Reemplazar por la URL de callback de Angular. */
-                    frontendCallbackUrl = { String tokenValue -> "http://localhost/welcome#token=${tokenValue}" }
+                    frontendCallbackUrl = { String tokenValue -> "http://localhost:4200/welcome#${tokenValue}" }
 
                     google {
                         client = org.pac4j.oauth.client.Google2Client

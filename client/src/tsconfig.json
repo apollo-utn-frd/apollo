@@ -14,8 +14,8 @@
       "../node_modules/@types"
     ],
     "types": [
-      "jasmine",
-      "core-js"
+      "jasmine"
+      //"core-js"
     ]
   }
 }
