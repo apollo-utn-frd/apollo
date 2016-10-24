@@ -1,0 +1,12 @@
+#barra {
+  background-color: #337ab7;
+  width: 100%;
+}
+
+#titulo {
+  color: white;
+}
+
+.navbar-default {
+  border-color: #337ab7;
+}
