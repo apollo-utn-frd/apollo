@@ -1,27 +1,33 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user';
-import { Service } from '../service.interface';
+import { Service } from '../service';
+import { Observable } from 'rxjs/Observable';
+import { Http } from '@angular/http';
 
 @Injectable()
-export class UserMockService implements Service {
+export class UserMockService extends Service<User> {
 
-  getByID<User>(id: number): User {
+  constructor(http: Http) { 
+    super(http);
+  }
+  
+  getByID(id: number): Observable<User> {
     return null;
   }
 
-  get<User>(): User[] {
+  get(): Observable<User[]> {
     return null;
   }
 
-  create<User>(t: User): void {
+  create(u: User): Observable<void> {
     return null;
   }
 
-  delete(id: number): void {
-    return null;
+  delete(id: number): Observable<void> {
+    return null; // no esta permitida
   }
 
-  edit<User>(id: number, u: User): void {
+  edit(id: number, u: User): Observable<void> {
     return null;
   }
 }

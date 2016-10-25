@@ -1,23 +1,36 @@
 import { Injectable } from '@angular/core';
 import { RV } from '../../models/rv';
-import { Service } from '../service.interface';
+import { Service } from '../service';
+import { Observable } from 'rxjs/Observable';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map'; 
+import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class RVMockService implements Service {
+export class RVMockService extends Service<RV> {
 
-  getByID<RV>(id: number): RV {
+  constructor(http: Http) { 
+    super(http);
+  }
+
+  getByID(id: number): Observable<RV> {
       return null;
   }
-  get<RV>(): RV[] {
+  
+  get(): Observable<RV[]> {
       return null;
   }
-  create<RV>(rv: RV): void {
+
+  create(rv: RV): Observable<void> {
       return null;
   }
-  delete(id: number): void {
+
+  delete(id: number): Observable<void> {
       return null;
   }
-  edit<RV>(id: number, rv: RV): void{
+
+  edit(id: number, rv: RV): Observable<void> {
       return null;
   }
+
 }
