@@ -27,7 +27,7 @@ export class UserMockService extends Service<User> {
     return null; // no esta permitida
   }
 
-  edit(id: number, u: User): Observable<void> {
+  edit(u: User): Observable<void> {
     return null;
   }
 }

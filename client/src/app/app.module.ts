@@ -42,8 +42,8 @@ import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from 'angular2-goo
       apiKey: 'AIzaSyDSA-Sc8yoe_NIGqOwTGoNPiKge0KRK_wo'
     })
   ],
-  entryComponents: [ 
-    AppComponent, 
+  entryComponents: [
+    AppComponent,
     WelcomeComponent,
     LoginComponent,
     HomeComponent,

@@ -4,12 +4,12 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 const V = Validators;
 
 @Component({
-  selector: 'creation-form',
+  selector: 'apollo-creation-form',
   templateUrl: 'creation-form.component.html',
   styleUrls: ['./creation-form.component.css']
 })
 export class CreationFormComponent {
-  form: FormGroup
+  form: FormGroup;
 
   private nameValidators = V.compose([V.required, V.minLength(2), V.maxLength(20)]);
   private descripValidators = V.maxLength(200);
@@ -17,9 +17,9 @@ export class CreationFormComponent {
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({
-      "nombre": new FormControl("nombre", this.nameValidators),
-      "descripcion": new FormControl("descripcion", this.descripValidators),
-      "visibilidad": new FormControl("visibilidad", this.visValidator)
+      'nombre': new FormControl('nombre', this.nameValidators),
+      'descripcion': new FormControl('descripcion', this.descripValidators),
+      'visibilidad': new FormControl('visibilidad', this.visValidator)
     });
   }
 
@@ -27,6 +27,6 @@ export class CreationFormComponent {
     // TODO
     // Crear objeto de RV y persistirlo.
     // tener en cuenta que pertenece a un usuario en particular
-    console.log("Ruta de viaje creada!")
+    console.log('Ruta de viaje creada!');
   }
 }

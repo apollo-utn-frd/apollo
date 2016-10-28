@@ -1,32 +1,40 @@
 import { Injectable } from '@angular/core';
-import { User } from '../../models/user';
+import { User, RV, Comment } from '../../models/index';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Service } from '../service';
-import 'rxjs/add/operator/map'; 
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/mergeMap';
+import * as api from '../api';
 
 @Injectable()
 export class UserService extends Service<User> {
 
-  constructor(http: Http) { 
+  constructor(http: Http) {
     super(http);
   }
-  
+
   getByID(id: number): Observable<User> {
-    return this.http.get("url" + id)
-                    .map((res: Response) => res.json() as User)
+    return this.http.get(api.USUARIOS + id)
+                    .flatMap((res: Response) => res.json())
+                    .catch(this.handleError);
+  }
+
+  getByName(name: string): Observable<User> {
+    return this.http.get(api.USUARIOS + 'u/' + name)
+                    .flatMap((res: Response) => res.json())
                     .catch(this.handleError);
   }
 
   get(): Observable<User[]> {
-    return this.http.get("url")
-                    .map((res: Response) => res.json() as User[])
+    return this.http.get(api.USUARIOS)
+                    .flatMap((res: Response) => res.json())
                     .catch(this.handleError);
   }
 
-  create(u: User): Observable<void> {
-    return this.http.post("url", u)
+  edit(u: User): Observable<void> {
+    return this.http.put(api.USUARIOS, u)
                     .catch(this.handleError);
   }
 
@@ -34,7 +42,53 @@ export class UserService extends Service<User> {
     return null; // no esta permitida
   }
 
-  edit(id: number, u: User): Observable<void> {
-    return null;
+  create(user: User): Observable<void> {
+    return null; // no esta permitida
+  }
+
+  share(rv: RV) {
+    return this.http.post(api.COMPARTIR_RV + rv.id, rv)
+                    .catch(this.handleError);
+  }
+
+  unshare(rv: RV) {
+    return this.http.delete(api.COMPARTIR_RV + rv.id)
+                    .catch(this.handleError);
+  }
+
+  fav(rv: RV) {
+    return this.http.post(api.FAVEAR_RV + rv.id, rv)
+                    .catch(this.handleError);
+  }
+
+  unfav(rv: RV) {
+    return this.http.delete(api.FAVEAR_RV + rv.id, rv)
+                    .catch(this.handleError);
+  }
+
+  follow(user: User) {
+    return this.http.post(api.SEGUIR_USUARIO + user.id, user)
+                    .catch(this.handleError);
+  }
+
+  unfollow(user: User) {
+    return this.http.delete(api.SEGUIR_USUARIO + user.id, user)
+                    .catch(this.handleError);
+  }
+
+  comment(rv: RV, comment: Comment) {
+    return this.http.post(api.COMENTAR_RV + rv.id, comment)
+                    .catch(this.handleError);
+  }
+
+  getComments() {
+    return this.http.get(api.COMENTAR_RV)
+                    .flatMap((res: Response) => res.json())
+                    .catch(this.handleError);
+  }
+
+  uncomment(comment: Comment) {
+    return this.http.delete(api.COMENTAR_RV, comment)
+                    .catch(this.handleError);
   }
 }
