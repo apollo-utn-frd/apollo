@@ -1,24 +1,19 @@
 package apollo
 
-import grails.transaction.Transactional
-import grails.validation.ValidationException
-import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 
-class FavoritoController {
-    static responseFormats = ['json']
+class FavoritoController implements BaseControllerTrait {
     static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
-
-    SecurityService securityService
 
     @Secured('ROLE_ADMIN')
     def show() {
-        def favorito = Favorito.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        Favorito favorito = Favorito.get(params.id)
 
-        if (!favorito?.canReadBy(usuario)) {
+        if (!favorito?.canReadBy(currentUser())) {
             render(status: NOT_FOUND)
             return
         }
@@ -28,25 +23,22 @@ class FavoritoController {
 
     @Secured('ROLE_ADMIN')
     def list() {
-        def usuario = securityService.getCurrentUser()
-
-        respond Favorito.list().findAll { it.canReadBy(usuario) }
+        respond Favorito.list().findAll { it.canReadBy(currentUser()) }
     }
 
     @Transactional
     @Secured('ROLE_USER')
     def create() {
-        def rutaViaje = RutaViaje.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        RutaViaje rutaViaje = RutaViaje.get(params.id)
 
-        if (!rutaViaje?.canReadBy(usuario)) {
+        if (!rutaViaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return
         }
 
-        def favorito = new Favorito(
-            usuario: usuario,
+        Favorito favorito = new Favorito(
+            usuario: currentUser(),
             rutaViaje: rutaViaje
         )
 
@@ -64,16 +56,15 @@ class FavoritoController {
     @Transactional
     @Secured('ROLE_USER')
     def delete() {
-        def rutaViaje = RutaViaje.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        RutaViaje rutaViaje = RutaViaje.get(params.id)
 
-        if (!rutaViaje?.canReadBy(usuario)) {
+        if (!rutaViaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return
         }
 
-        def favorito = Favorito.findByUsuarioAndRutaViaje(usuario, rutaViaje)
+        Favorito favorito = Favorito.findByUsuarioAndRutaViaje(currentUser(), rutaViaje)
 
         if (!favorito) {
             transactionStatus.setRollbackOnly()

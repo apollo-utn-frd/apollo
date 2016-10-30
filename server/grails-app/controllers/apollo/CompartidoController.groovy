@@ -1,24 +1,19 @@
 package apollo
 
-import grails.transaction.Transactional
-import grails.validation.ValidationException
-import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 
-class CompartidoController {
-    static responseFormats = ['json']
+class CompartidoController implements BaseControllerTrait {
     static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
-
-    SecurityService securityService
 
     @Secured('ROLE_ADMIN')
     def show() {
-        def compartido = Compartido.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        Compartido compartido = Compartido.get(params.id)
 
-        if (!compartido?.canReadBy(usuario)) {
+        if (!compartido?.canReadBy(currentUser())) {
             render(status: NOT_FOUND)
             return
         }
@@ -28,25 +23,22 @@ class CompartidoController {
 
     @Secured('ROLE_ADMIN')
     def list() {
-        def usuario = securityService.getCurrentUser()
-
-        respond Compartido.list().findAll { it.canReadBy(usuario) }
+        respond Compartido.list().findAll { it.canReadBy(currentUser()) }
     }
 
     @Transactional
     @Secured('ROLE_USER')
     def create() {
-        def rutaViaje = RutaViaje.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        RutaViaje rutaViaje = RutaViaje.get(params.id)
 
-        if (!rutaViaje?.canReadBy(usuario)) {
+        if (!rutaViaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return
         }
 
-        def compartido = new Compartido(
-            usuario: usuario,
+        Compartido compartido = new Compartido(
+            usuario: currentUser(),
             rutaViaje: rutaViaje
         )
 
@@ -64,16 +56,15 @@ class CompartidoController {
     @Transactional
     @Secured('ROLE_USER')
     def delete() {
-        def rutaViaje = RutaViaje.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        RutaViaje rutaViaje = RutaViaje.get(params.id)
 
-        if (!rutaViaje?.canReadBy(usuario)) {
+        if (!rutaViaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return
         }
 
-        def compartido = Compartido.findByUsuarioAndRutaViaje(usuario, rutaViaje)
+        Compartido compartido = Compartido.findByUsuarioAndRutaViaje(currentUser(), rutaViaje)
 
         if (!compartido) {
             transactionStatus.setRollbackOnly()

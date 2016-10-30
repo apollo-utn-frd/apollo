@@ -1,24 +1,19 @@
 package apollo
 
-import grails.transaction.Transactional
-import grails.validation.ValidationException
-import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 
-class SeguimientoController {
-    static responseFormats = ['json']
+class SeguimientoController implements BaseControllerTrait {
     static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
-
-    SecurityService securityService
 
     @Secured('ROLE_ADMIN')
     def show() {
-        def seguimiento = Seguimiento.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        Seguimiento seguimiento = Seguimiento.get(params.id)
 
-        if (!seguimiento?.canReadBy(usuario)) {
+        if (!seguimiento?.canReadBy(currentUser())) {
             render(status: NOT_FOUND)
             return
         }
@@ -28,16 +23,13 @@ class SeguimientoController {
 
     @Secured('ROLE_ADMIN')
     def list() {
-        def usuario = securityService.getCurrentUser()
-
-        respond Seguimiento.list().findAll { it.canReadBy(usuario) }
+        respond Seguimiento.list().findAll { it.canReadBy(currentUser()) }
     }
 
     @Transactional
     @Secured('ROLE_USER')
     def create() {
-        def seguido = Usuario.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        Usuario seguido = Usuario.get(params.id)
 
         if (!seguido) {
             transactionStatus.setRollbackOnly()
@@ -45,9 +37,9 @@ class SeguimientoController {
             return
         }
 
-        def seguimiento = new Seguimiento(
+        Seguimiento seguimiento = new Seguimiento(
             seguido: seguido,
-            seguidor: usuario
+            seguidor: currentUser()
         )
 
         if (!seguimiento.validate()) {
@@ -64,8 +56,7 @@ class SeguimientoController {
     @Transactional
     @Secured('ROLE_USER')
     def delete() {
-        def seguido = Usuario.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        Usuario seguido = Usuario.get(params.id)
 
         if (!seguido) {
             transactionStatus.setRollbackOnly()
@@ -73,7 +64,7 @@ class SeguimientoController {
             return
         }
 
-        def seguimiento = Seguimiento.findBySeguidoAndSeguidor(seguido, usuario)
+        Seguimiento seguimiento = Seguimiento.findBySeguidoAndSeguidor(seguido, currentUser())
 
         if (!seguimiento) {
             transactionStatus.setRollbackOnly()

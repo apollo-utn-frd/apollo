@@ -1,24 +1,19 @@
 package apollo
 
-import grails.transaction.Transactional
-import grails.validation.ValidationException
-import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 
-class RutaViajeController {
-    static responseFormats = ['json']
+class RutaViajeController implements BaseControllerTrait {
     static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
-
-    SecurityService securityService
 
     @Secured('permitAll')
     def show() {
-        def rutaViaje = RutaViaje.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        RutaViaje rutaViaje = RutaViaje.get(params.id)
 
-        if (!rutaViaje?.canReadBy(usuario)) {
+        if (!rutaViaje?.canReadBy(currentUser())) {
             render(status: NOT_FOUND)
             return
         }
@@ -28,18 +23,14 @@ class RutaViajeController {
 
     @Secured('ROLE_ADMIN')
     def list() {
-        def usuario = securityService.getCurrentUser()
-
-        respond RutaViaje.list().findAll { it.canReadBy(usuario) }
+        respond RutaViaje.list().findAll { it.canReadBy(currentUser()) }
     }
 
     @Transactional
     @Secured('ROLE_USER')
     def create() {
-        def usuario = securityService.getCurrentUser()
-
-        def rutaViaje = new RutaViaje(
-            creador: usuario,
+        RutaViaje rutaViaje = new RutaViaje(
+            creador: currentUser(),
             titulo: request.JSON?.titulo,
             descripcion: request.JSON?.descripcion ?: "",
             publico: (request.JSON?.publico != null) ? request.JSON?.publico : true,
@@ -56,7 +47,7 @@ class RutaViajeController {
 
         if (!rutaViaje.publico) {
             for (idUsuarioAutorizado in request.JSON?.autorizaciones) {
-                def usuarioAutorizado = Usuario.get(idUsuarioAutorizado.id)
+                Usuario usuarioAutorizado = Usuario.get(idUsuarioAutorizado.id)
 
                 if (!usuarioAutorizado) {
                     transactionStatus.setRollbackOnly()
@@ -64,7 +55,7 @@ class RutaViajeController {
                     return
                 }
 
-                def autorizacion = new Autorizacion(
+                Autorizacion autorizacion = new Autorizacion(
                     rutaViaje: rutaViaje,
                     usuario: usuarioAutorizado
                 )
@@ -85,7 +76,7 @@ class RutaViajeController {
     @Transactional
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def delete() {
-        def rutaViaje = RutaViaje.get(params.id)
+        RutaViaje rutaViaje = RutaViaje.get(params.id)
 
         if (!rutaViaje) {
             transactionStatus.setRollbackOnly()
@@ -93,13 +84,11 @@ class RutaViajeController {
             return
         }
 
-        def usuario = securityService.getCurrentUser()
-
-        if (!rutaViaje.canDeletedBy(usuario)) {
+        if (!rutaViaje.canDeletedBy(currentUser())) {
             transactionStatus.setRollbackOnly()
 
-            if (rutaViaje.canReadBy(usuario)) {
-                render(status: UNAUTHORIZED)
+            if (rutaViaje.canReadBy(currentUser())) {
+                render(status: FORBIDDEN)
             } else {
                 render(status: NOT_FOUND)
             }

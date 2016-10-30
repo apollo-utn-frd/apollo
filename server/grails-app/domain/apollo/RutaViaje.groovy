@@ -36,15 +36,11 @@ class RutaViaje {
         }
     }
 
-    static mapping = {
-        descripcion type: 'text'
-    }
-
     /**
      * Devuelve una lista con los usuarios autorizados para ver la ruta de viajes privada. Si la
      * ruta de viajes es pública el método devuelve una lista vacía.
      */
-    List usuariosAutorizados() {
+    List<Usuario> usuariosAutorizados() {
         autorizacionesUsuarios.usuario
     }
 

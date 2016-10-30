@@ -1,67 +1,59 @@
 package apollo
 
+import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
 import grails.transaction.Transactional
-import grails.validation.ValidationException
 import grails.plugin.springsecurity.annotation.Secured
-import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = true)
 
-class UsuarioController {
-    static responseFormats = ['json']
+class UsuarioController implements BaseControllerTrait {
     static allowedMethods = [index: 'GET', show: 'GET', showByUsername: 'GET', list: 'GET', update: 'PUT']
-
-    SecurityService securityService
 
     @Secured('ROLE_USER')
     def index() {
         JSON.use('private') {
-            respond securityService.getCurrentUser()
+            respond currentUser()
         }
     }
 
     @Secured('permitAll')
     def show() {
-        def usuario = securityService.getCurrentUser()
-        def usuarioMostrar = Usuario.get(params.id)
+        Usuario usuario = Usuario.get(params.id)
 
-        if (usuarioMostrar?.canManagedBy(usuario)) {
+        if (usuario?.canManagedBy(currentUser())) {
             JSON.use('private') {
-                respond usuarioMostrar
+                respond usuario
             }
         } else {
-            respond usuarioMostrar?.sanitize(usuario)
+            respond usuario?.sanitize(currentUser())
         }
     }
 
     @Secured('permitAll')
     def showByUsername() {
-        def usuario = securityService.getCurrentUser()
-        def usuarioMostrar = Usuario.findByUsername(params.username)
+        Usuario usuario = Usuario.findByUsername(params.username)
 
-        if (usuarioMostrar?.canManagedBy(usuario)) {
+        if (usuario?.canManagedBy(currentUser())) {
             JSON.use('private') {
-                respond usuarioMostrar
+                respond usuario
             }
         } else {
-            respond usuarioMostrar?.sanitize(usuario)
+            respond usuario?.sanitize(currentUser())
         }
     }
 
     @Secured('ROLE_ADMIN')
     def list() {
-        def usuario = securityService.getCurrentUser()
-
         JSON.use('private') {
-            respond Usuario.list().findAll { it.canManagedBy(usuario) }
+            respond Usuario.list().findAll { it.canManagedBy(currentUser()) }
         }
     }
 
     @Transactional
     @Secured('ROLE_USER')
     def update() {
-        def usuario = securityService.getCurrentUser()
+        Usuario usuario = currentUser()
 
         if (usuario.firstLogin) {
             usuario.firstLogin = false

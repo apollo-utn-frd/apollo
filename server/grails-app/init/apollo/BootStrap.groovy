@@ -2,22 +2,24 @@ package apollo
 
 class BootStrap {
     def init = { servletContext ->
-        def roleAdmin = Role.findOrSaveByAuthority('ROLE_ADMIN')
-        def roleUser = Role.findOrSaveByAuthority('ROLE_USER')
+        if (Role.count() == 0) {
+            new Role(authority: 'ROLE_ADMIN').save(failOnError: true)
+            new Role(authority: 'ROLE_USER').save(failOnError: true)
+        }
 
         if (Usuario.count() == 0) {
-            def jon = new Usuario(
+            Usuario jon = new Usuario(
                 username: 'test',
                 idGoogle: 1235,
                 email: 'jon.snow@gmail.com',
                 nombre: 'Jon',
                 apellido: 'Snow',
-                pictureUrl: 'http://vignette4.wikia.nocookie.net/hieloyfuego/images/8/8e/Game_of_Thrones_5x05.jpg/revision/latest?cb=20150508135940',
+                pictureUrl: 'http://s.newsweek.com/sites/www.newsweek.com/files/2016/03/31/jon-snow-game-thrones.jpg',
                 descripcion: 'Ex-Lord Comandante de la Guardia de la Noche',
                 firstLogin: false
             ).save(failOnError: true)
 
-            UsuarioRole.create jon, roleUser
+            UsuarioRole.create jon, Role.findByAuthority('ROLE_USER')
         }
 
         if (RutaViaje.count() == 0) {
@@ -27,12 +29,12 @@ class BootStrap {
                 creador: Usuario.findByUsername('test'),
                 sitios: [
                     [
-                        'latitud': "-34.6037389",
-                        'longitud': "-58.3837591"
+                        'latitud': '-34.6037389',
+                        'longitud': '-58.3837591'
                     ],
                     [
-                        'latitud': "-34.6053822",
-                        'longitud': "-58.3795195"
+                        'latitud': '-34.6053822',
+                        'longitud': '-58.3795195'
                     ]
                 ]
             ).save(failOnError: true)

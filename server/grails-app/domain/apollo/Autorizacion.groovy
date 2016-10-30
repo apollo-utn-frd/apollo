@@ -12,7 +12,7 @@ class Autorizacion {
     static constraints = {
         usuario unique: 'rutaViaje', validator: { usuario, autorizacion ->
             def seguimiento = Seguimiento.findBySeguidoAndSeguidor(autorizacion.rutaViaje.creador, usuario)
-            (autorizacion.rutaViaje.creador == usuario) || (seguimiento != null) ?: ['autorizacion.usuario.autorizoAUnNoSeguidor']
+            seguimiento || (autorizacion.rutaViaje.creador == usuario) ?: ['autorizacion.usuario.autorizoAUnNoSeguidor']
         }
         rutaViaje validator: { rutaViaje, autorizacion ->
             (rutaViaje.creador != autorizacion.usuario) ?: ['autorizacion.rutaViaje.seAutorizoASiMismo']

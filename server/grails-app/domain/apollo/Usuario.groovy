@@ -57,7 +57,7 @@ class Usuario implements Serializable {
      * Devuelve si un usuario tiene un determinado rol.
      */
     boolean hasRole(String role) {
-        getAuthorities()?.contains(Role.findByAuthority(role))
+        authorities?.contains(Role.findByAuthority(role))
     }
 
     /**

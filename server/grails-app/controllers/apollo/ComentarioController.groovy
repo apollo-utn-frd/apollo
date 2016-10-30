@@ -1,24 +1,19 @@
 package apollo
 
-import grails.transaction.Transactional
-import grails.validation.ValidationException
-import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 
-class ComentarioController {
-    static responseFormats = ['json']
+class ComentarioController implements BaseControllerTrait {
     static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
-
-    SecurityService securityService
 
     @Secured('permitAll')
     def show() {
-        def comentario = Comentario.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        Comentario comentario = Comentario.get(params.id)
 
-        if (!comentario?.canReadBy(usuario)) {
+        if (!comentario?.canReadBy(currentUser())) {
             render(status: NOT_FOUND)
             return
         }
@@ -28,25 +23,22 @@ class ComentarioController {
 
     @Secured('ROLE_ADMIN')
     def list() {
-        def usuario = securityService.getCurrentUser()
-
-        respond Comentario.list().findAll { it.canReadBy(usuario) }
+        respond Comentario.list().findAll { it.canReadBy(currentUser()) }
     }
 
     @Transactional
     @Secured('ROLE_USER')
     def create() {
-        def rutaViaje = RutaViaje.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        RutaViaje rutaViaje = RutaViaje.get(params.id)
 
-        if (!rutaViaje?.canReadBy(usuario)) {
+        if (!rutaViaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return
         }
 
-        def comentario = new Comentario(
-            usuario: usuario,
+        Comentario comentario = new Comentario(
+            usuario: currentUser(),
             rutaViaje: rutaViaje
         )
 
@@ -68,10 +60,9 @@ class ComentarioController {
     @Transactional
     @Secured('ROLE_ADMIN')
     def delete() {
-        def comentario = Comentario.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        Comentario comentario = Comentario.get(params.id)
 
-        if (!comentario?.canDeletedBy(usuario)) {
+        if (!comentario?.canDeletedBy(currentUser())) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return

@@ -1,24 +1,19 @@
 package apollo
 
-import grails.transaction.Transactional
-import grails.validation.ValidationException
-import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 
-class AutorizacionController {
-    static responseFormats = ['json']
+class AutorizacionController implements BaseControllerTrait {
     static allowedMethods = [show: 'GET', list: 'GET']
-
-    SecurityService securityService
 
     @Secured('ROLE_ADMIN')
     def show() {
-        def autorizacion = Autorizacion.get(params.id)
-        def usuario = securityService.getCurrentUser()
+        Autorizacion autorizacion = Autorizacion.get(params.id)
 
-        if (!autorizacion?.canReadBy(usuario)) {
+        if (!autorizacion?.canReadBy(currentUser())) {
             render(status: NOT_FOUND)
             return
         }
@@ -28,8 +23,6 @@ class AutorizacionController {
 
     @Secured('ROLE_ADMIN')
     def list() {
-        def usuario = securityService.getCurrentUser()
-
-        respond Autorizacion.list().findAll { it.canReadBy(usuario) }
+        respond Autorizacion.list().findAll { it.canReadBy(currentUser()) }
     }
 }

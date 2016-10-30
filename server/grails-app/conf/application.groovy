@@ -33,7 +33,6 @@ grails {
 
             rest {
                 oauth {
-                    /* TO-DO: Reemplazar por la URL de callback de Angular. */
                     frontendCallbackUrl = { String tokenValue -> "http://localhost:4200/welcome#${tokenValue}" }
 
                     google {
@@ -42,7 +41,7 @@ grails {
                         secret = 'iVddJvf1OcUG2jBpAP6RTlx3'
                         scope = org.pac4j.oauth.client.Google2Client.Google2Scope.EMAIL_AND_PROFILE
                         defaultRoles = ['ROLE_USER']
-                        /* defaultRoles = ['ROLE_ADMIN', ROLE_USER'] */
+                        /* defaultRoles = ['ROLE_ADMIN', 'ROLE_USER'] */
                     }
                 }
 

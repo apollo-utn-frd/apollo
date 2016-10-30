@@ -3,7 +3,6 @@ package apollo
 import groovy.util.logging.Slf4j
 import org.pac4j.core.profile.CommonProfile
 import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import grails.plugin.springsecurity.SpringSecurityUtils
@@ -12,6 +11,8 @@ import grails.plugin.springsecurity.rest.oauth.OauthUserDetailsService
 
 @Slf4j
 class SecurityService implements OauthUserDetailsService {
+    static transactional = false
+
     def springSecurityService
 
     @Delegate
@@ -20,10 +21,10 @@ class SecurityService implements OauthUserDetailsService {
     /**
      * Devuelve el usuario logueado actualmente. Si no hay ningun usuario logueado devuelve null.
      */
-    Usuario getCurrentUser() {
+    Usuario currentUser() {
         try {
             Usuario.findByIdGoogle(springSecurityService.principal.userProfile.id)
-        } catch(MissingPropertyException e) {
+        } catch (MissingPropertyException e) {
             null
         }
     }
@@ -33,7 +34,8 @@ class SecurityService implements OauthUserDetailsService {
      * Si es la primera vez que el usuario ingresa a la aplicación se le crea un Usuario nuevo con
      * los roles por defecto y se registran sus datos.
      */
-    OauthUser loadUserByUserProfile(CommonProfile userProfile, Collection<GrantedAuthority> defaultRoles) throws UsernameNotFoundException {
+    OauthUser loadUserByUserProfile(CommonProfile userProfile, Collection<GrantedAuthority> defaultRoles)
+        throws UsernameNotFoundException {
         log.debug "Buscando usuario con perfil: ${userProfile}."
 
         Usuario usuario = Usuario.findByIdGoogle(userProfile.id)
@@ -41,7 +43,7 @@ class SecurityService implements OauthUserDetailsService {
         if (!usuario) {
             log.debug "Usuario no existente. Creando nuevo usuario."
 
-            String username = userProfile.getEmail().takeWhile { it != '@' }
+            String username = userProfile.email.takeWhile { it != '@' }
 
             // Si el username ya es utilizado por algun otro usuario, se le concatena un numero aleatorio al final.
             while (Usuario.findByUsername(username)) {
@@ -51,10 +53,10 @@ class SecurityService implements OauthUserDetailsService {
             usuario = new Usuario(
                 username: username,
                 idGoogle: userProfile.id,
-                email: userProfile.getEmail(),
-                nombre: userProfile.getFirstName(),
-                apellido: userProfile.getFamilyName(),
-                pictureUrl: userProfile.getPictureUrl()
+                email: userProfile.email,
+                nombre: userProfile.firstName,
+                apellido: userProfile.familyName,
+                pictureUrl: userProfile.pictureUrl
             ).save(failOnError: true)
 
             log.debug "${usuario} creado. Asignando roles."
@@ -67,6 +69,6 @@ class SecurityService implements OauthUserDetailsService {
 
         log.debug "Se obtuvo ${usuario}. Creando OauthUser."
 
-        return new OauthUser(usuario.username, usuario.password, defaultRoles, userProfile)
+        new OauthUser(usuario.username, usuario.password, defaultRoles, userProfile)
     }
 }
