@@ -1,5 +1,5 @@
 #Apollo Back-end [![Build Status](https://travis-ci.org/juanbono/apollo-grails.svg?branch=master)](https://travis-ci.org/juanbono/apollo-grails)
-Implementa una API REST utilizando Grails 3.2.1. Para probarlo se puede instalar la aplicación [Postman](https://www.getpostman.com/) para Google Chrome e importar la colección *"Apollo.postman_collection.json"*. En el panel de la izquierda aparecerá la colección *Apollo* con ejemplos de todas las acciones que la aplicación soporta actualmente.
+Implementa una API REST utilizando Grails 3.2.2. Para probarlo se puede instalar la aplicación [Postman](https://www.getpostman.com/) para Google Chrome e importar la colección *"Apollo.postman_collection.json"*. En el panel de la izquierda aparecerá la colección *Apollo* con ejemplos de todas las acciones que la aplicación soporta actualmente.
 
 
 ##API REST Tentativa
@@ -18,10 +18,10 @@ GET | /usuario/:id_usr | Público | Devuelve el usuario segun un id.
 GET | /usuario/u/:username | Público | Devuelve el usuario segun un nombre de usuario.
 GET | /usuario/list | Administradores | Devuelve todos los usuarios.
 
-###Noticias
+###Últimas publicaciones
 Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
-GET | /noticias | Usuarios | Devuelve las últimas noticias de la pantalla principal.
+GET | /publicaciones | Usuarios | Devuelve las últimas publicaciones de la pantalla principal.
 
 ###Seguimientos
 Método HTTP | URI | Autenticación | Descripción

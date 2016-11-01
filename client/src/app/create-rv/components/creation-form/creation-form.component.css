@@ -1,4 +1,19 @@
-#panel-formulario {
-  height: 86vh;
-  width: 50vh;
+.panel {
+  height: 100%;
+  width: 100%;
+}
+
+.panel-heading h3 {
+  margin: 15px 0;
+}
+
+#visibilidad {
+  height: 20px;
+  width: 20px;
+  margin: 0;
+  margin-right: 8px;
+}
+
+#boton {
+  padding-top: 15px;
 }

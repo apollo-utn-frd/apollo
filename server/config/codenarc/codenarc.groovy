@@ -278,7 +278,6 @@ ruleset {
     // rulesets/size.xml
     AbcMetric {
         doNotApplyToClassNames = 'UrlMappings'
-        priority = 3
     } // Requires the GMetrics jar
     ClassSize
     CrapMetric   // Requires the GMetrics jar and a Cobertura coverage file

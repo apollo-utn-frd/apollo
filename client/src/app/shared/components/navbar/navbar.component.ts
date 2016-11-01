@@ -8,5 +8,4 @@ import { Component, Input } from '@angular/core';
 export class NavBarComponent {
   @Input() search: boolean;
   @Input() edit: boolean;
-
 }
