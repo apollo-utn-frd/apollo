@@ -17,8 +17,8 @@ export class CreationFormComponent {
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({
-      'nombre': new FormControl('nombre', this.nameValidators),
-      'descripcion': new FormControl('descripcion', this.descripValidators),
+      'nombre': new FormControl('', this.nameValidators),
+      'descripcion': new FormControl('', this.descripValidators),
       'visibilidad': new FormControl('visibilidad', this.visValidator)
     });
   }

@@ -16,24 +16,24 @@ export class RVService extends Service<RV> {
   }
 
   getByID(id: number): Observable<RV> {
-      return this.http.get(api.RUTASDEVIAJE + id)
+      return this.http.get(api.RUTADEVIAJE + id)
                       .flatMap((res: Response) => res.json())
                       .catch(this.handleError);
   }
 
   get(): Observable<RV[]> {
-      return this.http.get(api.RUTASDEVIAJE)
+      return this.http.get(api.RUTADEVIAJE)
                       .flatMap((res: Response) => res.json())
                       .catch(this.handleError);
   }
 
   create(rv: RV): Observable<void> {
-      return this.http.post(api.RUTASDEVIAJE, rv)
+      return this.http.post(api.RUTADEVIAJE, rv)
                       .catch(this.handleError);
   }
 
   delete(id: number): Observable<void> {
-      return this.http.delete(api.RUTASDEVIAJE + id)
+      return this.http.delete(api.RUTADEVIAJE + id)
                       .catch(this.handleError);
   }
 

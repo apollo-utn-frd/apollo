@@ -11,9 +11,14 @@
         <textarea id="descripcion" class="form-control" rows="5" formControlName="descripcion"></textarea>
       </div>
       <div class="form-group">
-        <label class="control-label flex">
-          <input id="visibilidad" type="checkbox" name="visibilidad" value="PUBLICA" checked>
-          Pública
+        <label class="control-label">
+            Visibilidad:
+            <label class="radio">
+              <input type="radio" name="visibilidad" value="PUBLICA" checked>Pública
+            </label>
+            <label class="radio">
+              <input type="radio" name="visibilidad" value="PRIVADA">Privada
+            </label>
         </label>
       </div>
       <div id="boton">
