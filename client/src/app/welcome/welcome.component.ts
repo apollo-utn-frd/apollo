@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/services/index';
+import { Store } from '@ngrx/store';
+import { State, getUser } from '../shared/store/index';
+import { Observable } from 'rxjs/Observable';
+import { User } from '../shared/models/index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'apollo-welcome',
@@ -7,10 +12,22 @@ import { AuthService } from '../shared/services/index';
   styleUrls: ['welcome.component.css'],
 })
 export class WelcomeComponent implements OnInit {
-
-  constructor(private auth: AuthService) { }
+  user$: Observable<User>;
+  constructor( private auth: AuthService
+             , private store: Store<State>
+             , private router: Router
+             ) {
+    this.user$ = store.let(getUser);
+   }
 
   ngOnInit() {
     this.auth.login();
+    this.user$.subscribe((u: User) => {
+      if (u.firstLogin) {
+        this.router.navigateByUrl('/login');
+      } else {
+        this.router.navigateByUrl('/home');
+      }
+    });
   }
 }
