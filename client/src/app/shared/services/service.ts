@@ -12,7 +12,7 @@ export abstract class Service<T> {
   abstract edit<T>(t: T): Observable<void>;
 
   handleError(error: any) {
-    let errorMsg = (error.message) ? error.message : 
+    let errorMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errorMsg);
     return Observable.throw(errorMsg);

@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
 
 // routes
 import { routing } from './app.routes';
@@ -21,6 +23,10 @@ import { CreationFormComponent, CreationPanelComponent } from './create-rv/compo
 // Services
 import { AuthService, UserService } from './shared/services/index';
 import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
+
+
+// Store 
+import { reducer } from './shared/store/index';
 
 @NgModule({
   declarations: [
@@ -43,7 +49,9 @@ import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from 'angular2-goo
     routing,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDSA-Sc8yoe_NIGqOwTGoNPiKge0KRK_wo'
-    })
+    }),
+    StoreModule.provideStore(reducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   entryComponents: [
     AppComponent,
