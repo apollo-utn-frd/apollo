@@ -1,26 +1,19 @@
-<nav id="barra" class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-          <img alt="Apollo" src="assets/img/logo.png">
-          <div id="titulo">Apollo</div>
-        </a>
-      </div>
+
+      <apollo-navbar-logo></apollo-navbar-logo>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      </ul>
-      <div [hidden]="search" class="navbar-form navbar-left">
+    <div class="collapse navbar-collapse navbar-right navbar-main-collapse" id="navbar-collapse">
+      <div [hidden]="!search" class="navbar-form navbar-left">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Búsqueda">
         </div>
@@ -29,7 +22,7 @@
         </button>
       </div>
 
-      <ul [hidden]="edit" class="nav navbar-nav navbar-right">
+      <ul [hidden]="!dropdown" class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             <span class="caret"></span>
@@ -52,6 +45,6 @@
           </ul>
         </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>

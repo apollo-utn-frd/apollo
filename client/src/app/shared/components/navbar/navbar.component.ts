@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavBarComponent {
-  @Input() search: boolean;
-  @Input() edit: boolean;
+  @Input() search: boolean = true;
+  @Input() dropdown: boolean = true;
 }

@@ -11,28 +11,10 @@
   border-width: 0;
 }
 
-.dropdown .dropdown-toggle {
-  color: #333;
+.navbar a {
+  color: #fff;
 }
 
-.dropdown li {
-  margin: 0 12px;
-}
-
-.dropdown li.divider {
-  margin: 6px 0;
-}
-
-.dropdown-menu {
-  padding: 6px 0;
-}
-
-.dropdown-menu a {
-  padding: 3px 0;
-}
-
-.dropdown-menu a .glyphicon {
-  padding: 0 7px 0 5px;
-  position: relative;
-  top: 2px;
+.navbar .active a {
+  color: #555;
 }

@@ -11,9 +11,10 @@ import { routing } from './app.routes';
 // Components
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { NavBarWelcomeComponent } from './welcome/components/index';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { NavBarComponent } from './shared/components/index';
+import { NavBarComponent, NavBarLogoComponent } from './shared/components/index';
 import { CreateRVComponent } from './create-rv/create-rv.component';
 import { CreationFormComponent, CreationPanelComponent } from './create-rv/components/index';
 
@@ -25,9 +26,11 @@ import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from 'angular2-goo
   declarations: [
     AppComponent,
     WelcomeComponent,
+    NavBarWelcomeComponent,
     LoginComponent,
     HomeComponent,
     NavBarComponent,
+    NavBarLogoComponent,
     CreateRVComponent,
     CreationFormComponent,
     CreationPanelComponent

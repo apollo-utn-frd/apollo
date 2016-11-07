@@ -1,25 +1,30 @@
-<sebm-google-map 
-          [latitude]="lat" 
-          [longitude]="lng"
-          [streetViewControl]="ui" 
-          (mapClick)="this.onMapClick($event)">
-  <sebm-google-map-marker 
-            *ngFor="let m of markers; let i = index"
-            [latitude]="m.lat"
-            [longitude]="m.lng"
-            [label]="m.label"
-            [markerDraggable]="m.draggable">
-  </sebm-google-map-marker>
-     <sebm-google-map-polyline
-        *ngFor="let l of lines; let k = index; let f = first"
-        [strokeColor]="color">
-         <sebm-google-map-polyline-point 
-            [latitude]="l.pointA.lat" 
-            [longitude]="l.pointA.lng">
-         </sebm-google-map-polyline-point>
-         <sebm-google-map-polyline-point 
-            [latitude]="l.pointB.lat" 
-            [longitude]="l.pointB.lng">
-         </sebm-google-map-polyline-point>
-     </sebm-google-map-polyline>
-</sebm-google-map>
+<div class="shadow">
+  <sebm-google-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [streetViewControl]="ui"
+    (mapClick)="this.onMapClick($event)"
+  >
+    <sebm-google-map-marker
+      *ngFor="let m of markers; let i = index"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [label]="m.label"
+      [markerDraggable]="m.draggable"
+    ></sebm-google-map-marker>
+    <sebm-google-map-polyline
+      *ngFor="let l of lines; let k = index; let f = first"
+      [strokeColor]="color"
+    >
+      <sebm-google-map-polyline-point
+        [latitude]="l.pointA.lat"
+        [longitude]="l.pointA.lng"
+      ></sebm-google-map-polyline-point>
+      <sebm-google-map-polyline-point
+        [latitude]="l.pointB.lat"
+        [longitude]="l.pointB.lng"
+      ></sebm-google-map-polyline-point>
+    </sebm-google-map-polyline>
+  </sebm-google-map>
+</div>
+

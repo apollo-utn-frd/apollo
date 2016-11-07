@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
+declare var $ : any;
+
 const V = Validators;
 
 @Component({
@@ -20,6 +22,16 @@ export class CreationFormComponent {
       'nombre': new FormControl('', this.nameValidators),
       'descripcion': new FormControl('', this.descripValidators),
       'visibilidad': new FormControl('visibilidad', this.visValidator)
+    });
+  }
+
+  ngAfterViewInit() {
+    $('.radio').click(function() {
+      $(this).find('input[type=radio]').click();
+    });
+
+    $('input[type=radio]').click(function(event) {
+      event.stopPropagation();
     });
   }
 

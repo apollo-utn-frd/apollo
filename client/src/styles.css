@@ -1,30 +1,182 @@
-/* You can add global styles to this file, and also import other style files */
 body {
-  background: rgba(179,220,237,1);
-  background: -moz-linear-gradient(top, rgba(179,220,237,1) 0%, rgba(61,186,224,0.58) 50%, rgba(188,224,238,0.15) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(179,220,237,1)), color-stop(50%, rgba(61,186,224,0.58)), color-stop(100%, rgba(188,224,238,0.15)));
-  background: -webkit-linear-gradient(top, rgba(179,220,237,1) 0%, rgba(61,186,224,0.58) 50%, rgba(188,224,238,0.15) 100%);
-  background: -o-linear-gradient(top, rgba(179,220,237,1) 0%, rgba(61,186,224,0.58) 50%, rgba(188,224,238,0.15) 100%);
-  background: -ms-linear-gradient(top, rgba(179,220,237,1) 0%, rgba(61,186,224,0.58) 50%, rgba(188,224,238,0.15) 100%);
-  background: linear-gradient(to bottom, rgba(179,220,237,1) 0%, rgba(61,186,224,0.58) 50%, rgba(188,224,238,0.15) 100%);
-  background-attachment: fixed;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee', GradientType=0 );
-}
-
-body:before {
-  content: ' ';
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
-  opacity: 0.1;
-  background-image: url('assets/img/cloud-background.jpg');
+  background-image: url('assets/img/background.png');
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
+.container-fluid {
+  padding-top: 75px;
+}
+
+textarea {
+  resize: none;
+}
+
+/* Clases utilitarias */
 .flex {
   display: flex;
+}
+
+.align-vertical {
+  display: flex;
+  align-items: center;
+}
+
+.shadow {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+/**
+ * Formularios. Basados en:
+ * http://azmind.com/2015/11/06/bootstrap-login-register-forms-templates/
+ */
+.form-top {
+  overflow: hidden;
+  padding: 0 25px;
+  background: #f3f3f3;
+  border-radius: 4px 4px 0 0;
+  text-align: left;
+}
+
+.form-top-left {
+  float: left;
+  width: 75%;
+  padding-top: 25px;
+}
+
+.form-top-left h3,
+.form-top-left h4 {
+  margin-top: 0;
+}
+
+.form-top-right {
+  float: left;
+  width: 25%;
+  padding-top: 5px;
+  font-size: 66px;
+  color: #ddd;
+  line-height: 100px;
+  text-align: right;
+}
+
+.form-top-right .fa {
+  color: #03baca;
+}
+
+.form-bottom {
+  padding: 25px 25px 30px 25px;
+  background: #eee;
+  border-radius: 0 0 4px 4px;
+  text-align: left;
+}
+
+.form-bottom form button.btn {
+  width: 100%;
+}
+
+.form-bottom form .input-error {
+  border-color: #19b9e7;
+}
+
+.form-box input[type="text"] {
+  height: 50px;
+}
+
+.form-box input[type="text"],
+.form-box textarea {
+  margin: 0;
+  padding: 0 20px;
+  vertical-align: middle;
+  background: #f8f8f8;
+  border: 3px solid #ddd;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 50px;
+  color: #888;
+  border-radius: 4px;
+  box-shadow: none;
+  transition: all .3s;
+}
+
+.form-box textarea {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 30px;
+}
+
+.form-box input[type="text"]:focus,
+.form-box textarea:focus {
+  outline: 0;
+  background: #fff;
+  border: 3px solid #ccc;
+  box-shadow: none;
+}
+
+.form-box input[type="text"]:-moz-placeholder,
+.form-box textarea:-moz-placeholder {
+  color: #888;
+}
+
+.form-box input[type="text"]::-webkit-input-placeholder,
+.form-box textarea::-webkit-input-placeholder {
+  color: #888;
+}
+
+/**
+ * Basado en:
+ * http://www.cssscript.com/pretty-checkbox-radio-inputs-bootstrap-awesome-bootstrap-checkbox-css/
+ */
+.form-box .radio {
+  padding-left: 35px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.form-box .radio label {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  padding-left: 5px;
+}
+
+.form-box .radio label::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 0;
+  margin-left: -20px;
+  border: 1px solid #cccccc;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: border 0.15s ease-in-out;
+}
+
+.form-box .radio label::after {
+  display: inline-block;
+  position: absolute;
+  content: "";
+  width: 11px;
+  height: 11px;
+  left: 3px;
+  top: 3px;
+  margin-left: -20px;
+  border-radius: 50%;
+  background-color: #555555;
+  transform: scale(0, 0);
+  transition: transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+}
+
+.form-box .radio input[type="radio"] {
+  opacity: 0;
+  z-index: 1;
+}
+
+.form-box .radio input[type="radio"]:checked + label::after {
+  transform: scale(1, 1);
 }

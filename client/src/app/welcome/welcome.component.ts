@@ -14,3 +14,4 @@ export class WelcomeComponent implements OnInit {
     this.auth.login();
   }
 }
+

@@ -1,36 +1,46 @@
-<div class="container" id="fondo">
-  <apollo-navbar [search]="true" [edit]="true"></apollo-navbar>
-  <div class="row" id="primer-fila"><div id="columna-superior" class="col-sm-4"></div></div>
-  <div class="row" id="segunda-fila">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <div id="panel-formulario" class="panel panel-primary">
-        <div class="panel-heading"><h3>Unete hoy a Apollo</h3></div>
-        <div class="panel-body">
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<apollo-navbar [search]="false" [dropdown]="false"></apollo-navbar>
+
+<div class="container-fluid">
+  <div class="row align-vertical">
+    <div class="col-md-4 col-md-offset-1">
+      <a title="Apollo es una nueva forma de viajar" class="polaroid" href="">
+        <img class="img-responsive" alt="Travel plan" src="assets/img/travelplan.jpg">
+      </a>
+    </div>
+
+    <div class="col-md-5 col-md-offset-1">
+      <div class="form-box shadow">
+        <div class="form-top">
+          <div class="form-top-left">
+            <h3>Registrate en Apollo</h3>
+            <p>Debes completar los siguientes datos.</p>
+          </div>
+          <div class="form-top-right">
+            <i class="fa fa-plane"></i>
+          </div>
+        </div>
+        <div class="form-bottom">
+          <form role="form" class="registration-form" [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <label class="control-label" for="nombre">Nombre:</label>
-              <input class="form-control" id="nombre" type="text" formControlName="nombre">
+              <label class="sr-only" for="username">Nombre de usuario</label>
+              <input id="username" type="text" name="username" placeholder="Nombre de usuario" class="form-control" autofocus required>
             </div>
             <div class="form-group">
-              <label class="control-label">Apellido:</label>
-              <input class="form-control" type="text" formControlName="apellido">
+              <label class="sr-only" for="form-last-name">Nombre</label>
+              <input id="nombre" type="text" name="nombre" placeholder="Nombre" class="form-control" required>
             </div>
             <div class="form-group">
-              <label class="control-label">Nombre de Usuario:</label>
-              <input class="form-control" type="text" formControlName="username">
+              <label class="sr-only" for="apellido">Apellido</label>
+              <input id="apellido" type="text" name="apellido" placeholder="Apellido" class="form-control" required>
             </div>
             <div class="form-group">
-              <label class="control-label">Descripción Personal (opcional):</label>
-              <textarea class="form-control" rows="3" formControlName="descripcion"></textarea>
+              <label class="sr-only" for="form-about-yourself">Cuéntanos sobre ti</label>
+              <textarea id="descripcion" name="descripcion" rows="3" placeholder="Cuéntanos sobre ti" class="form-control"></textarea>
             </div>
-            <div id=boton>
-              <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Registrate</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
           </form>
         </div>
       </div>
     </div>
-    <div class="col-md-4"></div>
   </div>
 </div>

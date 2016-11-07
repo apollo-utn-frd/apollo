@@ -1,21 +1,11 @@
-.panel {
-  height: 100%;
-  width: 100%;
+.form-top-right {
+  line-height: 90px;
 }
 
-.panel-heading h3 {
-  margin: 15px 0;
+.create-form .form-group:last-of-type {
+  margin-bottom: 30px
 }
 
-input[type=radio] {
-  height: 15px;
-  width: 15px;
-}
-
-label.radio {
-  padding-left: 35px;
-}
-
-#boton {
-  padding-top: 15px;
+label[for="visibilidad"] {
+  margin: 0;
 }
