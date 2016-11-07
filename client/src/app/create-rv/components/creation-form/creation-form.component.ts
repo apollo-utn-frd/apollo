@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
-declare var $ : any;
+declare var $: any;
 
 const V = Validators;
 
@@ -10,7 +10,7 @@ const V = Validators;
   templateUrl: 'creation-form.component.html',
   styleUrls: ['./creation-form.component.css']
 })
-export class CreationFormComponent {
+export class CreationFormComponent implements AfterViewInit {
   form: FormGroup;
 
   private nameValidators = V.compose([V.required, V.minLength(2), V.maxLength(20)]);

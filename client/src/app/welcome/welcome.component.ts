@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
   user$: Observable<User>;
+
   constructor( private auth: AuthService
              , private store: Store<State>
              , private router: Router
@@ -22,13 +23,18 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     this.auth.login();
-    this.user$.subscribe((u: User) => {
-      if (u.firstLogin) {
-        this.router.navigateByUrl('/login');
-      } else {
-        this.router.navigateByUrl('/home');
-      }
-    });
+    this.user$.subscribe(
+      (u: User) => {
+        if (u !== null) {
+          if (u.firstLogin) {
+            this.router.navigateByUrl('/login');
+          } else {
+            this.router.navigateByUrl('/home');
+          }
+        }
+      },
+      err => console.error(err)
+    );
   }
 }
 

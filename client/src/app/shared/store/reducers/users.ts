@@ -46,8 +46,6 @@ export function reducer(state = initialState, action: user.Actions): State {
                 token: token,
                 user: user
             };
-            console.log(newState);
-
             return newState;
         }
 

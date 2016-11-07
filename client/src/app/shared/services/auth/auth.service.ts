@@ -22,7 +22,6 @@ export class AuthService {
       this.http.get(USUARIOS, {headers: hs})
                .forEach(response => {
                  const json = response.json();
-                 console.log(json);
                  this.store.dispatch(new LoginAction([this.token, json]));
                 });
     } else {

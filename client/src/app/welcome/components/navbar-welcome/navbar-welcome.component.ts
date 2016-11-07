@@ -1,13 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 
-declare var $ : any;
+declare var $: any;
 
 @Component({
   selector: 'apollo-navbar-welcome',
   templateUrl: 'navbar-welcome.component.html',
   styleUrls: ['./navbar-welcome.component.css']
 })
-export class NavBarWelcomeComponent {
+export class NavBarWelcomeComponent implements AfterViewInit {
   ngAfterViewInit() {
     // jQuery for page scrolling feature - requires jQuery Easing plugin
     $('a.page-scroll').click(function(event) {
