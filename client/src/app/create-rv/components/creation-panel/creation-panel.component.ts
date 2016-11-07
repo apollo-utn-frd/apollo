@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SebmGoogleMap, SebmGoogleMapMarker, MouseEvent } from 'angular2-google-maps/core';
+import {GoogleplaceDirective} from 'angular2-google-map-auto-complete/directives/googleplace.directive';
 
 @Component({
   selector: 'apollo-creation-panel',
@@ -9,6 +10,7 @@ import { SebmGoogleMap, SebmGoogleMapMarker, MouseEvent } from 'angular2-google-
 export class CreationPanelComponent {
   lat: number = -34.1785255;
   lng: number = -58.9616511;
+  zoom = 16;
   ui: boolean = false;
   markers: Marker[];
   lines: Line[];
