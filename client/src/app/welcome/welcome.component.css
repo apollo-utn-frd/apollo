@@ -67,7 +67,7 @@ p {
 }
 
 a {
-  color: green;
+  color:  #337ab7;
   -webkit-transition: all .2s ease-in-out;
   -moz-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
@@ -75,7 +75,7 @@ a {
 
 a:hover,
 a:focus {
-  color: #256725;
+  color:  #337ab7;
 }
 
 .light {

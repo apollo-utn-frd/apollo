@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../shared/services/index';
+import { Component, OnInit } from '@angular/core';
+import { AuthService, UserService } from '../shared/services/index';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NavBarComponent } from '../shared/components/index';
+import { Store } from '@ngrx/store';
+import { State, getUser } from '../shared/store/index';
+import { Observable } from 'rxjs/Observable';
+import { User } from '../shared/models/index';
+import { Router } from '@angular/router';
 
 const V = Validators;
 
@@ -13,24 +18,27 @@ const V = Validators;
 })
 export class LoginComponent {
     form: FormGroup;
-    idToken;
+
     private nameValidators = V.compose([V.required, V.minLength(1), V.maxLength(20)]);
     private usernameValidators = V.compose([V.required, V.minLength(4), V.maxLength(20)]);
     private descriptionValidator = V.maxLength(150);
 
-       constructor(fb: FormBuilder, auth: AuthService) {
-        this.form = fb.group({
-            'nombre': new FormControl('nombre', this.nameValidators),
-            'apellido': new FormControl('apellido', this.nameValidators),
-            'username': new FormControl('username', this.usernameValidators),
-            'descripcion': new FormControl('', this.descriptionValidator)
-        });
+       constructor( fb: FormBuilder
+                  , auth: AuthService
+                  , store: Store<State>
+                  , userService: UserService
+                  ) {
+        store.let(getUser)
+             .subscribe((u: User) => {
+                this.form = fb.group({
+                    'nombre': new FormControl(u.firstname, this.nameValidators),
+                    'apellido': new FormControl(u.lastname, this.nameValidators),
+                    'username': new FormControl(u.username, this.usernameValidators),
+                    'descripcion': new FormControl('', this.descriptionValidator)
+                });
+            });
     }
 
     onSubmit() {
-        console.log('Valores Ingresados:');
-        console.log(JSON.stringify(this.form.value));
-        console.log(localStorage.length);
-        console.log(localStorage.getItem(this.idToken));
     }
 }

@@ -7,14 +7,14 @@ import { SebmGoogleMap, SebmGoogleMapMarker, MouseEvent } from 'angular2-google-
   styleUrls: ['./creation-panel.component.css']
 })
 export class CreationPanelComponent {
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number = -34.1785255;
+  lng: number = -58.9616511;
   ui: boolean = false;
   markers: Marker[];
   lines: Line[];
   pointA: Point;
   pointB: Point;
-  color: string = '#00FFFF';
+  color: string = '#000';
 
   constructor() {
     this.markers = [];

@@ -12,7 +12,7 @@
       <div class="form-box shadow">
         <div class="form-top">
           <div class="form-top-left">
-            <h3>Registrate en Apollo</h3>
+            <h3>Regístrate en Apollo</h3>
             <p>Debes completar los siguientes datos.</p>
           </div>
           <div class="form-top-right">
@@ -20,22 +20,22 @@
           </div>
         </div>
         <div class="form-bottom">
-          <form role="form" class="registration-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <form role="form" class="registration-form" [formGroup]="this.form" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <label class="sr-only" for="username">Nombre de usuario</label>
-              <input id="username" type="text" name="username" placeholder="Nombre de usuario" class="form-control" autofocus required>
+              <label for="username">Nombre de Usuario</label>
+              <input id="username" type="text" name="username" formControlName="username" placeholder="Nombre de usuario" class="form-control" autofocus required>
             </div>
             <div class="form-group">
-              <label class="sr-only" for="form-last-name">Nombre</label>
-              <input id="nombre" type="text" name="nombre" placeholder="Nombre" class="form-control" required>
+              <label for="form-last-name">Nombre</label>
+              <input id="nombre" type="text" name="nombre" formControlName="nombre" placeholder="Nombre" class="form-control" required>
             </div>
             <div class="form-group">
-              <label class="sr-only" for="apellido">Apellido</label>
-              <input id="apellido" type="text" name="apellido" placeholder="Apellido" class="form-control" required>
+              <label for="apellido">Apellido</label>
+              <input id="apellido" type="text" name="apellido" formControlName="apellido" placeholder="Apellido" class="form-control" required>
             </div>
             <div class="form-group">
-              <label class="sr-only" for="form-about-yourself">Cuéntanos sobre ti</label>
-              <textarea id="descripcion" name="descripcion" rows="3" placeholder="Cuéntanos sobre ti" class="form-control"></textarea>
+              <label for="form-about-yourself">Descripción</label>
+              <textarea id="descripcion" name="descripcion" formControlName="descripcion" rows="3" placeholder="Cuéntanos sobre ti" class="form-control"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Registrarse</button>
           </form>
