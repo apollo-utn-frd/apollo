@@ -1,0 +1,62 @@
+.pcard {
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.pcard-header .img-responsive {
+  width: 100%;
+}
+
+.pcard-body {
+  padding: 5px 15px;
+  float: left;
+}
+
+.pcard-body h2 {
+  margin-bottom: 5px;
+}
+
+.pcard-body em {
+  padding-bottom: 10px;
+  float: left;
+  color: #a9a1a1;;
+}
+
+.pcard-body .description p:last-of-type {
+  margin: 0;
+}
+
+.pcard-body hr,
+.pcard-body .description,
+.panel-statistics {
+  float: left;
+  width: 100%;
+}
+
+.panel-statistics {
+  margin-bottom: 10px;
+}
+
+.statistic {
+  display: block;
+  padding-bottom: 7px;
+}
+
+.statistic a {
+  display: flex;
+  align-items: center;
+  color: #154771;
+}
+
+.statistic a:hover,
+.statistic a:focus {
+  text-decoration: none;
+  color: #3277b3;
+}
+
+.statistic .fa {
+  width: 40px;
+  font-size: 1.5em;
+}
