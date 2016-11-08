@@ -2,12 +2,19 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
+    <section class="col-md-3">
       <apollo-profile-card></apollo-profile-card>
-    </div>
-    <div class="col-md-7 col-md-offset-1">
-      <apollo-message-create-rv></apollo-message-create-rv>
-    </div>
+    </section>
+
+    <section class="col-md-7 col-md-offset-1">
+      <div class="row">
+        <apollo-message-create-rv></apollo-message-create-rv>
+
+        <div id="publicaciones">
+          <apollo-preview-rv></apollo-preview-rv>
+        </div>
+      </div>
+    </section>
   </div>
 </div>
 

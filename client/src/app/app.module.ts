@@ -17,9 +17,19 @@ import { NavBarWelcomeComponent } from './welcome/components/index';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MessageCreateRVComponent } from './home/components/index';
-import { NavBarComponent, NavBarLogoComponent, ProfileCardComponent } from './shared/components/index';
 import { CreateRVComponent } from './create-rv/create-rv.component';
-import { CreationFormComponent, CreationPanelComponent } from './create-rv/components/index';
+
+import {
+  CreationFormComponent,
+  CreationPanelComponent
+} from './create-rv/components/index';
+
+import {
+  NavBarComponent,
+  NavBarLogoComponent,
+  ProfileCardComponent,
+  PreviewRVComponent
+} from './shared/components/index';
 
 // Services
 import { AuthService, UserService } from './shared/services/index';
@@ -37,12 +47,13 @@ import { reducer } from './shared/store/index';
     LoginComponent,
     HomeComponent,
     MessageCreateRVComponent,
+    CreateRVComponent,
+    CreationFormComponent,
+    CreationPanelComponent,
     NavBarComponent,
     NavBarLogoComponent,
     ProfileCardComponent,
-    CreateRVComponent,
-    CreationFormComponent,
-    CreationPanelComponent
+    PreviewRVComponent
   ],
   imports: [
     BrowserModule,

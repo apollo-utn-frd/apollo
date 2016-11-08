@@ -1,0 +1,36 @@
+.preview-rv {
+  background-color: #fff;
+  width: 100%;
+  margin: 15px 0;
+  position: relative;
+  float: left;
+  padding: 15px;
+}
+
+.col-profile-picture {
+  float: left;
+}
+
+.col-profile-picture .profile-picture {
+  width: 75px;
+  margin-right: 15px;
+}
+
+.col-rv {
+  padding-right: 45px;
+  float: right;
+  width: calc(100% - 90px);
+}
+
+.col-rv .information {
+  font-size: 1.1em;
+}
+
+.col-rv .rv {
+  margin-top: 15px;
+}
+
+.col-rv .map {
+  width: 100%;
+}
+

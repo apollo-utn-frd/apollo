@@ -12,6 +12,7 @@
 .information {
   padding: 5px 15px 25px;
   float: left;
+  background-color: #fff;
 }
 
 .information h2 {
@@ -21,7 +22,6 @@
 .information em {
   padding-bottom: 10px;
   float: left;
-  color: #a9a1a1;;
 }
 
 .information .description,

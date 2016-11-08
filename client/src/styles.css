@@ -32,6 +32,10 @@ textarea {
   resize: none;
 }
 
+.username {
+  color: #a9a1a1;
+}
+
 /* Clases utilitarias */
 .flex {
   display: flex;
