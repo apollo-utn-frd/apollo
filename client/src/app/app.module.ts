@@ -16,6 +16,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { NavBarWelcomeComponent } from './welcome/components/index';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { MessageCreateRVComponent } from './home/components/index';
 import { NavBarComponent, NavBarLogoComponent, ProfileCardComponent } from './shared/components/index';
 import { CreateRVComponent } from './create-rv/create-rv.component';
 import { CreationFormComponent, CreationPanelComponent } from './create-rv/components/index';
@@ -35,6 +36,7 @@ import { reducer } from './shared/store/index';
     NavBarWelcomeComponent,
     LoginComponent,
     HomeComponent,
+    MessageCreateRVComponent,
     NavBarComponent,
     NavBarLogoComponent,
     ProfileCardComponent,

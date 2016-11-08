@@ -5,4 +5,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: 'profile-card.component.html',
   styleUrls: ['./profile-card.component.css']
 })
-export class ProfileCardComponent {}
+export class ProfileCardComponent {
+  @Input() panelRutas: boolean = true;
+}

@@ -1,0 +1,37 @@
+.message {
+  padding: 0;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+  background-color: #f9f9f9;
+}
+
+.background {
+  margin: 20px;
+  height: 300px;
+  background-image: url("assets/img/world-travel-map-pins.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.gradient {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(249,249,249,0), rgba(249,249,249,0.5), rgba(249,249,249,1), rgba(249,249,249,1));
+}
+
+.text-box {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  width: 35%;
+  padding: 15px;
+  padding-right: 0;
+}
+
+.text-box p {
+  margin-bottom: 30px;
+}
