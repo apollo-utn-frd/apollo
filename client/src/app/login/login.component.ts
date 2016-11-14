@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService, UserService } from '../shared/services/index';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NavBarComponent } from '../shared/components/index';
 import { Store } from '@ngrx/store';
 import { State, getUser } from '../shared/store/index';
-import { Observable } from 'rxjs/Observable';
 import { User } from '../shared/models/index';
 import { Router } from '@angular/router';
 
@@ -24,9 +23,10 @@ export class LoginComponent {
     private descriptionValidator = V.maxLength(150);
 
        constructor( fb: FormBuilder
-                  , auth: AuthService
-                  , store: Store<State>
-                  , userService: UserService
+                  , private auth: AuthService
+                  , private store: Store<State>
+                  , private userService: UserService
+                  , private router: Router
                   ) {
         store.let(getUser)
              .subscribe((u: User) => {
@@ -40,5 +40,6 @@ export class LoginComponent {
     }
 
     onSubmit() {
+        this.router.navigateByUrl('/home');
     }
 }

@@ -62,3 +62,7 @@ export function reducer(state = initialState, action: user.Actions): State {
 export function getUser(state$: Observable<State>) {
     return state$.select(s => s.user);
 }
+
+export function getToken(state$: Observable<State>) {
+    return state$.select(s => s.token);
+}

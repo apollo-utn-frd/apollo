@@ -1,5 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormsModule } from '@angular/forms';
+import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directives/googleplace.directive';
+
+var F = require('./miFunciones');
 
 declare var $: any;
 
@@ -11,6 +14,16 @@ const V = Validators;
   styleUrls: ['./creation-form.component.css']
 })
 export class CreationFormComponent implements AfterViewInit {
+    public address: Object;
+    getAddress(place: Object) {
+        this.address = place['formatted_address'];
+        let location = place['geometry']['location'];
+        let lat =  location.lat();
+        let lng = location.lng();
+        console.log("Address Object", place);
+    }
+
+
   form: FormGroup;
 
   private nameValidators = V.compose([V.required, V.minLength(2), V.maxLength(20)]);

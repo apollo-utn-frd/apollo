@@ -29,7 +29,9 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Siguiente</button>
+       
     </form>
+    <input type="text" [(ngModel)]="address"  (setAddress)="getAddress($event)" googleplace/>
   </div>
 </div>
 

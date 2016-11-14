@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
@@ -32,12 +32,15 @@ import {
 } from './shared/components/index';
 
 // Services
-import { AuthService, UserService } from './shared/services/index';
+import { AuthService, AUTH_CONFIG, UserService } from './shared/services/index';
 import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
-
+import { provideAuth } from 'angular2-jwt';
 
 // Store
 import { reducer } from './shared/store/index';
+
+// Directives
+import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directives/googleplace.directive';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,8 @@ import { reducer } from './shared/store/index';
     NavBarComponent,
     NavBarLogoComponent,
     ProfileCardComponent,
-    PreviewRVComponent
+    PreviewRVComponent,
+    GoogleplaceDirective
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,7 @@ import { reducer } from './shared/store/index';
     CommonModule,
     ReactiveFormsModule,
     routing,
+    FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDSA-Sc8yoe_NIGqOwTGoNPiKge0KRK_wo'
     }),
@@ -81,7 +86,8 @@ import { reducer } from './shared/store/index';
     AuthService,
     UserService,
     MarkerManager,
-    GoogleMapsAPIWrapper
+    GoogleMapsAPIWrapper,
+    provideAuth(AUTH_CONFIG)
   ]
 })
 export class AppModule { }
