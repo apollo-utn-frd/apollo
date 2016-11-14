@@ -32,9 +32,8 @@ import {
 } from './shared/components/index';
 
 // Services
-import { AuthService, AUTH_CONFIG, UserService } from './shared/services/index';
+import { AuthService, UserService } from './shared/services/index';
 import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
-import { provideAuth } from 'angular2-jwt';
 
 // Store
 import { reducer } from './shared/store/index';
@@ -86,8 +85,7 @@ import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directiv
     AuthService,
     UserService,
     MarkerManager,
-    GoogleMapsAPIWrapper,
-    provideAuth(AUTH_CONFIG)
+    GoogleMapsAPIWrapper
   ]
 })
 export class AppModule { }

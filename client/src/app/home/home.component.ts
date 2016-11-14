@@ -14,7 +14,7 @@ import { State } from '../shared/store/index';
     providers: [NavBarComponent, ProfileCardComponent]
 })
 export class HomeComponent implements OnInit {
-  users$: Observable<User>;
+  users$: User;
   constructor( private http: Http
              , private store: Store<State>
              , private userService: UserService) {}
@@ -23,6 +23,6 @@ export class HomeComponent implements OnInit {
   console.log(this.userService.token);
   console.log(this.userService.headers.toJSON())
   this.userService.get()
-                  .subscribe(u => console.log(u));
+                  .subscribe(u => this.users$ = u);
   }
 }
