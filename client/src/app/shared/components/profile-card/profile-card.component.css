@@ -9,46 +9,45 @@
   width: 100%;
 }
 
-.information {
+.info-user {
   padding: 5px 15px 25px;
   float: left;
   background-color: #fff;
 }
 
-.information h2 {
+.info-user h2 {
   margin-bottom: 5px;
 }
 
-.information em {
+.info-user em {
   padding-bottom: 10px;
   float: left;
 }
 
-.information .description,
-.panel-statistics,
-.statistics {
+.info-user .description {
   float: left;
   width: 100%;
 }
 
-.panel-statistics {
-  margin-bottom: 0;
-}
-
-.information .description p:last-of-type {
+.info-user .description p:last-of-type {
   margin: 0;
 }
 
+.panel-statistics {
+  float: left;
+  width: 100%;
+  margin-bottom: 0;
+}
+
 .statistics {
+  float: left;
+  width: 100%;
   margin-bottom: 0;
   padding: 10px 15px;
-  background-color: #f5f5f5;
+  background-color: #f3f3f3;
 }
 
 .statistics + .statistics {
-  margin-bottom: 0;
-  padding: 10px 15px;
-  background-color: #f5f5f5;
   border-top: 1px solid #ddd;
 }
 

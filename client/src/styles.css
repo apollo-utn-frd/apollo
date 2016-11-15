@@ -57,7 +57,7 @@ textarea {
 .form-top {
   overflow: hidden;
   padding: 0 25px;
-  background: #f3f3f3;
+  background: #f5f5f5;
   border-radius: 4px 4px 0 0;
   text-align: left;
 }
@@ -94,6 +94,10 @@ textarea {
   text-align: left;
 }
 
+.form-bottom label {
+  font-size: 16px;
+}
+
 .form-bottom form button.btn {
   width: 100%;
 }
@@ -111,7 +115,7 @@ textarea {
   margin: 0;
   padding: 0 20px;
   vertical-align: middle;
-  background: #f8f8f8;
+  background: #fff;
   border: 3px solid #ddd;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
@@ -132,7 +136,6 @@ textarea {
 .form-box input[type="text"]:focus,
 .form-box textarea:focus {
   outline: 0;
-  background: #fff;
   border: 3px solid #ccc;
   box-shadow: none;
 }

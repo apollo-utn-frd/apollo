@@ -1,10 +1,15 @@
 .preview-rv {
   background-color: #fff;
   width: 100%;
-  margin: 15px 0;
+  margin-bottom: 15px;
   position: relative;
   float: left;
+}
+
+.background {
+  float: left;
   padding: 15px;
+  background-color: #fff;
 }
 
 .col-profile-picture {
@@ -22,8 +27,14 @@
   width: calc(100% - 90px);
 }
 
-.col-rv .information {
+.col-rv .info-user {
   font-size: 1.1em;
+}
+
+.col-rv .info-rv {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 .col-rv .rv {
@@ -34,3 +45,26 @@
   width: 100%;
 }
 
+.actions {
+  float: left;
+  width: 100%;
+  border-top: 1px solid #ddd;
+}
+
+.actions button {
+  float: left;
+  width: 33.3333%;
+  height: 35px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #f3f3f3;
+}
+
+.actions button + button {
+  border-left: 1px solid #ddd;
+}
+
+.actions button .fa {
+  margin-right: 7px;
+}
