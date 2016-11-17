@@ -31,6 +31,7 @@ export class UserService extends Service<User> {
 
   get(): Observable<User> {
     return this.http.get(api.USUARIOS, {headers: this.headers})
+                    .map(s => s.json())
                     .catch(this.handleError);
   }
 

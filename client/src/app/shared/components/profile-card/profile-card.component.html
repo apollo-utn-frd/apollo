@@ -1,15 +1,15 @@
 <div class="pcard shadow">
   <div class="pcard-header">
-    <img class="img-responsive" src="https://k46.kn3.net/taringa/3/C/0/3/E/A/Prensa-Taringa/C1E.jpg" alt="Avatar">
+    <img class="img-responsive" src="{{(user | async)?.pictureUrl}}" alt="Avatar">
   </div>
 
   <div class="pcard-body pull-right">
     <section class="info-user">
-      <h2>Ricardo Fort</h2>
-      <em class="username">@comandantefort</em>
+      <h2>{{ (user | async)?.nombre }} {{ (user | async)?.apellido }}</h2>
+      <em class="username">@ {{ (user | async)?.username }}</em>
 
       <div class="description">
-        <p>ERA UN HOMBRE DE NACIONALIDAD ARGENTINA QUE SE CRIO EN UN BARRIO HUMILDE DE BUENOS AIRES!!</p>
+        <p>{{ (user | async)?.description }}
       </div>
     </section>
 

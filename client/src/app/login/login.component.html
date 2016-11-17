@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="form-bottom">
-          <form role="form" class="registration-form" [formGroup]="this.form" (ngSubmit)="onSubmit()">
+          <form role="form" class="registration-form" [formGroup]="form" (ngSubmit)="onSubmit(user)">
             <div class="form-group">
               <label for="username">Nombre de Usuario</label>
               <input id="username" type="text" name="username" formControlName="username" class="form-control" autofocus required>
@@ -44,3 +44,4 @@
     </div>
   </div>
 </div>
+  
