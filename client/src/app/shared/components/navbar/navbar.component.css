@@ -40,3 +40,9 @@
   position: relative;
   top: 2px;
 }
+
+@media (max-width: 767px) {
+  #search {
+    display: none;
+  }
+}

@@ -1,68 +1,114 @@
 .preview-rv {
-  background-color: #fff;
-  width: 100%;
-  margin-bottom: 15px;
-  position: relative;
-  float: left;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .background {
-  float: left;
-  padding: 15px;
   background-color: #fff;
-}
-
-.col-profile-picture {
   float: left;
 }
 
-.col-profile-picture .profile-picture {
-  width: 75px;
-  margin-right: 15px;
+.legend {
+  padding: 10px;
 }
 
-.col-rv {
-  padding-right: 45px;
-  float: right;
-  width: calc(100% - 90px);
+.legend .username {
+  display: inline;
 }
 
-.col-rv .info-user {
-  font-size: 1.1em;
+.legend .fa {
+  margin: 0 5px;
 }
 
-.col-rv .info-rv {
-  position: absolute;
-  top: 15px;
-  right: 15px;
+.rv-map {
+  position: relative;
 }
 
-.col-rv .rv {
-  margin-top: 15px;
-}
-
-.col-rv .map {
+.rv-map .rv-picture {
   width: 100%;
+}
+
+.rv-map .gradient {
+  background: linear-gradient(180deg, rgba(249,249,249,0), rgba(249,249,249,0),rgba(249,249,249,0), rgba(249,249,249,0.5), rgba(249,249,249,1));
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.rv-map .rv-name {
+  margin: 0;
+  margin-left: 10px;
+  position: absolute;
+  bottom: 10px;
+}
+
+.rv-body {
+  float: left;
+  position: relative;
+}
+
+.rv-data {
+  position: absolute;
+  right: 0;
+  margin: 10px 15px;
+}
+
+.rv-user {
+  padding: 10px 10px 0;
+  float: left;
+}
+
+.rv-user .wrapper-user-picture {
+  float: left;
+  width: 15%;
+  display: inline-block;
+}
+
+.rv-user .user-picture {
+  width: 100%;
+  padding-right: 10px;
+}
+
+.rv-user .user-info {
+  display: inline-block;
+}
+
+.rv-user .username {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.rv-user .user-info:hover {
+  text-decoration: none;
 }
 
 .actions {
-  float: left;
-  width: 100%;
-  border-top: 1px solid #ddd;
+  display: inline-block;
+  float: right;
+  padding: 0 15px 5px;
 }
 
 .actions button {
-  float: left;
-  width: 33.3333%;
   height: 35px;
   margin: 0;
+  margin-left: 15px;
   padding: 0;
   border: none;
-  background-color: #f3f3f3;
+  background-color: transparent;
 }
 
-.actions button + button {
-  border-left: 1px solid #ddd;
+.actions button:hover {
+  color: #9ecfe9;
+}
+
+.actions button.activo {
+  color: #3279b6;
+}
+
+.actions button.disabled {
+  color: #808080;
+  cursor: default;
 }
 
 .actions button .fa {

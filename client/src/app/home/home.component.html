@@ -1,22 +1,28 @@
 <apollo-navbar></apollo-navbar>
 
+<button id="expand">
+  <i class="fa fa-chevron-left" aria-hidden="true"></i>
+</button>
+
 <div class="container-fluid">
   <div class="row">
-    <section class="col-md-3">
+    <section id="perfil">
       <apollo-profile-card></apollo-profile-card>
     </section>
 
-    <section class="col-md-7 col-md-offset-1">
-      <div class="row">
-        <apollo-message-create-rv></apollo-message-create-rv>
+    <section id="publicaciones">
+      <apollo-message-create-rv class="publicacion"></apollo-message-create-rv>
 
-        <div id="publicaciones">
-          <apollo-preview-rv></apollo-preview-rv>
-          <apollo-preview-rv></apollo-preview-rv>
-          <apollo-preview-rv></apollo-preview-rv>
-        </div>
-      </div>
+      <apollo-preview-rv class="publicacion"></apollo-preview-rv>
+      <apollo-preview-rv [publica]="false" class="publicacion"></apollo-preview-rv>
+      <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
+      <apollo-preview-rv class="publicacion"></apollo-preview-rv>
+      <apollo-preview-rv [publica]="false" class="publicacion"></apollo-preview-rv>
+      <apollo-preview-rv [publica]="false" class="publicacion"></apollo-preview-rv>
+      <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
+      <apollo-preview-rv class="publicacion"></apollo-preview-rv>
+      <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
+      <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
     </section>
   </div>
 </div>
-

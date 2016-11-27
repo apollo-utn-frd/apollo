@@ -1,27 +1,27 @@
 .message {
   padding: 0;
   width: 100%;
+  height: 300px;
   border-radius: 4px;
   overflow: hidden;
   background-color: #f9f9f9;
-  margin-bottom: 30px;
 }
 
-.background {
-  height: 300px;
+.message .background {
+  height: 100%;
   background-image: url("assets/img/world-travel-map-pins.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.gradient {
+.message .gradient {
   display: flex;
   flex-direction: row-reverse;
   height: 100%;
   background: linear-gradient(90deg, rgba(249,249,249,0), rgba(249,249,249,0.5), rgba(249,249,249,1), rgba(249,249,249,1));
 }
 
-.text-box {
+.message .text-box {
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -30,6 +30,27 @@
   padding: 15px;
 }
 
-.text-box p {
+.message .text-box p {
   margin-bottom: 30px;
+}
+
+.message.vertical {
+  position: relative;
+  height: 100%;
+}
+
+.message.vertical .text-box {
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.message.vertical .gradient {
+  background: linear-gradient(180deg, rgba(249,249,249,0), rgba(249,249,249,0.5), rgba(249,249,249,1), rgba(249,249,249,1));
+}
+
+.message.vertical .text-box p {
+  margin-bottom: 15px;
+  text-align: center;
 }

@@ -1,42 +1,46 @@
 <div class="preview-rv shadow">
   <div class="background">
-    <section class="col-profile-picture">
-      <img class="profile-picture" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
-    </section>
+    <div [hidden]="!compartida" class="legend">
+      <i class="fa fa-share" aria-hidden="true"></i>
+      Compartido por <a href="#"><span class="username">@federico_sanches</span></a>
+    </div>
 
-    <section class="col-rv">
-      <a class="info-user" href="#">
-        <strong class="nombre">Matías Mangiantini</strong>
-        <span class="username">@matias.mangiantini</span>
-      </a>
+    <div class="rv-map">
+      <img class="rv-picture" src="assets/img/sample-map.png">
+      <div class="gradient"></div>
+      <h4 class="rv-name">Ruta de viaje</h4>
+    </div>
 
-      <div class="info-rv">
-        <!-- Si es la ruta de viaje es privada
-        <i class="visibilidad fa fa-lock" aria-hidden="true" title="Privada"></i>
-        -->
-        <i class="visibilidad fa fa-globe" aria-hidden="true" title="Pública"></i>
-        <span class="date-created"> · 1 min</span>
+    <div class="rv-body">
+      <div class="rv-data">
+        <i [hidden]="publica" class="rv-visibilidad fa fa-lock" aria-hidden="true" title="Privada"></i>
+        <i [hidden]="!publica" class="rv-visibilidad fa fa-globe" aria-hidden="true" title="Pública"></i>
+        <span class="rv-date-created"> · 10 min</span>
       </div>
 
-      <div class="rv">
-        <h4 class="nombre-rv">Mi ruta de viaje</h4>
-        <p class="descripcion-rv">
-          Una descripción generica.
-        </p>
-        <img class="map" src="assets/img/sample-map.png">
+      <div class="rv-user">
+        <div class="wrapper-user-picture">
+          <img class="user-picture" src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
+        </div>
+        <a class="user-info" href="#">
+          <strong class="user-nombre">Matías Mangiantini</strong>
+          <span class="username">@matias.mangiantini</span>
+        </a>
       </div>
-    </section>
-  </div>
 
-  <div class="actions">
-    <button class="favoritos">
-      <i class="fa fa-star" aria-hidden="true"></i>Favoritos
-    </button>
-    <button class="comentar">
-      <i class="fa fa-comment" aria-hidden="true"></i>Comentar
-    </button>
-    <button class="compartir">
-      <i class="fa fa-share" aria-hidden="true"></i>Compartir
-    </button>
+      <div class="actions">
+        <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
+        <button class="favoritos">
+          <i class="fa fa-star" aria-hidden="true"></i><span class="cantidad">16</span>
+        </button>
+        <button class="comentar">
+          <i class="fa fa-comment" aria-hidden="true"></i><span class="cantidad">5</span>
+        </button>
+        <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
+        <button [hidden]="!publica" class="compartir">
+          <i class="fa fa-share" aria-hidden="true"></i><span class="cantidad">1</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

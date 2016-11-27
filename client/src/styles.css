@@ -32,8 +32,22 @@ textarea {
   resize: none;
 }
 
+button:focus {
+  outline: none;
+}
+
 .username {
   color: #a9a1a1;
+}
+
+.loading {
+  width: 100vw;
+  height: 100vh;
+  color: #fff;
+  font-size: 6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 /* Clases utilitarias */
@@ -44,6 +58,17 @@ textarea {
 .align-vertical {
   display: flex;
   align-items: center;
+}
+
+.align-full {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+.pull-left-100 {
+  float: left;
+  width: 100%;
 }
 
 .shadow {
