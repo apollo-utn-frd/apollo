@@ -1,0 +1,24 @@
+<div class="dropdown notifications-dropdown">
+  <button type="button" class="show-notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <i class="fa fa-bell" aria-hidden="true"></i>
+    <div class="notifications-count">
+      <span class="count">4</span>
+    </div>
+  </button>
+
+  <div class="dropdown-menu notifications" aria-labelledby="notifications-button">
+    <h3>Notificaciones</h3>
+
+    <ul class="notifications-list">
+      <!-- Esto hay que eliminarlo cuando se le agregue funcionalidad, por ahora es de muestra. -->
+      <apollo-notification-item [seguido]="true" class="item"></apollo-notification-item>
+      <apollo-notification-item [favorito]="true" class="item"></apollo-notification-item>
+      <apollo-notification-item [compartido]="true" class="item"></apollo-notification-item>
+      <apollo-notification-item [comentado]="true" class="item"></apollo-notification-item>
+
+      <li class="item no-data">No tienes notificaciones sin leer</li>
+    </ul>
+
+    <a href="#" class="show-all">Mostrar todas las notificaciones</a>
+  </div>
+</div>

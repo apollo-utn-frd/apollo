@@ -1,0 +1,115 @@
+/**
+ * Notificaciones. Basadas en:
+ * http://codepen.io/jo-asakura/pen/ExsLi
+ */
+.notifications-dropdown {
+  position: relative;
+  float: left;
+  margin: 0;
+}
+
+.show-notifications {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  outline: none;
+  position: relative;
+  height: 50px;
+}
+
+.show-notifications .fa {
+  font-size: 1.5em;
+}
+
+.show-notifications .notifications-count {
+  border-radius: 50%;
+  background-clip: padding-box;
+  background-color: #5cb85c;
+  color: #fefefe;
+  height: 16px;
+  line-height: 1.75em;
+  text-align: center;
+  position: absolute;
+  right: -3px;
+  top: 6px;
+}
+
+.show-notifications .notifications-count .count {
+  position: relative;
+  bottom: 4px;
+  right: 0px;
+  margin: 4px;
+}
+
+.notifications {
+  border-radius: 4px;
+  background-clip: padding-box;
+  position: absolute;
+  top: 52px;
+  right: -4px;
+  margin: 0;
+  padding: 0;
+}
+
+.notifications:after {
+  border: 10px solid transparent;
+  border-bottom-color: #5cb85c;
+  content: '';
+  display: block;
+  height: 0;
+  right: 10px;
+  position: absolute;
+  top: -20px;
+  width: 0;
+}
+
+.notifications h3,
+.notifications .show-all {
+  background: #5cb85c;
+  color: #fefefe;
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+}
+
+.notifications h3 {
+  cursor: default;
+  font-size: 1.05em;
+  font-weight: normal;
+}
+
+.notifications .show-all {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.notifications .show-all:hover,
+.notifications .show-all:focus {
+  text-decoration: underline;
+}
+
+.notifications-list {
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.notifications-list .item {
+  width: 375px;
+  float: left
+}
+
+.notifications-list .no-data {
+  display: none;
+  cursor: default;
+  padding: 10px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.notifications-list .no-data:first-child {
+  display: block;
+}

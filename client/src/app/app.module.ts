@@ -26,6 +26,8 @@ import {
 
 import {
   NavBarComponent,
+  NotificationsComponent,
+  NotificationItemComponent,
   NavBarLogoComponent,
   ProfileCardComponent,
   PreviewRVComponent
@@ -53,6 +55,8 @@ import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directiv
     CreationFormComponent,
     CreationPanelComponent,
     NavBarComponent,
+    NotificationsComponent,
+    NotificationItemComponent,
     NavBarLogoComponent,
     ProfileCardComponent,
     PreviewRVComponent,

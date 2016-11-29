@@ -30,7 +30,7 @@ export class HomeComponent implements AfterViewInit {
     });
 
     $('#expand').click(function() {
-      $('#perfil').toggleClass('hidden');
+      $('#perfil').toggle();
       $('#publicaciones').toggleClass('reduced');
       $(this).find('.fa').toggleClass('fa-chevron-left').toggleClass('fa-chevron-right');
 
@@ -69,10 +69,9 @@ function ajustarMensaje() {
 }
 
 /**
- * Ajusta los margenes inferiores de las preview-rv para que todas las preview-rv de una fila
- * empiecen a la misma altura. Esto es un problema principalmente cuando una ruta de viaje es
- * compartida ya que la preview-rv tendra una altura mayor a una cuya ruta de viaje no haya sido
- * compartida.
+ * Genera la grilla de las publicaciones para que todas las preview-rv de una fila empiecen a la
+ * misma altura. Esto es un problema principalmente cuando una ruta de viaje es compartida ya que
+ * la preview-rv tendra una altura mayor a una cuya ruta de viaje no haya sido compartida.
  */
 function ajustarPublicaciones() {
   var columnas = $('#expand .fa').hasClass('fa-chevron-left') ? 2 : 3;

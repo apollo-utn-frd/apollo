@@ -12,7 +12,7 @@
       <apollo-navbar-logo></apollo-navbar-logo>
     </div>
 
-    <div id="search" [hidden]="!search" class="navbar-form navbar-left">
+    <div [hidden]="!search" id="search" class="navbar-form navbar-left">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Búsqueda">
       </div>
@@ -21,11 +21,13 @@
       </button>
     </div>
 
-    <div class="collapse navbar-collapse navbar-right navbar-main-collapse" id="navbar-collapse">
-      <ul [hidden]="!dropdown" class="nav navbar-nav navbar-right">
+    <div [hidden]="!dropdown" id="navbar-collapse" class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <apollo-notifications></apollo-notifications>
+
+      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <span class="caret"></span>
+            <i class="fa fa-caret-down" aria-hidden="true"></i>
           </a>
 
           <ul class="dropdown-menu" role="menu">

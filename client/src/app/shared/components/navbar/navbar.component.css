@@ -11,6 +11,10 @@
   border-width: 0;
 }
 
+.navbar-nav {
+  margin-left: 5px;
+}
+
 .dropdown {
   margin-right: 15px;
 }

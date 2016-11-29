@@ -1,0 +1,43 @@
+<li class="item">
+  <div class="item-border">
+    <div class="profile-picture">
+      <img src="https://lh4.googleusercontent.com/-WHb2PGFg70g/AAAAAAAAAAI/AAAAAAAABjw/7u-wl0m3vZA/photo.jpg">
+    </div>
+
+    <!-- Cuando alguien te sigue. -->
+    <div [hidden]="!seguido" class="details seguido">
+      <span class="title">
+        <a class="username" href="#">@juanbono94</a> te está siguiendo
+      </span>
+      <i aria-hidden="true" class="fa fa-user-circle-o"></i>
+      <span class="date">05:20 AM</span>
+    </div>
+
+    <!-- Cuando marcan como favorito una RV. -->
+    <div [hidden]="!favorito" class="details favorito">
+      <span class="title">
+        <a class="username" href="#">@juanbono94</a> marcó como favorita a tu <a href="#">ruta de viaje</a>
+      </span>
+      <i aria-hidden="true" class="fa fa-star"></i>
+      <span class="date">05:20 AM</span>
+    </div>
+
+    <!-- Cuando comentan una RV. -->
+    <div [hidden]="!comentado" class="details comentado">
+      <span class="title">
+        <a class="username" href="#">@juanbono94</a> comentó tu <a href="#">ruta de viaje</a>
+      </span>
+      <i aria-hidden="true" class="fa fa-comment"></i>
+      <span class="date">05:20 AM</span>
+    </div>
+
+      <!-- Cuando comparten una RV. -->
+    <div [hidden]="!compartido" class="details compartido">
+      <span class="title">
+        <a class="username" href="#">@juanbono94</a> compartió tu <a href="#">ruta de viaje</a>
+      </span>
+      <i aria-hidden="true" class="fa fa-share"></i>
+      <span class="date">05:20 AM</span>
+    </div>
+  </div>
+</li>
