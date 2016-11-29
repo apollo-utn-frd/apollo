@@ -1,8 +1,3 @@
-export type Coord = {
-  lat: number,
-  long: number
-}
-
 /**
  * 
  * La visibilidad de una ruta de viaje puede ser solamente
@@ -12,10 +7,10 @@ export type Visibilidad = 'PRIVADA' | 'PUBLICA'
 
 export class RV {
   id: number;
-  nombre: string;
+  titulo: string;
   id_usuario: number;
   descripcion: string;
-  marcadores: Marker[];
+  marcadores: Point[];
   ruta: Line[];
   visibilidad: Visibilidad;
 }
@@ -28,8 +23,8 @@ interface Marker {
 }
 
 interface Point {
-  lat: number;
-  lng: number;
+  latitud: number;
+  longitud: number;
 }
 
 interface Line {

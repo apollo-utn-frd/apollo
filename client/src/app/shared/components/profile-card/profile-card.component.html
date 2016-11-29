@@ -6,10 +6,10 @@
   <div class="pcard-body pull-right">
     <section class="info-user">
       <h2>{{ (user | async)?.nombre }} {{ (user | async)?.apellido }}</h2>
-      <em class="username">@ {{ (user | async)?.username }}</em>
+      <em class="username">@{{ (user | async)?.username }}</em>
 
       <div class="description">
-        <p>{{ (user | async)?.description }}
+        <p> {{ (user | async)?.descripcion }} </p>
       </div>
     </section>
 
@@ -17,7 +17,7 @@
       <div id="creadas" class="statistics">
         <h4 class="panel-title">
           <a href="#" role="button">
-            <i class="fa fa-plane" aria-hidden="true"></i>9 viajes creados
+            <i class="fa fa-plane" aria-hidden="true"></i>{{ (user | async)?.rutasViaje.length }} viajes creados
           </a>
         </h4>
       </div>
@@ -25,7 +25,7 @@
       <div id="favoritas" class="statistics">
         <h4 class="panel-title">
           <a href="#" role="button">
-            <i class="fa fa-star" aria-hidden="true"></i>20 viajes favoritos
+            <i class="fa fa-star" aria-hidden="true"></i>{{ (user | async)?.favoritos.length }} viajes favoritos
           </a>
         </h4>
       </div>
@@ -33,7 +33,7 @@
       <div id="seguidores" class="statistics">
         <h4 class="panel-title">
           <a href="#" role="button">
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i>210 seguidores
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>{{ (user | async)?.seguidores.length }} seguidores
           </a>
         </h4>
       </div>
@@ -41,7 +41,7 @@
       <div id="siguiendo" class="statistics">
         <h4 class="panel-title">
           <a href="#" role="button">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>250 siguiendo
+            <i class="fa fa-user-circle" aria-hidden="true"></i>{{ (user | async)?.seguidos.length }} siguiendo
           </a>
         </h4>
       </div>

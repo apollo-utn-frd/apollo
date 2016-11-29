@@ -2,8 +2,6 @@ import { Component, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormsModule } from '@angular/forms';
 import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directives/googleplace.directive';
 
-var F = require('./miFunciones');
-
 declare var $: any;
 
 const V = Validators;

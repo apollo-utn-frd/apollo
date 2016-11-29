@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { User } from '../../models/index';
-import { Response } from '@angular/http';
 import { UserService } from '../../services/index';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'apollo-profile-card',
@@ -9,7 +9,7 @@ import { UserService } from '../../services/index';
   styleUrls: ['./profile-card.component.css']
 })
 export class ProfileCardComponent {
-  user: Object;
+  user: Observable<User>;
   @Input() panelRutas: boolean = true;
 
   constructor(private userService: UserService) {

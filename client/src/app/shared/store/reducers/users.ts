@@ -6,13 +6,13 @@ import { User } from '../../models/user';
 import * as user from '../actions/user';
 
 export interface State {
-    id: number;
+    id: string;
     token: string;
     user: User | null;
 }
 
 const initialState: State = {
-    id: 0,
+    id: '',
     token: '',
     user: null
 };
@@ -23,9 +23,15 @@ export function reducer(state = initialState, action: user.Actions): State {
             const token = action.payload[0];
             const json = action.payload[1];
             const user: User = { // habia una forma menos fea de hacer esto, pero no recuerdo.
-                id: json.id,
-                firstname: json.nombre,
-                lastname: json.apellido,
+                idGoogle: json.id,
+                password: json.password,
+                enabled: json.enable,
+                accountLocked: json.accountLocked,
+                accountExpired: json.accountExpired,
+                passwordExpired: json.passwordExpired,
+                lastUpdated: json.lastUpdated,
+                nombre: json.nombre,
+                apellido: json.apellido,
                 username: json.username,
                 email: json.email,
                 pictureUrl: json.pictureUrl,
@@ -37,10 +43,10 @@ export function reducer(state = initialState, action: user.Actions): State {
                 compartidos: json.compartidos,
                 autorizaciones: json.autorizaciones,
                 dateCreated: json.dateCreated,
-                description: json.descripcion,
+                descripcion: json.descripcion,
                 firstLogin: json.firstLogin
             };
-            const id = user.id;
+            const id = user.idGoogle;
             const newState = {
                 id: id,
                 token: token,
