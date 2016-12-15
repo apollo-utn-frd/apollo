@@ -1,9 +1,5 @@
 .form-top-right {
-  line-height: 90px;
-}
-
-.create-form .form-group:last-of-type {
-  margin-bottom: 30px
+  line-height: 70px;
 }
 
 label[for="visibilidad"] {

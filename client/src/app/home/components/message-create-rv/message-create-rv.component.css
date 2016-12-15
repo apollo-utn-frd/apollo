@@ -40,10 +40,8 @@
 }
 
 .message.vertical .text-box {
-  justify-content: flex-end;
-  position: absolute;
-  bottom: 0;
   width: 100%;
+  align-self: flex-end;
 }
 
 .message.vertical .gradient {

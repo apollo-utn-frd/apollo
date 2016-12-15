@@ -30,15 +30,15 @@
 
       <div class="actions">
         <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
+        <button [hidden]="!publica" class="compartir">
+          <i class="fa fa-share" aria-hidden="true"></i><span class="cantidad">1</span>
+        </button>
+        <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
         <button class="favoritos">
           <i class="fa fa-star" aria-hidden="true"></i><span class="cantidad">16</span>
         </button>
         <button class="comentar">
           <i class="fa fa-comment" aria-hidden="true"></i><span class="cantidad">5</span>
-        </button>
-        <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
-        <button [hidden]="!publica" class="compartir">
-          <i class="fa fa-share" aria-hidden="true"></i><span class="cantidad">1</span>
         </button>
       </div>
     </div>

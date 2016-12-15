@@ -1,6 +1,6 @@
 package apollo
 
-trait BaseControllerTrait {
+trait AppTrait {
     static responseFormats = ['json']
 
     SecurityService securityService

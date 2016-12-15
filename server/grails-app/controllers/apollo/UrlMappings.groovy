@@ -3,8 +3,8 @@ package apollo
 class UrlMappings {
     static mappings = {
         // Redirigue todas las peticiones OPTIONS (CORS).
-        options "/*"(controller: 'application')
-        options "/**"(controller: 'application')
+        options "/*"(controller: 'app')
+        options "/**"(controller: 'app')
 
         // Usuarios.
         group "/usuario", {

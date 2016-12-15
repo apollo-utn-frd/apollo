@@ -6,7 +6,7 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 
-class AutorizacionController implements BaseControllerTrait {
+class AutorizacionController implements AppTrait {
     static allowedMethods = [show: 'GET', list: 'GET']
 
     @Secured('ROLE_ADMIN')

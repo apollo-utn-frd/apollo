@@ -3,7 +3,7 @@ package apollo
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
 
-class ApplicationController {
+class AppController {
     static allowedMethods = [index: 'OPTIONS']
 
     /**

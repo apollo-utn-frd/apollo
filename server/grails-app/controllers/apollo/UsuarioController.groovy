@@ -7,7 +7,7 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 
-class UsuarioController implements BaseControllerTrait {
+class UsuarioController implements AppTrait {
     static allowedMethods = [index: 'GET', show: 'GET', showByUsername: 'GET', list: 'GET', update: 'PUT']
 
     @Secured('ROLE_USER')

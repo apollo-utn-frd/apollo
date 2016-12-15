@@ -79,7 +79,7 @@ button:focus {
  * Formularios. Basados en:
  * http://azmind.com/2015/11/06/bootstrap-login-register-forms-templates/
  */
-.form-top {
+.form-box .form-top {
   overflow: hidden;
   padding: 0 25px;
   background: #f5f5f5;
@@ -87,18 +87,18 @@ button:focus {
   text-align: left;
 }
 
-.form-top-left {
+.form-box .form-top-left {
   float: left;
   width: 75%;
   padding-top: 25px;
 }
 
-.form-top-left h3,
-.form-top-left h4 {
+.form-box .form-top-left h3,
+.form-box .form-top-left h4 {
   margin-top: 0;
 }
 
-.form-top-right {
+.form-box .form-top-right {
   float: left;
   width: 25%;
   padding-top: 5px;
@@ -108,35 +108,48 @@ button:focus {
   text-align: right;
 }
 
-.form-top-right .fa {
+.form-box .form-top-right .fa {
   color: #03baca;
+  font-size: 0.75em;
 }
 
-.form-bottom {
-  padding: 25px 25px 30px 25px;
+.form-box .form-bottom {
+  padding: 25px 25px 15px 25px;
   background: #eee;
   border-radius: 0 0 4px 4px;
   text-align: left;
 }
 
-.form-bottom label {
-  font-size: 16px;
+.form-box .form {
+  display: flex;
+  flex-direction: column;
 }
 
-.form-bottom form button.btn {
-  width: 100%;
+.form-box .form .form-group:last-of-type {
+  margin-bottom: 15px
 }
 
-.form-bottom form .input-error {
+.form-box .form label {
+  font-size: 14px;
+}
+
+.form-box .form .btn {
+  padding: 6px 25px;
+  align-self: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.form-box .form-bottom .input-error {
   border-color: #19b9e7;
 }
 
-.form-box input[type="text"] {
+.form-box .form input[type="text"] {
   height: 50px;
 }
 
-.form-box input[type="text"],
-.form-box textarea {
+.form-box .form input[type="text"],
+.form-box .form textarea {
   margin: 0;
   padding: 0 20px;
   vertical-align: middle;
@@ -152,26 +165,26 @@ button:focus {
   transition: all .3s;
 }
 
-.form-box textarea {
+.form-box .form textarea {
   padding-top: 10px;
   padding-bottom: 10px;
   line-height: 30px;
 }
 
-.form-box input[type="text"]:focus,
-.form-box textarea:focus {
+.form-box .form input[type="text"]:focus,
+.form-box .form textarea:focus {
   outline: 0;
   border: 3px solid #ccc;
   box-shadow: none;
 }
 
-.form-box input[type="text"]:-moz-placeholder,
-.form-box textarea:-moz-placeholder {
+.form-box .form input[type="text"]:-moz-placeholder,
+.form-box .form textarea:-moz-placeholder {
   color: #888;
 }
 
-.form-box input[type="text"]::-webkit-input-placeholder,
-.form-box textarea::-webkit-input-placeholder {
+.form-box .form input[type="text"]::-webkit-input-placeholder,
+.form-box .form textarea::-webkit-input-placeholder {
   color: #888;
 }
 

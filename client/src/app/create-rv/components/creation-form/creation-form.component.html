@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="form-bottom">
-    <form role="form" class="create-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form role="form" class="form create-form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="nombre">Nombre</label>
         <input id="nombre" type="text" name="nombre" class="form-control" autofocus required>
@@ -29,9 +29,7 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Siguiente</button>
-       
     </form>
-    <input type="text" [(ngModel)]="address"  (setAddress)="getAddress($event)" googleplace/>
   </div>
 </div>
 

@@ -6,7 +6,7 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 
-class RutaViajeController implements BaseControllerTrait {
+class RutaViajeController implements AppTrait {
     static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
 
     @Secured('permitAll')
