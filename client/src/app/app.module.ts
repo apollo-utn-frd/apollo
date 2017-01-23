@@ -34,7 +34,7 @@ import {
 } from './shared/components/index';
 
 // Services
-import { AuthService, UserService } from './shared/services/index';
+import { AuthService, UserService, RVService } from './shared/services/index';
 import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
 
 // Store
@@ -89,6 +89,7 @@ import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directiv
     AuthService,
     UserService,
     MarkerManager,
+    RVService,
     GoogleMapsAPIWrapper
   ]
 })

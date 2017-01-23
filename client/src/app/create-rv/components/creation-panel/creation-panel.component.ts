@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { SebmGoogleMap, SebmGoogleMapMarker, MouseEvent } from 'angular2-google-maps/core';
-import {GoogleplaceDirective} from 'angular2-google-map-auto-complete/directives/googleplace.directive';
 
 @Component({
   selector: 'apollo-creation-panel',
@@ -8,33 +7,46 @@ import {GoogleplaceDirective} from 'angular2-google-map-auto-complete/directives
   styleUrls: ['./creation-panel.component.css']
 })
 export class CreationPanelComponent {
-  lat: number = -34.1785255;
-  lng: number = -58.9616511;
+  // Datos para setear el mapa
+  lat: number = -34.1785255; // latitud de la facu
+  lng: number = -58.9616511; // longitud de la facu
   zoom = 16;
   ui: boolean = false;
+
+  // datos sobre los marcadores puestos en el mapa
   markers: Marker[];
   lines: Line[];
   pointA: Point;
   pointB: Point;
   color: string = '#000';
 
+  // marcadores que se envian al padre cuando el padre se los pide
+  @Output() marcadores: EventEmitter<Point> = new EventEmitter<Point>();
+
   constructor() {
     this.markers = [];
     this.lines = [];
   }
 
-  onMapClick($event: MouseEvent) {
+  onMapRightClick($event: MouseEvent): void {
+    if (this.markers.length !== 0) {
+      this.markers.pop();
+      this.lines.pop();
+    }
+  }
+
+  onMapClick($event: MouseEvent): void {
     if (this.markers.length !== 0) {
       let len = this.markers.length - 1;
       let lastElem: Marker = this.markers[len];
       this.pointA = {
-        lat: lastElem.lat,
-        lng: lastElem.lng
+        latitud: lastElem.lat,
+        longitud: lastElem.lng
       };
     } else {
       this.pointA = {
-        lat: $event.coords.lat,
-        lng: $event.coords.lng
+        latitud: $event.coords.lat,
+        longitud: $event.coords.lng
       };
     }
 
@@ -44,8 +56,8 @@ export class CreationPanelComponent {
     });
 
     this.pointB = {
-      lat: $event.coords.lat,
-      lng: $event.coords.lng
+      latitud: $event.coords.lat,
+      longitud: $event.coords.lng
     };
 
     this.lines.push({
@@ -53,7 +65,12 @@ export class CreationPanelComponent {
       pointB: this.pointB
     });
   }
+
 }
+
+
+
+// clases del dominio para los mapas, pasar a otro archivo.
 
 interface Marker {
   lat: number;
@@ -63,8 +80,8 @@ interface Marker {
 }
 
 interface Point {
-  lat: number;
-  lng: number;
+  latitud: number;
+  longitud: number;
 }
 
 interface Line {

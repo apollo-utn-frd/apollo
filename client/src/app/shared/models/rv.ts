@@ -6,12 +6,12 @@
 export type Visibilidad = 'PRIVADA' | 'PUBLICA'
 
 export class RV {
-  id: number;
+  id?: number;
   titulo: string;
-  id_usuario: number;
+  id_usuario: string;
   descripcion: string;
-  marcadores: Point[];
-  ruta: Line[];
+  sitios: Point[];
+  // ruta: Line[];
   visibilidad: Visibilidad;
 }
 

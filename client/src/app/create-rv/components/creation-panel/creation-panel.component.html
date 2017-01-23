@@ -5,6 +5,7 @@
     [zoom]="zoom"
     [streetViewControl]="ui"
     (mapClick)="this.onMapClick($event)"
+    (mapRightClick)="this.onMapRightClick($event)"
   >
     <sebm-google-map-marker
       *ngFor="let m of markers; let i = index"
@@ -18,12 +19,12 @@
       [strokeColor]="color"
     >
       <sebm-google-map-polyline-point
-        [latitude]="l.pointA.lat"
-        [longitude]="l.pointA.lng"
+        [latitude]="l.pointA.latitud"
+        [longitude]="l.pointA.longitud"
       ></sebm-google-map-polyline-point>
       <sebm-google-map-polyline-point
-        [latitude]="l.pointB.lat"
-        [longitude]="l.pointB.lng"
+        [latitude]="l.pointB.latitud"
+        [longitude]="l.pointB.longitud"
       ></sebm-google-map-polyline-point>
     </sebm-google-map-polyline>
   </sebm-google-map>

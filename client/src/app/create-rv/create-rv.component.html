@@ -3,10 +3,10 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-4">
-      <apollo-creation-form></apollo-creation-form>
+      <apollo-creation-form (formData)="onFormSubmit($event)"></apollo-creation-form>
     </div>
     <div class="col-md-8">
-      <apollo-creation-panel></apollo-creation-panel>
+      <apollo-creation-panel (marcadores)="getMarkers($event)"></apollo-creation-panel>
     </div>
   </div>
 </div>

@@ -36,5 +36,5 @@ export class WelcomeComponent implements OnInit {
       err => console.error(err)
     );
   }
-}
 
+}

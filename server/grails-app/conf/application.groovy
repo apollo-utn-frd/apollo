@@ -40,8 +40,8 @@ grails {
                         key = '373620657494-ebm7hgktjilhd8jvlqmi6uvfd8q93rs1.apps.googleusercontent.com'
                         secret = 'iVddJvf1OcUG2jBpAP6RTlx3'
                         scope = org.pac4j.oauth.client.Google2Client.Google2Scope.EMAIL_AND_PROFILE
-                        defaultRoles = ['ROLE_USER']
-                        /* defaultRoles = ['ROLE_ADMIN', 'ROLE_USER'] */
+                        //defaultRoles = ['ROLE_USER']
+                         defaultRoles = ['ROLE_ADMIN', 'ROLE_USER'] 
                     }
                 }
 

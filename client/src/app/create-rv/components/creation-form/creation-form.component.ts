@@ -1,6 +1,5 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormsModule } from '@angular/forms';
-import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directives/googleplace.directive';
 
 declare var $: any;
 
@@ -12,21 +11,14 @@ const V = Validators;
   styleUrls: ['./creation-form.component.css']
 })
 export class CreationFormComponent implements AfterViewInit {
-    public address: Object;
-    getAddress(place: Object) {
-        this.address = place['formatted_address'];
-        let location = place['geometry']['location'];
-        let lat =  location.lat();
-        let lng = location.lng();
-        console.log("Address Object", place);
-    }
-
-
   form: FormGroup;
 
   private nameValidators = V.compose([V.required, V.minLength(2), V.maxLength(20)]);
   private descripValidators = V.maxLength(200);
   private visValidator = V.required;
+
+  // Output con los datos del formulario enviados al componente padre.
+  @Output() formData: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({
@@ -47,9 +39,10 @@ export class CreationFormComponent implements AfterViewInit {
   }
 
   onSubmit() {
-    // TODO
-    // Crear objeto de RV y persistirlo.
-    // tener en cuenta que pertenece a un usuario en particular
+    let data = this.form.getRawValue();
+    console.log("valores a emitir: " + JSON.stringify(data))
+    this.formData.emit(data); // emito los datos del form.
+
     console.log('Ruta de viaje creada!');
   }
 }

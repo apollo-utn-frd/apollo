@@ -4,6 +4,7 @@ import { UserService } from '../shared/services/index';
 import { User } from '../shared/models/index';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { State } from '../shared/store/index';
 
@@ -40,7 +41,8 @@ export class HomeComponent implements AfterViewInit {
 
   constructor( private http: Http
              , private store: Store<State>
-             , private userService: UserService) {
+             , private userService: UserService
+             , private router: Router) {
              }
 }
 
