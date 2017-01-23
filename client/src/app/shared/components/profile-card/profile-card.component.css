@@ -1,3 +1,7 @@
+.img-responsive {
+  width: 100%;
+}
+
 .pcard {
   overflow: hidden;
   background: #ffffff;
@@ -5,14 +9,16 @@
   text-align: left;
 }
 
-.pcard-header .img-responsive {
+.pcard-body {
   width: 100%;
+  background-color: #fff;
 }
 
 .info-user {
   padding: 5px 15px 25px;
   float: left;
   background-color: #fff;
+  width: 100%;
 }
 
 .info-user h2 {
@@ -33,6 +39,13 @@
   margin: 0;
 }
 
+.seguir {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
 .panel-statistics {
   float: left;
   width: 100%;
@@ -51,6 +64,6 @@
   border-top: 1px solid #ddd;
 }
 
-.statistics i.fa {
+.fa {
   margin-right: 7px;
 }

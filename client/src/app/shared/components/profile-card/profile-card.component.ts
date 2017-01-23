@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Observable';
 export class ProfileCardComponent {
   user: Observable<User>;
   @Input() panelRutas: boolean = true;
+  @Input() seguir: boolean = true;
 
   constructor(private userService: UserService) {
     this.user = this.userService.get();

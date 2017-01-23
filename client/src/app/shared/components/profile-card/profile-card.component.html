@@ -1,9 +1,9 @@
 <div class="pcard shadow">
-  <div class="pcard-header">
-    <img class="img-responsive" src="{{(user | async)?.pictureUrl}}" alt="Avatar">
-  </div>
-
   <div class="pcard-body pull-right">
+    <section class="avatar">
+      <img class="img-responsive" src="{{(user | async)?.pictureUrl}}" alt="Avatar">
+    </section>
+
     <section class="info-user">
       <h2>{{ (user | async)?.nombre }} {{ (user | async)?.apellido }}</h2>
       <em class="username">@{{ (user | async)?.username }}</em>
@@ -11,6 +11,12 @@
       <div class="description">
         <p> {{ (user | async)?.descripcion }} </p>
       </div>
+    </section>
+
+    <section [hidden]="!seguir" class="seguir">
+      <button class="btn btn-material btn-primary">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>Seguir
+      </button>
     </section>
 
     <section [hidden]="!panelRutas" class="panel-statistics shadow">

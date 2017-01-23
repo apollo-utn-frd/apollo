@@ -4,26 +4,22 @@
   <i class="fa fa-chevron-left" aria-hidden="true"></i>
 </button>
 
-<div class="container-fluid">
-  <div class="row">
-    <section id="perfil">
-      <apollo-profile-card></apollo-profile-card>
-    </section>
+<div class="contenido">
+  <apollo-profile-card class="profile-card"></apollo-profile-card>
 
-    <section id="publicaciones">
-      <apollo-message-create-rv class="publicacion"></apollo-message-create-rv>
+  <section id="publicaciones">
+    <apollo-message-create-rv class="publicacion"></apollo-message-create-rv>
 
-      <!-- Esto hay que eliminarlo cuando se le agregue funcionalidad, por ahora es de muestra. -->
-      <apollo-preview-rv class="publicacion"></apollo-preview-rv>
-      <apollo-preview-rv [publica]="false" class="publicacion"></apollo-preview-rv>
-      <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
-      <apollo-preview-rv class="publicacion"></apollo-preview-rv>
-      <apollo-preview-rv [publica]="false" class="publicacion"></apollo-preview-rv>
-      <apollo-preview-rv [publica]="false" class="publicacion"></apollo-preview-rv>
-      <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
-      <apollo-preview-rv class="publicacion"></apollo-preview-rv>
-      <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
-      <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
-    </section>
-  </div>
+    <!-- Esto hay que eliminarlo cuando se le agregue funcionalidad, por ahora es de muestra. -->
+    <apollo-preview-rv class="publicacion"></apollo-preview-rv>
+    <apollo-preview-rv [publica]="false" class="publicacion"></apollo-preview-rv>
+    <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
+    <apollo-preview-rv class="publicacion"></apollo-preview-rv>
+    <apollo-preview-rv [publica]="false" class="publicacion"></apollo-preview-rv>
+    <apollo-preview-rv [publica]="false" class="publicacion"></apollo-preview-rv>
+    <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
+    <apollo-preview-rv class="publicacion"></apollo-preview-rv>
+    <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
+    <apollo-preview-rv [compartida]="true" class="publicacion"></apollo-preview-rv>
+  </section>
 </div>

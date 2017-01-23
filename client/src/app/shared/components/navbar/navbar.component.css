@@ -1,5 +1,6 @@
-.container-fluid {
+.contenido {
   padding-top: 0;
+  margin-bottom: 0;
 }
 
 .navbar {
@@ -12,11 +13,12 @@
 }
 
 .navbar-nav {
+  margin-right: 0;
   margin-left: 5px;
 }
 
-.dropdown {
-  margin-right: 15px;
+.navbar-right {
+  margin-right: 0;
 }
 
 .dropdown .dropdown-toggle {

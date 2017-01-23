@@ -1,6 +1,12 @@
-apollo-creation-form,
-apollo-creation-panel {
-  width: 100%;
-  display: block;
-  height: calc(95vh - 60px);
+.creation-form {
+  padding-right: 2vw;
+  width: 35%;
+  float: left;
+}
+
+.creation-panel {
+  padding-left: 2vw;
+  width: 65%;
+  float: right;
+  height: calc(95vh - 75px);
 }
