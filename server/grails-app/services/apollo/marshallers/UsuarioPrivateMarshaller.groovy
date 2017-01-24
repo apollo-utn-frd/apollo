@@ -12,10 +12,11 @@ class UsuarioPrivateMarshaller {
                 email = usuario.email
                 nombre = usuario.nombre
                 apellido = usuario.apellido
-                pictureUrl = usuario.pictureUrl
                 descripcion = usuario.descripcion
                 firstLogin = usuario.firstLogin
                 accountLocked = usuario.accountLocked
+
+                pictureUrl = 'http://localhost:8080/usuario/avatar/' + usuario.id
 
                 seguidos = usuario.seguidos.collect { seguimiento ->
                     [

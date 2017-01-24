@@ -14,10 +14,14 @@ class BootStrap {
                 email: 'jon.snow@gmail.com',
                 nombre: 'Jon',
                 apellido: 'Snow',
-                pictureUrl: 'http://s.newsweek.com/sites/www.newsweek.com/files/2016/03/31/jon-snow-game-thrones.jpg',
+                pictureUrl: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJa2pNSUY5cXFjZXc',
                 descripcion: 'Ex-Lord Comandante de la Guardia de la Noche',
                 firstLogin: false
             ).save(failOnError: true)
+
+            new File("grails-app/views/avatars/${jon.id}.jpg").withOutputStream { out ->
+              new URL(jon.pictureUrl).withInputStream { from ->  out << from }
+            }
 
             UsuarioRole.create jon, Role.findByAuthority('ROLE_USER')
         }

@@ -11,6 +11,7 @@ class UrlMappings {
             get    "/"(controller: 'usuario', action: 'index')
             put    "/"(controller: 'usuario', action: 'update')
             get    "/$id?"(controller: 'usuario', action: 'show')
+            get    "/avatar/$id?"(controller: 'usuario', action: 'showAvatar')
             get    "/list"(controller: 'usuario', action: 'list')
             get    "/u/$username?"(controller: 'usuario', action: 'showByUsername')
             post   "/seguir/$id?"(controller: 'seguimiento', action: 'create')

@@ -12,8 +12,9 @@ class UsuarioMarshaller {
                 email = usuario.email
                 nombre = usuario.nombre
                 apellido = usuario.apellido
-                pictureUrl = usuario.pictureUrl
                 descripcion = usuario.descripcion
+
+                pictureUrl = 'http://localhost:8080/usuario/avatar/' + usuario.id
 
                 seguidos = usuario.seguidos.collect { seguimiento ->
                     [

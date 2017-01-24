@@ -17,6 +17,7 @@ PUT | /usuario | Usuarios | Actualiza el usuario logueado.
 GET | /usuario/:id_usr | Público | Devuelve el usuario segun un id.
 GET | /usuario/u/:username | Público | Devuelve el usuario segun un nombre de usuario.
 GET | /usuario/list | Administradores | Devuelve todos los usuarios.
+GET | /usuario/avatar/:id_usr | Público | Devuelve el avatar del usuario segun un id.
 
 ###Últimas publicaciones
 Método HTTP | URI | Autenticación | Descripción
