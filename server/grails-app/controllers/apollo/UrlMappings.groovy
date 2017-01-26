@@ -11,7 +11,6 @@ class UrlMappings {
             get    "/"(controller: 'usuario', action: 'index')
             put    "/"(controller: 'usuario', action: 'update')
             get    "/$id?"(controller: 'usuario', action: 'show')
-            get    "/avatar/$id?"(controller: 'usuario', action: 'showAvatar')
             get    "/list"(controller: 'usuario', action: 'list')
             get    "/u/$username?"(controller: 'usuario', action: 'showByUsername')
             post   "/seguir/$id?"(controller: 'seguimiento', action: 'create')
@@ -64,6 +63,9 @@ class UrlMappings {
 
         // Autenticación.
         "/auth/$provider?"(controller: 'restOauth', action: 'authenticate')
+
+        // Imagenes
+        "/images/$domain?/$file?"(controller: 'app', action: 'images')
 
         "500"(view: '/error')
         "404"(view: '/notFound')

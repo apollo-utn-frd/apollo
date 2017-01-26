@@ -16,7 +16,9 @@ class UsuarioPrivateMarshaller {
                 firstLogin = usuario.firstLogin
                 accountLocked = usuario.accountLocked
 
-                pictureUrl = 'http://localhost:8080/usuario/avatar/' + usuario.id
+                if (usuario.pictureLocalPath) {
+                    pictureUrl = 'http://localhost:8080/' + usuario.pictureLocalPath
+                }
 
                 seguidos = usuario.seguidos.collect { seguimiento ->
                     [

@@ -8,26 +8,30 @@ class BootStrap {
         }
 
         if (Usuario.count() == 0) {
-            Usuario jon = new Usuario(
+            Usuario usuario = new Usuario(
                 username: 'test',
                 idGoogle: 1235,
                 email: 'jon.snow@gmail.com',
                 nombre: 'Jon',
                 apellido: 'Snow',
-                pictureUrl: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJa2pNSUY5cXFjZXc',
+                pictureGoogleUrl: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJa2pNSUY5cXFjZXc',
                 descripcion: 'Ex-Lord Comandante de la Guardia de la Noche',
                 firstLogin: false
             ).save(failOnError: true)
 
-            new File("grails-app/views/avatars/${jon.id}.jpg").withOutputStream { out ->
-              new URL(jon.pictureUrl).withInputStream { from ->  out << from }
+            usuario.pictureLocalPath = "images/usuario/${usuario.id}.jpg"
+
+            new File('grails-app/views/' + usuario.pictureLocalPath).withOutputStream { out ->
+                new URL(usuario.pictureGoogleUrl).withInputStream { from ->  out << from }
             }
 
-            UsuarioRole.create jon, Role.findByAuthority('ROLE_USER')
+            usuario.save(failOnError: true)
+
+            UsuarioRole.create usuario, Role.findByAuthority('ROLE_USER')
         }
 
         if (RutaViaje.count() == 0) {
-            new RutaViaje(
+            RutaViaje rutaViaje = new RutaViaje(
                 titulo: 'Mapa de prueba',
                 descripcion: 'Descripcion de prueba',
                 creador: Usuario.findByUsername('test'),
@@ -41,7 +45,19 @@ class BootStrap {
                         'longitud': '-58.3795195'
                     ]
                 ]
-            ).save(failOnError: true)
+            )
+
+            rutaViaje.pictureGoogleUrl = "https://maps.googleapis.com/maps/api/staticmap?center=${rutaViaje.sitios.first().latitud},${rutaViaje.sitios.first().longitud}&zoom=14&size=640x400&key=AIzaSyBHHo7P7VQWWRFx4kp9CwQQPyNJSNZMbEU"
+
+            rutaViaje.save(failOnError: true)
+
+            rutaViaje.pictureLocalPath = "images/rutaviaje/${rutaViaje.id}.jpg"
+
+            new File('grails-app/views/' + rutaViaje.pictureLocalPath).withOutputStream { out ->
+                new URL(rutaViaje.pictureGoogleUrl).withInputStream { from ->  out << from }
+            }
+
+            rutaViaje.save(failOnError: true)
         }
     }
 

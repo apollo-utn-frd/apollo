@@ -43,24 +43,6 @@ class UsuarioController implements AppTrait {
         }
     }
 
-    @Secured('permitAll')
-    def showAvatar() {
-        if (!Usuario.get(params.id)) {
-            render(status: NOT_FOUND)
-            return
-        }
-
-        File avatarFilePath = new File("grails-app/views/avatars/${params.id}.jpg")
-
-        response.setContentType('image/jpeg')
-        response.setContentLength(avatarFilePath.size().toInteger())
-
-        OutputStream out = response.getOutputStream()
-
-        out.write(avatarFilePath.bytes)
-        out.close()
-    }
-
     @Secured('ROLE_ADMIN')
     def list() {
         JSON.use('private') {

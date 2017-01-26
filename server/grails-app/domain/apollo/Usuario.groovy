@@ -17,7 +17,8 @@ class Usuario implements Serializable {
     String nombre
     String apellido
     String idGoogle
-    String pictureUrl
+    String pictureGoogleUrl
+    String pictureLocalPath
     String descripcion = ''
     boolean firstLogin = true
     boolean enabled = true
@@ -111,7 +112,8 @@ class Usuario implements Serializable {
         nombre size: 1..30, blank: false
         apellido size: 1..30, blank: false
         idGoogle unique: true, blank: false
-        pictureUrl url: true, blank: false
+        pictureGoogleUrl url: true, blank: false
+        pictureLocalPath nullable: true
         descripcion size: 0..150
     }
 

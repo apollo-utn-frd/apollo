@@ -14,7 +14,9 @@ class UsuarioMarshaller {
                 apellido = usuario.apellido
                 descripcion = usuario.descripcion
 
-                pictureUrl = 'http://localhost:8080/usuario/avatar/' + usuario.id
+                if (usuario.pictureLocalPath) {
+                    pictureUrl = 'http://localhost:8080/' + usuario.pictureLocalPath
+                }
 
                 seguidos = usuario.seguidos.collect { seguimiento ->
                     [

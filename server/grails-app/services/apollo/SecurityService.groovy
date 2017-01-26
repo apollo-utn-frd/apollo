@@ -50,25 +50,27 @@ class SecurityService implements OauthUserDetailsService {
                 username += new Random().nextInt(10)
             }
 
-            // Obtiene la imagen original, eliminando cualquier parametro en la URL.
-            String pictureUrl = userProfile.pictureUrl.tokenize("?").first()
-
+            // Para obtener la foto de perfil original, se elimina cualquier parametro en la URL.
             usuario = new Usuario(
                 username: username,
                 idGoogle: userProfile.id,
                 email: userProfile.email,
                 nombre: userProfile.firstName,
                 apellido: userProfile.familyName,
-                pictureUrl: pictureUrl
+                pictureGoogleUrl: userProfile.pictureUrl.tokenize("?").first()
             ).save(failOnError: true)
 
-            log.debug "${usuario} creado. Descargando avatar."
+            log.debug "${usuario} creado. Descargando avatar desde ${usuario.pictureGoogleUrl}"
 
-            new File("grails-app/views/avatars/${usuario.id}.jpg").withOutputStream { out ->
-              new URL(pictureUrl).withInputStream { from ->  out << from }
+            usuario.pictureLocalPath = "images/usuario/${usuario.id}.jpg"
+
+            new File('grails-app/views/' + usuario.pictureLocalPath).withOutputStream { out ->
+                new URL(usuario.pictureGoogleUrl).withInputStream { from ->  out << from }
             }
 
-            log.debug "Avatar descargado desde ${pictureUrl}"
+            usuario.save(failOnError: true)
+
+            log.debug "Avatar descargado a ${usuario.pictureLocalPath}"
 
             for (authority in SpringSecurityUtils.authoritiesToRoles(defaultRoles)) {
                 log.debug "Asignando rol \"${authority}\" a ${usuario}."

@@ -17,6 +17,10 @@ class RutaViajeMarshaller {
                 descripcion = rutaViaje.descripcion
                 publico = rutaViaje.publico
 
+                if (rutaViaje.pictureLocalPath) {
+                    pictureUrl = 'http://localhost:8080/' + rutaViaje.pictureLocalPath
+                }
+
                 sitios = rutaViaje.sitios.collect { sitio ->
                     [
                         latitud: sitio.latitud,

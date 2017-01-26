@@ -37,6 +37,8 @@ class RutaViajeController implements AppTrait {
             sitios: request.JSON?.sitios
         )
 
+        rutaViaje.pictureGoogleUrl = "https://maps.googleapis.com/maps/api/staticmap?center=${rutaViaje.sitios.first().latitud},${rutaViaje.sitios.first().longitud}&zoom=14&size=640x400&key=AIzaSyBHHo7P7VQWWRFx4kp9CwQQPyNJSNZMbEU"
+
         if (!rutaViaje.validate()) {
             transactionStatus.setRollbackOnly()
             respond rutaViaje.errors
@@ -45,6 +47,7 @@ class RutaViajeController implements AppTrait {
 
         rutaViaje.save(flush: true)
 
+        // Crea las autorizaciones si la ruta es privada.
         if (!rutaViaje.publico) {
             for (idUsuarioAutorizado in request.JSON?.autorizaciones) {
                 Usuario usuarioAutorizado = Usuario.get(idUsuarioAutorizado.id)
@@ -69,6 +72,15 @@ class RutaViajeController implements AppTrait {
                 autorizacion.save(flush: true)
             }
         }
+
+        // Descarga la previsualizacion de la ruta.
+        rutaViaje.pictureLocalPath = "images/rutaviaje/${rutaViaje.id}.jpg"
+
+        new File('grails-app/views/' + rutaViaje.pictureLocalPath).withOutputStream { out ->
+            new URL(rutaViaje.pictureGoogleUrl).withInputStream { from ->  out << from }
+        }
+
+        rutaViaje.save(failOnError: true)
 
         respond rutaViaje
     }
