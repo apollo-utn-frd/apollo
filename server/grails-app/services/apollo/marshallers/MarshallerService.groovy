@@ -12,6 +12,7 @@ class MarshallerService {
         JSON.registerObjectMarshaller(new SeguimientoMarshaller().objectMarshaller())
         JSON.registerObjectMarshaller(new RutaViajeMarshaller().objectMarshaller())
         JSON.registerObjectMarshaller(new UsuarioMarshaller().objectMarshaller())
+        JSON.registerObjectMarshaller(new PostMarshaller().objectMarshaller())
 
         JSON.createNamedConfig('private') { namedConfig ->
             namedConfig.registerObjectMarshaller(new UsuarioPrivateMarshaller().objectMarshaller())

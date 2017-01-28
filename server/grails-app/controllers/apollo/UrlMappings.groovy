@@ -61,6 +61,11 @@ class UrlMappings {
             get "/list"(controller: 'autorizacion', action: 'list')
         }
 
+        // Posts.
+        group "/posts", {
+            get "/"(controller: 'post', action: 'show')
+        }
+
         // Autenticación.
         "/auth/$provider?"(controller: 'restOauth', action: 'authenticate')
 

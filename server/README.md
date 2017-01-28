@@ -21,7 +21,7 @@ GET | /usuario/list | Administradores | Devuelve todos los usuarios.
 ###Últimas publicaciones
 Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
-GET | /publicaciones | Usuarios | Devuelve las últimas publicaciones de la pantalla principal.
+GET | /posts | Usuarios | Devuelve las últimas publicaciones de la pantalla principal.
 
 ###Seguimientos
 Método HTTP | URI | Autenticación | Descripción
