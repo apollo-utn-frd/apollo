@@ -1,6 +1,9 @@
 package apollo
 
 class BootStrap {
+    UsuarioService usuarioService
+    RutaViajeService rutaViajeService
+
     def init = { servletContext ->
         if (Role.count() == 0) {
             new Role(authority: 'ROLE_ADMIN').save(failOnError: true)
@@ -19,11 +22,7 @@ class BootStrap {
                 firstLogin: false
             ).save(failOnError: true)
 
-            usuario.pictureLocalPath = "images/usuario/${usuario.id}.jpg"
-
-            new File('grails-app/views/' + usuario.pictureLocalPath).withOutputStream { out ->
-                new URL(usuario.pictureGoogleUrl).withInputStream { from ->  out << from }
-            }
+            usuarioService.downloadPicture(usuario)
 
             usuario.save(failOnError: true)
 
@@ -45,17 +44,9 @@ class BootStrap {
                         'longitud': '-58.3795195'
                     ]
                 ]
-            )
+            ).save(failOnError: true)
 
-            rutaViaje.pictureGoogleUrl = "https://maps.googleapis.com/maps/api/staticmap?center=${rutaViaje.sitios.first().latitud},${rutaViaje.sitios.first().longitud}&zoom=14&size=640x400&key=AIzaSyBHHo7P7VQWWRFx4kp9CwQQPyNJSNZMbEU"
-
-            rutaViaje.save(failOnError: true)
-
-            rutaViaje.pictureLocalPath = "images/rutaviaje/${rutaViaje.id}.jpg"
-
-            new File('grails-app/views/' + rutaViaje.pictureLocalPath).withOutputStream { out ->
-                new URL(rutaViaje.pictureGoogleUrl).withInputStream { from ->  out << from }
-            }
+            rutaViajeService.downloadPicture(rutaViaje)
 
             rutaViaje.save(failOnError: true)
         }

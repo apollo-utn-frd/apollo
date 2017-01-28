@@ -15,6 +15,9 @@ class SecurityService implements OauthUserDetailsService {
 
     def springSecurityService
 
+    @Autowired
+    UsuarioService usuarioService
+
     @Delegate
     UserDetailsService userDetailsService
 
@@ -62,11 +65,7 @@ class SecurityService implements OauthUserDetailsService {
 
             log.debug "${usuario} creado. Descargando avatar desde ${usuario.pictureGoogleUrl}"
 
-            usuario.pictureLocalPath = "images/usuario/${usuario.id}.jpg"
-
-            new File('grails-app/views/' + usuario.pictureLocalPath).withOutputStream { out ->
-                new URL(usuario.pictureGoogleUrl).withInputStream { from ->  out << from }
-            }
+            usuarioService.downloadPicture(usuario)
 
             usuario.save(failOnError: true)
 

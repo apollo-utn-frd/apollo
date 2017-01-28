@@ -9,6 +9,8 @@ import grails.plugin.springsecurity.annotation.Secured
 class RutaViajeController implements AppTrait {
     static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
 
+    RutaViajeService rutaViajeService
+
     @Secured('permitAll')
     def show() {
         RutaViaje rutaViaje = RutaViaje.get(params.id)
@@ -37,8 +39,6 @@ class RutaViajeController implements AppTrait {
             sitios: request.JSON?.sitios
         )
 
-        rutaViaje.pictureGoogleUrl = "https://maps.googleapis.com/maps/api/staticmap?center=${rutaViaje.sitios.first().latitud},${rutaViaje.sitios.first().longitud}&zoom=14&size=640x400&key=AIzaSyBHHo7P7VQWWRFx4kp9CwQQPyNJSNZMbEU"
-
         if (!rutaViaje.validate()) {
             transactionStatus.setRollbackOnly()
             respond rutaViaje.errors
@@ -49,8 +49,8 @@ class RutaViajeController implements AppTrait {
 
         // Crea las autorizaciones si la ruta es privada.
         if (!rutaViaje.publico) {
-            for (idUsuarioAutorizado in request.JSON?.autorizaciones) {
-                Usuario usuarioAutorizado = Usuario.get(idUsuarioAutorizado.id)
+            request.JSON?.autorizaciones.each { usuarioJSON ->
+                Usuario usuarioAutorizado = Usuario.get(usuarioJSON.id)
 
                 if (!usuarioAutorizado) {
                     transactionStatus.setRollbackOnly()
@@ -73,14 +73,9 @@ class RutaViajeController implements AppTrait {
             }
         }
 
-        // Descarga la previsualizacion de la ruta.
-        rutaViaje.pictureLocalPath = "images/rutaviaje/${rutaViaje.id}.jpg"
+        rutaViajeService.downloadPicture(rutaViaje)
 
-        new File('grails-app/views/' + rutaViaje.pictureLocalPath).withOutputStream { out ->
-            new URL(rutaViaje.pictureGoogleUrl).withInputStream { from ->  out << from }
-        }
-
-        rutaViaje.save(failOnError: true)
+        rutaViaje.save(flush: true)
 
         respond rutaViaje
     }

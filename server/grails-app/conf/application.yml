@@ -1,5 +1,6 @@
 ---
 grails:
+    serverURL: http://localhost:8080
     profile: angular2
     codegen:
         defaultPackage: apollo
@@ -109,3 +110,10 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+
+app:
+    google:
+        staticMap:
+            key: AIzaSyBHHo7P7VQWWRFx4kp9CwQQPyNJSNZMbEU
+            language: es
+            region: ar
