@@ -33,10 +33,12 @@ class RutaViajeService {
      * Descarga la previsualización de una ruta de viaje dada y, ajusta la
      * URL de origen de la imagen y su ruta de destino.
      */
-    boolean downloadPicture(RutaViaje rutaViaje) {
+    void downloadPicture(RutaViaje rutaViaje) {
         rutaViaje.pictureGoogleUrl = pictureGoogleUrl(rutaViaje)
         rutaViaje.pictureLocalPath = "/images/rutaviaje/${rutaViaje.id}.jpg"
 
         imageService.download(rutaViaje.pictureGoogleUrl, rutaViaje.pictureLocalPath)
+
+        rutaViaje.save(flush: true)
     }
 }

@@ -14,9 +14,9 @@ Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
 GET | /usuario | Usuarios | Devuelve el usuario logueado.
 PUT | /usuario | Usuarios | Actualiza el usuario logueado.
+GET | /usuario/search | Público | Busca un usuario.
 GET | /usuario/:id_usr | Público | Devuelve el usuario segun un id.
 GET | /usuario/u/:username | Público | Devuelve el usuario segun un nombre de usuario.
-GET | /usuario/list | Administradores | Devuelve todos los usuarios.
 
 ###Últimas publicaciones
 Método HTTP | URI | Autenticación | Descripción
@@ -35,17 +35,17 @@ GET | /seguimiento/list | Administradores | Devuelve todos los seguimientos.
 Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
 POST | /rutaviaje | Usuarios | Crea una ruta de viaje.
+GET | /rutaviaje/search | Público | Busca una ruta de viaje.
 DELETE | /rutaviaje/:id_rv | Usuarios | Borra la ruta de viaje.
 GET | /rutaviaje/:id_rv | Público | Devuelve la ruta de viaje.
-GET | /rutaviaje/list | Administradores | Devuelve todas las rutas de viajes.
 
 ###Comentarios
 Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
 POST | /rutaviaje/comentar/:id_rv | Usuarios | Crea un comentario.
+GET | /comentario/search | Público | Busca un comentario.
 GET | /comentario/:id_cmn | Usuarios | Devuelve el comentario.
 DELETE | /comentario/:id_cmn | Administradores | Borra el comentario.
-GET | /comentario/list | Administradores | Devuelve todas los comentarios.
 
 ###Favoritos
 Método HTTP | URI | Autenticación | Descripción

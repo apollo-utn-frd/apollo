@@ -8,7 +8,9 @@ import grails.plugin.springsecurity.annotation.Secured
 @Transactional(readOnly = true)
 
 class UsuarioController implements AppTrait {
-    static allowedMethods = [index: 'GET', show: 'GET', showByUsername: 'GET', list: 'GET', update: 'PUT']
+    static allowedMethods = [index: 'GET', show: 'GET', showByUsername: 'GET', search: 'GET', update: 'PUT']
+
+    SearchService searchService
 
     @Secured('ROLE_USER')
     def index() {
@@ -43,11 +45,20 @@ class UsuarioController implements AppTrait {
         }
     }
 
-    @Secured('ROLE_ADMIN')
-    def list() {
-        JSON.use('private') {
-            respond Usuario.list().findAll { it.canManagedBy(currentUser()) }
-        }
+    @Secured('permitAll')
+    def search(String query, int offset, int max) {
+        Search search = new Search(
+            classx: Usuario,
+            properties: ['username', 'nombre', 'apellido', 'descripcion'],
+            query: query,
+            after: { usuarios ->
+                usuarios*.sanitize(currentUser())
+            },
+            max: max,
+            offset: offset
+        )
+
+        respond searchService.findAll(search)
     }
 
     @Transactional

@@ -11,16 +11,10 @@ class UrlMappings {
             get    "/"(controller: 'usuario', action: 'index')
             put    "/"(controller: 'usuario', action: 'update')
             get    "/$id?"(controller: 'usuario', action: 'show')
-            get    "/list"(controller: 'usuario', action: 'list')
+            get    "/search"(controller: 'usuario', action: 'search')
             get    "/u/$username?"(controller: 'usuario', action: 'showByUsername')
             post   "/seguir/$id?"(controller: 'seguimiento', action: 'create')
             delete "/seguir/$id?"(controller: 'seguimiento', action: 'delete')
-        }
-
-        // Seguimientos.
-        group "/seguimiento", {
-            get "/$id?"(controller: 'seguimiento', action: 'show')
-            get "/list"(controller: 'seguimiento', action: 'list')
         }
 
         // Rutas de viajes.
@@ -28,7 +22,7 @@ class UrlMappings {
             post   "/"(controller: 'rutaViaje', action: 'create')
             get    "/$id?"(controller: 'rutaViaje', action: 'show')
             delete "/$id?"(controller: 'rutaViaje', action: 'delete')
-            get    "/list"(controller: 'rutaViaje', action: 'list')
+            get    "/search"(controller: 'rutaViaje', action: 'search')
             post   "/comentar/$id?"(controller: 'comentario', action: 'create')
             post   "/compartir/$id?"(controller: 'compartido', action: 'create')
             delete "/compartir/$id?"(controller: 'compartido', action: 'delete')
@@ -40,13 +34,19 @@ class UrlMappings {
         group "/comentario", {
             get    "/$id?"(controller: 'comentario', action: 'show')
             delete "/$id?"(controller: 'comentario', action: 'delete')
-            get    "/list"(controller: 'comentario', action: 'list')
+            get    "/search"(controller: 'comentario', action: 'search')
         }
 
         // Compartidos.
         group "/compartido", {
             get "/$id?"(controller: 'compartido', action: 'show')
             get "/list"(controller: 'compartido', action: 'list')
+        }
+
+        // Seguimientos.
+        group "/seguimiento", {
+            get "/$id?"(controller: 'seguimiento', action: 'show')
+            get "/list"(controller: 'seguimiento', action: 'list')
         }
 
         // Favoritos.

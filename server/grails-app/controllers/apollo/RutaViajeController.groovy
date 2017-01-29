@@ -7,7 +7,9 @@ import grails.plugin.springsecurity.annotation.Secured
 @Transactional(readOnly = true)
 
 class RutaViajeController implements AppTrait {
-    static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
+    static allowedMethods = [show: 'GET', search: 'GET', create: 'POST', delete: 'DELETE']
+
+    SearchService searchService
 
     RutaViajeService rutaViajeService
 
@@ -23,9 +25,20 @@ class RutaViajeController implements AppTrait {
         respond rutaViaje
     }
 
-    @Secured('ROLE_ADMIN')
-    def list() {
-        respond RutaViaje.list().findAll { it.canReadBy(currentUser()) }
+    @Secured('permitAll')
+    def search(String query, int offset, int max) {
+        Search search = new Search(
+            classx: RutaViaje,
+            properties: ['titulo', 'descripcion'],
+            query: query,
+            after: { rutasViaje ->
+                rutasViaje.findAll { it.canReadBy(currentUser()) }
+            },
+            max: max,
+            offset: offset
+        )
+
+        respond searchService.findAll(search)
     }
 
     @Transactional
@@ -74,8 +87,6 @@ class RutaViajeController implements AppTrait {
         }
 
         rutaViajeService.downloadPicture(rutaViaje)
-
-        rutaViaje.save(flush: true)
 
         respond rutaViaje
     }

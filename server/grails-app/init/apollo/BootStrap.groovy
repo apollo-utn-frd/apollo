@@ -24,8 +24,6 @@ class BootStrap {
 
             usuarioService.downloadPicture(usuario)
 
-            usuario.save(failOnError: true)
-
             UsuarioRole.create usuario, Role.findByAuthority('ROLE_USER')
         }
 
@@ -47,8 +45,6 @@ class BootStrap {
             ).save(failOnError: true)
 
             rutaViajeService.downloadPicture(rutaViaje)
-
-            rutaViaje.save(failOnError: true)
         }
     }
 

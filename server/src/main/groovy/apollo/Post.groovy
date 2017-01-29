@@ -3,7 +3,7 @@ package apollo
 class Post {
     RutaViaje rutaViaje
     Usuario creador
-    List compartidos
+    List<Usuario> compartidos
     Date dateCreated
 
     Post(RutaViaje rutaViaje) {

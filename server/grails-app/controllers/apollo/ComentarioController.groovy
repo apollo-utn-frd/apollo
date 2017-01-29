@@ -7,7 +7,9 @@ import grails.plugin.springsecurity.annotation.Secured
 @Transactional(readOnly = true)
 
 class ComentarioController implements AppTrait {
-    static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
+    static allowedMethods = [show: 'GET', search: 'GET', create: 'POST', delete: 'DELETE']
+
+    SearchService searchService
 
     @Secured('permitAll')
     def show() {
@@ -21,9 +23,20 @@ class ComentarioController implements AppTrait {
         respond comentario
     }
 
-    @Secured('ROLE_ADMIN')
-    def list() {
-        respond Comentario.list().findAll { it.canReadBy(currentUser()) }
+    @Secured('permitAll')
+    def search(String query, int offset, int max) {
+        Search search = new Search(
+            classx: Comentario,
+            properties: ['contenido'],
+            query: query,
+            after: { comentarios ->
+                comentarios.findAll { it.canReadBy(currentUser()) }
+            },
+            max: max,
+            offset: offset
+        )
+
+        respond searchService.findAll(search)
     }
 
     @Transactional
