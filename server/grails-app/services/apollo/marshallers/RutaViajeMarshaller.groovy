@@ -1,5 +1,6 @@
 package apollo
 
+import grails.util.Holders
 import grails.converters.JSON
 import org.grails.web.converters.marshaller.ClosureObjectMarshaller
 
@@ -16,6 +17,10 @@ class RutaViajeMarshaller {
                 titulo = rutaViaje.titulo
                 descripcion = rutaViaje.descripcion
                 publico = rutaViaje.publico
+
+                if (rutaViaje.pictureLocalPath) {
+                    pictureUrl = Holders.grailsApplication.config.getProperty('grails.serverURL') + rutaViaje.pictureLocalPath
+                }
 
                 sitios = rutaViaje.sitios.collect { sitio ->
                     [

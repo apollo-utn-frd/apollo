@@ -1,5 +1,6 @@
 package apollo
 
+import grails.util.Holders
 import grails.converters.JSON
 import org.grails.web.converters.marshaller.ClosureObjectMarshaller
 
@@ -12,10 +13,13 @@ class UsuarioPrivateMarshaller {
                 email = usuario.email
                 nombre = usuario.nombre
                 apellido = usuario.apellido
-                pictureUrl = usuario.pictureUrl
                 descripcion = usuario.descripcion
                 firstLogin = usuario.firstLogin
                 accountLocked = usuario.accountLocked
+
+                if (usuario.pictureLocalPath) {
+                    pictureUrl = Holders.grailsApplication.config.getProperty('grails.serverURL') + usuario.pictureLocalPath
+                }
 
                 seguidos = usuario.seguidos.collect { seguimiento ->
                     [

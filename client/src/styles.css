@@ -28,6 +28,13 @@ body {
   padding-top: 75px;
 }
 
+.contenido {
+  padding: 75px 5vw 0;
+  margin-bottom: 20px;
+  float: left;
+  width: 100%;
+}
+
 textarea {
   resize: none;
 }
@@ -90,7 +97,7 @@ button:focus {
 .form-box .form-top-left {
   float: left;
   width: 75%;
-  padding-top: 25px;
+  padding: 25px 0;
 }
 
 .form-box .form-top-left h3,
@@ -98,10 +105,13 @@ button:focus {
   margin-top: 0;
 }
 
+.form-box .form-top-left :last-child {
+  margin-bottom: 0;
+}
+
 .form-box .form-top-right {
   float: left;
   width: 25%;
-  padding-top: 5px;
   font-size: 66px;
   color: #ddd;
   line-height: 100px;
@@ -133,11 +143,9 @@ button:focus {
   font-size: 14px;
 }
 
-.form-box .form .btn {
-  padding: 6px 25px;
-  align-self: center;
-  display: block;
-  margin: 0 auto;
+.form-box .form-btn {
+  display: flex;
+  justify-content: center;
 }
 
 .form-box .form-bottom .input-error {
@@ -194,7 +202,7 @@ button:focus {
  */
 .form-box .radio {
   padding-left: 35px;
-  margin-top: 5px;
+  margin-top: 0;
   margin-bottom: 5px;
 }
 
@@ -242,3 +250,29 @@ button:focus {
 .form-box .radio input[type="radio"]:checked + label::after {
   transform: scale(1, 1);
 }
+
+/**
+ * Basado en:
+ * http://materializecss.com/buttons.html
+ */
+.btn-material {
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  letter-spacing: .5px;
+  transition: .2s ease-out;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 2rem;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-material:hover {
+  text-decoration: none;
+}
+

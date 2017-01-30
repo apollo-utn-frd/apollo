@@ -1,6 +1,9 @@
 package apollo
 
 class BootStrap {
+    UsuarioService usuarioService
+    RutaViajeService rutaViajeService
+
     def init = { servletContext ->
         if (Role.count() == 0) {
             new Role(authority: 'ROLE_ADMIN').save(failOnError: true)
@@ -8,22 +11,24 @@ class BootStrap {
         }
 
         if (Usuario.count() == 0) {
-            Usuario jon = new Usuario(
+            Usuario usuario = new Usuario(
                 username: 'test',
                 idGoogle: 1235,
                 email: 'jon.snow@gmail.com',
                 nombre: 'Jon',
                 apellido: 'Snow',
-                pictureUrl: 'http://s.newsweek.com/sites/www.newsweek.com/files/2016/03/31/jon-snow-game-thrones.jpg',
+                pictureGoogleUrl: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJa2pNSUY5cXFjZXc',
                 descripcion: 'Ex-Lord Comandante de la Guardia de la Noche',
                 firstLogin: false
             ).save(failOnError: true)
 
-            UsuarioRole.create jon, Role.findByAuthority('ROLE_USER')
+            usuarioService.downloadPicture(usuario)
+
+            UsuarioRole.create usuario, Role.findByAuthority('ROLE_USER')
         }
 
         if (RutaViaje.count() == 0) {
-            new RutaViaje(
+            RutaViaje rutaViaje = new RutaViaje(
                 titulo: 'Mapa de prueba',
                 descripcion: 'Descripcion de prueba',
                 creador: Usuario.findByUsername('test'),
@@ -38,6 +43,8 @@ class BootStrap {
                     ]
                 ]
             ).save(failOnError: true)
+
+            rutaViajeService.downloadPicture(rutaViaje)
         }
     }
 

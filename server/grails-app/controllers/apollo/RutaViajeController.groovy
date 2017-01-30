@@ -7,7 +7,11 @@ import grails.plugin.springsecurity.annotation.Secured
 @Transactional(readOnly = true)
 
 class RutaViajeController implements AppTrait {
-    static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
+    static allowedMethods = [show: 'GET', search: 'GET', create: 'POST', delete: 'DELETE']
+
+    SearchService searchService
+
+    RutaViajeService rutaViajeService
 
     @Secured('permitAll')
     def show() {
@@ -21,9 +25,20 @@ class RutaViajeController implements AppTrait {
         respond rutaViaje
     }
 
-    @Secured('ROLE_ADMIN')
-    def list() {
-        respond RutaViaje.list().findAll { it.canReadBy(currentUser()) }
+    @Secured('permitAll')
+    def search(String query, int offset, int max) {
+        Search search = new Search(
+            classx: RutaViaje,
+            properties: ['titulo', 'descripcion'],
+            query: query,
+            after: { rutasViaje ->
+                rutasViaje.findAll { it.canReadBy(currentUser()) }
+            },
+            max: max,
+            offset: offset
+        )
+
+        respond searchService.findAll(search)
     }
 
     @Transactional
@@ -45,9 +60,10 @@ class RutaViajeController implements AppTrait {
 
         rutaViaje.save(flush: true)
 
+        // Crea las autorizaciones si la ruta es privada.
         if (!rutaViaje.publico) {
-            for (idUsuarioAutorizado in request.JSON?.autorizaciones) {
-                Usuario usuarioAutorizado = Usuario.get(idUsuarioAutorizado.id)
+            request.JSON?.autorizaciones.each { usuarioJSON ->
+                Usuario usuarioAutorizado = Usuario.get(usuarioJSON.id)
 
                 if (!usuarioAutorizado) {
                     transactionStatus.setRollbackOnly()
@@ -69,6 +85,8 @@ class RutaViajeController implements AppTrait {
                 autorizacion.save(flush: true)
             }
         }
+
+        rutaViajeService.downloadPicture(rutaViaje)
 
         respond rutaViaje
     }

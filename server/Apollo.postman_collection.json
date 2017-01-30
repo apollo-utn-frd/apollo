@@ -51,6 +51,15 @@
 			"owner": "558378"
 		},
 		{
+			"id": "9c78fb1e-79e6-ddf2-26b1-1203fd77b917",
+			"name": "Publicaciones",
+			"description": "",
+			"order": [
+				"cac9599d-2dc7-7bf8-e585-2479c4b0732d"
+			],
+			"owner": "558378"
+		},
+		{
 			"id": "083db7a7-2b2f-71e8-8b0d-b9958ffdf5b9",
 			"name": "Rutas de Viaje",
 			"description": "",
@@ -578,6 +587,26 @@
 			"rawModeData": ""
 		},
 		{
+			"id": "cac9599d-2dc7-7bf8-e585-2479c4b0732d",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ACCESS_TOKEN}}\n",
+			"url": "http://localhost:8080/posts",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485634305038,
+			"name": "Ver Últimas Publicaciones [Usuarios]",
+			"description": "",
+			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
 			"id": "d4bdf20d-57ec-a640-f926-533853fc15ee",
 			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ACCESS_TOKEN}}\n",
 			"url": "http://localhost:8080/auth/validate",
@@ -630,7 +659,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1476762569020,
+			"time": 1477809856220,
 			"name": "Crear RV Privada [Usuarios]",
 			"description": "",
 			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",

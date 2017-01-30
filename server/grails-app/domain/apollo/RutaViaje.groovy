@@ -7,6 +7,8 @@ import groovy.transform.ToString
 class RutaViaje {
     String titulo
     String descripcion = ''
+    String pictureGoogleUrl
+    String pictureLocalPath
     boolean publico = true
     List sitios
     List autorizacionesUsuarios
@@ -31,9 +33,16 @@ class RutaViaje {
     static constraints = {
         titulo size: 2..30, blank: false
         descripcion size: 0..1000
+        pictureGoogleUrl nullable: true, url: true, size: 0..3000
+        pictureLocalPath nullable: true
         sitios validator: { sitios ->
             (sitios && !sitios.empty) ?: ['rutaViaje.sitios.vacio']
         }
+    }
+
+    static mapping = {
+        descripcion type: 'text'
+        pictureGoogleUrl type: 'text'
     }
 
     /**

@@ -1,9 +1,9 @@
 <div class="pcard shadow">
-  <div class="pcard-header">
-    <img class="img-responsive" src="{{(user | async)?.pictureUrl}}" alt="Avatar">
-  </div>
-
   <div class="pcard-body pull-right">
+    <section class="avatar">
+      <img class="img-responsive" src="{{(user | async)?.pictureUrl}}" alt="Avatar">
+    </section>
+
     <section class="info-user">
       <h2>{{ (user | async)?.nombre }} {{ (user | async)?.apellido }}</h2>
       <em class="username">@{{ (user | async)?.username }}</em>
@@ -11,6 +11,23 @@
       <div class="description">
         <p> {{ (user | async)?.descripcion }} </p>
       </div>
+    </section>
+
+    <!--
+    Esta seccion solo debe mostrarse en el perfil de otros usuarios. No en la home ni en el perfil
+    del usuario logueado.
+    -->
+    <section [hidden]="!seguir" class="seguir">
+      <!--
+      Si el usuario logueado ya sigue a este usuario.
+      <button class="btn-material btn-danger">
+        <i class="fa fa-user-times" aria-hidden="true"></i>Eliminar
+      </button>
+      -->
+      <button class="btn-material btn-primary">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        <span class="text">Seguir</span>
+      </button>
     </section>
 
     <section [hidden]="!panelRutas" class="panel-statistics shadow">

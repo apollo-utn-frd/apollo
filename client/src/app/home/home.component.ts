@@ -31,7 +31,7 @@ export class HomeComponent implements AfterViewInit {
     });
 
     $('#expand').click(function() {
-      $('#perfil').toggle();
+      $('.profile-card').toggle();
       $('#publicaciones').toggleClass('reduced');
       $(this).find('.fa').toggleClass('fa-chevron-left').toggleClass('fa-chevron-right');
 
@@ -82,17 +82,37 @@ function ajustarPublicaciones() {
     --columnas;
   }
 
-  var publicaciones = $('.publicacion');
+  if ($(window).width() < 767 && columnas > 1) {
+    --columnas;
+  }
+
+  var publicaciones = $('.publicacion:not(.empty)');
 
   $('#publicaciones').empty();
 
   for (var i = 0; (i * columnas) < publicaciones.length; ++i) {
-    var nuevaFila = $('<div>').addClass('pull-left-100');
+    // Agrego el CSS manualmente porque al agregar el elemento directo al DOM no toma los
+    // estilos definidos en home.component.css. Cuando se pase este codigo a nativo de Angular
+    // se debe obviar ese paso.
+    var nuevaFila = $('<div>')
+      .addClass('rowx')
+      .css({
+        'float': 'left',
+        'width': '100%',
+        'display': 'flex',
+        'justify-content': 'space-between'
+      });
 
     for (var j = 0; j < columnas; ++j) {
-      nuevaFila.append(publicaciones[i * columnas + j]);
+      // Si la fila no esta completa se la rellena con publicaciones vacias para que las publicaciones
+      // que si existen se posicionen correctamente.
+      var publicacion = publicaciones[i * columnas + j] || $('<div>').addClass('publicacion empty');
+
+      nuevaFila.append(publicacion);
     }
 
     $('#publicaciones').append(nuevaFila);
+
+    $('.publicacion.empty').css('width', $('.publicacion').first().width() + 'px');
   }
 }

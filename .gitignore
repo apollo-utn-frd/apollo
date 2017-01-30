@@ -29,6 +29,7 @@ client/libpeerconnection.log
 client/npm-debug.log
 client/testem.log
 client/typings
+server/grails-app/views/images/**/*.jpg
 *.iml
 *.ipr
 *.iws
