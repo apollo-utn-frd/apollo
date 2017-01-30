@@ -1,29 +1,26 @@
-export class User {
-
-  constructor(
-    public username: string,
-    public password: string,
-    public email: string,
-    public nombre: string,
-    public apellido: string,
-    public idGoogle: string,
-    public pictureUrl: string,
-    public descripcion: string,
-    public firstLogin: boolean,
-    public enabled: boolean,
-    public accountExpired: boolean,
-    public accountLocked: boolean,
-    public passwordExpired: boolean,
-    public seguidos: Seguidor[],
-    public seguidores: Seguidor[],
-    public rutasViaje: number[],
-    public autorizaciones: number[],
-    public favoritos: number[],
-    public compartidos: number[],
-    public comentarios: number[],
-    public dateCreated: Date,
-    public lastUpdated: Date
-            ) { }
+export interface User {
+  username: string,
+  password: string,
+  email: string,
+  nombre: string,
+  apellido: string,
+  idGoogle: string,
+  pictureGoogleUrl: string,
+  descripcion: string,
+  firstLogin: boolean,
+  enabled: boolean,
+  accountExpired: boolean,
+  accountLocked: boolean,
+  passwordExpired: boolean,
+  seguidos: Seguidor[],
+  seguidores: Seguidor[],
+  rutasViaje: number[],
+  autorizaciones: number[],
+  favoritos: number[],
+  compartidos: number[],
+  comentarios: number[],
+  dateCreated: Date,
+  lastUpdated: Date
 }
 
 export interface Seguidor {

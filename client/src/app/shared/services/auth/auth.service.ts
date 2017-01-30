@@ -1,32 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import {Http, Headers, Response} from '@angular/http';
 import { USUARIOS } from '../api';
-import { Store } from '@ngrx/store';
-import { State, LoginAction } from '../../store/index';
+import {Store, Action} from '@ngrx/store';
+import {SaveAuthStateAction} from "../../store/actions/auth.actions";
+import {Observable} from "rxjs";
+import {User} from "../../models/user";
+import {ApplicationState} from "../../store/state/application.state";
 
 @Injectable()
 export class AuthService {
 
-  token: string;
+  constructor(private http: Http, private store: Store<ApplicationState>) {}
 
-  constructor(private http: Http, private store: Store<State>) {}
-
-  login(): void {
-    this.token = window.location.hash.substr(1);
-
-    if (this.token.length !== 0) {
-      let hs = new Headers();
+  login(token: string): Observable<{user: User, token: string}> {
+    if (token.length !== 0) {
+      let hs: Headers = new Headers();
       hs.append('Content-Type', 'application/json');
-      hs.append('Authorization', 'Bearer ' + this.token);
+      hs.append('Authorization', 'Bearer ' + token);
 
-      this.http.get(USUARIOS, {headers: hs})
-               .forEach(response => {
-                 const json = response.json();
-                 this.store.dispatch(new LoginAction([this.token, json]));
-                });
-    } else {
-      console.error('usuario no logueado');
+      return this.http.get(USUARIOS, {headers: hs})
+        .map((response: Response) => {
+          return {user: response.json(), token: token}
+        });
     }
   }
-
 }
+

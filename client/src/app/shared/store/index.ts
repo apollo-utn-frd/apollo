@@ -1,3 +1,1 @@
-export * from './reducers/rootReducer';
-export * from './reducers/users';
-export * from './actions/user';
+export * from './actions/user.actions';

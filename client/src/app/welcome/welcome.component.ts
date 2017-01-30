@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/services/index';
 import { Store } from '@ngrx/store';
-import { State, getUser } from '../shared/store/index';
 import { Observable } from 'rxjs/Observable';
-import { User } from '../shared/models/index';
-import { Router } from '@angular/router';
+import {LoginAction} from "../shared/store/actions/auth.actions";
+import {go} from "@ngrx/router-store";
+import {AuthState} from "../shared/store/state/auth.state";
+import {ApplicationState} from "../shared/store/state/application.state";
 
 @Component({
   selector: 'apollo-welcome',
@@ -12,29 +12,26 @@ import { Router } from '@angular/router';
   styleUrls: ['welcome.component.css'],
 })
 export class WelcomeComponent implements OnInit {
-  user$: Observable<User>;
+  credentials: AuthState;
 
-  constructor( private auth: AuthService
-             , private store: Store<State>
-             , private router: Router
-             ) {
-    this.user$ = store.let(getUser);
-   }
-
-  ngOnInit() {
-    this.auth.login();
-    this.user$.subscribe(
-      (u: User) => {
-        if (u !== null) {
-          if (u.firstLogin) {
-            this.router.navigateByUrl('/login');
-          } else {
-            this.router.navigateByUrl('/home');
-          }
-        }
-      },
-      err => console.error(err)
-    );
+  constructor(private store: Store<ApplicationState>) {
+    if (window.localStorage.length > 0) {
+      this.credentials = {
+        id: window.localStorage.getItem('id'),
+        token: window.localStorage.getItem('token')
+      }
+    } else if (window.location.hash.substr(1)) {
+      this.credentials = {
+        id: window.localStorage.getItem('id'),
+        token: window.location.hash.substr(1)
+      }
+    }
   }
 
+  ngOnInit() {
+    if (this.credentials) {
+      this.store.dispatch(new LoginAction(this.credentials));
+      //this.store.dispatch(go(['/login'])); // fijarse si se puede mejorar
+    }
+  }
 }

@@ -10,7 +10,7 @@ declare var $: any;
 export class NavBarWelcomeComponent implements AfterViewInit {
   ngAfterViewInit() {
     // jQuery for page scrolling feature - requires jQuery Easing plugin
-    $('a.page-scroll').click(function(event) {
+    $('a.page-scroll').click(function(event:any) {
       $('.navbar-nav .active').removeClass('active');
       $(this).parent().addClass('active');
 

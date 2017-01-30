@@ -2,10 +2,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreModule } from '@ngrx/store';
+import {StoreModule, combineReducers} from '@ngrx/store';
 
 // routes
 import { routing } from './app.routes';
@@ -38,10 +38,17 @@ import { AuthService, UserService, RVService } from './shared/services/index';
 import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
 
 // Store
-import { reducer } from './shared/store/index';
 
 // Directives
 import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directives/googleplace.directive';
+import {compose} from "@ngrx/core/compose";
+import {storeFreeze} from "ngrx-store-freeze";
+import {RouterStoreModule} from "@ngrx/router-store";
+import {EffectsModule} from "@ngrx/effects";
+import {AuthEffectService} from "./shared/store/effects/auth-effects.service";
+import {localStorageSync} from "ngrx-store-localstorage";
+import {appReducers} from "./shared/store/reducers/app.reducer";
+import {INITIAL_APP_STATE} from "./shared/store/state/application.state";
 
 @NgModule({
   declarations: [
@@ -68,11 +75,13 @@ import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directiv
     CommonModule,
     ReactiveFormsModule,
     routing,
-    FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDSA-Sc8yoe_NIGqOwTGoNPiKge0KRK_wo'
     }),
-    StoreModule.provideStore(reducer),
+    StoreModule.provideStore(
+      compose(storeFreeze, localStorageSync(['id','token']), combineReducers)(appReducers), INITIAL_APP_STATE),
+    RouterStoreModule.connectRouter(),
+    EffectsModule.run(AuthEffectService),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   entryComponents: [

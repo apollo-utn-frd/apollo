@@ -33,7 +33,7 @@ export class CreationFormComponent implements AfterViewInit {
       $(this).find('input[type=radio]').click();
     });
 
-    $('input[type=radio]').click(function(event) {
+    $('input[type=radio]').click(function(event:any) {
       event.stopPropagation();
     });
   }

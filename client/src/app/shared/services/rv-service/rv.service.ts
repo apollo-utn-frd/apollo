@@ -8,13 +8,13 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
 import { Store } from '@ngrx/store';
-import { State } from '../../store/index';
 import * as api from '../api';
+import {ApplicationState} from "../../store/state/application.state";
 
 @Injectable()
 export class RVService extends Service<RV> {
 
-  constructor(http: Http, store: Store<State>) {
+  constructor(http: Http, store: Store<ApplicationState>) {
     super(http, store);
   }
 

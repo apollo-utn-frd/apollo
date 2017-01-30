@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { State } from '../shared/store/index';
+import {ApplicationState} from "../shared/store/state/application.state";
 
 declare var $: any;
 
@@ -40,7 +40,7 @@ export class HomeComponent implements AfterViewInit {
   }
 
   constructor( private http: Http
-             , private store: Store<State>
+             , private store: Store<ApplicationState>
              , private userService: UserService
              , private router: Router) {
              }

@@ -16,16 +16,16 @@ export class CreateRVComponent {
   marcadores: Point[];
 
   constructor( private rvService: RVService
-             , private usuarioService: UserService) {
-               this.usuarioService.get().subscribe(u => this.usuario = u);
-             }
+    , private usuarioService: UserService) {
+    this.usuarioService.get().subscribe(u => this.usuario = u);
+  }
 
   getMarkers(m: Point[]) {
     this.marcadores = m;
     console.log(m);
   }
 
-  onFormSubmit(formData): void {
+  onFormSubmit(formData:any): void {
     console.log(formData);
     let newRV: RV = {
       titulo: formData.nombre,
