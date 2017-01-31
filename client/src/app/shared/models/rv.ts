@@ -1,33 +1,23 @@
-/**
- * 
- * La visibilidad de una ruta de viaje puede ser solamente
- * 'PRIVADA' o 'PUBLICA'
- */
+
+import {GenericRVInteraction} from "./genericRVInteraction.vm";
+
 export type Visibilidad = 'PRIVADA' | 'PUBLICA'
 
-export class RV {
+export interface RV {
   id?: number;
-  titulo: string;
-  id_usuario: string;
+  creador: number,
+  nombre: string;
   descripcion: string;
+  publico: Visibilidad;
+  imagenLocalPath: string,
+  comentarios: Comment[],
+  favoritos: GenericRVInteraction[],
+  compartidos: GenericRVInteraction[],
+  autorizaciones: GenericRVInteraction[],
   sitios: Point[];
-  // ruta: Line[];
-  visibilidad: Visibilidad;
-}
-
-interface Marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable?: boolean;
 }
 
 interface Point {
+  longitud: number,
   latitud: number;
-  longitud: number;
-}
-
-interface Line {
-  pointA: Point;
-  pointB: Point;
 }

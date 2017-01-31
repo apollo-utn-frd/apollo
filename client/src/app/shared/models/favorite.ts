@@ -1,8 +1,7 @@
 
-export interface Comment {
+export interface Favorite {
   id: number,
   rutaViaje: number,
   usuario: number,
-  contenido: string,
   dataCreated: Date
 }

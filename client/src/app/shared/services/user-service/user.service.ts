@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, UserForm, RV, Comment } from '../../models/index';
+import { User, UserFormVM, RV, Comment } from '../../models/index';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Service } from '../service';
@@ -61,12 +61,12 @@ export class UserService extends Service<User> {
   }
 
   follow(user: User) {
-    return this.http.post(api.SEGUIR_USUARIO + user.idGoogle, user, {headers: this.headers})
+    return this.http.post(api.SEGUIR_USUARIO + user.id, user, {headers: this.headers})
       .catch(this.handleError);
   }
 
   unfollow(user: User) {
-    return this.http.delete(api.SEGUIR_USUARIO + user.idGoogle, {headers: this.headers})
+    return this.http.delete(api.SEGUIR_USUARIO + user.id, {headers: this.headers})
       .catch(this.handleError);
   }
 
@@ -86,7 +86,7 @@ export class UserService extends Service<User> {
       .catch(this.handleError);
   }
 
-  update(u: User, form: UserForm): void {
+  update(u: User, form: UserFormVM): void {
     u.nombre = form.nombre;
     u.apellido = form.apellido;
     u.username = form.username;

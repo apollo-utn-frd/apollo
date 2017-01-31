@@ -1,4 +1,4 @@
-export interface UserForm {
+export interface UserFormVM {
     nombre: string;
     apellido: string;
     username: string;

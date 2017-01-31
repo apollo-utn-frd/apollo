@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 import {LoginAction} from "../shared/store/actions/auth.actions";
 import {go} from "@ngrx/router-store";
 import {AuthState} from "../shared/store/state/auth.state";
@@ -31,7 +30,7 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
     if (this.credentials) {
       this.store.dispatch(new LoginAction(this.credentials));
-      //this.store.dispatch(go(['/login'])); // fijarse si se puede mejorar
+      this.store.dispatch(go(['/login'])); // fijarse si se puede mejorar
     }
   }
 }

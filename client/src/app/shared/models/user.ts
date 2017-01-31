@@ -1,28 +1,20 @@
+import {Seguidor} from "./follower";
+import {GenericUserInteraction} from "./genericUserInteraction.vm";
+
 export interface User {
+  id: string,
   username: string,
-  password: string,
   email: string,
   nombre: string,
   apellido: string,
-  idGoogle: string,
-  pictureGoogleUrl: string,
   descripcion: string,
-  firstLogin: boolean,
-  enabled: boolean,
-  accountExpired: boolean,
-  accountLocked: boolean,
-  passwordExpired: boolean,
+  imagenGoogleUrl: string,
   seguidos: Seguidor[],
   seguidores: Seguidor[],
   rutasViaje: number[],
-  autorizaciones: number[],
-  favoritos: number[],
-  compartidos: number[],
-  comentarios: number[],
+  comentarios: Comment[],
+  favoritos: GenericUserInteraction[],
+  compartidos: GenericUserInteraction[],
+  firstLogin: boolean, // preguntar a matias que onda
   dateCreated: Date,
-  lastUpdated: Date
-}
-
-export interface Seguidor {
-
 }

@@ -8,6 +8,7 @@ import {AUTH_LOGIN_ACTION, SaveAuthStateAction} from "../actions/auth.actions";
 import {toLocalStorage} from "./toLocalStorage";
 import {SaveUserAction} from "../actions/user.actions";
 import {ApplicationState} from "../state/application.state";
+import {go} from "@ngrx/router-store";
 
 @Injectable()
 export class AuthEffectService {
@@ -25,7 +26,9 @@ export class AuthEffectService {
     .do(toLocalStorage)
     .debug("Retrieving user information")
     .map(userData => {
-      this.store.dispatch(new SaveAuthStateAction({id: userData.user.idGoogle, token: userData.token}));
-      return new SaveUserAction(userData.user)
-    });
+      this.store.dispatch(new SaveAuthStateAction({id: userData.user.id, token: userData.token}));
+      this.store.dispatch(go('/login'));
+      return new SaveUserAction(userData.user);
+    })
+    .debug("user saved");
 }

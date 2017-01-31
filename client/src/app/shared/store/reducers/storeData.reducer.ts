@@ -1,5 +1,4 @@
 
-
 import {Action} from "@ngrx/store";
 import {USER_SAVE_ACTION, SaveUserAction} from "../actions/user.actions";
 import {StoreData} from "../state/storeData.state";
