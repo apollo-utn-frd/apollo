@@ -8,8 +8,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.rest.oauth.OauthUser
 import grails.plugin.springsecurity.rest.oauth.OauthUserDetailsService
+import grails.transaction.Transactional
 
 @Slf4j
+@Transactional
+
 class SecurityService implements OauthUserDetailsService {
     static transactional = false
 
@@ -24,6 +27,7 @@ class SecurityService implements OauthUserDetailsService {
     /**
      * Devuelve el usuario logueado actualmente. Si no hay ningun usuario logueado devuelve null.
      */
+    @Transactional(readOnly = true)
     Usuario currentUser() {
         try {
             Usuario.findByIdGoogle(springSecurityService.principal.userProfile.id)
@@ -73,14 +77,14 @@ class SecurityService implements OauthUserDetailsService {
             email: userProfile.email,
             nombre: userProfile.firstName,
             apellido: userProfile.familyName,
-            pictureGoogleUrl: userProfile.pictureUrl.tokenize("?").first()
+            imagenGoogleUrl: userProfile.pictureUrl.tokenize("?").first()
         ).save(failOnError: true)
 
-        log.debug "${usuario} creado. Descargando avatar desde ${usuario.pictureGoogleUrl}"
+        log.debug "${usuario} creado. Descargando avatar desde ${usuario.imagenGoogleUrl}"
 
         usuarioService.downloadPicture(usuario)
 
-        log.debug "Avatar descargado a ${usuario.pictureLocalPath}"
+        log.debug "Avatar descargado a ${usuario.imagenLocalPath}"
 
         setRoles(usuario, defaultRoles)
     }

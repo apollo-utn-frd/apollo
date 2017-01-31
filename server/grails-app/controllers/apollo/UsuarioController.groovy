@@ -12,6 +12,29 @@ class UsuarioController implements AppTrait {
 
     SearchService searchService
 
+    @Secured('permitAll')
+    def images() {
+        if (!params.file.endsWith('.jpg')) {
+            render(status: UNPROCESSABLE_ENTITY)
+            return
+        }
+
+        File image = new File("grails-app/views/images/usuario/${params.file}")
+
+        if (!image.exists()) {
+            render(status: NOT_FOUND)
+            return
+        }
+
+        response.setContentType('image/jpeg')
+        response.setContentLength(image.size().toInteger())
+
+        OutputStream out = response.getOutputStream()
+
+        out.write(image.bytes)
+        out.close()
+    }
+
     @Secured('ROLE_USER')
     def index() {
         JSON.use('private') {

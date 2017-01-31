@@ -14,12 +14,12 @@ class RutaViajeMarshaller {
                     id: rutaViaje.creador.id
                 ]
 
-                titulo = rutaViaje.titulo
+                nombre = rutaViaje.nombre
                 descripcion = rutaViaje.descripcion
                 publico = rutaViaje.publico
 
-                if (rutaViaje.pictureLocalPath) {
-                    pictureUrl = Holders.grailsApplication.config.getProperty('grails.serverURL') + rutaViaje.pictureLocalPath
+                if (rutaViaje.imagenLocalPath) {
+                    imagenUrl = Holders.grailsApplication.config.getProperty('grails.serverURL') + rutaViaje.imagenLocalPath
                 }
 
                 sitios = rutaViaje.sitios.collect { sitio ->

@@ -17,8 +17,8 @@ class Usuario implements Serializable {
     String nombre
     String apellido
     String idGoogle
-    String pictureGoogleUrl
-    String pictureLocalPath
+    String imagenGoogleUrl
+    String imagenLocalPath
     String descripcion = ''
     boolean firstLogin = true
     boolean enabled = true
@@ -107,13 +107,13 @@ class Usuario implements Serializable {
     ]
 
     static constraints = {
-        username unique: true, size: 4..30, blank: false
+        username unique: true, size: 4..30, matches: '^[a-zA-Z0-9\\.]+$', blank: false
         email email: true, unique: true, blank: false
         nombre size: 1..30, blank: false
         apellido size: 1..30, blank: false
         idGoogle unique: true, blank: false
-        pictureGoogleUrl url: true, blank: false
-        pictureLocalPath nullable: true
+        imagenGoogleUrl url: true, blank: false
+        imagenLocalPath nullable: true
         descripcion size: 0..150
     }
 

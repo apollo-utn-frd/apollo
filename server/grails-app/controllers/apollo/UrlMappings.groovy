@@ -66,11 +66,14 @@ class UrlMappings {
             get "/"(controller: 'post', action: 'show')
         }
 
+        // Imagenes.
+        group "/images", {
+            "/usuario/$file?"(controller: 'usuario', action: 'images')
+            "/rutaviaje/$file?"(controller: 'rutaViaje', action: 'images')
+        }
+
         // Autenticación.
         "/auth/$provider?"(controller: 'restOauth', action: 'authenticate')
-
-        // Imagenes
-        "/images/$domain?/$file?"(controller: 'app', action: 'images')
 
         "500"(view: '/error')
         "404"(view: '/notFound')

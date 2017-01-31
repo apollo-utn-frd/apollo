@@ -1,5 +1,9 @@
 package apollo
 
+import grails.transaction.Transactional
+
+@Transactional
+
 class UsuarioService {
     ImageService imageService
 
@@ -8,9 +12,9 @@ class UsuarioService {
      * destino de la imagen.
      */
     void downloadPicture(Usuario usuario) {
-        usuario.pictureLocalPath = "/images/usuario/${usuario.id}.jpg"
+        usuario.imagenLocalPath = "/images/usuario/${usuario.id}.jpg"
 
-        imageService.download(usuario.pictureGoogleUrl, usuario.pictureLocalPath)
+        imageService.download(usuario.imagenGoogleUrl, usuario.imagenLocalPath)
 
         usuario.save(flush: true)
     }

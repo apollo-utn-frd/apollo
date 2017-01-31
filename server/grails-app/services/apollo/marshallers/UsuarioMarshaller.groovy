@@ -15,8 +15,8 @@ class UsuarioMarshaller {
                 apellido = usuario.apellido
                 descripcion = usuario.descripcion
 
-                if (usuario.pictureLocalPath) {
-                    pictureUrl = Holders.grailsApplication.config.getProperty('grails.serverURL') + usuario.pictureLocalPath
+                if (usuario.imagenLocalPath) {
+                    imagenUrl = Holders.grailsApplication.config.getProperty('grails.serverURL') + usuario.imagenLocalPath
                 }
 
                 seguidos = usuario.seguidos.collect { seguimiento ->

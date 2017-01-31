@@ -17,8 +17,8 @@ class UsuarioPrivateMarshaller {
                 firstLogin = usuario.firstLogin
                 accountLocked = usuario.accountLocked
 
-                if (usuario.pictureLocalPath) {
-                    pictureUrl = Holders.grailsApplication.config.getProperty('grails.serverURL') + usuario.pictureLocalPath
+                if (usuario.imagenLocalPath) {
+                    imagenUrl = Holders.grailsApplication.config.getProperty('grails.serverURL') + usuario.imagenLocalPath
                 }
 
                 seguidos = usuario.seguidos.collect { seguimiento ->
