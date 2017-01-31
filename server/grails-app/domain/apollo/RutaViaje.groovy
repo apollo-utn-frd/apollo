@@ -2,13 +2,13 @@ package apollo
 
 import groovy.transform.ToString
 
-@ToString(includes = 'titulo', includePackage = false)
+@ToString(includes = 'nombre', includePackage = false)
 
 class RutaViaje {
-    String titulo
+    String nombre
     String descripcion = ''
-    String pictureGoogleUrl
-    String pictureLocalPath
+    String imagenGoogleUrl
+    String imagenLocalPath
     boolean publico = true
     List sitios
     List autorizacionesUsuarios
@@ -31,18 +31,18 @@ class RutaViaje {
     ]
 
     static constraints = {
-        titulo size: 2..30, blank: false
+        nombre size: 2..30, blank: false
         descripcion size: 0..1000
-        pictureGoogleUrl nullable: true, url: true, size: 0..3000
-        pictureLocalPath nullable: true
-        sitios validator: { sitios ->
+        imagenGoogleUrl nullable: true, url: true, size: 0..3000
+        imagenLocalPath nullable: true
+        sitios maxSize: 25, validator: { sitios ->
             (sitios && !sitios.empty) ?: ['rutaViaje.sitios.vacio']
         }
     }
 
     static mapping = {
         descripcion type: 'text'
-        pictureGoogleUrl type: 'text'
+        imagenGoogleUrl type: 'text'
     }
 
     /**

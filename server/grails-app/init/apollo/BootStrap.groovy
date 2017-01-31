@@ -17,7 +17,7 @@ class BootStrap {
                 email: 'jon.snow@gmail.com',
                 nombre: 'Jon',
                 apellido: 'Snow',
-                pictureGoogleUrl: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJa2pNSUY5cXFjZXc',
+                imagenGoogleUrl: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJa2pNSUY5cXFjZXc',
                 descripcion: 'Ex-Lord Comandante de la Guardia de la Noche',
                 firstLogin: false
             ).save(failOnError: true)
@@ -29,7 +29,7 @@ class BootStrap {
 
         if (RutaViaje.count() == 0) {
             RutaViaje rutaViaje = new RutaViaje(
-                titulo: 'Mapa de prueba',
+                nombre: 'Mapa de prueba',
                 descripcion: 'Descripcion de prueba',
                 creador: Usuario.findByUsername('test'),
                 sitios: [

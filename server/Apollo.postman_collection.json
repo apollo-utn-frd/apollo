@@ -22,7 +22,8 @@
 				"76beaac8-a8cd-97cb-490a-18426ed6b958",
 				"8fcdf689-0873-9443-4bab-e59722562cea",
 				"041581dc-ae8b-c90d-a032-ba7bdbf75d97",
-				"35fe5fa0-4576-67e0-3f12-32907c29d5e1"
+				"35fe5fa0-4576-67e0-3f12-32907c29d5e1",
+				"3c843187-e190-ed1f-e612-8b1426919788"
 			],
 			"owner": "558378"
 		},
@@ -68,7 +69,8 @@
 				"d90b51f2-6f02-19ec-8281-d840f3376d8e",
 				"82684f50-e98a-c73e-2418-dc25f4a10658",
 				"0b2a0f1d-0fc8-8d44-7b39-a7a2880104b7",
-				"3b1267c6-ac0a-76b3-0c6d-01c3a249c162"
+				"3b1267c6-ac0a-76b3-0c6d-01c3a249c162",
+				"0a73d2ab-1dd9-760f-082d-74e8627576f9"
 			],
 			"owner": "558378"
 		},
@@ -95,9 +97,11 @@
 				"2b887c01-3845-b9c6-75a3-d6aeb3f0b196",
 				"ec21576a-3347-7ba7-7469-3070861da9e1",
 				"90f17352-754d-1083-4de2-75b3e972e62e",
+				"ab047497-e497-df17-4d74-e151146942f2",
 				"f014f863-88f4-16d1-f050-a84b13c42004"
 			],
-			"owner": "558378"
+			"owner": "558378",
+			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5"
 		}
 	],
 	"timestamp": 1461562167787,
@@ -123,6 +127,25 @@
 			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
 			"responses": [],
 			"rawModeData": ""
+		},
+		{
+			"id": "0a73d2ab-1dd9-760f-082d-74e8627576f9",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ACCESS_TOKEN}}\n",
+			"url": "http://localhost:8080/rutaviaje/search?query=mapa+prueba&offset=0&max=10",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485728315773,
+			"name": "Buscar RVs [Público]",
+			"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados.",
+			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
+			"responses": []
 		},
 		{
 			"id": "0b2a0f1d-0fc8-8d44-7b39-a7a2880104b7",
@@ -230,23 +253,21 @@
 		{
 			"id": "35fe5fa0-4576-67e0-3f12-32907c29d5e1",
 			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ACCESS_TOKEN}}\n",
-			"url": "http://localhost:8080/comentario/list",
-			"pathVariables": {},
+			"url": "http://localhost:8080/comentario/search",
 			"preRequestScript": null,
+			"pathVariables": {},
 			"method": "GET",
-			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
 			"data": [],
 			"dataMode": "raw",
-			"name": "Ver Todos los Comentarios [Administradores]",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1475300763513,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"folder": "88f75102-39d8-f7e0-595e-a50269cfa76c",
+			"time": 1485715230736,
+			"name": "Ver Todos los Comentarios [Público]",
+			"description": "",
+			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
+			"responses": [],
 			"rawModeData": ""
 		},
 		{
@@ -292,7 +313,7 @@
 		{
 			"id": "3b1267c6-ac0a-76b3-0c6d-01c3a249c162",
 			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ACCESS_TOKEN}}\n",
-			"url": "http://localhost:8080/rutaviaje/list",
+			"url": "http://localhost:8080/rutaviaje/search",
 			"preRequestScript": null,
 			"pathVariables": {},
 			"method": "GET",
@@ -302,13 +323,31 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1475309922806,
-			"name": "Ver Todos las RVs [Administradores]",
+			"time": 1485714999600,
+			"name": "Ver Todos las RVs [Público]",
 			"description": "",
 			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
+			"responses": []
+		},
+		{
+			"id": "3c843187-e190-ed1f-e612-8b1426919788",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ACCESS_TOKEN}}\n",
+			"url": "http://localhost:8080/comentario/search?query=primer+comentario&offset=0&max=10",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485728490208,
+			"name": "Buscar Comentario [Público]",
+			"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados.",
+			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
 			"responses": [],
-			"folder": "083db7a7-2b2f-71e8-8b0d-b9958ffdf5b9",
-			"timestamp": null
+			"rawModeData": ""
 		},
 		{
 			"id": "5670cfdd-06b6-97f6-58f9-fb5ac27a1c5d",
@@ -483,7 +522,7 @@
 		{
 			"id": "90f17352-754d-1083-4de2-75b3e972e62e",
 			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ACCESS_TOKEN}}\n",
-			"url": "http://localhost:8080/usuario/list",
+			"url": "http://localhost:8080/usuario/search",
 			"preRequestScript": null,
 			"pathVariables": {},
 			"method": "GET",
@@ -493,12 +532,11 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1475051872550,
-			"name": "Ver Todos los Perfiles [Administradores]",
+			"time": 1485715136095,
+			"name": "Ver Todos los Perfiles [Público]",
 			"description": "",
 			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
 			"responses": [],
-			"folder": "2b55630a-a061-b717-18e8-227ae5f798f7",
 			"rawModeData": ""
 		},
 		{
@@ -563,6 +601,26 @@
 			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
 			"responses": [],
 			"folder": "70d40e43-6649-eb3c-41d0-b00f79913e5d",
+			"rawModeData": ""
+		},
+		{
+			"id": "ab047497-e497-df17-4d74-e151146942f2",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ACCESS_TOKEN}}\n",
+			"url": "http://localhost:8080/usuario/search?query=jon+snow&offset=0&max=10",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485728507023,
+			"name": "Buscar Perfil [Público]",
+			"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados.",
+			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
+			"responses": [],
 			"rawModeData": ""
 		},
 		{
@@ -639,12 +697,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1476676242112,
+			"time": 1485729946903,
 			"name": "Crear RV Pública [Usuarios]",
 			"description": "",
 			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
 			"responses": [],
-			"rawModeData": "{\n    \"titulo\": \"Mi mapa\",\n    \"descripcion\": \"El mapa de mi viaje por el mundo\",\n    \"sitios\": [\n    \t{\"latitud\": \"40.748432\", \"longitud\": \"-73.985418\"},\n    \t{\"latitud\": \"48.858406\", \"longitud\": \"2.294514\"},\n    \t{\"latitud\": \"41.403630\", \"longitud\": \"2.174377\"},\n    \t{\"latitud\": \"-13.163329\", \"longitud\": \"-72.544834\"}\n    ]\n}"
+			"rawModeData": "{\n    \"nombre\": \"Mi mapa\",\n    \"descripcion\": \"El mapa de mi viaje por el mundo\",\n    \"sitios\": [\n    \t{\"latitud\": \"40.748432\", \"longitud\": \"-73.985418\"},\n    \t{\"latitud\": \"48.858406\", \"longitud\": \"2.294514\"},\n    \t{\"latitud\": \"41.403630\", \"longitud\": \"2.174377\"},\n    \t{\"latitud\": \"-13.163329\", \"longitud\": \"-72.544834\"}\n    ]\n}"
 		},
 		{
 			"id": "d90b51f2-6f02-19ec-8281-d840f3376d8e",
@@ -659,12 +717,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1477809856220,
+			"time": 1485729950683,
 			"name": "Crear RV Privada [Usuarios]",
 			"description": "",
 			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
 			"responses": [],
-			"rawModeData": "{\n    \"titulo\": \"Mi super mapa privado\",\n    \"descripcion\": \"Mi super mapa de mi super viaje secreto\",\n    \"publico\": false,\n    \"sitios\": [\n    \t{\"latitud\": \"-34.178700\", \"longitud\": \"-58.962062\"},\n    \t{\"latitud\": \"-34.112823\", \"longitud\": \"-59.020135\"}\n    ],\n    \"autorizaciones\": [\n        {\n            \"id\": 3\n        }\n    ]\n}"
+			"rawModeData": "{\n    \"nombre\": \"Mi super mapa privado\",\n    \"descripcion\": \"Mi super mapa de mi super viaje secreto\",\n    \"publico\": false,\n    \"sitios\": [\n    \t{\"latitud\": \"-34.178700\", \"longitud\": \"-58.962062\"},\n    \t{\"latitud\": \"-34.112823\", \"longitud\": \"-59.020135\"}\n    ],\n    \"autorizaciones\": [\n        {\n            \"id\": 3\n        }\n    ]\n}"
 		},
 		{
 			"id": "d9397598-4a59-20e7-3e4f-abb83dee5624",
@@ -742,12 +800,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1476678925150,
+			"time": 1485735255858,
 			"name": "Actualizar Perfil [Usuarios]",
 			"description": "",
 			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
 			"responses": [],
-			"rawModeData": "{\n\t\"username\": \"jon_snow\",\n\t\"nombre\": \"Jon\",\n\t\"apellido\": \"Snow\",\n\t\"descripcion\": \"Hijo de Lyanna Stark y Rhaegar Targaryen.\"\n}"
+			"rawModeData": "{\n\t\"username\": \"jon.snow\",\n\t\"nombre\": \"Jon\",\n\t\"apellido\": \"Snow\",\n\t\"descripcion\": \"Hijo de Lyanna Stark y Rhaegar Targaryen.\"\n}"
 		}
 	]
 }

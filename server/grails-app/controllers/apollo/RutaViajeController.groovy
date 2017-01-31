@@ -14,6 +14,36 @@ class RutaViajeController implements AppTrait {
     RutaViajeService rutaViajeService
 
     @Secured('permitAll')
+    def images() {
+        if (!params.file.endsWith('.jpg')) {
+            render(status: UNPROCESSABLE_ENTITY)
+            return
+        }
+
+        File image = new File("grails-app/views/images/rutaviaje/${params.file}")
+
+        if (!image.exists()) {
+            render(status: NOT_FOUND)
+            return
+        }
+
+        RutaViaje rutaViaje = RutaViaje.find { imagenLocalPath == request.forwardURI }
+
+        if (!rutaViaje?.canReadBy(currentUser())) {
+            render(status: NOT_FOUND)
+            return
+        }
+
+        response.setContentType('image/jpeg')
+        response.setContentLength(image.size().toInteger())
+
+        OutputStream out = response.getOutputStream()
+
+        out.write(image.bytes)
+        out.close()
+    }
+
+    @Secured('permitAll')
     def show() {
         RutaViaje rutaViaje = RutaViaje.get(params.id)
 
@@ -29,7 +59,7 @@ class RutaViajeController implements AppTrait {
     def search(String query, int offset, int max) {
         Search search = new Search(
             classx: RutaViaje,
-            properties: ['titulo', 'descripcion'],
+            properties: ['nombre', 'descripcion'],
             query: query,
             after: { rutasViaje ->
                 rutasViaje.findAll { it.canReadBy(currentUser()) }
@@ -46,7 +76,7 @@ class RutaViajeController implements AppTrait {
     def create() {
         RutaViaje rutaViaje = new RutaViaje(
             creador: currentUser(),
-            titulo: request.JSON?.titulo,
+            nombre: request.JSON?.nombre,
             descripcion: request.JSON?.descripcion ?: "",
             publico: (request.JSON?.publico != null) ? request.JSON?.publico : true,
             sitios: request.JSON?.sitios
@@ -60,29 +90,11 @@ class RutaViajeController implements AppTrait {
 
         rutaViaje.save(flush: true)
 
-        // Crea las autorizaciones si la ruta es privada.
         if (!rutaViaje.publico) {
-            request.JSON?.autorizaciones.each { usuarioJSON ->
-                Usuario usuarioAutorizado = Usuario.get(usuarioJSON.id)
-
-                if (!usuarioAutorizado) {
-                    transactionStatus.setRollbackOnly()
-                    render(status: NOT_FOUND)
-                    return
-                }
-
-                Autorizacion autorizacion = new Autorizacion(
-                    rutaViaje: rutaViaje,
-                    usuario: usuarioAutorizado
-                )
-
-                if (!autorizacion.validate()) {
-                    transactionStatus.setRollbackOnly()
-                    respond autorizacion.errors
-                    return
-                }
-
-                autorizacion.save(flush: true)
+            if (!rutaViajeService.authorize(rutaViaje, request.JSON?.autorizaciones.id)) {
+                transactionStatus.setRollbackOnly()
+                respond rutaViaje.errors
+                return
             }
         }
 

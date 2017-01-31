@@ -14,7 +14,7 @@ Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
 GET | /usuario | Usuarios | Devuelve el usuario logueado.
 PUT | /usuario | Usuarios | Actualiza el usuario logueado.
-GET | /usuario/search | Público | Busca un usuario.
+GET | /usuario/search | Público | Busca usuarios.
 GET | /usuario/:id_usr | Público | Devuelve el usuario segun un id.
 GET | /usuario/u/:username | Público | Devuelve el usuario segun un nombre de usuario.
 
@@ -35,7 +35,7 @@ GET | /seguimiento/list | Administradores | Devuelve todos los seguimientos.
 Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
 POST | /rutaviaje | Usuarios | Crea una ruta de viaje.
-GET | /rutaviaje/search | Público | Busca una ruta de viaje.
+GET | /rutaviaje/search | Público | Busca rutas de viaje.
 DELETE | /rutaviaje/:id_rv | Usuarios | Borra la ruta de viaje.
 GET | /rutaviaje/:id_rv | Público | Devuelve la ruta de viaje.
 
@@ -43,7 +43,7 @@ GET | /rutaviaje/:id_rv | Público | Devuelve la ruta de viaje.
 Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
 POST | /rutaviaje/comentar/:id_rv | Usuarios | Crea un comentario.
-GET | /comentario/search | Público | Busca un comentario.
+GET | /comentario/search | Público | Busca comentarios.
 GET | /comentario/:id_cmn | Usuarios | Devuelve el comentario.
 DELETE | /comentario/:id_cmn | Administradores | Borra el comentario.
 
