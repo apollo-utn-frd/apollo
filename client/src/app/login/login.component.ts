@@ -6,7 +6,10 @@ import {ApplicationState} from "../shared/store/state/application.state";
 import {LoginFormValidators} from "./loginForm.validators";
 import {UserFormVM} from "../shared/models/userForm.vm";
 import {storeToUserFormVM} from "./storeToUserFormVM";
-import {UpdateUserInfo} from "../shared/store/actions/user.actions";
+import {UpdateUserAction} from "../shared/store/actions/user.actions";
+import {User} from "../shared/models/user";
+import {storeToUserWithAuthVM, UserWithAuthVM} from "./storeToUserWithAuth.vm";
+import {go} from "@ngrx/router-store";
 
 const V = Validators;
 
@@ -25,7 +28,16 @@ export class LoginComponent implements OnInit {
     description: V.maxLength(150)
   };
 
-  constructor(private fb: FormBuilder, private store: Store<ApplicationState>) { }
+  user: UserWithAuthVM;
+
+  constructor(private fb: FormBuilder, private store: Store<ApplicationState>) {
+
+    this.store.select(storeToUserWithAuthVM)
+      .subscribe((userWithAuth: UserWithAuthVM) => {
+        this.user = userWithAuth
+      })
+      .unsubscribe();
+  }
 
   ngOnInit() {
     this.store.select(storeToUserFormVM)
@@ -40,10 +52,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    let userForm: UserFormVM = <UserFormVM> this.form.getRawValue();
-    this.store.dispatch(new UpdateUserInfo(userForm));
-    //this.userService.update(this.loggedUser, uf);
-    //this.userService.edit(this.loggedUser).subscribe(_ => console.log('usuario modificado :)'));
-    //this.router.navigateByUrl('/home');
+      let userForm: UserFormVM = <UserFormVM> this.form.getRawValue();
+      this.store.dispatch(new UpdateUserAction({user: this.user, form: userForm}));
+      this.store.dispatch(go('/home'));
   }
 }

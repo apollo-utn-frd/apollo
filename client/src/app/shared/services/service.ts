@@ -14,4 +14,12 @@ export abstract class Service<T> {
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     return Observable.throw(errorMsg);
   }
+
+  mkHeaders(token: string): Headers {
+    let headers: Headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + token);
+
+    return headers;
+  }
 }

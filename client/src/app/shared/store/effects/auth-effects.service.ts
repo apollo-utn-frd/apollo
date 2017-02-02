@@ -27,7 +27,7 @@ export class AuthEffectService {
     .debug("Retrieving user information")
     .map(userData => {
       this.store.dispatch(new SaveAuthStateAction({id: userData.user.id, token: userData.token}));
-      this.store.dispatch(go('/login'));
+      //this.store.dispatch(go('/login'));
       return new SaveUserAction(userData.user);
     })
     .debug("user saved");

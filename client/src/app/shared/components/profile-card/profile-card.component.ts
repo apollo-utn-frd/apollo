@@ -1,7 +1,6 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
-import { User } from '../../models/index';
-import { UserService } from '../../services/index';
 import { Observable } from 'rxjs/Observable';
+import {User} from "../../models/user";
 
 declare var $: any;
 
@@ -12,13 +11,11 @@ declare var $: any;
 })
 
 export class ProfileCardComponent implements AfterViewInit {
-  user: Observable<User>;
+  @Input() user: Observable<User>;
   @Input() panelRutas: boolean = true;
   @Input() seguir: boolean = true;
 
-  constructor(private userService: UserService) {
-    this.user = this.userService.get();
-  }
+  constructor() { }
 
   ngAfterViewInit() {
     $('.seguir .btn-material').click(function() {

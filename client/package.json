@@ -36,6 +36,7 @@
     "zone.js": "^0.7.6"
   },
   "devDependencies": {
+    "@types/googlemaps": "^3.26.1",
     "@types/jasmine": "^2.5.41",
     "@types/lodash": "^4.14.50",
     "@types/node": "^7.0.0",

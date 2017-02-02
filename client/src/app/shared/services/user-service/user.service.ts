@@ -9,6 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
 import * as api from '../api';
 import {ApplicationState} from "../../store/state/application.state";
+import * as _ from 'lodash';
 
 @Injectable()
 export class UserService extends Service<User> {
@@ -35,8 +36,8 @@ export class UserService extends Service<User> {
       .catch(this.handleError);
   }
 
-  edit(u: User): Observable<void> {
-    return this.http.put(api.USUARIOS, JSON.stringify(u), {headers: this.headers})
+  edit(u: User, token: string): Observable<Response> {
+    return this.http.put(api.USUARIOS, u, this.mkHeaders(token))
       .catch(this.handleError);
   }
 
@@ -86,10 +87,13 @@ export class UserService extends Service<User> {
       .catch(this.handleError);
   }
 
-  update(u: User, form: UserFormVM): void {
-    u.nombre = form.nombre;
-    u.apellido = form.apellido;
-    u.username = form.username;
-    u.descripcion = form.descripcion;
+  update(u: User, form: UserFormVM): User {
+    let clon = _.clone(u);
+    clon.nombre = form.nombre;
+    clon.apellido = form.apellido;
+    clon.username = form.username;
+    clon.descripcion = form.descripcion;
+
+    return clon;
   }
 }

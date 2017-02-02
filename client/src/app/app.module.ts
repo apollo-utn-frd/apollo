@@ -49,6 +49,7 @@ import {AuthEffectService} from "./shared/store/effects/auth-effects.service";
 import {localStorageSync} from "ngrx-store-localstorage";
 import {appReducers} from "./shared/store/reducers/app.reducer";
 import {INITIAL_APP_STATE} from "./shared/store/state/application.state";
+import {UserEffectService} from "./shared/store/effects/user-effects.service";
 
 @NgModule({
   declarations: [
@@ -76,12 +77,14 @@ import {INITIAL_APP_STATE} from "./shared/store/state/application.state";
     ReactiveFormsModule,
     routing,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDSA-Sc8yoe_NIGqOwTGoNPiKge0KRK_wo'
+      apiKey: 'AIzaSyDSA-Sc8yoe_NIGqOwTGoNPiKge0KRK_wo',
+      libraries: ["places"]
     }),
     StoreModule.provideStore(
       compose(storeFreeze, localStorageSync(['id','token']), combineReducers)(appReducers), INITIAL_APP_STATE),
     RouterStoreModule.connectRouter(),
     EffectsModule.run(AuthEffectService),
+    EffectsModule.run(UserEffectService),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   entryComponents: [

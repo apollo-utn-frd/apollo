@@ -1,10 +1,10 @@
 
 export interface AuthState {
-  id: string;
+  id?: string;
   token: string;
 }
 
 export const INITIAL_AUTH_STATE: AuthState
   = { id: undefined
-  , token: undefined
-};
+    , token: undefined
+    };

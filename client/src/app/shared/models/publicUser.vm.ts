@@ -1,15 +1,13 @@
 import {Seguidor} from "./follower";
 import {GenericUserInteraction} from "./genericUserInteraction.vm";
 
-export interface User {
+export interface PublicUserVM {
   id: string,
   username: string,
   email: string,
   nombre: string,
   apellido: string,
   descripcion: string,
-  firstLogin: boolean,
-  accountLocked: boolean
   imagenGoogleUrl: string,
   seguidos: Seguidor[],
   seguidores: Seguidor[],
@@ -17,6 +15,5 @@ export interface User {
   comentarios: Comment[],
   favoritos: GenericUserInteraction[],
   compartidos: GenericUserInteraction[],
-  autorizaciones: GenericUserInteraction[],
   dateCreated: Date,
 }

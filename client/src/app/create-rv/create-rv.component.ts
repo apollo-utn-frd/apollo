@@ -3,6 +3,8 @@ import { NavBarComponent } from '../shared/components/index';
 import { CreationFormComponent, CreationPanelComponent } from './components/index';
 import { RVService, UserService } from '../shared/services/index';
 import { RV, User } from '../shared/models/index';
+import {RVFormVM} from "../shared/models/rvForm.vm";
+import {Point} from "../shared/models/point";
 
 @Component({
   selector: 'apollo-create-rv',
@@ -27,27 +29,14 @@ export class CreateRVComponent {
 
   onFormSubmit(formData:any): void {
     console.log(formData);
-    let newRV: RV = {
-      titulo: formData.nombre,
-      id_usuario: this.usuario.idGoogle,
+    let newRV: RVFormVM = {
+      nombre: formData.nombre,
+      creador: parseInt(this.usuario.id),
       descripcion: formData.descripcion,
       sitios: this.marcadores,
-      visibilidad: formData.visibilidad
+      publico: formData.visibilidad
     };
     console.log(newRV);
-    this.rvService.create(newRV).subscribe(_ => console.log("movida creada"));
+    //this.rvService.create(newRV).subscribe(_ => console.log("movida creada"));
   }
-
-}
-
-interface Point {
-  latitud: number;
-  longitud: number;
-}
-
-interface Marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable?: boolean;
 }

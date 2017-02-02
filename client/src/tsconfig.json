@@ -16,7 +16,8 @@
     ],
     "types": [
       "jasmine",
-      "lodash"
+      "lodash",
+      "googlemaps"
       //"core-js"
     ]
   }

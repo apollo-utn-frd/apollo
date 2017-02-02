@@ -24,27 +24,3 @@ function handleSaveAuthStateAction(state: AuthState, action: SaveAuthStateAction
     token:action.payload.token
   };
 }
-
-
-
-
-
-/*
- function handleLoginAction(state: AuthState, action: LoginAction): AuthState {
- const token = action.payload[0];
- const json = action.payload[1];
- return {
- id: json.id,
- token: token,
- };
- }
- */
-/*
- export function getUser(state$: Observable<State>) {
- return state$.select(s => s.user);
- }
-
- export function getToken(state$: Observable<State>) {
- return state$.select(s => s.token);
- }
- */

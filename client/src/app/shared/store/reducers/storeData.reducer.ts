@@ -1,6 +1,6 @@
 
 import {Action} from "@ngrx/store";
-import {USER_SAVE_ACTION, SaveUserAction} from "../actions/user.actions";
+import {USER_SAVE_ACTION, SaveUserAction, USER_EDIT_ACTION} from "../actions/user.actions";
 import {StoreData} from "../state/storeData.state";
 
 export function storeData(state: StoreData , action: Action): StoreData {
@@ -8,6 +8,10 @@ export function storeData(state: StoreData , action: Action): StoreData {
     case USER_SAVE_ACTION: {
       return handleSaveUserAction(state, action);
     }
+    case USER_EDIT_ACTION: {
+      return state;
+    }
+
     default:
       return state;
   }

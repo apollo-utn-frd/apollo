@@ -1,5 +1,6 @@
 
 import {GenericRVInteraction} from "./genericRVInteraction.vm";
+import {Point} from "./point";
 
 export type Visibilidad = 'PRIVADA' | 'PUBLICA'
 
@@ -15,9 +16,4 @@ export interface RV {
   compartidos: GenericRVInteraction[],
   autorizaciones: GenericRVInteraction[],
   sitios: Point[];
-}
-
-interface Point {
-  longitud: number,
-  latitud: number;
 }
