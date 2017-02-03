@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {ApplicationState} from "./shared/store/state/application.state";
+import {Store} from "@ngrx/store";
+import {init} from "protractor/built/launcher";
 
 @Component({
   selector: 'apollo-root',
@@ -6,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private store: Store<ApplicationState>) {
+   // this.store.dispatch(new LoadAppAction())
+  }
 }

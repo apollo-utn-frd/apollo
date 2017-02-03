@@ -22,4 +22,4 @@ function handleSaveUserAction(state: StoreData, action: SaveUserAction): StoreDa
   return {
     currentUser: action.payload
   }
-};
+}

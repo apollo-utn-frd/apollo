@@ -5,7 +5,7 @@
 </button>
 
 <div class="contenido">
-  <apollo-profile-card class="profile-card" ></apollo-profile-card>
+  <apollo-profile-card class="profile-card" [user]="users$ | async"></apollo-profile-card>
 
   <section id="publicaciones">
     <apollo-message-create-rv class="publicacion"></apollo-message-create-rv>

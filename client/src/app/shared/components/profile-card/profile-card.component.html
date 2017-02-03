@@ -1,15 +1,15 @@
 <div class="pcard shadow">
   <div class="pcard-body pull-right">
     <section class="avatar">
-      <img class="img-responsive" src="{{user.pictureUrl | async}}" alt="Avatar">
+      <img class="img-responsive" src="{{user.imagenGoogleUrl}}" alt="Avatar">
     </section>
 
     <section class="info-user">
-      <h2>{{ (user | async)?.nombre }} {{ user.apellido | async}}</h2>
-      <em class="username">@{{ user.username | async}}</em>
+      <h2>{{user.nombre}} {{ user.apellido}}</h2>
+      <em class="username">@{{user.username}}</em>
 
       <div class="description">
-        <p> {{ user.descripcion | async }} </p>
+        <p> {{user.descripcion}} </p>
       </div>
     </section>
 
@@ -34,7 +34,7 @@
       <div id="creadas" class="statistics">
         <h4 class="panel-title">
           <a href="#" role="button">
-            <i class="fa fa-plane" aria-hidden="true"></i>{{ user.rutasViaje.length | async}} viajes creados
+            <i class="fa fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
           </a>
         </h4>
       </div>
@@ -42,7 +42,7 @@
       <div id="favoritas" class="statistics">
         <h4 class="panel-title">
           <a href="#" role="button">
-            <i class="fa fa-star" aria-hidden="true"></i>{{ user.favoritos.length | async }} viajes favoritos
+            <i class="fa fa-star" aria-hidden="true"></i>{{user.favoritos.length}} viajes favoritos
           </a>
         </h4>
       </div>
@@ -50,7 +50,7 @@
       <div id="seguidores" class="statistics">
         <h4 class="panel-title">
           <a href="#" role="button">
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i>{{ user.seguidores.length | async}} seguidores
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>{{user.seguidores.length}} seguidores
           </a>
         </h4>
       </div>
@@ -58,7 +58,7 @@
       <div id="siguiendo" class="statistics">
         <h4 class="panel-title">
           <a href="#" role="button">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>{{ user.seguidos.length | async}} siguiendo
+            <i class="fa fa-user-circle" aria-hidden="true"></i>{{user.seguidos.length}} siguiendo
           </a>
         </h4>
       </div>

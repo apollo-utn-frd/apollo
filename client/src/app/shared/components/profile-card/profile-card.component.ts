@@ -11,7 +11,7 @@ declare var $: any;
 })
 
 export class ProfileCardComponent implements AfterViewInit {
-  @Input() user: Observable<User>;
+  @Input() user: User;
   @Input() panelRutas: boolean = true;
   @Input() seguir: boolean = true;
 

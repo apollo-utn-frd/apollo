@@ -1,12 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NavBarComponent, ProfileCardComponent } from '../shared/components/index';
-import { UserService } from '../shared/services/index';
-import { User } from '../shared/models/index';
-import { Observable } from 'rxjs/Observable';
-import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {ApplicationState} from "../shared/store/state/application.state";
+import {User} from "../shared/models/user";
+import {Observable} from "rxjs";
 
 declare var $: any;
 
@@ -17,7 +15,8 @@ declare var $: any;
     providers: [NavBarComponent, ProfileCardComponent]
 })
 export class HomeComponent implements AfterViewInit {
-  users$: User;
+
+  users$: Observable<User>;
 
   ngAfterViewInit() {
     ajustarLayout();
@@ -39,11 +38,10 @@ export class HomeComponent implements AfterViewInit {
     });
   }
 
-  constructor( private http: Http
-             , private store: Store<ApplicationState>
-             , private userService: UserService
-             , private router: Router) {
-             }
+  constructor(private store: Store<ApplicationState> , private router: Router) {
+    this.users$ = this.store.select(st => st.storeData.currentUser);
+  }
+
 }
 
 function ajustarLayout() {
