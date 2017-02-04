@@ -14,12 +14,14 @@ export class WelcomeComponent implements OnInit {
   credentials: AuthState;
 
   constructor(private store: Store<ApplicationState>) {
-    if (window.localStorage.length > 0) {
+    if (window.localStorage.getItem('token')) {
       this.credentials = {
         id: window.localStorage.getItem('id'),
         token: window.localStorage.getItem('token')
       }
     } else if (window.location.hash.substr(1)) {
+      console.log("token: ", window.location.hash.substr(1))
+
       this.credentials = {
         id: window.localStorage.getItem('id'),
         token: window.location.hash.substr(1)

@@ -4,8 +4,8 @@
     [longitude]="lng"
     [zoom]="zoom"
     [streetViewControl]="ui"
-    (mapClick)="this.onMapClick($event)"
-    (mapRightClick)="this.onMapRightClick($event)"
+    (mapClick)="onMapClick($event)"
+    (mapRightClick)="onMapRightClick($event)"
   >
     <sebm-google-map-marker
       *ngFor="let m of markers; let i = index"

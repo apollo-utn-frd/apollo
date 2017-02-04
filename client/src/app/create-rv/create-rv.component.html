@@ -1,6 +1,6 @@
 <apollo-navbar></apollo-navbar>
 
 <div class="contenido">
-  <apollo-creation-form class="creation-form"></apollo-creation-form>
-  <apollo-creation-panel class="creation-panel"></apollo-creation-panel>
+  <apollo-creation-form class="creation-form" (submit)="form.onSubmit(panel.getMarkers())" #form></apollo-creation-form>
+  <apollo-creation-panel class="creation-panel" #panel></apollo-creation-panel>
 </div>

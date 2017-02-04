@@ -53,6 +53,8 @@ import {appReducers} from './shared/store/reducers/app.reducer';
 import {INITIAL_APP_STATE} from './shared/store/state/application.state';
 import {UserEffectService} from './shared/store/effects/user-effects.service';
 
+let syncedState = ['authState', 'storeData', 'router'];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +87,7 @@ import {UserEffectService} from './shared/store/effects/user-effects.service';
       libraries: ['places']
     }),
     StoreModule.provideStore(
-      compose(storeFreeze, localStorageSync(['authState', 'storeData', 'router'], true), combineReducers)(appReducers), INITIAL_APP_STATE),
+      compose(storeFreeze, localStorageSync(syncedState, true), combineReducers)(appReducers), INITIAL_APP_STATE),
     RouterStoreModule.connectRouter(),
     EffectsModule.run(AuthEffectService),
     EffectsModule.run(UserEffectService),

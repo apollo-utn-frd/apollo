@@ -1,5 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { SebmGoogleMap, SebmGoogleMapMarker, MouseEvent } from 'angular2-google-maps/core';
+import { Component } from '@angular/core';
+import {MouseEvent} from 'angular2-google-maps/core';
+import {Marker} from "../models/Marker";
+import {Point} from "../models/Point";
+import {Line} from "../models/Line";
 
 @Component({
   selector: 'apollo-creation-panel',
@@ -20,9 +23,6 @@ export class CreationPanelComponent {
   pointB: Point;
   color: string = '#000';
 
-  // marcadores que se envian al padre cuando el padre se los pide
-  @Output() marcadores: EventEmitter<Point> = new EventEmitter<Point>();
-
   constructor() {
     this.markers = [];
     this.lines = [];
@@ -35,6 +35,13 @@ export class CreationPanelComponent {
     }
   }
 
+  getMarkers(): Marker[] {
+    return this.markers;
+  }
+
+  // Agrega un marcador al mapa y crea una linea que lo une.
+  // este metodo capaz se puede hacer de forma mas facil.
+  // la verdad es que lo hice asi nomas (?)
   onMapClick($event: MouseEvent): void {
     if (this.markers.length !== 0) {
       let len = this.markers.length - 1;
@@ -70,21 +77,3 @@ export class CreationPanelComponent {
 
 
 
-// clases del dominio para los mapas, pasar a otro archivo.
-
-interface Marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable?: boolean;
-}
-
-interface Point {
-  latitud: number;
-  longitud: number;
-}
-
-interface Line {
-  pointA: Point;
-  pointB: Point;
-}

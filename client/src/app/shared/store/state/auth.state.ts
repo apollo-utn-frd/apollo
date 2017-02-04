@@ -5,6 +5,6 @@ export interface AuthState {
 }
 
 export const INITIAL_AUTH_STATE: AuthState
-  = { id: undefined
-    , token: undefined
+  = { id: ''
+    , token: ''
     };
