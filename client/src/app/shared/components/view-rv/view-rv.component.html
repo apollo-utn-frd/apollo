@@ -1,0 +1,72 @@
+<div class="modal fade in">
+  <div class="view-rv shadow">
+    <div class="background">
+      <section class="rv-map">
+        <img class="rv-picture" src="assets/img/sample-map.png">
+      </section>
+
+      <section class="rv-body">
+        <div class="rv-info">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+          <div class="rv-user">
+            <div class="wrapper-user-picture">
+              <img class="user-picture" src="http://localhost:8080/images/usuario/1.jpg">
+            </div>
+            <a class="user-info" href="#">
+              <strong class="user-nombre">Jon Snow</strong>
+              <span class="username">@test</span>
+            </a>
+          </div>
+
+          <div class="rv-data">
+            <h4 class="rv-name">Ruta de viaje</h4>
+            <div class="rv-description">
+              <p>Descripcion de prueba</p>
+            </div>
+            <div class="rv-data-right">
+              <!-- <i class="rv-visibilidad fa fa-lock" aria-hidden="true" title="Privada"></i> -->
+              <i class="rv-visibilidad fa fa-globe" aria-hidden="true" title="Pública"></i>
+              <span class="rv-date-created"> · 10 min</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
+            <!-- Si la ruta de viaje es privada ocultar este elemento -->
+            <button class="compartir" (click)="toggleButton($event)">
+              <i class="fa fa-share" aria-hidden="true"></i><span class="cantidad">1</span>
+            </button>
+            <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
+            <button class="favoritos" (click)="toggleButton($event)">
+              <i class="fa fa-star" aria-hidden="true"></i><span class="cantidad">16</span>
+            </button>
+            <button class="comentar" (click)="focusComment($event)">
+              <i class="fa fa-comment" aria-hidden="true"></i><span class="cantidad">3</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="comments pull-left-100">
+          <div class="new-comment pull-left-100">
+            <textarea class="input-comment" rows="3" placeholder="Escribe un comentario..."></textarea>
+
+            <button class="btn-material btn-primary" (click)="addComment($event)">
+              <span class="text">Publicar</span>
+            </button>
+          </div>
+
+          <div class="list-comments">
+            <apollo-comment class="comment"></apollo-comment>
+            <hr class="line">
+            <apollo-comment class="comment"></apollo-comment>
+            <hr class="line">
+            <apollo-comment class="comment"></apollo-comment>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

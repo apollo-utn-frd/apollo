@@ -71,7 +71,7 @@ class RutaViajeService {
                 hasError = true
 
                 rutaViaje.errors.reject(
-                    'rutaViaje.autorizaciones.usuario.noExiste',
+                    'autorizacion.usuario.noExiste',
                     [idUsuario.toString()] as Object[],
                     'Error'
                 )

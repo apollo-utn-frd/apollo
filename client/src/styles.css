@@ -78,6 +78,11 @@ button:focus {
   width: 100%;
 }
 
+.pull-right-100 {
+  float: right;
+  width: 100%;
+}
+
 .shadow {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
@@ -86,6 +91,19 @@ button:focus {
  * Formularios. Basados en:
  * http://azmind.com/2015/11/06/bootstrap-login-register-forms-templates/
  */
+input[type="text"],
+textarea {
+  margin: 0;
+  vertical-align: middle;
+  background: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #888;
+  border-radius: 4px;
+  box-shadow: none;
+  transition: all .3s;
+}
+
 .form-box .form-top {
   overflow: hidden;
   padding: 0 25px;
@@ -152,31 +170,13 @@ button:focus {
   border-color: #19b9e7;
 }
 
-.form-box .form input[type="text"] {
-  height: 50px;
-}
-
 .form-box .form input[type="text"],
 .form-box .form textarea {
-  margin: 0;
-  padding: 0 20px;
-  vertical-align: middle;
-  background: #fff;
-  border: 3px solid #ddd;
-  font-family: 'Roboto', sans-serif;
+  padding: 10px;
   font-size: 16px;
-  font-weight: 300;
-  line-height: 50px;
-  color: #888;
-  border-radius: 4px;
-  box-shadow: none;
-  transition: all .3s;
-}
-
-.form-box .form textarea {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  line-height: 30px;
+  height: auto;
+  width: 100%;
+  border: 3px solid #ddd;
 }
 
 .form-box .form input[type="text"]:focus,
@@ -276,3 +276,8 @@ button:focus {
   text-decoration: none;
 }
 
+.btn-material.disabled,
+.btn-material[disabled] {
+  opacity: .65;
+  cursor: not-allowed;
+}

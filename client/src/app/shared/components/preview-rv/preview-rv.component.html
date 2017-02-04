@@ -5,7 +5,7 @@
       Compartido por <a href="#"><span class="username">@federico_sanches</span></a>
     </div>
 
-    <div class="rv-map">
+    <div class="rv-map" (click)="showViewRV($event)">
       <img class="rv-picture" src="assets/img/sample-map.png">
       <div class="gradient"></div>
       <h4 class="rv-name">Ruta de viaje</h4>
@@ -20,7 +20,7 @@
 
       <div class="rv-user pull-left-100">
         <div class="wrapper-user-picture">
-          <img class="user-picture" src="http://localhost:8080/usuario/avatar/1">
+          <img class="user-picture" src="http://localhost:8080/images/usuario/1.jpg">
         </div>
         <a class="user-info" href="#">
           <strong class="user-nombre">Jon Snow</strong>
@@ -30,17 +30,19 @@
 
       <div class="actions">
         <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
-        <button [hidden]="!publica" class="compartir">
+        <button [hidden]="!publica" class="compartir" (click)="toggleButton($event)">
           <i class="fa fa-share" aria-hidden="true"></i><span class="cantidad">1</span>
         </button>
         <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
-        <button class="favoritos">
+        <button class="favoritos" (click)="toggleButton($event)">
           <i class="fa fa-star" aria-hidden="true"></i><span class="cantidad">16</span>
         </button>
-        <button class="comentar">
+        <button class="comentar" (click)="showViewRV($event)">
           <i class="fa fa-comment" aria-hidden="true"></i><span class="cantidad">5</span>
         </button>
       </div>
     </div>
   </div>
 </div>
+
+<apollo-view-rv></apollo-view-rv>

@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 declare var $: any;
 
@@ -7,13 +7,26 @@ declare var $: any;
   templateUrl: 'preview-rv.component.html',
   styleUrls: ['./preview-rv.component.css']
 })
-export class PreviewRVComponent implements AfterViewInit {
+export class PreviewRVComponent {
   @Input() publica: boolean = true;
   @Input() compartida: boolean = false;
 
-  ngAfterViewInit() {
-    $('.actions button').click(function() {
-      $(this).toggleClass('activo');
-    });
+  showViewRV(event: any) {
+    $(event.target)
+      .closest('apollo-preview-rv')
+      .find('apollo-view-rv .modal')
+      .modal('show')
+      .find('.input-comment')[0]
+      .focus();
+  }
+
+  toggleButton(event: any) {
+    let target = $(event.target);
+
+    if (!target.is('button')) {
+      target = target.closest('button');
+    }
+
+    target.toggleClass('activo');
   }
 }

@@ -23,19 +23,19 @@
           <form role="form" class="form registration-form" [formGroup]="form" (ngSubmit)="onSubmit(user)">
             <div class="form-group">
               <label for="username">Nombre de Usuario</label>
-              <input id="username" type="text" name="username" formControlName="username" class="form-control" autofocus required>
+              <input id="username" type="text" name="username" formControlName="username" autofocus required>
             </div>
             <div class="form-group">
               <label for="form-last-name">Nombre</label>
-              <input id="nombre" type="text" name="nombre" formControlName="nombre" class="form-control" required>
+              <input id="nombre" type="text" name="nombre" formControlName="nombre" required>
             </div>
             <div class="form-group">
               <label for="apellido">Apellido</label>
-              <input id="apellido" type="text" name="apellido" formControlName="apellido" class="form-control" required>
+              <input id="apellido" type="text" name="apellido" formControlName="apellido" required>
             </div>
             <div class="form-group">
               <label for="form-about-yourself">Cuéntanos sobre ti</label>
-              <textarea id="descripcion" name="descripcion" formControlName="descripcion" rows="3" class="form-control"></textarea>
+              <textarea id="descripcion" name="descripcion" formControlName="descripcion" rows="3"></textarea>
             </div>
             <div class="form-btn">
               <button type="submit" class="btn btn-material btn-primary">Confirmar</button>

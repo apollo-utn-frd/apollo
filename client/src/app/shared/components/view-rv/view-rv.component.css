@@ -1,0 +1,176 @@
+.modal {
+  background-color: rgba(73, 75, 76, 0.75);
+  padding: 17px;
+}
+
+.view-rv {
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.background {
+  background-color: #fff;
+  height: 100%;
+  display: flex;
+  align-content: space-around;
+  flex-direction: row;
+}
+
+.rv-map {
+  display: flex;
+  align-self: center;
+  width: 70%;
+  height: 100%;
+  background-color: #eaeaea;
+}
+
+.rv-map .rv-picture {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  align-self: center;
+}
+
+.rv-body {
+  width: 30%;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 20px;
+}
+
+.rv-info {
+  width: 100%;
+  padding: 20px;
+}
+
+.rv-data {
+  float: left;
+  width: 100%;
+  position: relative;
+  margin-top: 7px;
+}
+
+.rv-user {
+  float: left;
+  width: 100%;
+}
+
+.rv-user .wrapper-user-picture {
+  float: left;
+  width: 70px;
+  display: inline-block;
+}
+
+.rv-user .user-picture {
+  width: 100%;
+  padding-right: 10px;
+}
+
+.rv-user .user-info {
+  display: inline-block;
+}
+
+.rv-user .username {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.rv-user .user-info:hover {
+  text-decoration: none;
+}
+
+.rv-data-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10px 0;
+}
+
+.actions {
+  display: inline-block;
+  float: right;
+  clear: both;
+  padding: 5px;
+}
+
+.actions button {
+  height: 35px;
+  margin: 0;
+  margin-left: 15px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.actions button:hover {
+  color: #9ecfe9;
+}
+
+.actions button.activo {
+  color: #3279b6;
+}
+
+.actions button.disabled {
+  color: #808080;
+  cursor: default;
+}
+
+.actions button .fa {
+  margin-right: 7px;
+}
+
+.line {
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  border : 0;
+  height: 1px;
+  background-image: linear-gradient(to left, #d5dfe8, #8c8c8c, #d5dfe8);
+}
+
+.comments {
+  background-color: #d5dfe8;
+}
+
+.new-comment {
+  padding: 20px;
+}
+
+.new-comment .input-comment {
+  margin-bottom: 5px;
+  padding: 10px;
+  font-size: 14px;
+  height: auto;
+  width: 100%;
+  border: 3px solid #ccc;
+}
+
+.new-comment .input-comment:focus {
+  outline: 0;
+  border: 3px solid #ccc;
+}
+
+.new-comment .btn-primary {
+  float: right;
+}
+
+.list-comments {
+  clear: both;
+}
+
+.list-comments .comment {
+  padding: 20px;
+  display: block;
+}
+
+.list-comments .comment:first-of-type {
+  padding-top: 0;
+}

@@ -1,0 +1,34 @@
+.comment-header {
+  width: 100%;
+}
+
+.username {
+  color: #696262;
+}
+
+.wrapper-user-picture {
+  width: 50px;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.wrapper-user-picture .user-picture {
+  width: 100%;
+}
+
+.comment-date-created {
+  display: block;
+}
+
+.comment-content {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.comment-content p:last-of-type {
+  margin-bottom: 5px;
+}
+
+.comment-content p:last-of-type {
+  margin-bottom: 0;
+}

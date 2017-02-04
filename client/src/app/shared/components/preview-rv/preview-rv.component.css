@@ -21,6 +21,7 @@
 
 .rv-map {
   position: relative;
+  cursor: pointer;
 }
 
 .rv-map .rv-picture {

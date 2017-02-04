@@ -1,6 +1,5 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import {User} from "../../models/user";
+import { Component, Input } from '@angular/core';
+import { User } from '../../models/user';
 
 declare var $: any;
 
@@ -10,20 +9,22 @@ declare var $: any;
   styleUrls: ['./profile-card.component.css']
 })
 
-export class ProfileCardComponent implements AfterViewInit {
+export class ProfileCardComponent {
   @Input() user: User;
   @Input() panelRutas: boolean = true;
   @Input() seguir: boolean = true;
 
-  constructor() { }
+  toggleButton(event: any) {
+    let target = $(event.target);
 
-  ngAfterViewInit() {
-    $('.seguir .btn-material').click(function() {
-      var btnText = $(this).hasClass('btn-primary') ? 'Eliminar' : 'Seguir';
+    if (!target.is('button')) {
+      target = target.closest('button');
+    }
 
-      $(this).toggleClass('btn-primary').toggleClass('btn-danger');
-      $(this).find('.fa').toggleClass('fa-user-plus').toggleClass('fa-user-times');
-      $(this).find('.text').text(btnText);
-    });
+    let btnText = target.hasClass('btn-primary') ? 'Eliminar' : 'Seguir';
+
+    target.toggleClass('btn-primary').toggleClass('btn-danger');
+    target.find('.fa').toggleClass('fa-user-plus').toggleClass('fa-user-times');
+    target.find('.text').text(btnText);
   }
 }

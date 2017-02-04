@@ -30,7 +30,9 @@ import {
   NotificationItemComponent,
   NavBarLogoComponent,
   ProfileCardComponent,
-  PreviewRVComponent
+  PreviewRVComponent,
+  ViewRVComponent,
+  CommentComponent
 } from './shared/components/index';
 
 // Services
@@ -41,15 +43,15 @@ import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from 'angular2-goo
 
 // Directives
 import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directives/googleplace.directive';
-import {compose} from "@ngrx/core/compose";
-import {storeFreeze} from "ngrx-store-freeze";
-import {RouterStoreModule} from "@ngrx/router-store";
-import {EffectsModule} from "@ngrx/effects";
-import {AuthEffectService} from "./shared/store/effects/auth-effects.service";
-import {localStorageSync} from "ngrx-store-localstorage";
-import {appReducers} from "./shared/store/reducers/app.reducer";
-import {INITIAL_APP_STATE} from "./shared/store/state/application.state";
-import {UserEffectService} from "./shared/store/effects/user-effects.service";
+import {compose} from '@ngrx/core/compose';
+import {storeFreeze} from 'ngrx-store-freeze';
+import {RouterStoreModule} from '@ngrx/router-store';
+import {EffectsModule} from '@ngrx/effects';
+import {AuthEffectService} from './shared/store/effects/auth-effects.service';
+import {localStorageSync} from 'ngrx-store-localstorage';
+import {appReducers} from './shared/store/reducers/app.reducer';
+import {INITIAL_APP_STATE} from './shared/store/state/application.state';
+import {UserEffectService} from './shared/store/effects/user-effects.service';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import {UserEffectService} from "./shared/store/effects/user-effects.service";
     NavBarLogoComponent,
     ProfileCardComponent,
     PreviewRVComponent,
+    ViewRVComponent,
+    CommentComponent,
     GoogleplaceDirective
   ],
   imports: [
@@ -78,10 +82,10 @@ import {UserEffectService} from "./shared/store/effects/user-effects.service";
     routing,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDSA-Sc8yoe_NIGqOwTGoNPiKge0KRK_wo',
-      libraries: ["places"]
+      libraries: ['places']
     }),
     StoreModule.provideStore(
-      compose(storeFreeze, localStorageSync(['authState', 'storeData','router'],true), combineReducers)(appReducers), INITIAL_APP_STATE),
+      compose(storeFreeze, localStorageSync(['authState', 'storeData', 'router'], true), combineReducers)(appReducers), INITIAL_APP_STATE),
     RouterStoreModule.connectRouter(),
     EffectsModule.run(AuthEffectService),
     EffectsModule.run(UserEffectService),
