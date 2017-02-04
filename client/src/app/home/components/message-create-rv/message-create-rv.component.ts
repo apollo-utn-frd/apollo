@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {ApplicationState} from "../../../shared/store/state/application.state";
+import {Store} from "@ngrx/store";
+import {go} from "@ngrx/router-store";
 
 @Component({
     selector: 'apollo-message-create-rv',
@@ -6,5 +9,9 @@ import { Component } from '@angular/core';
     styleUrls: ['./message-create-rv.component.css']
 })
 export class MessageCreateRVComponent {
-  constructor() {}
+  constructor(private store: Store<ApplicationState>) {}
+
+  goToCreateRV() {
+    this.store.dispatch(go('new/rv'));
+  }
 }

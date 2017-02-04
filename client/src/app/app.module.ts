@@ -81,7 +81,7 @@ import {UserEffectService} from "./shared/store/effects/user-effects.service";
       libraries: ["places"]
     }),
     StoreModule.provideStore(
-      compose(storeFreeze, localStorageSync(['id','token']), combineReducers)(appReducers), INITIAL_APP_STATE),
+      compose(storeFreeze, localStorageSync(['authState', 'storeData','router'],true), combineReducers)(appReducers), INITIAL_APP_STATE),
     RouterStoreModule.connectRouter(),
     EffectsModule.run(AuthEffectService),
     EffectsModule.run(UserEffectService),
