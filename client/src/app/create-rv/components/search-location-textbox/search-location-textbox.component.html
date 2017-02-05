@@ -1,10 +1,13 @@
-<div class="form-group">
-  <input placeholder="Buscar ubicación"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="off"
-         type="text"
-         class="form-control"
-         #search [formControl]="searchControl"
+<div class="search-box minimized" (click)="maximizeSearch($event)">
+  <input
+    placeholder="Buscar ubicación"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="off"
+    type="text"
+    class="input-search"
+    #search [formControl]="searchControl"
   >
+
+  <i class="fa fa-search" aria-hidden="true"></i>
 </div>

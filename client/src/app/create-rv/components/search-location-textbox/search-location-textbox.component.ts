@@ -1,6 +1,8 @@
 import {Component, OnInit, NgZone, ElementRef, ViewChild} from '@angular/core';
-import {FormControl} from "@angular/forms";
-import {MapsAPILoader} from "angular2-google-maps/core";
+import {FormControl} from '@angular/forms';
+import {MapsAPILoader} from 'angular2-google-maps/core';
+
+declare var $: any;
 
 @Component({
   selector: 'apollo-search-location-textbox',
@@ -14,31 +16,31 @@ export class SearchLocationTextBox implements OnInit {
 
   public searchControl: FormControl;
 
-  @ViewChild("search")
+  @ViewChild('search')
   public searchElementRef: ElementRef;
 
   constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) {}
 
   ngOnInit() {
-    //create search FormControl
+    // Create search FormControl
     this.searchControl = new FormControl();
 
-    //load Places Autocomplete
+    // Load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
+        types: ['address']
       });
-      autocomplete.addListener("place_changed", () => {
+      autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
-          //get the place result
+          // Get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
 
-          //verify result
+          // Verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
 
-          //set latitude, longitude and zoom
+          // Set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
@@ -47,4 +49,15 @@ export class SearchLocationTextBox implements OnInit {
     });
   }
 
+  maximizeSearch(event: any) {
+    let target = $(event.target);
+
+    if (!target.hasClass('search-box')) {
+      target = target.closest('.search-box');
+    }
+
+    if (target.hasClass('minimized')) {
+      target.removeClass('minimized');
+    }
+  }
 }

@@ -13,7 +13,7 @@
 
 .profile-card {
   padding-right: 2vw;
-  width: 30%;
+  width: 29%;
   float: left;
 }
 
@@ -31,7 +31,7 @@
 }
 
 #publicaciones .publicacion {
-  width: calc(50% - 0.5vw);
+  width: calc(50% - 0.75vw);
   margin-bottom: 20px;
   float: left;
 }
@@ -42,7 +42,7 @@
 }
 
 #publicaciones.reduced .publicacion {
-  width: calc(33.33% - 0.5vw);
+  width: calc(33.33% - 0.75vw);
 }
 
 @media (max-width: 991px) {
@@ -59,7 +59,7 @@
   }
 
   #publicaciones.reduced .publicacion {
-    width: calc(50% - 0.5vw);
+    width: calc(50% - 0.75vw);
   }
 }
 
