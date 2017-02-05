@@ -54,6 +54,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
       let userForm: UserFormVM = <UserFormVM> this.form.getRawValue();
       this.store.dispatch(new UpdateUserAction({user: this.user, form: userForm}));
-      this.store.dispatch(go('/home'));
+      //this.store.dispatch(go('/home'));
   }
 }

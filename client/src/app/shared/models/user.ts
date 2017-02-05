@@ -10,7 +10,7 @@ export interface User {
   descripcion: string,
   firstLogin: boolean,
   accountLocked: boolean
-  imagenGoogleUrl: string,
+  imagenUrl: string,
   seguidos: Seguidor[],
   seguidores: Seguidor[],
   rutasViaje: number[],

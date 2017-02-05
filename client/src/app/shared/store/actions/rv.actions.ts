@@ -1,6 +1,22 @@
 import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/let';
-import { Observable } from 'rxjs/Observable';
-import { RV } from '../../models/rv';
-import * as rv from '../actions/rv.actions';
+import {AuthState} from "../state/auth.state";
+import {Point} from "../../models/point";
+import {RVFormVM} from "../../models/rvForm.vm";
+
+export const RV_CREATE_ACTION = 'RV_CREATE_ACTION';
+
+export const RV_NEW_ACTION = 'RV_NEW_ACTION';
+
+export class CreateRVAction {
+  type = RV_CREATE_ACTION;
+
+  constructor(public payload?: {rvForm: RVFormVM, sitios: Point[], authData: AuthState}) { }
+}
+
+export class NewRVAction {
+  type = RV_NEW_ACTION;
+
+  constructor(public payload?: any) { }
+}

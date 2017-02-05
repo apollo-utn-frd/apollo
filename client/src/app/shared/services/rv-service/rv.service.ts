@@ -10,12 +10,19 @@ import 'rxjs/add/operator/mergeMap';
 import { Store } from '@ngrx/store';
 import * as api from '../api';
 import {ApplicationState} from "../../store/state/application.state";
+import {RVDataVM} from "../../models/rvData.vm";
+import {AuthState} from "../../store/state/auth.state";
 
 @Injectable()
 export class RVService extends Service<RV> {
+  token: string;
 
   constructor(http: Http, store: Store<ApplicationState>) {
     super(http, store);
+    this.store.select(state => state.authState)
+      .subscribe((authState: AuthState) => {
+        this.token = authState.token;
+      })
   }
 
   getByID(id: number): Observable<RV> {
@@ -30,8 +37,8 @@ export class RVService extends Service<RV> {
                       .catch(this.handleError);
   }
 
-  create(rv: RV): Observable<void> {
-      return this.http.post(api.RUTADEVIAJE, rv, {headers: this.headers})
+  create(rv: RVDataVM): Observable<Response> {
+      return this.http.post(api.RUTADEVIAJE, rv, {headers: this.mkHeaders(this.token)})
                       .catch(this.handleError);
   }
 

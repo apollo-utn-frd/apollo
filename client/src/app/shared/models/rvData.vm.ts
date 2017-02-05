@@ -1,10 +1,11 @@
 
-import {Visibilidad} from "./rv";
 import {Point} from "./point";
+import {Visibilidad} from "./rv";
 
-export interface RVFormVM {
+export interface RVDataVM {
   nombre: string
   creador: number
   descripcion: string
   publico: Visibilidad
+  sitios: Point[]
 }

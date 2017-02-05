@@ -52,6 +52,7 @@ import {localStorageSync} from 'ngrx-store-localstorage';
 import {appReducers} from './shared/store/reducers/app.reducer';
 import {INITIAL_APP_STATE} from './shared/store/state/application.state';
 import {UserEffectService} from './shared/store/effects/user-effects.service';
+import {RVEffectService} from "./shared/store/effects/rv-effects.service";
 
 let syncedState = ['authState', 'storeData', 'router'];
 
@@ -91,6 +92,7 @@ let syncedState = ['authState', 'storeData', 'router'];
     RouterStoreModule.connectRouter(),
     EffectsModule.run(AuthEffectService),
     EffectsModule.run(UserEffectService),
+    EffectsModule.run(RVEffectService),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   entryComponents: [

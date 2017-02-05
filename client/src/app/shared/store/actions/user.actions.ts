@@ -20,5 +20,5 @@ export class UpdateUserAction implements Action {
 
 export class EditedUserAction implements Action {
   readonly type = USER_EDIT_ACTION;
-  constructor(public payload?: any) {}
+  constructor(public payload?: User) {}
 }

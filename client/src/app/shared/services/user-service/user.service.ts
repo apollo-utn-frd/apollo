@@ -10,12 +10,20 @@ import 'rxjs/add/operator/mergeMap';
 import * as api from '../api';
 import {ApplicationState} from "../../store/state/application.state";
 import * as _ from 'lodash';
+import {authState} from "../../store/reducers/auth.reducer";
+import {AuthState} from "../../store/state/auth.state";
 
 @Injectable()
 export class UserService extends Service<User> {
 
+  token: string;
+
   constructor(http: Http, store: Store<ApplicationState>) {
     super(http, store);
+    this.store.select(state => state.authState)
+      .subscribe((authState: AuthState) => {
+        this.token = authState.token;
+    })
   }
 
   getByID(id: number): Observable<User> {
@@ -31,13 +39,16 @@ export class UserService extends Service<User> {
   }
 
   get(): Observable<User> {
-    return this.http.get(api.USUARIOS, {headers: this.headers})
+    let headers = this.mkHeaders(this.token);
+    return this.http.get(api.USUARIOS, {headers: headers})
       .map(s => s.json())
       .catch(this.handleError);
   }
 
   edit(u: User, token: string): Observable<Response> {
-    return this.http.put(api.USUARIOS, u, this.mkHeaders(token))
+    let headers = this.mkHeaders(token);
+    console.log(headers);
+    return this.http.put(api.USUARIOS, u, {headers: headers})
       .catch(this.handleError);
   }
 
