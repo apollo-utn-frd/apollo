@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MouseEvent} from 'angular2-google-maps/core';
-import {Marker} from "../models/Marker";
-import {Point} from "../models/Point";
-import {Line} from "../models/Line";
+import {Marker} from "../../models/Marker";
+import {Point} from "../../models/Point";
+import {Line} from "../../models/Line";
 
 @Component({
   selector: 'apollo-creation-panel',
@@ -11,9 +11,9 @@ import {Line} from "../models/Line";
 })
 export class CreationPanelComponent {
   // Datos para setear el mapa
-  lat: number = -34.1785255; // latitud de la facu
-  lng: number = -58.9616511; // longitud de la facu
-  zoom = 16;
+  @Input() lat: number;
+  @Input() lng: number;
+  @Input() zoom: number;
   ui: boolean = false;
 
   // datos sobre los marcadores puestos en el mapa

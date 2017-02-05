@@ -53,6 +53,7 @@ import {appReducers} from './shared/store/reducers/app.reducer';
 import {INITIAL_APP_STATE} from './shared/store/state/application.state';
 import {UserEffectService} from './shared/store/effects/user-effects.service';
 import {RVEffectService} from "./shared/store/effects/rv-effects.service";
+import {SearchLocationTextBox} from "./create-rv/components/search-location-textbox/search-location-textbox.component";
 
 let syncedState = ['authState', 'storeData', 'router'];
 
@@ -65,6 +66,7 @@ let syncedState = ['authState', 'storeData', 'router'];
     HomeComponent,
     MessageCreateRVComponent,
     CreateRVComponent,
+    SearchLocationTextBox,
     CreationFormComponent,
     CreationPanelComponent,
     NavBarComponent,

@@ -2,5 +2,11 @@
 
 <div class="contenido">
   <apollo-creation-form class="creation-form" (submit)="form.onSubmit(panel.getMarkers())" #form></apollo-creation-form>
-  <apollo-creation-panel class="creation-panel" #panel></apollo-creation-panel>
+  <apollo-creation-panel class="creation-panel"
+                         [lat]="location.latitude || lat"
+                         [lng]="location.longitude || lng"
+                         [zoom]="location.zoom || zoom"
+                         #panel>
+  </apollo-creation-panel>
+  <apollo-search-location-textbox class="search-location-textbox" #location></apollo-search-location-textbox>
 </div>
