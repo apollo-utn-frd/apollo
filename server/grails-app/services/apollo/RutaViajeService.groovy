@@ -54,35 +54,29 @@ class RutaViajeService {
      * dentro de la ruta de viaje.
      */
     boolean authorize(RutaViaje rutaViaje, List idsUsuario) {
-        boolean hasError = false;
-
         for (idUsuario in idsUsuario) {
             Usuario usuario = Usuario.get(idUsuario)
 
             if (usuario) {
                 Autorizacion autorizacion = createAuthorization(rutaViaje, usuario)
 
-                if (!hasError && autorizacion) {
+                if (!rutaViaje.hasErrors() && autorizacion) {
                     autorizacion.save(flush: true)
-                } else {
-                    hasError = true
                 }
             } else {
-                hasError = true
-
                 rutaViaje.errors.reject(
                     'autorizacion.usuario.noExiste',
                     [idUsuario.toString()] as Object[],
-                    'Error'
+                    'Error al autorizar ruta de viaje'
                 )
             }
         }
 
-        if (hasError) {
+        if (rutaViaje.hasErrors()) {
             transactionStatus.setRollbackOnly()
         }
 
-        !hasError
+        !rutaViaje.hasErrors()
     }
 
     /**

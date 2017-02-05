@@ -1,10 +1,9 @@
 plugins {
-    id "com.moowork.node" version "0.13"
+    id "com.moowork.node" version "1.0.1"
 }
 
 node {
-    version = '6.3.1'
-    npmVersion = '3.10.3'
+    version = '6.9.1'
 }
 
 task bootRun(type: NpmTask, dependsOn: 'npmInstall') {
