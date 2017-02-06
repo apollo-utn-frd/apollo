@@ -17,5 +17,6 @@
 }
 
 .navbar .active a {
-  color: #555;
+  color: #fff;
+  background-color: transparent;
 }

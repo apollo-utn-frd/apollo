@@ -281,3 +281,18 @@ img::-moz-selection {
 #contact > .row {
   width: 100%;
 }
+
+.equipo {
+  width: 33%;
+  display: inline-block;
+  padding: 45px;
+}
+
+.equipo-img {
+    border: 4px solid #337AB7;
+    border-radius: 50%;
+}
+
+.equipo-img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
