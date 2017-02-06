@@ -43,7 +43,7 @@ export class SearchLocationTextBox implements OnInit {
           // Set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+          this.zoom = 16;
         });
       });
     });

@@ -18,6 +18,12 @@ export class PreviewRVComponent {
       .modal('show')
       .find('.input-comment')[0]
       .focus();
+
+      //Codigo para eliminar los modales por defecto de Bootstrap
+      $.fn.modal.Constructor.prototype.adjustDialog = function () {}
+      $.fn.modal.Constructor.prototype.setScrollbar = function () {
+        this.originalBodyPad = document.body.style.paddingRight || ''
+        }
   }
 
   toggleButton(event: any) {

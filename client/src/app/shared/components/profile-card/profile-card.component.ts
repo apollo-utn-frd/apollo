@@ -21,7 +21,7 @@ export class ProfileCardComponent {
       target = target.closest('button');
     }
 
-    let btnText = target.hasClass('btn-primary') ? 'Eliminar' : 'Seguir';
+    let btnText = target.hasClass('btn-primary') ? 'Dejar de seguir' : 'Seguir';
 
     target.toggleClass('btn-primary').toggleClass('btn-danger');
     target.find('.fa').toggleClass('fa-user-plus').toggleClass('fa-user-times');

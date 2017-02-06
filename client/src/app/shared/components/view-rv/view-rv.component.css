@@ -1,6 +1,6 @@
 .modal {
   background-color: rgba(73, 75, 76, 0.75);
-  padding: 17px;
+  padding: 70px;
 }
 
 .view-rv {
@@ -92,21 +92,18 @@
   position: absolute;
   right: 0;
   top: 0;
-  margin: 10px 0;
 }
 
 .actions {
   display: inline-block;
-  float: right;
+  float: left;
   clear: both;
-  padding: 5px 5px 0;
 }
 
 .actions button {
   height: 35px;
   margin: 0;
-  margin-left: 15px;
-  padding: 0;
+  padding: 5px;
   border: none;
   background-color: transparent;
 }
