@@ -34,13 +34,10 @@ class RutaViajeController implements AppTrait {
             return
         }
 
-        response.setContentType('image/jpeg')
-        response.setContentLength(image.size().toInteger())
-
-        OutputStream out = response.getOutputStream()
-
-        out.write(image.bytes)
-        out.close()
+        render(
+            file: image,
+            contentType: 'image/jpeg'
+        )
     }
 
     @Secured('permitAll')
