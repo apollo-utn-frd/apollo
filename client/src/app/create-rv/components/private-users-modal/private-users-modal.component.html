@@ -1,0 +1,54 @@
+<div class="modal fade in">
+  <div class="modal-users shadow">
+    <div class="background">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+      <div class="modal-user-header">
+        <h3>Selecciona que usuarios podrán acceder a tu ruta de viaje</h3>
+      </div>
+
+      <div class="users">
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+        <apollo-checkbox-user class="checkbox-user"></apollo-checkbox-user>
+      </div>
+
+      <div class="modal-user-footer">
+        <div class="footer-left">
+          <!-- Agregar funcionalidad a este contador cuando se lo implemente -->
+          <span class="cantidad">Sin usuarios seleccionados - </span>
+          <button class="restablecer" (click)="uncheckUsers($event)">
+            Restablecer usuarios seleccionados
+          </button>
+        </div>
+
+        <button class="btn-material btn-primary">
+          <span class="text">Publicar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,4 @@
 <div class="shadow">
-  <apollo-search-location-textbox
-    class="search-location-textbox"
-    #location
-  ></apollo-search-location-textbox>
-
   <sebm-google-map
     [latitude]="lat"
     [longitude]="lng"
@@ -19,6 +14,7 @@
       [label]="m.label"
       [markerDraggable]="m.draggable"
     ></sebm-google-map-marker>
+
     <sebm-google-map-polyline
       *ngFor="let l of lines; let k = index; let f = first"
       [strokeColor]="color"

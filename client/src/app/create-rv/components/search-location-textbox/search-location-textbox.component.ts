@@ -49,7 +49,7 @@ export class SearchLocationTextBox implements OnInit {
     });
   }
 
-  maximizeSearch(event: any) {
+  clickSearch(event: any) {
     let target = $(event.target);
 
     if (!target.hasClass('search-box')) {
@@ -57,7 +57,18 @@ export class SearchLocationTextBox implements OnInit {
     }
 
     if (target.hasClass('minimized')) {
-      target.removeClass('minimized');
+      target
+        .removeClass('minimized')
+        .find('.input-search')[0]
+        .focus();
+    }
+  }
+
+  focusOutSearch(event: any) {
+    let target = $(event.target);
+
+    if (!target.val()) {
+      target.closest('.search-box').addClass('minimized');
     }
   }
 }

@@ -3,7 +3,7 @@
   height: 40px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  position: relative;
   padding: 0 15px;
   background-color: #fff;
   border-radius: 20px;
@@ -15,7 +15,6 @@
 
 .search-box.minimized {
   width: 40px;
-  justify-content: center;
 }
 
 .search-box .input-search {
@@ -34,4 +33,9 @@
 
 .search-box.minimized .input-search {
   display: none;
+}
+
+.search-box .fa-search {
+  position: absolute;
+  right: 12px;
 }

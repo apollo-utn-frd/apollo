@@ -1,0 +1,56 @@
+.modal {
+  background-color: rgba(73, 75, 76, 0.75);
+  padding: 17px;
+}
+
+.modal-users {
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.background {
+  background-color: #fff;
+  height: 100%;
+  padding: 2%;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 20px;
+}
+
+.modal-user-header h3 {
+  margin: 20px 2%;
+}
+
+.users {
+  float: left;
+}
+
+.checkbox-user {
+  display: inline-block;
+  width: 21%;
+  margin: 0.75% 2%;
+  float: left;
+}
+
+.modal-user-footer {
+  padding: 1% 2% 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.restablecer {
+  border: none;
+  background-color: transparent;
+  color: #4078c0;
+  padding: 0;
+}

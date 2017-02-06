@@ -21,7 +21,8 @@ import { CreateRVComponent } from './create-rv/create-rv.component';
 
 import {
   CreationFormComponent,
-  CreationPanelComponent
+  CreationPanelComponent,
+  PrivateUsersModalComponent
 } from './create-rv/components/index';
 
 import {
@@ -31,6 +32,8 @@ import {
   NavBarLogoComponent,
   ProfileCardComponent,
   PreviewRVComponent,
+  PreviewUserComponent,
+  CheckboxUserComponent,
   ViewRVComponent,
   CommentComponent
 } from './shared/components/index';
@@ -69,12 +72,15 @@ let syncedState = ['authState', 'storeData', 'router'];
     SearchLocationTextBox,
     CreationFormComponent,
     CreationPanelComponent,
+    PrivateUsersModalComponent,
     NavBarComponent,
     NotificationsComponent,
     NotificationItemComponent,
     NavBarLogoComponent,
     ProfileCardComponent,
     PreviewRVComponent,
+    PreviewUserComponent,
+    CheckboxUserComponent,
     ViewRVComponent,
     CommentComponent,
     GoogleplaceDirective

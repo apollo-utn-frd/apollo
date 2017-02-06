@@ -4,9 +4,22 @@
   float: left;
 }
 
-.creation-panel {
-  padding-left: 2vw;
-  width: 65%;
+.panel-map {
+  width: 62%;
   float: right;
   height: calc(95vh - 75px);
+  position: relative;
+}
+
+.search-location-textbox {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1000;
+  width: 50%;
+}
+
+.creation-panel {
+  width: 100%;
+  height: 100%;
 }

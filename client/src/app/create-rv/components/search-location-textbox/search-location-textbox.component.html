@@ -1,4 +1,4 @@
-<div class="search-box minimized" (click)="maximizeSearch($event)">
+<div class="search-box minimized" (click)="clickSearch($event)">
   <input
     placeholder="Buscar ubicación"
     autocorrect="off"
@@ -6,6 +6,7 @@
     spellcheck="off"
     type="text"
     class="input-search"
+    (focusout)="focusOutSearch($event)"
     #search [formControl]="searchControl"
   >
 

@@ -7,11 +7,21 @@
     #form
   ></apollo-creation-form>
 
-  <apollo-creation-panel
-    class="creation-panel"
-    [lat]="location.latitude || lat"
-    [lng]="location.longitude || lng"
-    [zoom]="location.zoom || zoom"
-    #panel
-  ></apollo-creation-panel>
+  <div class="panel-map">
+    <apollo-search-location-textbox
+      class="search-location-textbox"
+      #location
+    ></apollo-search-location-textbox>
+
+    <apollo-creation-panel
+      class="creation-panel"
+      [lat]="location.latitude || lat"
+      [lng]="location.longitude || lng"
+      [zoom]="location.zoom || zoom"
+      #panel
+    ></apollo-creation-panel>
+  </div>
 </div>
+
+<!-- Mostrarlo con $('.private-users-modal .modal').modal('show') -->
+<apollo-private-users-modal class="private-users-modal"></apollo-private-users-modal>
