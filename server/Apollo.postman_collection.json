@@ -647,7 +647,7 @@
 		{
 			"id": "cac9599d-2dc7-7bf8-e585-2479c4b0732d",
 			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ACCESS_TOKEN}}\n",
-			"url": "http://localhost:8080/posts",
+			"url": "http://localhost:8080/posts?offset=0&max=10",
 			"preRequestScript": null,
 			"pathVariables": {},
 			"method": "GET",
@@ -657,9 +657,9 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1485634305038,
+			"time": 1486364674999,
 			"name": "Ver Últimas Publicaciones [Usuarios]",
-			"description": "",
+			"description": "Los parametros 'offset' y 'max' son opcionales. Por defecto se devuelven todos los resultados.",
 			"collectionId": "fa12b779-c538-6bf0-e499-01d4a9f027d5",
 			"responses": [],
 			"rawModeData": ""

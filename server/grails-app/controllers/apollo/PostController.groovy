@@ -10,7 +10,7 @@ class PostController implements AppTrait {
     PostService postService
 
     @Secured('ROLE_USER')
-    def show() {
-        respond postService.latest(currentUser())
+    def show(int offset, int max) {
+        respond postService.latest(currentUser(), offset, max)
     }
 }

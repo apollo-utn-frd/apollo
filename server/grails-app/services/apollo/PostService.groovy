@@ -5,7 +5,7 @@ class PostService {
      * Devuelve una lista de las ultimas publicaciones ordenadas por la fecha
      * de creación en orden ascendente para un usuario dado.
      */
-    List<Post> latest(Usuario usuario) {
+    List<Post> latest(Usuario usuario, int offset, int max) {
         List<Post> posts = []
 
         usuario.rutasViaje.each { rutaViaje ->
@@ -33,9 +33,11 @@ class PostService {
         }
 
         // Ordena las publicaciones de forma ascendente.
-        posts.sort { a, b ->
+        posts = posts.sort { a, b ->
             a.dateCreated <=> b.dateCreated
         }.reverse()
+
+        paginate(posts, offset, max)
     }
 
     /**
@@ -72,5 +74,31 @@ class PostService {
                 previousPost.dateCreated = compartido.dateCreated
             }
         }
+    }
+
+    /**
+     * Pagina una lista de publicaciones de acuerdo a una posición de inicio y
+     * una cantidad máxima de publicaciones a mostrar.
+     */
+    private List<Post> paginate(List<Post> posts, int offset, int max) {
+        if (offset == null || offset < 0) {
+            offset = 0
+        }
+
+        if (offset >= posts.size()) {
+            return []
+        }
+
+        if (max == null || max <= 0) {
+            max = posts.size() - offset
+        }
+
+        int end = offset + max - 1
+
+        if (end >= posts.size()) {
+            end = posts.size() - 1
+        }
+
+        posts[offset..end]
     }
 }
