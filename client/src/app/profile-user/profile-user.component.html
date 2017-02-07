@@ -5,10 +5,9 @@
 </button>
 
 <div class="contenido">
-  <apollo-profile-card class="profile-card" [user]="users$ | async" [seguir]="false"></apollo-profile-card>
+  <apollo-profile-card class="profile-card" [user]="users$ | async"></apollo-profile-card>
 
   <section id="publicaciones">
-    <apollo-message-create-rv class="publicacion"></apollo-message-create-rv>
 
     <!-- Esto hay que eliminarlo cuando se le agregue funcionalidad, por ahora es de muestra. -->
     <apollo-preview-rv class="publicacion"></apollo-preview-rv>
