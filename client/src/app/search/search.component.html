@@ -1,0 +1,47 @@
+<apollo-navbar></apollo-navbar>
+
+<div class="contenido">
+  <div class="search shadow">
+    <div class="background">
+      <div class="search-header">
+        <h3>Resultados de la búsqueda</h3>
+      </div>
+
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+          <a href="#rutas" (click)="changeTab($event)">
+            <i class="fa fa-plane" aria-hidden="true"></i>Rutas de viajes <span class="badge">7</span>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#usuarios" (click)="changeTab($event)">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>Usuarios <span class="badge">8</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="rutas">
+          <apollo-preview-rv class="publicacion preview-rv"></apollo-preview-rv>
+          <apollo-preview-rv class="publicacion preview-rv"></apollo-preview-rv>
+          <apollo-preview-rv class="publicacion preview-rv"></apollo-preview-rv>
+          <apollo-preview-rv class="publicacion preview-rv"></apollo-preview-rv>
+          <apollo-preview-rv class="publicacion preview-rv"></apollo-preview-rv>
+          <apollo-preview-rv class="publicacion preview-rv"></apollo-preview-rv>
+          <apollo-preview-rv class="publicacion preview-rv"></apollo-preview-rv>
+        </div>
+
+        <div role="tabpanel" class="tab-pane fade" id="usuarios">
+          <apollo-preview-user class="publicacion preview-user"></apollo-preview-user>
+          <apollo-preview-user class="publicacion preview-user"></apollo-preview-user>
+          <apollo-preview-user class="publicacion preview-user"></apollo-preview-user>
+          <apollo-preview-user class="publicacion preview-user"></apollo-preview-user>
+          <apollo-preview-user class="publicacion preview-user"></apollo-preview-user>
+          <apollo-preview-user class="publicacion preview-user"></apollo-preview-user>
+          <apollo-preview-user class="publicacion preview-user"></apollo-preview-user>
+          <apollo-preview-user class="publicacion preview-user"></apollo-preview-user>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

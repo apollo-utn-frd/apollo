@@ -1,0 +1,42 @@
+.search {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.background {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 3.5vw;
+}
+
+.search-header {
+  margin-bottom: 1.75vw;
+}
+
+.search-header h3 {
+  margin: 0;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs .fa {
+  margin-right: 5px;
+}
+
+.tab-content {
+  width: 100%;
+  padding: 20px;
+  float: right;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.publicacion {
+  width: 33.33%;
+  padding: 10px;
+  float: left;
+}
+

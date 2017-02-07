@@ -17,6 +17,7 @@ import { NavBarWelcomeComponent } from './welcome/components/index';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MessageCreateRVComponent } from './home/components/index';
+import { SearchComponent } from './search/search.component';
 import { CreateRVComponent } from './create-rv/create-rv.component';
 
 import {
@@ -55,8 +56,8 @@ import {localStorageSync} from 'ngrx-store-localstorage';
 import {appReducers} from './shared/store/reducers/app.reducer';
 import {INITIAL_APP_STATE} from './shared/store/state/application.state';
 import {UserEffectService} from './shared/store/effects/user-effects.service';
-import {RVEffectService} from "./shared/store/effects/rv-effects.service";
-import {SearchLocationTextBox} from "./create-rv/components/search-location-textbox/search-location-textbox.component";
+import {RVEffectService} from './shared/store/effects/rv-effects.service';
+import {SearchLocationTextBox} from './create-rv/components/search-location-textbox/search-location-textbox.component';
 
 let syncedState = ['authState', 'storeData', 'router'];
 
@@ -82,6 +83,7 @@ let syncedState = ['authState', 'storeData', 'router'];
     PreviewUserComponent,
     CheckboxUserComponent,
     ViewRVComponent,
+    SearchComponent,
     CommentComponent,
     GoogleplaceDirective
   ],
