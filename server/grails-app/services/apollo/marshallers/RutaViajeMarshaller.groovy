@@ -11,16 +11,76 @@ class RutaViajeMarshaller {
                 id = rutaViaje.id
 
                 creador = [
-                    id: rutaViaje.creador.id
+                    id: rutaViaje.creador.id,
+                    username: rutaViaje.creador.username,
+                    email: rutaViaje.creador.email,
+                    nombre: rutaViaje.creador.nombre,
+                    apellido: rutaViaje.creador.apellido,
+                    descripcion: rutaViaje.creador.descripcion,
+
+                    imagenUrl: Holders.grailsApplication.config.getProperty('grails.serverURL') + rutaViaje.creador.imagenLocalPath,
+
+                    seguidos: rutaViaje.creador.seguidos.collect { seguimiento ->
+                        [
+                            usuario: [
+                                id: seguimiento.seguido.id
+                            ],
+                            dateCreated: seguimiento.dateCreated
+                        ]
+                    },
+
+                    seguidores: rutaViaje.creador.seguidores.collect { seguimiento ->
+                        [
+                            usuario: [
+                                id: seguimiento.seguidor.id
+                            ],
+                            dateCreated: seguimiento.dateCreated
+                        ]
+                    },
+
+                    rutasViaje: rutaViaje.creador.rutasViaje.collect { rutaViajeCreador ->
+                        [
+                            id: rutaViajeCreador.id
+                        ]
+                    },
+
+                    comentarios: rutaViaje.creador.comentarios.collect { comentario ->
+                        [
+                            id: comentario.id,
+                            contenido: comentario.contenido,
+                            rutaViaje: [
+                                id: comentario.rutaViaje.id
+                            ],
+                            dateCreated: comentario.dateCreated
+                        ]
+                    },
+
+                    favoritos: rutaViaje.creador.favoritos.collect { favorito ->
+                        [
+                            rutaViaje: [
+                                id: favorito.rutaViaje.id
+                            ],
+                            dateCreated: favorito.dateCreated
+                        ]
+                    },
+
+                    compartidos: rutaViaje.creador.compartidos.collect { compartido ->
+                        [
+                            rutaViaje: [
+                                id: compartido.rutaViaje.id
+                            ],
+                            dateCreated: compartido.dateCreated
+                        ]
+                    },
+
+                    dateCreated: rutaViaje.creador.dateCreated
                 ]
 
                 nombre = rutaViaje.nombre
                 descripcion = rutaViaje.descripcion
                 publico = rutaViaje.publico
 
-                if (rutaViaje.imagenLocalPath) {
-                    imagenUrl = Holders.grailsApplication.config.getProperty('grails.serverURL') + rutaViaje.imagenLocalPath
-                }
+                imagenUrl = Holders.grailsApplication.config.getProperty('grails.serverURL') + rutaViaje.imagenLocalPath
 
                 sitios = rutaViaje.sitios.collect { sitio ->
                     [
