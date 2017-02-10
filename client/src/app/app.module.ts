@@ -58,8 +58,11 @@ import {INITIAL_APP_STATE} from './shared/store/state/application.state';
 import {UserEffectService} from './shared/store/effects/user-effects.service';
 import {RVEffectService} from './shared/store/effects/rv-effects.service';
 import {SearchLocationTextBox} from './create-rv/components/search-location-textbox/search-location-textbox.component';
+import {PostEffectService} from "./shared/store/effects/posts-effects.service";
+import {PostService} from "./shared/services/posts-service/posts.service";
 
 let syncedState = ['authState', 'storeData', 'router'];
+let reducers = compose(storeFreeze, localStorageSync(syncedState, true), combineReducers)(appReducers);
 
 @NgModule({
   declarations: [
@@ -97,12 +100,12 @@ let syncedState = ['authState', 'storeData', 'router'];
       apiKey: 'AIzaSyDSA-Sc8yoe_NIGqOwTGoNPiKge0KRK_wo',
       libraries: ['places']
     }),
-    StoreModule.provideStore(
-      compose(storeFreeze, localStorageSync(syncedState, true), combineReducers)(appReducers), INITIAL_APP_STATE),
+    StoreModule.provideStore(reducers, INITIAL_APP_STATE),
     RouterStoreModule.connectRouter(),
     EffectsModule.run(AuthEffectService),
     EffectsModule.run(UserEffectService),
     EffectsModule.run(RVEffectService),
+    EffectsModule.run(PostEffectService),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   entryComponents: [
@@ -120,6 +123,7 @@ let syncedState = ['authState', 'storeData', 'router'];
     UserService,
     MarkerManager,
     RVService,
+    PostService,
     GoogleMapsAPIWrapper
   ]
 })

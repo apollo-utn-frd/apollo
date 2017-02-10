@@ -32,7 +32,14 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
     if (this.credentials) {
       this.store.dispatch(new LoginAction(this.credentials));
-      this.store.dispatch(go(['/login'])); // fijarse si se puede mejorar
+      let usuarioNulo = JSON.parse(window.localStorage.getItem('storeData'));
+      if (typeof (usuarioNulo.currentUser) !== undefined) {
+        if (usuarioNulo.currentUser.firstLogin) {
+          this.store.dispatch(go(['/login']));
+        } else {
+          this.store.dispatch(go(['/home'])); // fijarse si se puede mejorar
+        }
+      }
     }
   }
 }

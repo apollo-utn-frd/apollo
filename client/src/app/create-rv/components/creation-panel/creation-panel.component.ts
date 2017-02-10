@@ -10,11 +10,13 @@ import {Line} from "../../models/Line";
   styleUrls: ['./creation-panel.component.css']
 })
 export class CreationPanelComponent {
+
   // Datos para setear el mapa
   @Input() lat: number;
   @Input() lng: number;
   @Input() zoom: number;
   ui: boolean = false;
+
 
   // datos sobre los marcadores puestos en el mapa
   markers: Marker[];

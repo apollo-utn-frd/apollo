@@ -10,6 +10,7 @@ export function authState(state: AuthState , action: Action): AuthState {
     }
 
     case AUTH_LOGOUT_ACTION: {
+      window.localStorage.clear();
       return INITIAL_AUTH_STATE; // borro el token y el id del usuario. naive impl.
     }
 
@@ -18,7 +19,7 @@ export function authState(state: AuthState , action: Action): AuthState {
   }
 }
 
-function handleSaveAuthStateAction(state: AuthState, action: SaveAuthStateAction) {
+function handleSaveAuthStateAction(_: AuthState, action: SaveAuthStateAction) {
   return {
     id: action.payload.id,
     token:action.payload.token

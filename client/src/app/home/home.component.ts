@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import {ApplicationState} from "../shared/store/state/application.state";
 import {User} from "../shared/models/user";
 import {Observable} from "rxjs";
+import {UpdatePostsAction} from "../shared/store/actions/post.action";
 
 declare var $: any;
 
@@ -14,10 +15,13 @@ declare var $: any;
     styleUrls: ['./home.component.css'],
     providers: [NavBarComponent, ProfileCardComponent]
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements AfterViewInit, OnInit {
 
   users$: Observable<User>;
 
+  ngOnInit() {
+    this.store.dispatch(new UpdatePostsAction());
+  }
   ngAfterViewInit() {
     ajustarLayout();
 

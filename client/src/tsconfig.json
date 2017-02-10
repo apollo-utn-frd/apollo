@@ -18,7 +18,6 @@
       "jasmine",
       "lodash",
       "googlemaps"
-      //"core-js"
     ]
   }
 }

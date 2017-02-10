@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { NavBarComponent } from '../shared/components/index';
 import { CreationFormComponent, CreationPanelComponent } from './components/index';
 import {ApplicationState} from "../shared/store/state/application.state";
