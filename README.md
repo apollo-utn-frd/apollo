@@ -1,7 +1,7 @@
 ## Prerequisites
 To use this app, you should have Grails, Node, NPM, and the Angular CLI installed.
 
-* [Grails 3.2.5](http://docs.grails.org/latest/guide/single.html#gettingStarted)
+* [Grails 3.2.6](http://docs.grails.org/latest/guide/single.html#gettingStarted)
 
 * [Node 5 && NPM 3](https://docs.npmjs.com/getting-started/installing-node)
 

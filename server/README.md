@@ -1,5 +1,5 @@
 #Apollo Back-end [![Build Status](https://travis-ci.org/juanbono/apollo-grails.svg?branch=master)](https://travis-ci.org/juanbono/apollo-grails)
-Implementa una API REST utilizando Grails 3.2.5. Para probarlo se puede instalar la aplicación [Postman](https://www.getpostman.com/) para Google Chrome e importar la colección *"Apollo.postman_collection.json"*. En el panel de la izquierda aparecerá la colección *Apollo* con ejemplos de todas las acciones que la aplicación soporta actualmente.
+Implementa una API REST utilizando Grails 3.2.6. Para probarlo se puede instalar la aplicación [Postman](https://www.getpostman.com/) para Google Chrome e importar la colección *"Apollo.postman_collection.json"*. En el panel de la izquierda aparecerá la colección *Apollo* con ejemplos de todas las acciones que la aplicación soporta actualmente.
 
 
 ##API REST
