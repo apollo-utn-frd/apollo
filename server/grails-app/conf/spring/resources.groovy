@@ -5,6 +5,4 @@ beans = {
     oauthUserDetailsService(SecurityService) {
         userDetailsService = ref('userDetailsService')
     }
-
-    myCustomMarshallerRegistrar(MarshallerService)
 }

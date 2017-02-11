@@ -1,0 +1,5 @@
+model {
+  List<Seguimiento> seguimientoList
+}
+
+json tmpl.seguimiento(seguimientoList)

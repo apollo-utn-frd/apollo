@@ -1,0 +1,12 @@
+model {
+  Seguimiento seguimiento
+}
+
+json {
+  usuario g.render(
+    template: '/id',
+    model: [object: seguimiento.seguido]
+  )
+
+  dateCreated seguimiento.dateCreated
+}

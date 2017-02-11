@@ -1,0 +1,7 @@
+model {
+  def object
+}
+
+json {
+  id object.id
+}

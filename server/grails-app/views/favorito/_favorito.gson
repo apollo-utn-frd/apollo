@@ -1,0 +1,19 @@
+model {
+  Favorito favorito
+}
+
+json {
+  id favorito.id
+
+  rutaViaje g.render(
+    template: '/rutaViaje/rutaViaje_min',
+    model: [rutaViaje: favorito.rutaViaje]
+  )
+
+  usuario g.render(
+    template: '/usuario/usuario_min',
+    model: [usuario: favorito.usuario]
+  )
+
+  dateCreated favorito.dateCreated
+}

@@ -1,0 +1,5 @@
+model {
+  List<Compartido> compartidoList
+}
+
+json tmpl.compartido(compartidoList)
