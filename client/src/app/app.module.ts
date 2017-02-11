@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import {StoreModule, combineReducers} from '@ngrx/store';
 
 // routes
 import { routing } from './app.routes';
@@ -41,28 +39,17 @@ import {
 
 // Services
 import { AuthService, UserService, RVService } from './shared/services/index';
-import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
-
-// Store
+import { MarkerManager, GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
 
 // Directives
 import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directives/googleplace.directive';
-import {compose} from '@ngrx/core/compose';
-import {storeFreeze} from 'ngrx-store-freeze';
-import {RouterStoreModule} from '@ngrx/router-store';
-import {EffectsModule} from '@ngrx/effects';
-import {AuthEffectService} from './shared/store/effects/auth-effects.service';
-import {localStorageSync} from 'ngrx-store-localstorage';
-import {appReducers} from './shared/store/reducers/app.reducer';
-import {INITIAL_APP_STATE} from './shared/store/state/application.state';
-import {UserEffectService} from './shared/store/effects/user-effects.service';
-import {RVEffectService} from './shared/store/effects/rv-effects.service';
 import {SearchLocationTextBox} from './create-rv/components/search-location-textbox/search-location-textbox.component';
-import {PostEffectService} from "./shared/store/effects/posts-effects.service";
 import {PostService} from "./shared/services/posts-service/posts.service";
+import {
+  userEffectsConf, authEffectsConf, routerStoreConf, storeConf, ngGoogleMapsConf,
+  rvEffectsConf, postEffectsConf, storeDevToolsConf
+} from "./app.exports";
 
-let syncedState = ['authState', 'storeData', 'router'];
-let reducers = compose(storeFreeze, localStorageSync(syncedState, true), combineReducers)(appReducers);
 
 @NgModule({
   declarations: [
@@ -96,17 +83,14 @@ let reducers = compose(storeFreeze, localStorageSync(syncedState, true), combine
     CommonModule,
     ReactiveFormsModule,
     routing,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDSA-Sc8yoe_NIGqOwTGoNPiKge0KRK_wo',
-      libraries: ['places']
-    }),
-    StoreModule.provideStore(reducers, INITIAL_APP_STATE),
-    RouterStoreModule.connectRouter(),
-    EffectsModule.run(AuthEffectService),
-    EffectsModule.run(UserEffectService),
-    EffectsModule.run(RVEffectService),
-    EffectsModule.run(PostEffectService),
-    StoreDevtoolsModule.instrumentOnlyWithExtension()
+    ngGoogleMapsConf,
+    storeConf,
+    routerStoreConf,
+    authEffectsConf,
+    userEffectsConf,
+    rvEffectsConf,
+    postEffectsConf,
+    storeDevToolsConf
   ],
   entryComponents: [
     AppComponent,
