@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { CreateRVComponent } from './create-rv/create-rv.component';
 import { SearchComponent } from './search/search.component';
+import { ProfileUserComponent } from './profile-user/profile-user.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'new/rv',
     component: CreateRVComponent
+  },
+  {
+    path: 'profile/test',
+    component: ProfileUserComponent
   }
 ];
 

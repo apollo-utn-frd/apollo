@@ -39,7 +39,7 @@
   margin: 0;
 }
 
-.seguir {
+.seguir:not([hidden]) {
   width: 100%;
   display: flex;
   justify-content: center;

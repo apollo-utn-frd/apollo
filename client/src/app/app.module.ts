@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { MessageCreateRVComponent } from './home/components/index';
 import { SearchComponent } from './search/search.component';
 import { CreateRVComponent } from './create-rv/create-rv.component';
+import { ProfileUserComponent } from './profile-user/profile-user.component';
 
 import {
   CreationFormComponent,
@@ -75,6 +76,7 @@ import {
     ViewRVComponent,
     SearchComponent,
     CommentComponent,
+    ProfileUserComponent,
     GoogleplaceDirective
   ],
   imports: [
