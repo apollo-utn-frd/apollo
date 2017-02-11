@@ -1,22 +1,10 @@
-import {Point} from "../../models/point";
-import {RVFormVM} from "../../models/rvForm.vm";
 
-export interface MapState {
-  center: Point
-  points: Point[]
-  form: RVFormVM
-}
-
-export const INITIAL_MAP_STATE: MapState = {
-  center: undefined,
-  points: undefined,
-  form: undefined
-};
+import {Post} from "../../models/post";
 
 export interface UIState {
-  mapState: MapState
+  posts: Post[]
 }
 
 export const INITIAL_UI_STATE: UIState = {
-  mapState: INITIAL_MAP_STATE
+  posts: []
 };
