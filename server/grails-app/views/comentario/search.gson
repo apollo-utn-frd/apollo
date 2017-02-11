@@ -1,0 +1,5 @@
+model {
+  List<Comentario> comentarioList
+}
+
+json tmpl.comentario(comentarioList)

@@ -59,6 +59,13 @@ grails:
         encoding: UTF-8
 
 ---
+# If you disable static compilation rendering performance will suffer.
+grails:
+    views:
+        json:
+            compileStatic: false
+
+---
 grails:
     cors:
         enabled: true

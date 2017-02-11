@@ -1,0 +1,5 @@
+model {
+  List<Autorizacion> autorizacionList
+}
+
+json tmpl.autorizacion(autorizacionList)

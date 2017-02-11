@@ -1,0 +1,20 @@
+model {
+  Comentario comentario
+}
+
+json {
+  id comentario.id
+
+  rutaViaje g.render(
+    template: '/rutaViaje/rutaViaje_min',
+    model: [rutaViaje: comentario.rutaViaje]
+  )
+
+  usuario g.render(
+    template: '/usuario/usuario_min',
+    model: [usuario: comentario.usuario]
+  )
+
+  contenido comentario.contenido
+  dateCreated comentario.dateCreated
+}

@@ -1,0 +1,19 @@
+model {
+  Autorizacion autorizacion
+}
+
+json {
+  id autorizacion.id
+
+  rutaViaje g.render(
+    template: '/rutaViaje/rutaViaje_min',
+    model: [rutaViaje: autorizacion.rutaViaje]
+  )
+
+  usuario g.render(
+    template: '/usuario/usuario_min',
+    model: [usuario: autorizacion.usuario]
+  )
+
+  dateCreated autorizacion.dateCreated
+}

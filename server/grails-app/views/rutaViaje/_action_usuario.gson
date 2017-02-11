@@ -1,0 +1,12 @@
+model {
+  def action
+}
+
+json {
+  usuario g.render(
+    template: '/id',
+    model: [object: action.usuario]
+  )
+
+  dateCreated action.dateCreated
+}

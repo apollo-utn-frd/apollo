@@ -1,0 +1,8 @@
+model {
+  Sitio sitio
+}
+
+json {
+  latitud sitio.latitud
+  longitud sitio.longitud
+}

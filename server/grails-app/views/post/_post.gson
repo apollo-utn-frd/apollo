@@ -1,0 +1,23 @@
+model {
+  Post post
+}
+
+json {
+  rutaViaje g.render(
+    template: '/rutaViaje/rutaViaje_min',
+    model: [rutaViaje: post.rutaViaje]
+  )
+
+  creador g.render(
+    template: '/usuario/usuario_min',
+    model: [usuario: post.creador]
+  )
+
+  compartidos g.render(
+    template: '/usuario/usuario_min',
+    collection: post.compartidos,
+    var: 'usuario'
+  )
+
+  dateCreated post.dateCreated
+}

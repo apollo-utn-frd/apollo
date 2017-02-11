@@ -1,0 +1,12 @@
+model {
+  def action
+}
+
+json {
+  rutaViaje g.render(
+    template: '/id',
+    model: [object: action.rutaViaje]
+  )
+
+  dateCreated action.dateCreated
+}

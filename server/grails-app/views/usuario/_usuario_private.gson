@@ -1,0 +1,16 @@
+inherits template: 'usuario'
+
+model {
+  Usuario usuario
+}
+
+json {
+  firstLogin usuario.firstLogin
+  accountLocked usuario.accountLocked
+
+  autorizaciones g.render(
+    template: '/usuario/action_ruta_viaje',
+    collection: usuario.autorizaciones,
+    var: 'action'
+  )
+}

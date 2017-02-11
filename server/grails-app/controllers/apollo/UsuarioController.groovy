@@ -1,7 +1,6 @@
 package apollo
 
 import static org.springframework.http.HttpStatus.*
-import grails.converters.JSON
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -34,35 +33,21 @@ class UsuarioController implements AppTrait {
 
     @Secured('ROLE_USER')
     def index() {
-        JSON.use('private') {
-            respond currentUser()
-        }
+        respond currentUser(), view: '/usuario/_usuario_private'
     }
 
     @Secured('permitAll')
     def show() {
         Usuario usuario = Usuario.get(params.id)
 
-        if (usuario?.canManagedBy(currentUser())) {
-            JSON.use('private') {
-                respond usuario
-            }
-        } else {
-            respond usuario?.sanitize(currentUser())
-        }
+        respond usuario?.sanitize(currentUser())
     }
 
     @Secured('permitAll')
     def showByUsername() {
         Usuario usuario = Usuario.findByUsername(params.username)
 
-        if (usuario?.canManagedBy(currentUser())) {
-            JSON.use('private') {
-                respond usuario
-            }
-        } else {
-            respond usuario?.sanitize(currentUser())
-        }
+        respond usuario?.sanitize(currentUser())
     }
 
     @Secured('permitAll')
@@ -111,8 +96,6 @@ class UsuarioController implements AppTrait {
 
         usuario.save(flush: true)
 
-        JSON.use('private') {
-            respond usuario
-        }
+        respond usuario, view: '/usuario/_usuario_private'
     }
 }
