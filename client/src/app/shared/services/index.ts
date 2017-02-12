@@ -1,3 +1,3 @@
-export * from './auth/auth.service';
-export * from './rv-service/rv.service';
-export * from './user-service/user.service';
+export * from './auth.service';
+export * from './rv.service';
+export * from './user.service';

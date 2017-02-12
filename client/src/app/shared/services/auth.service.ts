@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
-import { USUARIOS } from '../api';
+import { USUARIOS } from './api';
 import {Observable} from "rxjs";
-import {User} from "../../models/user";
-import {ApplicationState} from "../../store/state/application.state";
+import {User} from "../models/user";
+import {ApplicationState} from "../store/state/application.state";
 
 @Injectable()
 export class AuthService {

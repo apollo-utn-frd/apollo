@@ -4,7 +4,7 @@ import {Actions, Effect} from "@ngrx/effects";
 import {Action} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {USER_UPDATE_ACTION, UpdateUserAction, EditedUserAction} from "../actions/user.actions";
-import {UserService} from "../../services/user-service/user.service";
+import {UserService} from "../../services/user.service";
 import {UserWithAuthVM} from "../../../login/storeToUserWithAuth.vm";
 import {Response} from "@angular/http";
 import {go} from "@ngrx/router-store";

@@ -45,12 +45,11 @@ import { MarkerManager, GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
 // Directives
 import { GoogleplaceDirective } from 'angular2-google-map-auto-complete/directives/googleplace.directive';
 import {SearchLocationTextBox} from './create-rv/components/search-location-textbox/search-location-textbox.component';
-import {PostService} from "./shared/services/posts-service/posts.service";
+import {PostService} from "./shared/services/posts.service";
 import {
   userEffectsConf, authEffectsConf, routerStoreConf, storeConf, ngGoogleMapsConf,
   rvEffectsConf, postEffectsConf, storeDevToolsConf
 } from "./app.exports";
-
 
 @NgModule({
   declarations: [

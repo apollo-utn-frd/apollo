@@ -5,7 +5,7 @@ import {Action, Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {ApplicationState} from "../state/application.state";
 import {RV_CREATE_ACTION, CreateRVAction, NewRVAction} from "../actions/rv.actions";
-import {RVService} from "../../services/rv-service/rv.service";
+import {RVService} from "../../services/rv.service";
 import {User} from "../../models/user";
 import {RV} from "../../models/rv";
 import {AuthState} from "../state/auth.state";
@@ -15,7 +15,7 @@ import {RVDataVM} from "../../models/rvData.vm";
 import {Response} from "@angular/http";
 import {go} from "@ngrx/router-store";
 import {SaveUserAction} from "../actions/user.actions";
-import {UserService} from "../../services/user-service/user.service";
+import {UserService} from "../../services/user.service";
 
 
 @Injectable()

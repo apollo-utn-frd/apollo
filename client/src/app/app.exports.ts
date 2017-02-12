@@ -41,9 +41,3 @@ export const userEffectsConf = EffectsModule.run(UserEffectService);
 export const rvEffectsConf = EffectsModule.run(RVEffectService);
 export const postEffectsConf = EffectsModule.run(PostEffectService);
 export const storeDevToolsConf = StoreDevtoolsModule.instrumentOnlyWithExtension();
-
-
-/*
- "@angular/cli": "^1.0.0-beta.18",
- "@angular/compiler-cli": "^2.4.7",
- */

@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import {Actions, Effect} from "@ngrx/effects";
 import {Store, Action} from "@ngrx/store";
 import {ApplicationState} from "../state/application.state";
-import {PostService} from "../../services/posts-service/posts.service";
+import {PostService} from "../../services/posts.service";
 import {UPDATE_POSTS_ACTION, UpdatePostsAction, UpdateStoredPostsAction } from "../actions/post.action";
 import {Observable} from "rxjs";
 import {Post} from "../../models/post";

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Post} from "../../models/post";
 
 declare var $: any;
 
@@ -10,7 +11,9 @@ declare var $: any;
 export class PreviewRVComponent {
   @Input() publica: boolean = true;
   @Input() compartida: boolean = false;
+  @Input() post: Post;
 
+  constructor() {}
   showViewRV(event: any) {
     $(event.target)
       .closest('apollo-preview-rv')

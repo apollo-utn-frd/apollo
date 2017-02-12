@@ -2,6 +2,25 @@ import {Seguidor} from "./follower";
 import {GenericUserInteraction} from "./genericUserInteraction.vm";
 
 export interface User {
+  id?: string
+  username: string
+  email: string
+  nombre: string
+  apellido: string
+  descripcion: string
+  imagenUrl: string
+  seguidos: any[] // fijarse
+  seguidores: any[] // fijarse
+  rutasViaje: any[] // fijarse
+  comentarios: any[] // fijarse
+  favoritos: any[] // fijarse
+  compartidos: any[] // fijarse
+  dataCreated?: Date
+  firstLogin: boolean
+  autorizaciones: any[] // fijarse
+}
+/* interfaz vieja
+export interface User {
   id: string,
   username: string,
   email: string,
@@ -20,3 +39,4 @@ export interface User {
   autorizaciones: GenericUserInteraction[],
   dateCreated: Date,
 }
+*/

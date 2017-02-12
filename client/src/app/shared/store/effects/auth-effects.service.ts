@@ -1,14 +1,13 @@
 
 import {Injectable} from "@angular/core";
 import {Actions, Effect} from "@ngrx/effects";
-import {AuthService} from "../../services/auth/auth.service";
+import {AuthService} from "../../services/auth.service";
 import {Action, Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {AUTH_LOGIN_ACTION, SaveAuthStateAction} from "../actions/auth.actions";
 import {toLocalStorage} from "./toLocalStorage";
 import {SaveUserAction} from "../actions/user.actions";
 import {ApplicationState} from "../state/application.state";
-import {go} from "@ngrx/router-store";
 
 @Injectable()
 export class AuthEffectService {

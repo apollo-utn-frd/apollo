@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { User, UserFormVM, RV, Comment } from '../../models/index';
+import { User, UserFormVM, RV, Comment } from '../models/index';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Service } from '../service';
+import { Service } from './service';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
-import * as api from '../api';
-import {ApplicationState} from "../../store/state/application.state";
+import * as api from './api';
+import {ApplicationState} from "../store/state/application.state";
 import * as _ from 'lodash';
-import {authState} from "../../store/reducers/auth.reducer";
-import {AuthState} from "../../store/state/auth.state";
+import {authState} from "../store/reducers/auth.reducer";
+import {AuthState} from "../store/state/auth.state";
 
 @Injectable()
 export class UserService extends Service<User> {
