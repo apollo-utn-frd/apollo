@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, UserFormVM, RV, Comment } from '../models/index';
+import { User, UserFormVM, RV} from '../models/index';
 import {Http, Response, Headers} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Service } from './service';
@@ -52,11 +52,6 @@ export class UserService extends Service<User> {
       .catch(this.handleError);
   }
 
-  fav(rv: RV) {
-    return this.http.post(api.FAVEAR_RV + rv.id, rv, {headers: this.headers})
-      .catch(this.handleError);
-  }
-
   unfav(rv: RV) {
     return this.http.delete(api.FAVEAR_RV + rv.id, {headers: this.headers})
       .catch(this.handleError);
@@ -69,16 +64,6 @@ export class UserService extends Service<User> {
 
   unfollow(user: User) {
     return this.http.delete(api.SEGUIR_USUARIO + user.id, {headers: this.headers})
-      .catch(this.handleError);
-  }
-
-  comment(rv: RV, comment: Comment) {
-    return this.http.post(api.COMENTAR_RV + rv.id, comment, {headers: this.headers})
-      .catch(this.handleError);
-  }
-
-  uncomment(comment: Comment) {
-    return this.http.delete(api.COMENTAR_RV, {headers: this.headers})
       .catch(this.handleError);
   }
 

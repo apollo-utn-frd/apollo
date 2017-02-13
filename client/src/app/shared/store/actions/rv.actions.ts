@@ -11,6 +11,7 @@ import {RV} from "../../models/rv";
 export const RV_CREATE_ACTION = 'RV_CREATE_ACTION';
 export const RV_SHARE_ACTION = 'RV_SHARE_ACTION';
 export const RV_FAV_ACTION = 'RV_FAV_ACTION';
+export const RV_NEW_COMMENT_ACTION = 'RV_NEW_COMMENT_ACTION';
 
 /* Accion que representa la creacion de una ruta de viaje.
  * Acarrea los datos necesarios para crear una ruta de viaje.
@@ -39,4 +40,13 @@ export class ShareRVAction {
 export class FavRVAction {
   readonly type = RV_FAV_ACTION;
   constructor(public payload?: RV) {}
+}
+
+/* Accion que representa la creacion de un nuevo comentario.
+ * Acarrea el texto del comentario y la ruta de viaje donde se
+ * realiza el comentario*
+ */
+export class NewCommentAction {
+  readonly type = RV_NEW_COMMENT_ACTION;
+  constructor(public payload?: {contenido: {contenido: string}, rv: RV}) {}
 }

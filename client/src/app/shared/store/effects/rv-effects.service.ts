@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
 import {ApplicationState} from "../state/application.state";
 import {
   RV_CREATE_ACTION, CreateRVAction, RV_SHARE_ACTION, ShareRVAction, RV_FAV_ACTION,
-  FavRVAction
+  FavRVAction, RV_NEW_COMMENT_ACTION, NewCommentAction
 } from "../actions/rv.actions";
 import {RVService} from "../../services/rv.service";
 import {User} from "../../models/user";
@@ -77,6 +77,15 @@ export class RVEffectService {
     .switchMap(_ => this.userService.get()) // actualizo usuario actual en la store
     .map((user: User) => this.store.dispatch(new SaveUserAction(user)))
     .map(_ => go('/home'));
+
+  @Effect() commentRV$: Observable<Action> = this.actions$
+    .ofType(RV_NEW_COMMENT_ACTION)
+    .switchMap((action: NewCommentAction) => this.rvService.comment(action.payload.contenido, action.payload.rv))
+    .debug("comentario realizado")
+    .switchMap(_ => this.userService.get()) // actualizo usuario actual en la store
+    .map((user: User) => this.store.dispatch(new SaveUserAction(user)))
+    .map(_ => go('/home'));
+
 }
 
 

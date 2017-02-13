@@ -50,11 +50,13 @@
 
         <div class="comments pull-left-100">
           <div class="new-comment pull-left-100">
-            <textarea class="input-comment" rows="3" placeholder="Escribe un comentario..."></textarea>
+            <form [formGroup]="form" (ngSubmit)="onSubmit($event, post.rutaViaje)">
+            <textarea class="input-comment" rows="3" formControlName="contenido" placeholder="Escribe un comentario..."></textarea>
 
-            <button class="btn-material btn-primary" (click)="addComment($event)">
+            <button type="submit" class="btn-material btn-primary">
               <span class="text">Publicar</span>
             </button>
+            </form>
           </div>
 
           <div class="list-comments">

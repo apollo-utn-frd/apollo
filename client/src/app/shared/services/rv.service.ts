@@ -68,6 +68,15 @@ export class RVService extends Service<RV> {
       .flatMap((res: Response) => res.json());
   }
 
+  /* Metodo para realizar un comentario.
+   * Toma como parametro un comentario y una ruta de viaje.
+   */
+  comment(content: {contenido: string}, rv: RV): Observable<Response> {
+    let url = api.COMENTAR_RV + rv.id;
+    return this.http.post(url, content, {headers: this.headers})
+      .map((res: Response) => res.json());
+  }
+
   /* documentacion, revisar metodo */
   delete(id: number): Observable<void> {
       return this.http.delete(api.RUTADEVIAJE + id, {headers: this.headers})

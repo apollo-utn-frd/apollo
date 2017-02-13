@@ -3,8 +3,9 @@ import {Post} from "../../models/post";
 import {ApplicationState} from "../../store/state/application.state";
 import {Store} from "@ngrx/store";
 import {RV} from "../../models/rv";
-import {ShareRVAction, FavRVAction} from "../../store/actions/rv.actions";
+import {ShareRVAction, FavRVAction, NewCommentAction} from "../../store/actions/rv.actions";
 import {User} from "../../models/user";
+import {FormGroup, FormControl} from "@angular/forms";
 
 declare var $: any;
 
@@ -15,6 +16,9 @@ declare var $: any;
 })
 export class ViewRVComponent {
 
+  /* Formulario para enviar comentario */
+  form: FormGroup;
+
   /* Post que contiene la RV */
   @Input() post: Post;
 
@@ -24,6 +28,10 @@ export class ViewRVComponent {
   constructor(private store: Store<ApplicationState>) {
     this.store.select(state => state.storeData.currentUser)
       .subscribe((user: User) => this.user = user);
+
+    this.form = new FormGroup({
+      contenido: new FormControl('')
+    });
   }
 
   /* Funcion que chequea si la ruta que se pasa por parametro fue creada por el usuario actual
@@ -31,6 +39,13 @@ export class ViewRVComponent {
    * */
   esRutaPropia(rv: RV): Object {
     return (this.user.id === rv.creador.id) ? {'disabled': true} : {'disabled': false}
+  }
+
+  onSubmit(event: any, rv: RV) {
+    let contents = this.form.getRawValue();
+    console.log("datos del comentario: ", contents);
+    this.addComment(event);
+    this.store.dispatch(new NewCommentAction({contenido: contents, rv: rv}));
   }
 
   toggleButton(event: any) {
