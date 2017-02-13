@@ -53,9 +53,19 @@ export class RVService extends Service<RV> {
   *  No se pueden compartir rutas de viaje propias.
   */
   share(rv: RV): Observable<Response> {
-    let url = api.RUTADEVIAJE + 'compartir/' + rv.id;
+    let url = api.COMPARTIR_RV + rv.id;
     return this.http.post(url, undefined, {headers: this.headers})
       .flatMap((res: Response) => res.json())
+  }
+
+  /* Metodo para setear como favorito una ruta de viaje pasada
+   * como parametro. No se pueden marcar como favoritas las
+   * rutas de viaje propias
+   */
+  fav(rv: RV): Observable<Response> {
+    let url = api.FAVEAR_RV + rv.id;
+    return this.http.post(url, undefined, {headers: this.headers})
+      .flatMap((res: Response) => res.json());
   }
 
   /* documentacion, revisar metodo */

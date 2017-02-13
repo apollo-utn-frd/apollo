@@ -3,7 +3,7 @@ import {Post} from "../../models/post";
 import {ApplicationState} from "../../store/state/application.state";
 import {Store} from "@ngrx/store";
 import {RV} from "../../models/rv";
-import {ShareRVAction} from "../../store/actions/rv.actions";
+import {ShareRVAction, FavRVAction} from "../../store/actions/rv.actions";
 import {User} from "../../models/user";
 
 declare var $: any;
@@ -47,6 +47,12 @@ export class ViewRVComponent {
     this.toggleButton(event);
     this.store.dispatch(new ShareRVAction(rv));
   }
+
+  favButton(event: any, rv: RV) {
+    this.toggleButton(event);
+    this.store.dispatch(new FavRVAction(rv));
+  }
+
 
   focusComment(event: any) {
     $(event.target)

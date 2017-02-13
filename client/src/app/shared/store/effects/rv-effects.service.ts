@@ -4,7 +4,10 @@ import {Actions, Effect} from "@ngrx/effects";
 import {Action, Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {ApplicationState} from "../state/application.state";
-import {RV_CREATE_ACTION, CreateRVAction, RV_SHARE_ACTION, ShareRVAction} from "../actions/rv.actions";
+import {
+  RV_CREATE_ACTION, CreateRVAction, RV_SHARE_ACTION, ShareRVAction, RV_FAV_ACTION,
+  FavRVAction
+} from "../actions/rv.actions";
 import {RVService} from "../../services/rv.service";
 import {User} from "../../models/user";
 import {RV} from "../../models/rv";
@@ -53,7 +56,7 @@ export class RVEffectService {
 
   /* Efecto que comparte una ruta de viaje:
    * Hace la llamada http pertinente
-   * Actualiza los datos de la store del usuario y los posts
+   * Actualiza los datos de la store del usuario.
   */
   @Effect() shareRV$: Observable<Action> = this.actions$
     .ofType(RV_SHARE_ACTION)
@@ -63,12 +66,23 @@ export class RVEffectService {
     .map((user: User) => this.store.dispatch(new SaveUserAction(user)))
     .map(_ => go('/home'));
 
+  /* Efecto que marca una ruta de viaje como favorita:
+   * Hace la llamada http pertinente
+   * Actualiza los datos de la store del usuario.
+   */
+  @Effect() favRV$: Observable<Action> = this.actions$
+    .ofType(RV_FAV_ACTION)
+    .switchMap((action: FavRVAction) => this.rvService.fav(action.payload))
+    .debug("Se marco la ruta de viaje como favorita: ")
+    .switchMap(_ => this.userService.get()) // actualizo usuario actual en la store
+    .map((user: User) => this.store.dispatch(new SaveUserAction(user)))
+    .map(_ => go('/home'));
 }
 
 
 /* funcion auxiliar que une los datos del formulario de
  * creacion de rv y los puntos del mapa.
- * Devuelve un objeto con todo lo necesario para crear una ruta de vida
+ * Devuelve un objeto con lo necesario para crear una ruta de vida
  */
 export function mkRV(rvData: {rvForm: RVFormVM, sitios: Point[], authData: AuthState}): RVDataVM {
   return {

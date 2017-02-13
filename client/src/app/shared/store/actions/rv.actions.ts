@@ -1,3 +1,4 @@
+
 import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/let';
@@ -9,6 +10,7 @@ import {RV} from "../../models/rv";
 /* Tipos de las acciones, son utilizados para matchear en el reducer de rutas de viaje */
 export const RV_CREATE_ACTION = 'RV_CREATE_ACTION';
 export const RV_SHARE_ACTION = 'RV_SHARE_ACTION';
+export const RV_FAV_ACTION = 'RV_FAV_ACTION';
 
 /* Accion que representa la creacion de una ruta de viaje.
  * Acarrea los datos necesarios para crear una ruta de viaje.
@@ -27,5 +29,14 @@ export class CreateRVAction {
  */
 export class ShareRVAction {
   readonly type = RV_SHARE_ACTION;
+  constructor(public payload?: RV) {}
+}
+
+/* Accion que representa el hecho de que el usuario ha marcado como favorita
+*  una ruta de viaje.
+*  Acarrea la ruta de viaje a marcar como favorita
+*  */
+export class FavRVAction {
+  readonly type = RV_FAV_ACTION;
   constructor(public payload?: RV) {}
 }
