@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User, UserFormVM, RV, Comment } from '../models/index';
-import { Http, Response } from '@angular/http';
+import {Http, Response, Headers} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Service } from './service';
 import { Store } from '@ngrx/store';
@@ -10,20 +10,21 @@ import 'rxjs/add/operator/mergeMap';
 import * as api from './api';
 import {ApplicationState} from "../store/state/application.state";
 import * as _ from 'lodash';
-import {authState} from "../store/reducers/auth.reducer";
 import {AuthState} from "../store/state/auth.state";
 
 @Injectable()
 export class UserService extends Service<User> {
 
   token: string;
+  headers: Headers;
 
   constructor(http: Http, store: Store<ApplicationState>) {
     super(http, store);
     this.store.select(state => state.authState)
       .subscribe((authState: AuthState) => {
         this.token = authState.token;
-    })
+        this.headers = this.mkHeaders(this.token);
+    });
   }
 
   getByID(id: number): Observable<User> {
@@ -39,8 +40,7 @@ export class UserService extends Service<User> {
   }
 
   get(): Observable<User> {
-    let headers = this.mkHeaders(this.token);
-    return this.http.get(api.USUARIOS, {headers: headers})
+    return this.http.get(api.USUARIOS, {headers: this.headers})
       .map(s => s.json())
       .catch(this.handleError);
   }
@@ -49,16 +49,6 @@ export class UserService extends Service<User> {
     let headers = this.mkHeaders(token);
     console.log(headers);
     return this.http.put(api.USUARIOS, u, {headers: headers})
-      .catch(this.handleError);
-  }
-
-  share(rv: RV) {
-    return this.http.post(api.COMPARTIR_RV + rv.id, rv, {headers: this.headers})
-      .catch(this.handleError);
-  }
-
-  unshare(rv: RV) {
-    return this.http.delete(api.COMPARTIR_RV + rv.id, {headers: this.headers})
       .catch(this.handleError);
   }
 
@@ -84,12 +74,6 @@ export class UserService extends Service<User> {
 
   comment(rv: RV, comment: Comment) {
     return this.http.post(api.COMENTAR_RV + rv.id, comment, {headers: this.headers})
-      .catch(this.handleError);
-  }
-
-  getComments() {
-    return this.http.get(api.COMENTAR_RV, {headers: this.headers})
-      .flatMap((res: Response) => res.json())
       .catch(this.handleError);
   }
 

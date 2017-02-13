@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import {ApplicationState} from "../store/state/application.state";
 
 export abstract class Service<T> {
-  public headers: Headers = new Headers();
 
   constructor(public http: Http, public store: Store<ApplicationState>) { }
 

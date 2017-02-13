@@ -4,7 +4,7 @@ import {Actions, Effect} from "@ngrx/effects";
 import {Action, Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {ApplicationState} from "../state/application.state";
-import {RV_CREATE_ACTION, CreateRVAction, NewRVAction} from "../actions/rv.actions";
+import {RV_CREATE_ACTION, CreateRVAction, RV_SHARE_ACTION, ShareRVAction} from "../actions/rv.actions";
 import {RVService} from "../../services/rv.service";
 import {User} from "../../models/user";
 import {RV} from "../../models/rv";
@@ -32,22 +32,45 @@ export class RVEffectService {
       })
   }
 
-  @Effect()
-  createRV$: Observable<Action> = this.actions$
+  /* Efecto que triggerea la creacion de una ruta de viaje:
+   * Reune los datos necesarios para crear la RV
+   * Hace la llamada http correspondiente
+   * Actualiza el usuario en la store (frontend)
+   * Redirecciona al usuario a la pantalla /home
+   */
+  @Effect() createRV$: Observable<Action> = this.actions$
     .ofType(RV_CREATE_ACTION)
     .switchMap((action: CreateRVAction) => {
       let rv: RVDataVM = mkRV(action.payload);
       return this.rvService.create(rv);
     })
     .switchMap(_ => this.userService.get()) // esto esta re mal hahaha, separar en otra accion
-    .map((user: User) => this.store.dispatch(new SaveUserAction(user)))
+    .map((user: User) => this.store.dispatch(new SaveUserAction(user))) // esto tambien, solo sirve para actualizar la store
+    // posible nombre RefreshUserAction
     .debug("Ruta creada")
     .map(_ => go('/home'))
-    .debug("Redireccion a /home")
+    .debug("Redireccion a /home");
+
+  /* Efecto que comparte una ruta de viaje:
+   * Hace la llamada http pertinente
+   * Actualiza los datos de la store del usuario y los posts
+  */
+  @Effect() shareRV$: Observable<Action> = this.actions$
+    .ofType(RV_SHARE_ACTION)
+    .switchMap((action: ShareRVAction) => this.rvService.share(action.payload))
+    .debug("Se compartio la ruta de viaje: ")
+    .switchMap(_ => this.userService.get()) // actualizo usuario actual en la store
+    .map((user: User) => this.store.dispatch(new SaveUserAction(user)))
+    .map(_ => go('/home'));
 
 }
 
-export function mkRV(rvData: {rvForm: RVFormVM, sitios: Point[], authData: AuthState}) {
+
+/* funcion auxiliar que une los datos del formulario de
+ * creacion de rv y los puntos del mapa.
+ * Devuelve un objeto con todo lo necesario para crear una ruta de vida
+ */
+export function mkRV(rvData: {rvForm: RVFormVM, sitios: Point[], authData: AuthState}): RVDataVM {
   return {
     nombre: rvData.rvForm.nombre,
     creador: parseInt(rvData.authData.id),

@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Post} from "../../models/post";
+import {ApplicationState} from "../../store/state/application.state";
+import {Store} from "@ngrx/store";
+import {RV} from "../../models/rv";
+import {ShareRVAction} from "../../store/actions/rv.actions";
+import {User} from "../../models/user";
 
 declare var $: any;
 
@@ -8,6 +14,25 @@ declare var $: any;
   styleUrls: ['./view-rv.component.css']
 })
 export class ViewRVComponent {
+
+  /* Post que contiene la RV */
+  @Input() post: Post;
+
+  /* Usuario actualmente logueado */
+  user: User;
+
+  constructor(private store: Store<ApplicationState>) {
+    this.store.select(state => state.storeData.currentUser)
+      .subscribe((user: User) => this.user = user);
+  }
+
+  /* Funcion que chequea si la ruta que se pasa por parametro fue creada por el usuario actual
+   * En caso afirmativo, devuelve un objeto de configuracion para setear en disabled un componente
+   * */
+  esRutaPropia(rv: RV): Object {
+    return (this.user.id === rv.creador.id) ? {'disabled': true} : {'disabled': false}
+  }
+
   toggleButton(event: any) {
     let target = $(event.target);
 
@@ -16,6 +41,11 @@ export class ViewRVComponent {
     }
 
     target.toggleClass('activo');
+  }
+
+  shareButton(event: any, rv: RV) {
+    this.toggleButton(event);
+    this.store.dispatch(new ShareRVAction(rv));
   }
 
   focusComment(event: any) {

@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import {Actions, Effect} from "@ngrx/effects";
 import {Action} from "@ngrx/store";
 import {Observable} from "rxjs";
-import {USER_UPDATE_ACTION, UpdateUserAction, EditedUserAction} from "../actions/user.actions";
+import {USER_UPDATE_ACTION, UpdateUserAction, SaveUserAction} from "../actions/user.actions";
 import {UserService} from "../../services/user.service";
 import {UserWithAuthVM} from "../../../login/storeToUserWithAuth.vm";
 import {Response} from "@angular/http";
@@ -28,7 +28,7 @@ export class UserEffectService {
     })
     .debug('the user has been edited')
     .do(response => console.log("Respuesta", response))
-    .map((res: Response) => new EditedUserAction(res.json()))
+    .map((res: Response) => new SaveUserAction(res.json()))
     .map(_ => go('/home'))
     .debug('edit finalizado')
 

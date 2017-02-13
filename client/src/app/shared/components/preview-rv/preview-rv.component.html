@@ -29,8 +29,7 @@
       </div>
 
       <div class="actions">
-        <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
-        <button [hidden]="!post.rutaViaje.publico" class="compartir" (click)="toggleButton($event)">
+        <button [ngClass]="esRutaPropia(post.rutaViaje)" [hidden]="!post.rutaViaje.publico" class="compartir" (click)="shareButton($event, post.rutaViaje)">
           <i class="fa fa-share" aria-hidden="true"></i><span class="cantidad">{{post.rutaViaje.compartidos.length}}</span>
         </button>
         <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
@@ -45,4 +44,4 @@
   </div>
 </div>
 
-<apollo-view-rv></apollo-view-rv>
+<apollo-view-rv [post]="post"></apollo-view-rv>

@@ -2,7 +2,7 @@
   <div class="view-rv shadow">
     <div class="background">
       <section class="rv-map">
-        <img class="rv-google-map" src="assets/img/sample-map.png">
+        <img class="rv-google-map" src="{{post.rutaViaje.imagenUrl}}">
       </section>
 
       <section class="rv-body">
@@ -13,18 +13,18 @@
 
           <div class="rv-user">
             <div class="wrapper-user-picture">
-              <img class="user-picture" src="http://localhost:8080/images/usuario/1.jpg">
+              <img class="user-picture" src="{{post.creador.imagenUrl}}">
             </div>
             <a class="user-info" href="#">
-              <strong class="user-nombre">Jon Snow</strong>
-              <span class="username">@test</span>
+              <strong class="user-nombre">{{post.creador.nombre}} {{post.creador.apellido}}</strong>
+              <span class="username">@{{post.creador.username}}</span>
             </a>
           </div>
 
           <div class="rv-data">
-            <h4 class="rv-name">Ruta de viaje</h4>
+            <h4 class="rv-name">{{post.rutaViaje.nombre}}</h4>
             <div class="rv-description">
-              <p>Descripcion de prueba</p>
+              <p>{{post.rutaViaje.descripcion}}</p>
             </div>
             <div class="rv-data-right">
               <!-- <i class="rv-visibilidad fa fa-lock" aria-hidden="true" title="Privada"></i> -->
@@ -35,16 +35,16 @@
 
           <div class="actions">
             <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
-            <!-- Si la ruta de viaje es privada ocultar este elemento -->
-            <button class="compartir" (click)="toggleButton($event)">
-              <i class="fa fa-share" aria-hidden="true"></i><span class="cantidad">1</span>
+            <!-- Si la ruta de viaje es privada ocultar este elemento PREGUNTAR A MATIAS-->
+            <button [ngClass]="esRutaPropia(post.rutaViaje)" class="compartir" (click)="shareButton($event, post.rutaViaje)">
+              <i class="fa fa-share" aria-hidden="true"></i><span class="cantidad">{{post.rutaViaje.compartidos.length}}</span>
             </button>
             <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
             <button class="favoritos" (click)="toggleButton($event)">
-              <i class="fa fa-star" aria-hidden="true"></i><span class="cantidad">16</span>
+              <i class="fa fa-star" aria-hidden="true"></i><span class="cantidad">{{post.rutaViaje.favoritos.length}}</span>
             </button>
             <button class="comentar" (click)="focusComment($event)">
-              <i class="fa fa-comment" aria-hidden="true"></i><span class="cantidad">3</span>
+              <i class="fa fa-comment" aria-hidden="true"></i><span class="cantidad">{{post.rutaViaje.comentarios.length}}</span>
             </button>
           </div>
         </div>
