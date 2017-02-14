@@ -2,7 +2,6 @@ package apollo
 
 import grails.core.*
 import grails.transaction.Transactional
-import org.grails.web.json.JSONArray
 
 @Transactional
 
@@ -18,7 +17,7 @@ class RutaViajeService {
     String imagenGoogleUrl(RutaViaje rutaViaje) {
         String url = "https://maps.googleapis.com/maps/api/staticmap?size=640x400"
 
-        String path = "&path=color:0x000000";
+        String path = "&path=color:0x000000"
 
         for (int i = 0; i < rutaViaje.sitios.size(); i++) {
             String coordenadas = "%7C${rutaViaje.sitios[i].latitud},${rutaViaje.sitios[i].longitud}"

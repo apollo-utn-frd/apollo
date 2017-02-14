@@ -80,7 +80,6 @@ ruleset {
         doNotApplyToClassNames = 'UsuarioRole' // Clase generada por Spring Security.
     }
     LocaleSetDefault
-    NestedForLoop
     PrivateFieldCouldBeFinal
     PublicInstanceField
     ReturnsNullInsteadOfEmptyArray

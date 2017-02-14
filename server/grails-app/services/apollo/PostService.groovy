@@ -65,14 +65,14 @@ class PostService {
             post.rutaViaje == compartido.rutaViaje
         }
 
-        if (!previousPost) {
-            posts << new Post(compartido)
-        } else {
+        if (previousPost) {
             previousPost.compartidos << compartido.usuario
 
             if (previousPost.dateCreated > compartido.dateCreated) {
                 previousPost.dateCreated = compartido.dateCreated
             }
+        } else {
+            posts << new Post(compartido)
         }
     }
 
