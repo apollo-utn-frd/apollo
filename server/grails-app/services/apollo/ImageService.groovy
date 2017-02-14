@@ -9,6 +9,6 @@ class ImageService {
             new URL(urlSource).withInputStream { from ->  out << from }
         }
 
-        true;
+        true
     }
 }

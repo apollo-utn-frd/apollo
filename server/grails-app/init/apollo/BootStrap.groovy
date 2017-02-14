@@ -304,8 +304,10 @@ class BootStrap {
     }
 
     def destroy = { servletContext ->
+        /* Eliminar imagenes
         if (Environment.current == Environment.TEST) {
-            // Eliminar imagenes
+
         }
+        */
     }
 }

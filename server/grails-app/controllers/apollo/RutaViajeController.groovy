@@ -27,7 +27,14 @@ class RutaViajeController implements AppTrait {
             return
         }
 
+        /*
         RutaViaje rutaViaje = RutaViaje.findByImagenLocalPath(request.forwardURI)
+
+        if (!rutaViaje?.canReadBy(currentUser())) {
+            render(status: NOT_FOUND)
+            return
+        }
+        */
 
         render(
             file: image,
