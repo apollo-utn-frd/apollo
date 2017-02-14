@@ -65,7 +65,14 @@ class RutaViajeController implements AppTrait {
             offset: offset
         )
 
-        respond searchService.findAll(search)
+        List<RutaViaje> results = searchService.findAll(search)
+
+        if (results.empty) {
+            render(text: [], contentType: 'text/json')
+            return
+        }
+
+        respond results
     }
 
     @Transactional

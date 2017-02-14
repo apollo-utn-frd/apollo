@@ -63,7 +63,14 @@ class UsuarioController implements AppTrait {
             offset: offset
         )
 
-        respond searchService.findAll(search)
+        List<Usuario> results = searchService.findAll(search)
+
+        if (results.empty) {
+            render(text: [], contentType: 'text/json')
+            return
+        }
+
+        respond results
     }
 
     @Transactional

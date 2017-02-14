@@ -10,7 +10,7 @@ json {
     model: [usuario: seguimiento.seguido]
   )
 
-  seguidor .render(
+  seguidor g.render(
     template: '/usuario/usuario_min',
     model: [usuario: seguimiento.seguidor]
   )

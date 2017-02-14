@@ -36,7 +36,14 @@ class ComentarioController implements AppTrait {
             offset: offset
         )
 
-        respond searchService.findAll(search)
+        List<Comentario> results = searchService.findAll(search)
+
+        if (results.empty) {
+            render(text: [], contentType: 'text/json')
+            return
+        }
+
+        respond results
     }
 
     @Transactional
