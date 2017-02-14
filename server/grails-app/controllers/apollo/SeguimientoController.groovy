@@ -74,6 +74,10 @@ class SeguimientoController implements AppTrait {
 
         seguimiento.delete(flush: true)
 
+        // Fix para error de Grails cuando el seguimiento fue creado en el Bootstrap.
+        currentUser().seguidos.removeAll([null])
+        seguido.seguidores.removeAll([null])
+
         render(status: OK)
     }
 }

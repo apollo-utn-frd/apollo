@@ -34,6 +34,7 @@
   width: calc(50% - 0.75vw);
   margin-bottom: 20px;
   float: left;
+  padding: 0 10px;
 }
 
 #publicaciones.reduced {

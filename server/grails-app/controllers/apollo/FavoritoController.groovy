@@ -74,6 +74,10 @@ class FavoritoController implements AppTrait {
 
         favorito.delete(flush: true)
 
+        // Fix para error de Grails cuando el favorito fue creado en el Bootstrap.
+        currentUser().favoritos.removeAll([null])
+        rutaViaje.favoritosUsuarios.removeAll([null])
+
         render(status: OK)
     }
 }

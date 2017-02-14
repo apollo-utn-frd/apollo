@@ -74,6 +74,10 @@ class CompartidoController implements AppTrait {
 
         compartido.delete(flush: true)
 
+        // Fix para error de Grails cuando el compartido fue creado en el Bootstrap.
+        currentUser().compartidos.removeAll([null])
+        rutaViaje.compartidosUsuarios.removeAll([null])
+
         render(status: OK)
     }
 }
