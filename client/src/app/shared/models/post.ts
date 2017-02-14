@@ -5,6 +5,6 @@ import {UserMinVM} from "./userMin.vm";
 export interface Post {
   rutaViaje: RV
   creador: UserMinVM
-  compartidos: number[]
+  compartidos: UserMinVM[]
   dateCreated: Date
 }

@@ -53,6 +53,7 @@ export class RVEffectService {
     .map((user: User) => this.store.dispatch(new SaveUserAction(user))) // esto tambien, solo sirve para actualizar la store
     // posible nombre RefreshUserAction
     .debug("Ruta creada")
+    .map(_ => this.store.dispatch(new UpdatePostsAction()))
     .map(_ => go('/home'))
     .debug("Redireccion a /home");
 

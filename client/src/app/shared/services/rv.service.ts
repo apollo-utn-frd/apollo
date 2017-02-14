@@ -55,7 +55,7 @@ export class RVService extends Service<RV> {
   share(rv: RV): Observable<Response> {
     let url = api.COMPARTIR_RV + rv.id;
     return this.http.post(url, undefined, {headers: this.headers})
-      .flatMap((res: Response) => res.json())
+      .map((res: Response) => res.json())
   }
 
   /* Metodo para setear como favorito una ruta de viaje pasada
@@ -65,7 +65,7 @@ export class RVService extends Service<RV> {
   fav(rv: RV): Observable<Response> {
     let url = api.FAVEAR_RV + rv.id;
     return this.http.post(url, undefined, {headers: this.headers})
-      .flatMap((res: Response) => res.json());
+      .map((res: Response) => res.json());
   }
 
   /* Metodo para realizar un comentario.
