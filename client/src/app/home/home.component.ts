@@ -1,10 +1,11 @@
+
 import {Component} from '@angular/core';
 import { NavBarComponent, ProfileCardComponent } from '../shared/components/index';
 import { Store } from '@ngrx/store';
 import {ApplicationState} from "../shared/store/state/application.state";
 import {User} from "../shared/models/user";
 import {Observable} from "rxjs";
-import {UpdatePostsAction} from "../shared/store/actions/post.action";
+import {UpdatePostsAction, LoadCommentAction} from "../shared/store/actions/ui.action";
 import {Post} from "../shared/models/post";
 import {PreviewRVComponent} from "../shared/components/preview-rv/preview-rv.component";
 

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {Post} from "../../models/post";
 import {ApplicationState} from "../../store/state/application.state";
 import {Store} from "@ngrx/store";
@@ -6,6 +6,10 @@ import {RV} from "../../models/rv";
 import {ShareRVAction, FavRVAction, NewCommentAction} from "../../store/actions/rv.actions";
 import {User} from "../../models/user";
 import {FormGroup, FormControl} from "@angular/forms";
+import {Comentario} from "../../models/comentario";
+import {Observable} from "rxjs";
+import {LoadCommentAction} from "../../store/actions/ui.action";
+import {go} from "@ngrx/router-store";
 
 declare var $: any;
 
@@ -14,7 +18,7 @@ declare var $: any;
   templateUrl: 'view-rv.component.html',
   styleUrls: ['./view-rv.component.css']
 })
-export class ViewRVComponent {
+export class ViewRVComponent implements OnInit {
 
   /* Formulario para enviar comentario */
   form: FormGroup;
@@ -24,16 +28,23 @@ export class ViewRVComponent {
 
   /* Usuario actualmente logueado */
   user: User;
+  comentarios: Comentario[];
 
-  constructor(private store: Store<ApplicationState>) {
+  constructor(private ref: ChangeDetectorRef, private store: Store<ApplicationState>) {
     this.store.select(state => state.storeData.currentUser)
       .subscribe((user: User) => this.user = user);
-
+    this.store.select(state => state.uiState.commentsFromCurrentRV)
+      .subscribe((cs: Comentario[]) => this.comentarios = cs.filter(c => c.rutaViaje.id === this.post.rutaViaje.id));
     this.form = new FormGroup({
       contenido: new FormControl('')
     });
   }
 
+  ngOnInit() {
+    this.post.rutaViaje.comentarios
+      .map((objetoID: {id: number}) => objetoID.id)
+      .forEach((id: number) => this.store.dispatch(new LoadCommentAction(id)));
+  }
   /* Funcion que chequea si la ruta que se pasa por parametro fue creada por el usuario actual
    * En caso afirmativo, devuelve un objeto de configuracion para setear en disabled un componente
    * */
@@ -46,6 +57,13 @@ export class ViewRVComponent {
     console.log("datos del comentario: ", contents);
     this.addComment(event);
     this.store.dispatch(new NewCommentAction({contenido: contents, rv: rv}));
+    this.ref.detectChanges();
+  }
+
+  openView(post: Post) { // cambiar evento bajo el qeu se activa?
+    post.rutaViaje.comentarios
+      .map((objetoID: {id: number}) => objetoID.id)
+      .forEach((id: number) => this.store.dispatch(new LoadCommentAction(id)));
   }
 
   toggleButton(event: any) {

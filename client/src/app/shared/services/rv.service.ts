@@ -7,12 +7,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
-import { Store } from '@ngrx/store';
+import {Store, Action} from '@ngrx/store';
 import * as api from './api';
 import {ApplicationState} from "../store/state/application.state";
 import {RVDataVM} from "../models/rvData.vm";
 import {AuthState} from "../store/state/auth.state";
-
+import {Comentario} from '../models/comentario'
 @Injectable()
 export class RVService extends Service<RV> {
   token: string;
@@ -71,10 +71,16 @@ export class RVService extends Service<RV> {
   /* Metodo para realizar un comentario.
    * Toma como parametro un comentario y una ruta de viaje.
    */
-  comment(content: {contenido: string}, rv: RV): Observable<Response> {
+  comment(content: {contenido: string}, rv: RV): Observable<Comentario> {
     let url = api.COMENTAR_RV + rv.id;
     return this.http.post(url, content, {headers: this.headers})
-      .map((res: Response) => res.json());
+      .map((res: Response) => <Comentario> res.json());
+  }
+
+  getCommentByID(id: number): Observable<Comentario> {
+    let url = api.COMENTARIO + id;
+    return this.http.get(url, {headers: this.headers})
+            .map((res: Response) => res.json());
   }
 
   /* documentacion, revisar metodo */

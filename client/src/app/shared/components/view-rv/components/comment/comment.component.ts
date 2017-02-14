@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Comentario} from "../../../../models/comentario";
 
 @Component({
   selector: 'apollo-comment',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent {
+  @Input() comment: Comentario;
 }

@@ -2,7 +2,7 @@
 import {UserMinVM} from "./userMin.vm";
 import {RVMinVM} from "./RVMinVM";
 
-export interface Comment {
+export interface Comentario {
   id: number
   rutaViaje: RVMinVM
   usuario: UserMinVM

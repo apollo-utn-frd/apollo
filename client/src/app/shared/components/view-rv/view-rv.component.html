@@ -60,11 +60,10 @@
           </div>
 
           <div class="list-comments">
-            <apollo-comment class="comment"></apollo-comment>
-            <hr class="line">
-            <apollo-comment class="comment"></apollo-comment>
-            <hr class="line">
-            <apollo-comment class="comment"></apollo-comment>
+            <apollo-comment *ngFor="let comentario of comentarios"
+                            [comment]="comentario"
+                            class="comment">
+            </apollo-comment>
           </div>
         </div>
       </section>
