@@ -1,5 +1,5 @@
 
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NavBarComponent, ProfileCardComponent } from '../shared/components/index';
 import { Store } from '@ngrx/store';
 import {ApplicationState} from "../shared/store/state/application.state";
@@ -17,16 +17,19 @@ declare var $: any;
     styleUrls: ['./home.component.css'],
     providers: [NavBarComponent, ProfileCardComponent, PreviewRVComponent]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   users$: Observable<User>;
-  posts: Observable<Post[]>;
+  posts: Post[];
 
   constructor(private store: Store<ApplicationState>) {
     this.users$ = this.store.select(st => st.storeData.currentUser);
     this.store.dispatch(new UpdatePostsAction());
-    this.posts = this.store.select((state: ApplicationState) => state.uiState.posts)
-      //.subscribe(posts => this.posts = posts)
+     this.store.select((state: ApplicationState) => state.uiState.posts)
+      .subscribe(posts => this.posts = posts)
   }
 
+  ngOnInit() {
+    this.store.dispatch(new UpdatePostsAction());
+  }
 }
