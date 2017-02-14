@@ -12,4 +12,6 @@ export const SEGUIR_USUARIO = USUARIOS + 'seguir/';
 
 export const COMENTAR_RV = RUTADEVIAJE + 'comentar/';
 
+export const COMENTARIO = API + 'comentario/';
+
 export const POSTS = API + 'posts/';
