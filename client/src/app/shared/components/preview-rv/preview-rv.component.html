@@ -2,11 +2,11 @@
   <div class="background pull-left-100">
     <div [hidden]="!compartida" class="legend">
       <i class="fa fa-share" aria-hidden="true"></i>
-      Compartido por <a href="#"><span class="username">@federico_sanches</span></a>
+      Compartido por <a href="#"><span class="username">@{{post.compartidos}}</span></a>
     </div>
 
     <div class="rv-map" (click)="showViewRV($event)">
-      <img class="rv-picture" src="{{ post.rutaViaje.imagenUrl }}">
+      <img class="rv-picture" src="{{post.rutaViaje.imagenUrl}}">
       <div class="gradient"></div>
       <h4 class="rv-name">{{post.rutaViaje.nombre}}</h4>
     </div>
