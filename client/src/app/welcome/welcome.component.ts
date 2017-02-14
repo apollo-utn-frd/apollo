@@ -33,7 +33,7 @@ export class WelcomeComponent implements OnInit {
     if (this.credentials) {
       this.store.dispatch(new LoginAction(this.credentials));
       let usuarioNulo = JSON.parse(window.localStorage.getItem('storeData'));
-      if (typeof (usuarioNulo.currentUser) !== undefined) {
+      if (usuarioNulo.currentUser !== undefined) {
         if (usuarioNulo.currentUser.firstLogin) {
           this.store.dispatch(go(['/login']));
         } else {
