@@ -32,16 +32,16 @@
 
     <section [hidden]="!panelRutas" class="panel-statistics shadow">
       <div id="creadas" class="statistics">
-        <h4 class="panel-title">
-          <a href="#" role="button">
-            <i class="fa fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
-          </a>
-        </h4>
-      </div>
+          <h4 class="panel-title">
+            <a role="button" data-toggle="modal" data-target="#creadasModal">
+              <i class="fa fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
+            </a>
+          </h4>
+      </div> 
 
       <div id="favoritas" class="statistics">
         <h4 class="panel-title">
-          <a href="#" role="button">
+          <a role="button" data-toggle="modal" data-target="#favoritasModal">
             <i class="fa fa-star" aria-hidden="true"></i>{{user.favoritos.length}} viajes favoritos
           </a>
         </h4>
@@ -49,7 +49,7 @@
 
       <div id="seguidores" class="statistics">
         <h4 class="panel-title">
-          <a href="#" role="button">
+          <a role="button" data-toggle="modal" data-target="#seguidoresModal">
             <i class="fa fa-user-circle-o" aria-hidden="true"></i>{{user.seguidores.length}} seguidores
           </a>
         </h4>
@@ -57,11 +57,91 @@
 
       <div id="siguiendo" class="statistics">
         <h4 class="panel-title">
-          <a href="#" role="button">
+          <a role="button" data-toggle="modal" data-target="#siguiendoModal">
             <i class="fa fa-user-circle" aria-hidden="true"></i>{{user.seguidos.length}} siguiendo
           </a>
         </h4>
       </div>
     </section>
+
+  <!-- Modal Creadas -->
+   <div class="modal fade" id="creadasModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">Viajes Creados</h3>
+        </div>
+        <div class="modal-body">
+          <!-- En este div va la lista con las rv creadas a mostar -->
+          <li *ngFor="let rv of user.rutasViaje">
+            {{rv.nombre}}
+          </li>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal Favoritas -->
+   <div class="modal fade" id="favoritasModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">Viajes Favoritos</h3>
+        </div>
+        <div class="modal-body">
+          <!-- En este div va la lista con las rv favoritas a mostar -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal Seguidores -->
+   <div class="modal fade" id="seguidoresModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">Seguidores</h3>
+        </div>
+        <div class="modal-body">
+          <!-- En este div va la lista con los seguidores a mostar -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal Siguiendo -->
+   <div class="modal fade" id="siguiendoModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">Siguiendo</h3>
+        </div>
+        <div class="modal-body">
+          <!-- En este div va la lista con los seguiendo a mostar -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </div>
 </div>
