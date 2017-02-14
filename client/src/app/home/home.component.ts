@@ -20,13 +20,13 @@ declare var $: any;
 export class HomeComponent {
 
   users$: Observable<User>;
-  posts: Post[];
+  posts: Observable<Post[]>;
 
   constructor(private store: Store<ApplicationState>) {
     this.users$ = this.store.select(st => st.storeData.currentUser);
     this.store.dispatch(new UpdatePostsAction());
-    this.store.select((state: ApplicationState) => state.uiState.posts)
-      .subscribe(posts => this.posts = posts)
+    this.posts = this.store.select((state: ApplicationState) => state.uiState.posts)
+      //.subscribe(posts => this.posts = posts)
   }
 
 }
