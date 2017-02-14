@@ -28,7 +28,7 @@ export class UpdateStoredPostsAction implements Action {
  * El comentario a cargar es el cual cuya id es la pasada por parametro al
  * constructor de la accion.
  */
-export class LoadComment implements Action {
+export class LoadCommentAction implements Action {
   readonly type = LOAD_COMMENT_ACTION;
   constructor(public payload?: number) {}
 }

@@ -19,6 +19,8 @@ import {Response} from "@angular/http";
 import {go} from "@ngrx/router-store";
 import {SaveUserAction} from "../actions/user.actions";
 import {UserService} from "../../services/user.service";
+import {LoadCommentAction, UpdatePostsAction} from "../actions/ui.action";
+import {Comentario} from "../../models/comentario";
 
 
 @Injectable()
@@ -81,10 +83,10 @@ export class RVEffectService {
   @Effect() commentRV$: Observable<Action> = this.actions$
     .ofType(RV_NEW_COMMENT_ACTION)
     .switchMap((action: NewCommentAction) => this.rvService.comment(action.payload.contenido, action.payload.rv))
+    .map((c: Comentario) => this.store.dispatch(new LoadCommentAction(c.id)))
     .debug("comentario realizado")
     .switchMap(_ => this.userService.get()) // actualizo usuario actual en la store
-    .map((user: User) => this.store.dispatch(new SaveUserAction(user)))
-    .map(_ => go('/home'));
+    .map((user: User) => new SaveUserAction(user))
 
 }
 

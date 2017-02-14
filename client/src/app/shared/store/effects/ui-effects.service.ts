@@ -6,7 +6,7 @@ import {Comentario} from '../../models/comentario'
 import {PostService} from "../../services/posts.service";
 import {
   UPDATE_POSTS_ACTION, UpdateStoredPostsAction,
-  LOAD_COMMENT_ACTION, LoadComment, SaveCommentsAction
+  LOAD_COMMENT_ACTION, LoadCommentAction, SaveCommentsAction
 } from "../actions/ui.action";
 import {Observable} from "rxjs";
 import {Post} from "../../models/post";
@@ -30,7 +30,7 @@ export class UIEffectService {
 
   @Effect() loadComment$: Observable<Action> = this.actions$
     .ofType(LOAD_COMMENT_ACTION)
-    .mergeMap((action: LoadComment) => this.rvService.getCommentByID(action.payload))
+    .mergeMap((action: LoadCommentAction) => this.rvService.getCommentByID(action.payload))
     .debug("comentario cargado")
     .map((comment: Comentario) => new SaveCommentsAction(comment))
 }

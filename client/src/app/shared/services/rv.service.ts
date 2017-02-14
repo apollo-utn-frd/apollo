@@ -71,10 +71,10 @@ export class RVService extends Service<RV> {
   /* Metodo para realizar un comentario.
    * Toma como parametro un comentario y una ruta de viaje.
    */
-  comment(content: {contenido: string}, rv: RV): Observable<Response> {
+  comment(content: {contenido: string}, rv: RV): Observable<Comentario> {
     let url = api.COMENTAR_RV + rv.id;
     return this.http.post(url, content, {headers: this.headers})
-      .map((res: Response) => res.json());
+      .map((res: Response) => <Comentario> res.json());
   }
 
   getCommentByID(id: number): Observable<Comentario> {

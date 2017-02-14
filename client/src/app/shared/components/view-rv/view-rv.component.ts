@@ -8,7 +8,7 @@ import {User} from "../../models/user";
 import {FormGroup, FormControl} from "@angular/forms";
 import {Comentario} from "../../models/comentario";
 import {Observable} from "rxjs";
-import {LoadComment} from "../../store/actions/ui.action";
+import {LoadCommentAction} from "../../store/actions/ui.action";
 import {go} from "@ngrx/router-store";
 
 declare var $: any;
@@ -43,7 +43,7 @@ export class ViewRVComponent implements OnInit {
   ngOnInit() {
     this.post.rutaViaje.comentarios
       .map((objetoID: {id: number}) => objetoID.id)
-      .forEach((id: number) => this.store.dispatch(new LoadComment(id)));
+      .forEach((id: number) => this.store.dispatch(new LoadCommentAction(id)));
   }
   /* Funcion que chequea si la ruta que se pasa por parametro fue creada por el usuario actual
    * En caso afirmativo, devuelve un objeto de configuracion para setear en disabled un componente
@@ -58,13 +58,12 @@ export class ViewRVComponent implements OnInit {
     this.addComment(event);
     this.store.dispatch(new NewCommentAction({contenido: contents, rv: rv}));
     this.ref.detectChanges();
-    this.store.dispatch(go('/home'))
   }
 
   openView(post: Post) { // cambiar evento bajo el qeu se activa?
     post.rutaViaje.comentarios
       .map((objetoID: {id: number}) => objetoID.id)
-      .forEach((id: number) => this.store.dispatch(new LoadComment(id)));
+      .forEach((id: number) => this.store.dispatch(new LoadCommentAction(id)));
   }
 
   toggleButton(event: any) {
