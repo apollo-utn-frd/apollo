@@ -5,6 +5,8 @@ import {ApplicationState} from "../../store/state/application.state";
 import {Store} from "@ngrx/store";
 import {ShareRVAction, FavRVAction} from "../../store/actions/rv.actions";
 import {User} from "../../models/user";
+import {go} from "@ngrx/router-store";
+import {UserMinVM} from "../../models/userMin.vm";
 
 declare var $: any;
 
@@ -20,6 +22,14 @@ export class PreviewRVComponent {
   @Input() post: Post;
 
   user: User;
+
+  nombresCompartidos(): string {
+    return this.post.compartidos.map(c => c.nombre).join(', ');
+  }
+
+  fueCompartida(): boolean {
+    return this.post.compartidos.length > 0;
+  }
 
   constructor(private store: Store<ApplicationState>) {
     this.store.select(state => state.storeData.currentUser)
@@ -46,6 +56,10 @@ export class PreviewRVComponent {
       $.fn.modal.Constructor.prototype.setScrollbar = function () {
         this.originalBodyPad = document.body.style.paddingRight || ''
         }
+  }
+
+  goToUserProfile(id: number) {
+    this.store.dispatch(go('/usuario/', {id: id}));
   }
 
   toggleButton(event: any) {

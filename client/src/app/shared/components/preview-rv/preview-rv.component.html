@@ -1,8 +1,8 @@
 <div class="preview-rv shadow">
   <div class="background pull-left-100">
-    <div [hidden]="!compartida" class="legend">
+    <div [hidden]="!fueCompartida()" class="legend">
       <i class="fa fa-share" aria-hidden="true"></i>
-      Compartido por <a href="#"><span class="username">@{{post.compartidos}}</span></a>
+      Compartido por <a href="#"><span class="username">{{nombresCompartidos()}}</span></a>
     </div>
 
     <div class="rv-map" (click)="showViewRV($event)">
@@ -23,7 +23,9 @@
           <img class="user-picture" src="{{ post.creador.imagenUrl }}">
         </div>
         <a class="user-info" href="#">
-          <strong class="user-nombre">{{ post.creador.nombre }} {{ post.creador.apellido }}</strong>
+          <strong class="user-nombre" (click)="goToUserProfile(post.creador.id)">
+            {{ post.creador.nombre }} {{ post.creador.apellido }}
+          </strong>
           <span class="username">@{{ post.creador.username }}</span>
         </a>
       </div>
