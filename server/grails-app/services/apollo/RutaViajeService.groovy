@@ -1,6 +1,6 @@
 package apollo
 
-import grails.core.*
+import grails.core.GrailsApplication
 import grails.transaction.Transactional
 
 @Transactional

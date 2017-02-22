@@ -1,10 +1,12 @@
 package apollo
 
+import grails.core.GrailsApplication
 import grails.util.Environment
 
 class BootStrap {
     UsuarioService usuarioService
     RutaViajeService rutaViajeService
+    GrailsApplication grailsApplication
 
     def init = { servletContext ->
         if (Role.count() == 0) {
@@ -17,7 +19,7 @@ class BootStrap {
                 Usuario batman = new Usuario(
                     id: 1,
                     username: 'batman',
-                    idGoogle: 106894254477926480695,
+                    idGoogle: grailsApplication.config.getProperty('app.test.google.idUsuario') ?: 1235,
                     email: 'batman@gmail.com',
                     nombre: 'Bruce',
                     apellido: 'Wayne',

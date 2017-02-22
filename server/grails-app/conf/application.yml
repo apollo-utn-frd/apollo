@@ -117,8 +117,13 @@ environments:
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 
 app:
+    pathRoot:
+        images: grails-app/views/
     google:
         staticMap:
             key: AIzaSyBHHo7P7VQWWRFx4kp9CwQQPyNJSNZMbEU
             language: es
             region: ar
+    test:
+        google:
+            idUsuario: 117610751969512663627
