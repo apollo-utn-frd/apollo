@@ -1,16 +1,14 @@
 package apollo
 
+import groovy.util.logging.Slf4j
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
+@Slf4j
 @EqualsAndHashCode(includes = 'username')
 @ToString(includes = 'username', includePackage = false)
 
 class Usuario implements Serializable {
-    private static final long serialVersionUID = 1
-
-    transient springSecurityService
-
     String username
     String password = ' '
     String email
@@ -34,6 +32,68 @@ class Usuario implements Serializable {
     List comentarios
     Date dateCreated
     Date lastUpdated
+
+    private static final long serialVersionUID = 1
+
+    transient fileService
+    transient springSecurityService
+
+    static transients = [
+        'fileService',
+        'springSecurityService'
+    ]
+
+    static hasMany = [
+        seguidos: Seguimiento,
+        seguidores: Seguimiento,
+        rutasViaje: RutaViaje,
+        autorizaciones: Autorizacion,
+        favoritos: Favorito,
+        compartidos: Compartido,
+        comentarios: Comentario
+    ]
+
+    static mappedBy = [
+        seguidos: 'seguidor',
+        seguidores: 'seguido'
+    ]
+
+    static constraints = {
+        username unique: true, size: 4..30, matches: '^[a-zA-Z0-9\\.]+$', blank: false
+        email email: true, unique: true, blank: false
+        nombre size: 1..30, blank: false
+        apellido size: 1..30, blank: false
+        idGoogle unique: true, blank: false
+        imagenGoogleUrl url: true, blank: false
+        imagenLocalPath nullable: true
+        descripcion size: 0..150
+    }
+
+    static mapping = {
+        password column: '`password`'
+        seguidos joinTable: [
+            name: 'usuario_seguidos_seguimiento',
+            key: 'seguido_id'
+        ]
+        seguidores joinTable: [
+            name: 'usuario_seguidores_seguimiento',
+            key: 'seguidor_id'
+        ]
+    }
+
+    def beforeInsert() {
+        encodePassword()
+    }
+
+    def beforeUpdate() {
+        if (isDirty('password')) {
+            encodePassword()
+        }
+    }
+
+    def afterInsert() {
+        downloadPicture()
+    }
 
     /**
      * Devuelve al usuario habiéndole eliminado todas las referencias a rutas de viajes privadas
@@ -75,57 +135,30 @@ class Usuario implements Serializable {
         (this == usuario) || usuario?.isAdmin()
     }
 
-    def beforeInsert() {
-        encodePassword()
+    /**
+     * Descarga la imagen de perfil y ajusta la ruta de destino de la imagen.
+     */
+    protected void downloadPicture() {
+        imagenLocalPath = "/images/usuario/${id}.jpg"
+
+        try {
+            fileService.download(imagenGoogleUrl, imagenLocalPath)
+        } catch (IOException e) {
+            log.warn "Usuario(${id}): No se pudo descargar la imagen de perfil [${e}]."
+            copyDefaultPicture()
+        }
     }
 
-    def beforeUpdate() {
-        if (isDirty('password')) {
-            encodePassword()
-        }
+    /**
+     * Asigna la imagen de perfil por defecto.
+     */
+    protected void copyDefaultPicture() {
+        String defaultImage = "/images/usuario/default.jpg"
+        fileService.copy(defaultImage, imagenLocalPath)
+        log.debug "Usuario(${id}): Se le asigno la imagen de perfil por defecto."
     }
 
     protected void encodePassword() {
         password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
-    }
-
-    static transients = ['springSecurityService']
-
-    static hasMany = [
-        seguidos: Seguimiento,
-        seguidores: Seguimiento,
-        rutasViaje: RutaViaje,
-        autorizaciones: Autorizacion,
-        favoritos: Favorito,
-        compartidos: Compartido,
-        comentarios: Comentario
-    ]
-
-    static mappedBy = [
-        seguidos: 'seguidor',
-        seguidores: 'seguido'
-    ]
-
-    static constraints = {
-        username unique: true, size: 4..30, matches: '^[a-zA-Z0-9\\.]+$', blank: false
-        email email: true, unique: true, blank: false
-        nombre size: 1..30, blank: false
-        apellido size: 1..30, blank: false
-        idGoogle unique: true, blank: false
-        imagenGoogleUrl url: true, blank: false
-        imagenLocalPath nullable: true
-        descripcion size: 0..150
-    }
-
-    static mapping = {
-        password column: '`password`'
-        seguidos joinTable: [
-            name: 'usuario_seguidos_seguimiento',
-            key: 'seguido_id'
-        ]
-        seguidores joinTable: [
-            name: 'usuario_seguidores_seguimiento',
-            key: 'seguidor_id'
-        ]
     }
 }

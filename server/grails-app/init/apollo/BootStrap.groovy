@@ -4,7 +4,6 @@ import grails.core.GrailsApplication
 import grails.util.Environment
 
 class BootStrap {
-    UsuarioService usuarioService
     RutaViajeService rutaViajeService
     GrailsApplication grailsApplication
 
@@ -25,10 +24,8 @@ class BootStrap {
                     apellido: 'Wayne',
                     imagenGoogleUrl: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJa2pNSUY5cXFjZXc',
                     descripcion: 'I\'m Batman',
-                    firstLogin: false
+                    firstLogin: true
                 ).save(flush: true, failOnError: true)
-
-                usuarioService.downloadPicture(batman)
 
                 Usuario flash = new Usuario(
                     id: 2,
@@ -42,8 +39,6 @@ class BootStrap {
                     firstLogin: true
                 ).save(flush: true, failOnError: true)
 
-                usuarioService.downloadPicture(flash)
-
                 Usuario arrow = new Usuario(
                     id: 3,
                     username: 'arrow',
@@ -53,10 +48,8 @@ class BootStrap {
                     apellido: 'Queen',
                     imagenGoogleUrl: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJZzhRQW5FTVFXVWc',
                     descripcion: 'You have failed this city',
-                    firstLogin: false
+                    firstLogin: true
                 ).save(flush: true, failOnError: true)
-
-                usuarioService.downloadPicture(arrow)
 
                 Usuario raven = new Usuario(
                     id: 4,
@@ -67,10 +60,8 @@ class BootStrap {
                     apellido: 'Roth',
                     imagenGoogleUrl: 'https://drive.google.com/uc?export=view&id=0B0UwIYETUqQJOTVDeDJ2MWdwTTQ',
                     descripcion: 'Azarath Metreon Zinthos',
-                    firstLogin: false
+                    firstLogin: true
                 ).save(flush: true, failOnError: true)
-
-                usuarioService.downloadPicture(raven)
 
                 new Seguimiento(
                     seguido: flash,
@@ -114,8 +105,6 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                rutaViajeService.downloadPicture(rutaEntrenamiento)
-
                 RutaViaje baticueva = new RutaViaje(
                     id: 2,
                     nombre: 'Ubicacion de la Baticueva',
@@ -129,8 +118,6 @@ class BootStrap {
                         ]
                     ]
                 ).save(flush: true, failOnError: true)
-
-                rutaViajeService.downloadPicture(baticueva)
 
                 RutaViaje flashcueva = new RutaViaje(
                     id: 3,
@@ -146,7 +133,6 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                rutaViajeService.downloadPicture(flashcueva)
                 rutaViajeService.createAuthorization(flashcueva, batman)
 
                 RutaViaje arrowcueva = new RutaViaje(
@@ -163,7 +149,6 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                rutaViajeService.downloadPicture(arrowcueva)
                 rutaViajeService.createAuthorization(arrowcueva, flash)
 
                 RutaViaje trianguloBermudas = new RutaViaje(
@@ -191,8 +176,6 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                rutaViajeService.downloadPicture(trianguloBermudas)
-
                 RutaViaje lugaresEnergeticos = new RutaViaje(
                     id: 6,
                     nombre: 'Lugares con energia positiva',
@@ -213,8 +196,6 @@ class BootStrap {
                         ]
                     ]
                 ).save(flush: true, failOnError: true)
-
-                rutaViajeService.downloadPicture(lugaresEnergeticos)
 
                 new Compartido(
                     usuario: batman,

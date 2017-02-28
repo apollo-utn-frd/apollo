@@ -18,9 +18,6 @@ class SecurityService implements OauthUserDetailsService {
 
     def springSecurityService
 
-    @Autowired
-    UsuarioService usuarioService
-
     @Delegate
     UserDetailsService userDetailsService
 
@@ -43,7 +40,7 @@ class SecurityService implements OauthUserDetailsService {
      */
     OauthUser loadUserByUserProfile(CommonProfile userProfile, Collection<GrantedAuthority> defaultRoles)
         throws UsernameNotFoundException {
-        log.debug "Buscando usuario con perfil: ${userProfile}."
+        log.info "Buscando usuario con perfil: ${userProfile}."
 
         Usuario usuario = Usuario.findByIdGoogle(userProfile.id)
 
@@ -51,7 +48,7 @@ class SecurityService implements OauthUserDetailsService {
             usuario = createUsuario(userProfile, defaultRoles)
         }
 
-        log.debug "Se obtuvo ${usuario}. Creando OauthUser."
+        log.info "Se obtuvo ${usuario}. Creando OauthUser."
 
         new OauthUser(usuario.username, usuario.password, defaultRoles, userProfile)
     }
@@ -80,11 +77,7 @@ class SecurityService implements OauthUserDetailsService {
             imagenGoogleUrl: userProfile.pictureUrl.tokenize("?").first()
         ).save(failOnError: true)
 
-        log.debug "${usuario} creado. Descargando avatar desde ${usuario.imagenGoogleUrl}"
-
-        usuarioService.downloadPicture(usuario)
-
-        log.debug "Avatar descargado a ${usuario.imagenLocalPath}"
+        log.debug "${usuario} creado."
 
         setRoles(usuario, defaultRoles)
     }

@@ -1,6 +1,7 @@
 package apollo
 
 import static org.springframework.http.HttpStatus.*
+import grails.core.GrailsApplication
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -10,8 +11,8 @@ class RutaViajeController implements AppTrait {
     static allowedMethods = [show: 'GET', search: 'GET', create: 'POST', delete: 'DELETE']
 
     SearchService searchService
-
     RutaViajeService rutaViajeService
+    GrailsApplication grailsApplication
 
     @Secured('permitAll')
     def images() {
@@ -20,7 +21,7 @@ class RutaViajeController implements AppTrait {
             return
         }
 
-        File image = new File("grails-app/views/images/rutaviaje/${params.file}")
+        File image = new File("${grailsApplication.config.getProperty('app.files.path')}/images/rutaviaje/${params.file}")
 
         if (!image.exists()) {
             render(status: NOT_FOUND)
@@ -103,8 +104,6 @@ class RutaViajeController implements AppTrait {
                 return
             }
         }
-
-        rutaViajeService.downloadPicture(rutaViaje)
 
         respond rutaViaje
     }

@@ -117,11 +117,12 @@ environments:
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 
 app:
-    pathRoot:
-        images: grails-app/views/
+    files:
+        path: src/main/webapp/
     google:
         staticMap:
             key: AIzaSyBHHo7P7VQWWRFx4kp9CwQQPyNJSNZMbEU
+            size: 640x400
             language: es
             region: ar
     test:

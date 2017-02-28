@@ -3,11 +3,15 @@
 # server dependencies
 .gradle
 
-# client dependencies
-client/node_modules
-
 # server compiled output
 build/
+
+# server assets
+server/src/**/*.jpg
+!server/src/**/default.jpg
+
+# client dependencies
+client/node_modules
 
 # client compiled output
 client/dist
@@ -20,7 +24,6 @@ client/tmp
 .classpath
 client/.vscode/
 
-
 # misc
 client/.sass-cache
 client/connect.lock
@@ -29,7 +32,6 @@ client/libpeerconnection.log
 client/npm-debug.log
 client/testem.log
 client/typings
-server/grails-app/views/images/**/*.jpg
 *.iml
 *.ipr
 *.iws
