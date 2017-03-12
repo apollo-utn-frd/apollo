@@ -2,4 +2,4 @@ model {
   List<Seguimiento> seguimientoList
 }
 
-json tmpl.seguimiento(seguimientoList)
+json(tmpl.seguimiento(seguimientoList) ?: [])

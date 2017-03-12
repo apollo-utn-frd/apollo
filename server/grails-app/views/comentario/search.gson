@@ -2,4 +2,4 @@ model {
   List<Comentario> comentarioList
 }
 
-json tmpl.comentario(comentarioList)
+json(tmpl.comentario(comentarioList) ?: [])

@@ -2,4 +2,4 @@ model {
   List<Favorito> favoritoList
 }
 
-json tmpl.favorito(favoritoList)
+json(tmpl.favorito(favoritoList) ?: [])

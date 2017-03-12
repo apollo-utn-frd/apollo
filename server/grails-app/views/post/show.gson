@@ -2,4 +2,4 @@ model {
   List<Post> postList
 }
 
-json tmpl.post(postList)
+json(tmpl.post(postList) ?: [])

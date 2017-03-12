@@ -2,4 +2,4 @@ model {
   List<RutaViaje> rutaViajeList
 }
 
-json tmpl.rutaViaje(rutaViajeList)
+json(tmpl.rutaViaje(rutaViajeList) ?: [])

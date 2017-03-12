@@ -2,4 +2,4 @@ model {
   List<Usuario> usuarioList
 }
 
-json tmpl.usuario(usuarioList)
+json(tmpl.usuario(usuarioList) ?: [])

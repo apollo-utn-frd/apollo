@@ -28,15 +28,6 @@ class RutaViajeController implements AppTrait {
             return
         }
 
-        /*
-        RutaViaje rutaViaje = RutaViaje.findByImagenLocalPath(request.forwardURI)
-
-        if (!rutaViaje?.canReadBy(currentUser())) {
-            render(status: NOT_FOUND)
-            return
-        }
-        */
-
         render(
             file: image,
             contentType: 'image/jpeg'
@@ -68,14 +59,7 @@ class RutaViajeController implements AppTrait {
             offset: offset
         )
 
-        List<RutaViaje> results = searchService.findAll(search)
-
-        if (results.empty) {
-            render(text: [], contentType: 'text/json')
-            return
-        }
-
-        respond results
+        respond searchService.findAll(search)
     }
 
     @Transactional
