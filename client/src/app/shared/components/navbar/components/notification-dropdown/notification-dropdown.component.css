@@ -1,0 +1,89 @@
+/**
+ * Notificaciones. Basadas en:
+ * http://codepen.io/jo-asakura/pen/ExsLi
+ */
+.dropdown {
+  position: relative;
+  margin: 0;
+}
+
+.show-dropdown .fa {
+  color: #e7e7e7;
+  font-size: 1.5em;
+}
+
+.show-dropdown .notifications-count {
+  border-radius: 50%;
+  background-clip: padding-box;
+  background-color: #c53e31;
+  color: #fefefe;
+  height: 16px;
+  line-height: 1.75em;
+  text-align: center;
+  position: absolute;
+  right: -3px;
+  top: 6px;
+}
+
+.show-dropdown .notifications-count .count {
+  position: relative;
+  bottom: 4px;
+  right: 0px;
+  margin: 4px;
+}
+
+.dropdown-menu {
+  border-radius: 4px;
+  background-clip: padding-box;
+  position: absolute;
+  right: -4px;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu:after {
+  border-bottom-color: #c53e31;
+}
+
+.dropdown-menu h3,
+.dropdown-menu .show-all {
+  background-color: #c53e31;
+  color: #fefefe;
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+}
+
+.dropdown-menu h3 {
+  cursor: default;
+  font-size: 1.05em;
+  font-weight: normal;
+}
+
+.dropdown-menu .show-all {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.dropdown-menu .show-all:hover,
+.dropdown-menu .show-all:focus {
+  text-decoration: underline;
+}
+
+.dropdown-list .item {
+  width: 375px;
+  float: left
+}
+
+.dropdown-list .no-data {
+  display: none;
+  cursor: default;
+  padding: 10px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.dropdown-list .no-data:first-child {
+  display: block;
+}

@@ -1,0 +1,32 @@
+<div class="dropdown user-dropdown">
+  <button type="button" class="show-dropdown align-vertical" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <div class="user-picture">
+      <img src="http://localhost:8080/images/usuario/1.jpg">
+    </div>
+    <i class="fa fa-caret-down" aria-hidden="true"></i>
+  </button>
+
+  <div class="dropdown-menu" aria-labelledby="dropdown-button">
+    <ul class="dropdown-list" role="menu">
+      <li>
+        <a (click)="router($event)" class="link" href="/profile/test">
+          <i class="fa fa-user" aria-hidden="true"></i>Perfil
+        </a>
+      </li>
+
+      <li>
+        <a (click)="router($event)" class="link" href="/settings">
+          <i class="fa fa-cogs" aria-hidden="true"></i>Configuración
+        </a>
+      </li>
+
+      <li class="divider"></li>
+
+      <li>
+        <button (click)="logout()" class="link">
+          <i class="fa fa-sign-out" aria-hidden="true"></i>Salir
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

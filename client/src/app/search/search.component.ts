@@ -9,14 +9,7 @@ declare var $: any;
 })
 export class SearchComponent {
   changeTab(event: any) {
-    let target = $(event.target);
-
-    if (!target.is('a')) {
-      target = target.closest('a');
-    }
-
-    target.tab('show');
-
     event.preventDefault();
+    $(event.currentTarget).tab('show');
   }
 }

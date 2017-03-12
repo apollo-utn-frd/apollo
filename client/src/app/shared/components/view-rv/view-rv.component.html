@@ -2,7 +2,7 @@
   <div class="view-rv shadow">
     <div class="background">
       <section class="rv-map">
-        <sebm-google-map class="googe-map" [latitude]="51.678418" [longitude]="7.809007"></sebm-google-map>
+        <sebm-google-map [latitude]="51.678418" [longitude]="7.809007" class="google-map"></sebm-google-map>
         <!--<img class="rv-google-map" src="{{post.rutaViaje.imagenUrl}}">-->
       </section>
 
@@ -16,7 +16,8 @@
             <div class="wrapper-user-picture">
               <img class="user-picture" src="{{post.creador.imagenUrl}}">
             </div>
-            <a class="user-info" href="#">
+
+            <a (click)="router($event)" class="user-info" href="profile/{{post.creador.username}}">
               <strong class="user-nombre">{{post.creador.nombre}} {{post.creador.apellido}}</strong>
               <span class="username">@{{post.creador.username}}</span>
             </a>
@@ -24,27 +25,32 @@
 
           <div class="rv-data">
             <h4 class="rv-name">{{post.rutaViaje.nombre}}</h4>
+
             <div class="rv-description">
               <p>{{post.rutaViaje.descripcion}}</p>
             </div>
+
             <div class="rv-data-right">
-              <!-- <i class="rv-visibilidad fa fa-lock" aria-hidden="true" title="Privada"></i> -->
-              <i class="rv-visibilidad fa fa-globe" aria-hidden="true" title="Pública"></i>
+              <i *ngIf="post.rutaViaje.publico" class="rv-visibilidad fa fa-globe" aria-hidden="true" title="Pública"></i>
+              <i *ngIf="!post.rutaViaje.publico" class="rv-visibilidad fa fa-lock" aria-hidden="true" title="Privada"></i>
               <span class="rv-date-created"> · 10 min</span>
             </div>
           </div>
 
           <div class="actions">
-            <!-- Si la ruta de viaje fue creada por el usuario logueado agregar clase "disabled" -->
-            <!-- Si la ruta de viaje es privada ocultar este elemento PREGUNTAR A MATIAS-->
-            <button [ngClass]="esRutaPropia(post.rutaViaje)" class="compartir" (click)="shareButton($event, post.rutaViaje)">
-              <i class="fa fa-share" aria-hidden="true"></i><span class="cantidad">{{post.rutaViaje.compartidos.length}}</span>
+            <button *ngIf="post.rutaViaje.publico && !isCurrentUser(post.rutaViaje.creador)" (click)="shareButton($event, post.rutaViaje)" class="compartir" title="Compartir con tus seguidores">
+              <i class="fa fa-share" aria-hidden="true"></i>
+              <span class="cantidad">{{post.rutaViaje.compartidos.length}}</span>
             </button>
-            <button [ngClass]="esRutaPropia(post.rutaViaje)" class="favoritos" (click)="favButton($event, post.rutaViaje)">
-              <i class="fa fa-star" aria-hidden="true"></i><span class="cantidad">{{post.rutaViaje.favoritos.length}}</span>
+
+            <button *ngIf="!isCurrentUser(post.rutaViaje.creador)" (click)="favButton($event, post.rutaViaje)" class="favoritos" title="Mandar a favoritos">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <span class="cantidad">{{post.rutaViaje.favoritos.length}}</span>
             </button>
-            <button class="comentar" (click)="focusComment($event)">
-              <i class="fa fa-comment" aria-hidden="true"></i><span class="cantidad">{{post.rutaViaje.comentarios.length}}</span>
+
+            <button (click)="focusComment($event)" class="comentar" title="Comentar">
+              <i class="fa fa-comment" aria-hidden="true"></i>
+              <span class="cantidad">{{post.rutaViaje.comentarios.length}}</span>
             </button>
           </div>
         </div>
@@ -52,11 +58,11 @@
         <div class="comments pull-left-100">
           <div class="new-comment pull-left-100">
             <form [formGroup]="form" (ngSubmit)="onSubmit($event, post.rutaViaje)">
-            <textarea class="input-comment" rows="3" formControlName="contenido" placeholder="Escribe un comentario..."></textarea>
+              <textarea class="input-comment" rows="3" formControlName="contenido" placeholder="Escribe un comentario..."></textarea>
 
-            <button type="submit" class="btn-material btn-primary">
-              <span class="text">Publicar</span>
-            </button>
+              <button type="submit" class="btn-material btn-primary">
+                <span class="text">Publicar</span>
+              </button>
             </form>
           </div>
 

@@ -30,7 +30,7 @@ const routes: Routes = [
     component: SearchComponent
   },
   {
-    path: 'new/rv',
+    path: 'new',
     component: CreateRVComponent
   },
   {

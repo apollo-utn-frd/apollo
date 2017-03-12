@@ -27,7 +27,8 @@ import {
 
 import {
   NavBarComponent,
-  NotificationsComponent,
+  UserDropdownComponent,
+  NotificationDropdownComponent,
   NotificationItemComponent,
   NavBarLogoComponent,
   ProfileCardComponent,
@@ -65,7 +66,8 @@ import {
     CreationPanelComponent,
     PrivateUsersModalComponent,
     NavBarComponent,
-    NotificationsComponent,
+    UserDropdownComponent,
+    NotificationDropdownComponent,
     NotificationItemComponent,
     NavBarLogoComponent,
     ProfileCardComponent,

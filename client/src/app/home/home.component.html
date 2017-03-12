@@ -7,16 +7,15 @@
 -->
 
 <div class="contenido">
-  <apollo-profile-card class="profile-card" [user]="users$ | async" [seguir]="false"></apollo-profile-card>
+  <apollo-profile-card class="profile-card" [user]="users$ | async"></apollo-profile-card>
 
   <section id="publicaciones">
     <apollo-message-create-rv class="publicacion"></apollo-message-create-rv>
 
-      <apollo-preview-rv *ngFor="let unPost of posts"
-                         [post]="unPost"
-                         class="publicacion"
-                         >
-      </apollo-preview-rv>
-
+    <apollo-preview-rv *ngFor="let unPost of posts"
+                       [post]="unPost"
+                       class="publicacion"
+                       >
+    </apollo-preview-rv>
   </section>
 </div>

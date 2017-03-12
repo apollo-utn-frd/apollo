@@ -9,39 +9,35 @@
       <em class="username">@{{user.username}}</em>
 
       <div class="description">
-        <p> {{user.descripcion}} </p>
+        <p>{{user.descripcion}}</p>
       </div>
     </section>
 
-    <!--
-    Esta seccion solo debe mostrarse en el perfil de otros usuarios. No en la home ni en el perfil
-    del usuario logueado.
-    -->
-    <section [hidden]="!seguir" class="seguir">
+    <section *ngIf="!isCurrentUser(user)" class="seguir">
       <!--
       Si el usuario logueado ya sigue a este usuario.
       <button class="btn-material btn-danger">
         <i class="fa fa-user-times" aria-hidden="true"></i>Eliminar
       </button>
       -->
-      <button class="btn-material btn-primary" (click)="toggleButton($event)">
+      <button (click)="toggleButton($event)" class="btn-material btn-primary">
         <i class="fa fa-user-plus" aria-hidden="true"></i>
         <span class="text">Seguir</span>
       </button>
     </section>
 
-    <section [hidden]="!panelRutas" class="panel-statistics shadow">
+    <section *ngIf="panelRutas" class="panel-statistics shadow">
       <div id="creadas" class="statistics">
-          <h4 class="panel-title">
-            <a role="button" data-toggle="modal" data-target="#creadasModal">
-              <i class="fa fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
-            </a>
-          </h4>
-      </div> 
+        <h4 class="panel-title">
+          <a (click)="router($event)" href="/profile/{{user.username}}/routes">
+            <i class="fa fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
+          </a>
+        </h4>
+      </div>
 
       <div id="favoritas" class="statistics">
         <h4 class="panel-title">
-          <a role="button" data-toggle="modal" data-target="#favoritasModal">
+          <a (click)="router($event)" href="/profile/{{user.username}}/favorites">
             <i class="fa fa-star" aria-hidden="true"></i>{{user.favoritos.length}} viajes favoritos
           </a>
         </h4>
@@ -49,7 +45,7 @@
 
       <div id="seguidores" class="statistics">
         <h4 class="panel-title">
-          <a role="button" data-toggle="modal" data-target="#seguidoresModal">
+          <a (click)="router($event)" href="/profile/{{user.username}}/subscribers">
             <i class="fa fa-user-circle-o" aria-hidden="true"></i>{{user.seguidores.length}} seguidores
           </a>
         </h4>
@@ -57,91 +53,11 @@
 
       <div id="siguiendo" class="statistics">
         <h4 class="panel-title">
-          <a role="button" data-toggle="modal" data-target="#siguiendoModal">
+          <a (click)="router($event)" href="/profile/{{user.username}}/subscriptions">
             <i class="fa fa-user-circle" aria-hidden="true"></i>{{user.seguidos.length}} siguiendo
           </a>
         </h4>
       </div>
     </section>
-
-  <!-- Modal Creadas -->
-   <div class="modal fade" id="creadasModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title">Viajes Creados</h3>
-        </div>
-        <div class="modal-body">
-          <!-- En este div va la lista con las rv creadas a mostar -->
-          <li *ngFor="let rv of user.rutasViaje">
-            {{rv.nombre}}
-          </li>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <!-- Modal Favoritas -->
-   <div class="modal fade" id="favoritasModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title">Viajes Favoritos</h3>
-        </div>
-        <div class="modal-body">
-          <!-- En este div va la lista con las rv favoritas a mostar -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <!-- Modal Seguidores -->
-   <div class="modal fade" id="seguidoresModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title">Seguidores</h3>
-        </div>
-        <div class="modal-body">
-          <!-- En este div va la lista con los seguidores a mostar -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <!-- Modal Siguiendo -->
-   <div class="modal fade" id="siguiendoModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title">Siguiendo</h3>
-        </div>
-        <div class="modal-body">
-          <!-- En este div va la lista con los seguiendo a mostar -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   </div>
 </div>

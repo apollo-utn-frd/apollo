@@ -1,11 +1,11 @@
 <div class="preview-rv shadow">
   <div class="background pull-left-100">
-    <div [hidden]="!fueCompartida()" class="legend">
+    <div *ngIf="fueCompartida()" class="legend">
       <i class="fa fa-share" aria-hidden="true"></i>
       Compartido por <a href="#"><span class="username">{{nombresCompartidos()}}</span></a>
     </div>
 
-    <div class="rv-map" (click)="showViewRV($event)">
+    <div (click)="showViewRV($event)" class="rv-map">
       <img class="rv-picture" src="{{post.rutaViaje.imagenUrl}}">
       <div class="gradient"></div>
       <h4 class="rv-name">{{post.rutaViaje.nombre}}</h4>
@@ -13,8 +13,8 @@
 
     <div class="rv-body pull-left-100">
       <div class="rv-data">
-        <i [hidden]="post.rutaViaje.publico" class="rv-visibilidad fa fa-lock" aria-hidden="true" title="Privada"></i>
-        <i [hidden]="!post.rutaViaje.publico" class="rv-visibilidad fa fa-globe" aria-hidden="true" title="Pública"></i>
+        <i *ngIf="post.rutaViaje.publico" class="rv-visibilidad fa fa-globe" aria-hidden="true" title="Pública"></i>
+        <i *ngIf="!post.rutaViaje.publico" class="rv-visibilidad fa fa-lock" aria-hidden="true" title="Privada"></i>
         <span class="rv-date-created"> · 10 min</span>
       </div>
 
@@ -22,8 +22,9 @@
         <div class="wrapper-user-picture">
           <img class="user-picture" src="{{ post.creador.imagenUrl }}">
         </div>
-        <a class="user-info" href="#">
-          <strong class="user-nombre" (click)="goToUserProfile(post.creador.id)">
+
+        <a (click)="router($event)" class="user-info" href="/profile/{{ post.creador.username }}">
+          <strong class="user-nombre">
             {{ post.creador.nombre }} {{ post.creador.apellido }}
           </strong>
           <span class="username">@{{ post.creador.username }}</span>
@@ -31,14 +32,19 @@
       </div>
 
       <div class="actions">
-        <button [ngClass]="esRutaPropia(post.rutaViaje)" [hidden]="!post.rutaViaje.publico" class="compartir" (click)="shareButton($event, post.rutaViaje)">
-          <i class="fa fa-share" aria-hidden="true"></i><span class="cantidad">{{post.rutaViaje.compartidos.length}}</span>
+        <button *ngIf="post.rutaViaje.publico && !isCurrentUser(post.rutaViaje.creador)" (click)="shareButton($event, post.rutaViaje)" class="compartir" title="Compartir con tus seguidores">
+          <i class="fa fa-share" aria-hidden="true"></i>
+          <span class="cantidad">{{post.rutaViaje.compartidos.length}}</span>
         </button>
-        <button [ngClass]="esRutaPropia(post.rutaViaje)" class="favoritos" (click)="favButton($event, post.rutaViaje)">
-          <i class="fa fa-star" aria-hidden="true"></i><span class="cantidad">{{post.rutaViaje.favoritos.length}}</span>
+
+        <button *ngIf="!isCurrentUser(post.rutaViaje.creador)" (click)="favButton($event, post.rutaViaje)" class="favoritos" title="Mandar a favoritos">
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <span class="cantidad">{{post.rutaViaje.favoritos.length}}</span>
         </button>
-        <button class="comentar" (click)="showViewRV($event)">
-          <i class="fa fa-comment" aria-hidden="true"></i><span class="cantidad">{{post.rutaViaje.comentarios.length}}</span>
+
+        <button (click)="showViewRV($event)" class="comentar" title="Comentar">
+          <i class="fa fa-comment" aria-hidden="true"></i>
+          <span class="cantidad">{{post.rutaViaje.comentarios.length}}</span>
         </button>
       </div>
     </div>

@@ -9,13 +9,13 @@ declare var $: any;
 })
 
 export class CheckboxUserComponent {
+  checked: boolean = false;
+
   checkUser(event: any) {
-    let target = $(event.target);
+    this.checked = !this.checked;
+  }
 
-    if (!target.hasClass('checkbox-user')) {
-      target = target.closest('.checkbox-user');
-    }
-
-    target.toggleClass('checked');
+  classCheckbox() {
+    return {checkbox: true, shadow: true, checked: this.checked};
   }
 }

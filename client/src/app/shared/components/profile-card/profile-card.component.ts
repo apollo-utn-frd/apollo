@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { User } from '../../models/user';
+import {ApplicationState} from "../../store/state/application.state";
+import {Store} from "@ngrx/store";
+import {go} from "@ngrx/router-store";
 
 declare var $: any;
 
@@ -14,17 +17,29 @@ export class ProfileCardComponent {
   @Input() panelRutas: boolean = true;
   @Input() seguir: boolean = true;
 
-  toggleButton(event: any) {
-    let target = $(event.target);
+  currentUser: User;
 
-    if (!target.is('button')) {
-      target = target.closest('button');
-    }
+  constructor(private store: Store<ApplicationState>) {
+    this.store.select(state => state.storeData.currentUser)
+      .subscribe((user: User) => this.currentUser = user);
+  }
+
+  toggleButton(event: any) {
+    let target = $(event.currentTarget);
 
     let btnText = target.hasClass('btn-primary') ? 'Dejar de seguir' : 'Seguir';
 
     target.toggleClass('btn-primary').toggleClass('btn-danger');
     target.find('.fa').toggleClass('fa-user-plus').toggleClass('fa-user-times');
     target.find('.text').text(btnText);
+  }
+
+  isCurrentUser(user: User): boolean {
+    return user.id === this.currentUser.id;
+  }
+
+  router(event: any) {
+    event.preventDefault();
+    this.store.dispatch(go(event.currentTarget.getAttribute('href')));
   }
 }

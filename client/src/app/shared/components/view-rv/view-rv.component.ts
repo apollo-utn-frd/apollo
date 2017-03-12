@@ -27,12 +27,12 @@ export class ViewRVComponent implements OnInit {
   @Input() post: Post;
 
   /* Usuario actualmente logueado */
-  user: User;
+  currentUser: User;
   comentarios: Comentario[];
 
   constructor(private ref: ChangeDetectorRef, private store: Store<ApplicationState>) {
     this.store.select(state => state.storeData.currentUser)
-      .subscribe((user: User) => this.user = user);
+      .subscribe((user: User) => this.currentUser = user);
     this.store.select(state => state.uiState.commentsFromCurrentRV)
       .subscribe((cs: Comentario[]) => this.comentarios = cs.filter(c => c.rutaViaje.id === this.post.rutaViaje.id));
     this.form = new FormGroup({
@@ -45,11 +45,13 @@ export class ViewRVComponent implements OnInit {
       .map((objetoID: {id: number}) => objetoID.id)
       .forEach((id: number) => this.store.dispatch(new LoadCommentAction(id)));
   }
-  /* Funcion que chequea si la ruta que se pasa por parametro fue creada por el usuario actual
-   * En caso afirmativo, devuelve un objeto de configuracion para setear en disabled un componente
-   * */
-  esRutaPropia(rv: RV): Object {
-    return (this.user.id === rv.creador.id) ? {'disabled': true} : {'disabled': false}
+
+  fueCompartida(): boolean {
+    return this.post.compartidos.length > 0;
+  }
+
+  isCurrentUser(user: User): boolean {
+    return user.id === this.currentUser.id;
   }
 
   onSubmit(event: any, rv: RV) {
@@ -66,14 +68,13 @@ export class ViewRVComponent implements OnInit {
       .forEach((id: number) => this.store.dispatch(new LoadCommentAction(id)));
   }
 
+  router(event: any) {
+    event.preventDefault();
+    this.store.dispatch(go(event.currentTarget.getAttribute('href')));
+  }
+
   toggleButton(event: any) {
-    let target = $(event.target);
-
-    if (!target.is('button')) {
-      target = target.closest('button');
-    }
-
-    target.toggleClass('activo');
+    $(event.currentTarget).toggleClass('activo');
   }
 
   shareButton(event: any, rv: RV) {
@@ -86,20 +87,16 @@ export class ViewRVComponent implements OnInit {
     this.store.dispatch(new FavRVAction(rv));
   }
 
-
   focusComment(event: any) {
-    $(event.target)
+    $(event.currentTarget)
       .closest('apollo-view-rv')
-      .find('.input-comment')[0]
+      .find('.input-comment')
+      .first()
       .focus();
   }
 
   addComment(event: any) {
-    let target = $(event.target);
-
-    if (!target.is('button')) {
-      target = target.closest('button');
-    }
+    let target = $(event.currentTarget);
 
     target.prop('disabled', true);
 
