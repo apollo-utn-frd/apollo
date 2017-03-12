@@ -34,7 +34,7 @@ const routes: Routes = [
     component: CreateRVComponent
   },
   {
-    path: 'profile/test',
+    path: 'profile/:username',
     component: ProfileUserComponent
   }
 ];

@@ -20,14 +20,14 @@
 
       <div class="rv-user pull-left-100">
         <div class="wrapper-user-picture">
-          <img class="user-picture" src="{{ post.creador.imagenUrl }}">
+          <img class="user-picture" src="{{post.creador.imagenUrl}}">
         </div>
 
-        <a (click)="router($event)" class="user-info" href="/profile/{{ post.creador.username }}">
+        <a routerLink="/profile/{{post.creador.username}}" class="user-info">
           <strong class="user-nombre">
-            {{ post.creador.nombre }} {{ post.creador.apellido }}
+            {{post.creador.nombre}} {{post.creador.apellido}}
           </strong>
-          <span class="username">@{{ post.creador.username }}</span>
+          <span class="username">@{{post.creador.username}}</span>
         </a>
       </div>
 

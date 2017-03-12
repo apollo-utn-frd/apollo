@@ -19,16 +19,15 @@ declare var $: any;
   styleUrls: ['./view-rv.component.css']
 })
 export class ViewRVComponent implements OnInit {
-
-  /* Formulario para enviar comentario */
-  form: FormGroup;
-
   /* Post que contiene la RV */
   @Input() post: Post;
 
   /* Usuario actualmente logueado */
   currentUser: User;
   comentarios: Comentario[];
+
+  /* Formulario para enviar comentario */
+  form: FormGroup;
 
   constructor(private ref: ChangeDetectorRef, private store: Store<ApplicationState>) {
     this.store.select(state => state.storeData.currentUser)
@@ -66,11 +65,6 @@ export class ViewRVComponent implements OnInit {
     post.rutaViaje.comentarios
       .map((objetoID: {id: number}) => objetoID.id)
       .forEach((id: number) => this.store.dispatch(new LoadCommentAction(id)));
-  }
-
-  router(event: any) {
-    event.preventDefault();
-    this.store.dispatch(go(event.currentTarget.getAttribute('href')));
   }
 
   toggleButton(event: any) {

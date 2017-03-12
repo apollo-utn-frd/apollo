@@ -1,4 +1,3 @@
-
 import {Component, OnInit} from '@angular/core';
 import { NavBarComponent, ProfileCardComponent } from '../shared/components/index';
 import { Store } from '@ngrx/store';
@@ -9,8 +8,6 @@ import {UpdatePostsAction, LoadCommentAction} from "../shared/store/actions/ui.a
 import {Post} from "../shared/models/post";
 import {PreviewRVComponent} from "../shared/components/preview-rv/preview-rv.component";
 
-declare var $: any;
-
 @Component({
     selector: 'apollo-home',
     templateUrl: 'home.component.html',
@@ -18,14 +15,13 @@ declare var $: any;
     providers: [NavBarComponent, ProfileCardComponent, PreviewRVComponent]
 })
 export class HomeComponent implements OnInit {
-
   users$: Observable<User>;
   posts: Post[];
 
   constructor(private store: Store<ApplicationState>) {
     this.users$ = this.store.select(st => st.storeData.currentUser);
     this.store.dispatch(new UpdatePostsAction());
-     this.store.select((state: ApplicationState) => state.uiState.posts)
+    this.store.select((state: ApplicationState) => state.uiState.posts)
       .subscribe(posts => this.posts = posts)
   }
 

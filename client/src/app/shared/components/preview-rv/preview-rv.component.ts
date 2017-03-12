@@ -5,7 +5,6 @@ import {ApplicationState} from "../../store/state/application.state";
 import {Store} from "@ngrx/store";
 import {ShareRVAction, FavRVAction} from "../../store/actions/rv.actions";
 import {User} from "../../models/user";
-import {go} from "@ngrx/router-store";
 import {UserMinVM} from "../../models/userMin.vm";
 
 declare var $: any;
@@ -18,7 +17,6 @@ declare var $: any;
 export class PreviewRVComponent {
   @Input() publica: boolean = true;
   @Input() compartida: boolean = false;
-
   @Input() post: Post;
 
   currentUser: User;
@@ -54,11 +52,6 @@ export class PreviewRVComponent {
     $.fn.modal.Constructor.prototype.setScrollbar = function () {
       this.originalBodyPad = document.body.style.paddingRight || '';
     }
-  }
-
-  router(event: any) {
-    event.preventDefault();
-    this.store.dispatch(go(event.currentTarget.getAttribute('href')));
   }
 
   toggleButton(event: any) {

@@ -29,7 +29,7 @@
     <section *ngIf="panelRutas" class="panel-statistics shadow">
       <div id="creadas" class="statistics">
         <h4 class="panel-title">
-          <a (click)="router($event)" href="/profile/{{user.username}}/routes">
+          <a routerLink="/profile/{{user.username}}/routes">
             <i class="fa fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
           </a>
         </h4>
@@ -37,7 +37,7 @@
 
       <div id="favoritas" class="statistics">
         <h4 class="panel-title">
-          <a (click)="router($event)" href="/profile/{{user.username}}/favorites">
+          <a routerLink="/profile/{{user.username}}/favorites">
             <i class="fa fa-star" aria-hidden="true"></i>{{user.favoritos.length}} viajes favoritos
           </a>
         </h4>
@@ -45,7 +45,7 @@
 
       <div id="seguidores" class="statistics">
         <h4 class="panel-title">
-          <a (click)="router($event)" href="/profile/{{user.username}}/subscribers">
+          <a routerLink="/profile/{{user.username}}/subscribers">
             <i class="fa fa-user-circle-o" aria-hidden="true"></i>{{user.seguidores.length}} seguidores
           </a>
         </h4>
@@ -53,7 +53,7 @@
 
       <div id="siguiendo" class="statistics">
         <h4 class="panel-title">
-          <a (click)="router($event)" href="/profile/{{user.username}}/subscriptions">
+          <a routerLink="/profile/{{user.username}}/subscriptions">
             <i class="fa fa-user-circle" aria-hidden="true"></i>{{user.seguidos.length}} siguiendo
           </a>
         </h4>

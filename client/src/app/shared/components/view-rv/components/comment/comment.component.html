@@ -3,7 +3,7 @@
     <img class="user-picture" src="{{comment.usuario.imagenUrl}}">
   </div>
   <div class="comment-info">
-    <a (click)="router($event)" class="user-info" href="/profile/{{comment.usuario.username}}">
+    <a routerLink="/profile/{{comment.usuario.username}}" class="user-info">
       <strong class="user-nombre">{{comment.usuario.nombre}} {{comment.usuario.apellido}}</strong>
       <span class="username">@{{comment.usuario.username}}</span>
     </a>

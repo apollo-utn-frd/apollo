@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-
-declare var $: any;
+import { Component, Input } from '@angular/core';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'apollo-preview-user',
@@ -9,4 +8,5 @@ declare var $: any;
 })
 
 export class PreviewUserComponent {
+  @Input() user: User;
 }

@@ -1,15 +1,15 @@
 <div class="preview-user shadow">
   <div class="background">
     <div class="wrapper-picture">
-      <img class="user-picture" src="http://localhost:8080/images/usuario/1.jpg">
+      <img class="user-picture" src="{{user.imagenUrl}}" alt="Avatar">
     </div>
     <div class="user-info">
-      <a (click)="router($event)" href="#" class="username-nombre">
-        <strong class="user-nombre">Jon Snow</strong>
-        <span class="username">@test</span>
+      <a routerLink="/profile/{{user.username}}" class="username-nombre">
+        <strong class="user-nombre">{{user.nombre}} {{user.apellido}}</strong>
+        <span class="username">@{{user.username}}</span>
       </a>
       <span class="rv-creadas">
-        <i class="fa fa-plane" aria-hidden="true"></i>9 viajes creados
+        <i class="fa fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
       </span>
     </div>
   </div>

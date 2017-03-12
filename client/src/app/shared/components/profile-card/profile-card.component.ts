@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { User } from '../../models/user';
 import {ApplicationState} from "../../store/state/application.state";
 import {Store} from "@ngrx/store";
-import {go} from "@ngrx/router-store";
 
 declare var $: any;
 
@@ -36,10 +35,5 @@ export class ProfileCardComponent {
 
   isCurrentUser(user: User): boolean {
     return user.id === this.currentUser.id;
-  }
-
-  router(event: any) {
-    event.preventDefault();
-    this.store.dispatch(go(event.currentTarget.getAttribute('href')));
   }
 }
