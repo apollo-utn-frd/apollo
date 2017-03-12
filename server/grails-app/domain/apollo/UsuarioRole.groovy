@@ -48,7 +48,7 @@ class UsuarioRole implements Serializable {
 
     static UsuarioRole create(Usuario usuario, Role role) {
         UsuarioRole instance = new UsuarioRole(usuario: usuario, role: role)
-        instance.save()
+        instance.save(flush: true)
         instance
     }
 

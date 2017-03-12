@@ -8,10 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.rest.oauth.OauthUser
 import grails.plugin.springsecurity.rest.oauth.OauthUserDetailsService
-import grails.transaction.Transactional
 
 @Slf4j
-@Transactional
 
 class SecurityService implements OauthUserDetailsService {
     static transactional = false
@@ -24,8 +22,9 @@ class SecurityService implements OauthUserDetailsService {
     /**
      * Devuelve el usuario logueado actualmente. Si no hay ningun usuario logueado devuelve null.
      */
-    @Transactional(readOnly = true)
     Usuario currentUser() {
+        log.debug "currentUser(): ${springSecurityService.principal}."
+
         try {
             Usuario.findByIdGoogle(springSecurityService.principal.userProfile.id)
         } catch (MissingPropertyException e) {
@@ -40,7 +39,7 @@ class SecurityService implements OauthUserDetailsService {
      */
     OauthUser loadUserByUserProfile(CommonProfile userProfile, Collection<GrantedAuthority> defaultRoles)
         throws UsernameNotFoundException {
-        log.info "Buscando usuario con perfil: ${userProfile}."
+        log.debug "Buscando usuario con perfil: ${userProfile}."
 
         Usuario usuario = Usuario.findByIdGoogle(userProfile.id)
 
@@ -48,9 +47,9 @@ class SecurityService implements OauthUserDetailsService {
             usuario = createUsuario(userProfile, defaultRoles)
         }
 
-        log.info "Se obtuvo ${usuario}. Creando OauthUser."
+        log.debug "Se obtuvo ${usuario}. Creando OauthUser."
 
-        new OauthUser(usuario.username, usuario.password, defaultRoles, userProfile)
+        new OauthUser(usuario.username, usuario.password, usuario.authorities, userProfile)
     }
 
     /**
