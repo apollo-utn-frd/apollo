@@ -13,8 +13,6 @@ declare var $: any;
 
 export class ProfileCardComponent {
   @Input() user: User;
-  @Input() panelRutas: boolean = true;
-  @Input() seguir: boolean = true;
 
   currentUser: User;
 

@@ -45,10 +45,6 @@ export class ViewRVComponent implements OnInit {
       .forEach((id: number) => this.store.dispatch(new LoadCommentAction(id)));
   }
 
-  fueCompartida(): boolean {
-    return this.post.compartidos.length > 0;
-  }
-
   isCurrentUser(user: User): boolean {
     return user.id === this.currentUser.id;
   }
@@ -84,7 +80,7 @@ export class ViewRVComponent implements OnInit {
   focusComment(event: any) {
     $(event.currentTarget)
       .closest('apollo-view-rv')
-      .find('.input-comment')
+      .find('.new-comment .input')
       .first()
       .focus();
   }
@@ -96,7 +92,7 @@ export class ViewRVComponent implements OnInit {
 
     let compartirSize = target
       .closest('.view-rv')
-      .find('.comentar .cantidad');
+      .find('.comentarios .cantidad');
 
     compartirSize.text(parseInt(compartirSize.text(), 10) + 1);
 

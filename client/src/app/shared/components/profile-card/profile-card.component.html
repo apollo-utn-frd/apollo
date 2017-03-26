@@ -1,19 +1,19 @@
-<div class="pcard shadow">
-  <div class="pcard-body pull-right">
+<div class="pcard shadow radius">
+  <article class="user">
     <section class="avatar">
-     <img class="img-responsive" src="{{user.imagenUrl}}" alt="Avatar">
+      <img class="img-responsive" src="{{user.imagenUrl}}" alt="Avatar @{{user.username}}">
     </section>
 
     <section class="info-user">
-      <h2>{{user.nombre}} {{user.apellido}}</h2>
-      <em class="username">@{{user.username}}</em>
+      <h3>{{user.nombre}} {{user.apellido}}</h3>
+      <span class="username">@{{user.username}}</span>
 
       <div class="description">
         <p>{{user.descripcion}}</p>
       </div>
     </section>
 
-    <section *ngIf="!isCurrentUser(user)" class="seguir">
+    <section *ngIf="!isCurrentUser(user)" class="seguir center-x">
       <!--
       Si el usuario logueado ya sigue a este usuario.
       <button class="btn-material btn-danger">
@@ -21,43 +21,27 @@
       </button>
       -->
       <button (click)="toggleButton($event)" class="btn-material btn-primary">
-        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        <i class="fa fa-fw fa-user-plus" aria-hidden="true"></i>
         <span class="text">Seguir</span>
       </button>
     </section>
+  </article>
 
-    <section *ngIf="panelRutas" class="panel-statistics shadow">
-      <div id="creadas" class="statistics">
-        <h4 class="panel-title">
-          <a routerLink="/profile/{{user.username}}/routes">
-            <i class="fa fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
-          </a>
-        </h4>
-      </div>
+  <article class="sidebar">
+    <a routerLink="/profile/{{user.username}}/travels" class="sidebar-item creados">
+      <i class="fa fa-fw fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
+    </a>
 
-      <div id="favoritas" class="statistics">
-        <h4 class="panel-title">
-          <a routerLink="/profile/{{user.username}}/favorites">
-            <i class="fa fa-star" aria-hidden="true"></i>{{user.favoritos.length}} viajes favoritos
-          </a>
-        </h4>
-      </div>
+    <a routerLink="/profile/{{user.username}}/favorites" class="sidebar-item favoritos">
+      <i class="fa fa-fw fa-star" aria-hidden="true"></i>{{user.favoritos.length}} viajes favoritos
+    </a>
 
-      <div id="seguidores" class="statistics">
-        <h4 class="panel-title">
-          <a routerLink="/profile/{{user.username}}/subscribers">
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i>{{user.seguidores.length}} seguidores
-          </a>
-        </h4>
-      </div>
+    <a routerLink="/profile/{{user.username}}/subscribers" class="sidebar-item seguidores">
+      <i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>{{user.seguidores.length}} seguidores
+    </a>
 
-      <div id="siguiendo" class="statistics">
-        <h4 class="panel-title">
-          <a routerLink="/profile/{{user.username}}/subscriptions">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>{{user.seguidos.length}} siguiendo
-          </a>
-        </h4>
-      </div>
-    </section>
-  </div>
+    <a routerLink="/profile/{{user.username}}/subscriptions" class="sidebar-item siguiendo">
+      <i class="fa fa-fw fa-user-circle" aria-hidden="true"></i>{{user.seguidos.length}} siguiendo
+    </a>
+  </article>
 </div>

@@ -1,79 +1,66 @@
-<div class="modal fade in">
-  <div class="view-rv shadow">
-    <div class="background">
-      <section class="rv-map">
-        <sebm-google-map [latitude]="51.678418" [longitude]="7.809007" class="google-map"></sebm-google-map>
-        <!--<img class="rv-google-map" src="{{post.rutaViaje.imagenUrl}}">-->
-      </section>
+<article class="view-rv shadow radius">
+  <section class="map center-y">
+    <sebm-google-map [latitude]="51.678418" [longitude]="7.809007" class="google-map"></sebm-google-map>
+  </section>
 
-      <section class="rv-body">
-        <div class="rv-info">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <section class="body">
+    <div class="info">
+      <div class="metadata hidden-xs">
+        <i *ngIf="post.rutaViaje.publico" class="fa fa-fw fa-globe" aria-hidden="true" title="Pública"></i>
+        <i *ngIf="!post.rutaViaje.publico" class="fa fa-fw fa-lock" aria-hidden="true" title="Privada"></i>
+        <span class="date"> · 10 min</span>
+      </div>
 
-          <div class="rv-user">
-            <div class="wrapper-user-picture">
-              <img class="user-picture" src="{{post.creador.imagenUrl}}">
-            </div>
+      <div class="user flex">
+        <a routerLink="/profile/{{post.creador.username}}" class="avatar">
+          <img class="img-responsive" src="{{post.creador.imagenUrl}}" alt="Avatar @{{post.creador.username}}">
+        </a>
 
-            <a routerLink="/profile/{{post.creador.username}}" class="user-info">
-              <strong class="user-nombre">{{post.creador.nombre}} {{post.creador.apellido}}</strong>
-              <span class="username">@{{post.creador.username}}</span>
-            </a>
-          </div>
+        <a routerLink="/profile/{{post.creador.username}}" class="user-info">
+          <strong class="user-nombre">{{post.creador.nombre}} {{post.creador.apellido}}</strong>
+          <span class="username">@{{post.creador.username}}</span>
+        </a>
+      </div>
 
-          <div class="rv-data">
-            <h4 class="rv-name">{{post.rutaViaje.nombre}}</h4>
+      <div class="data">
+        <h4 class="name">{{post.rutaViaje.nombre}}</h4>
 
-            <div class="rv-description">
-              <p>{{post.rutaViaje.descripcion}}</p>
-            </div>
-
-            <div class="rv-data-right">
-              <i *ngIf="post.rutaViaje.publico" class="rv-visibilidad fa fa-globe" aria-hidden="true" title="Pública"></i>
-              <i *ngIf="!post.rutaViaje.publico" class="rv-visibilidad fa fa-lock" aria-hidden="true" title="Privada"></i>
-              <span class="rv-date-created"> · 10 min</span>
-            </div>
-          </div>
-
-          <div class="actions">
-            <button *ngIf="post.rutaViaje.publico && !isCurrentUser(post.rutaViaje.creador)" (click)="shareButton($event, post.rutaViaje)" class="compartir" title="Compartir con tus seguidores">
-              <i class="fa fa-share" aria-hidden="true"></i>
-              <span class="cantidad">{{post.rutaViaje.compartidos.length}}</span>
-            </button>
-
-            <button *ngIf="!isCurrentUser(post.rutaViaje.creador)" (click)="favButton($event, post.rutaViaje)" class="favoritos" title="Mandar a favoritos">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <span class="cantidad">{{post.rutaViaje.favoritos.length}}</span>
-            </button>
-
-            <button (click)="focusComment($event)" class="comentar" title="Comentar">
-              <i class="fa fa-comment" aria-hidden="true"></i>
-              <span class="cantidad">{{post.rutaViaje.comentarios.length}}</span>
-            </button>
-          </div>
+        <div class="description">
+          <p>{{post.rutaViaje.descripcion}}</p>
         </div>
+      </div>
 
-        <div class="comments pull-left-100">
-          <div class="new-comment pull-left-100">
-            <form [formGroup]="form" (ngSubmit)="onSubmit($event, post.rutaViaje)">
-              <textarea class="input-comment" rows="3" formControlName="contenido" placeholder="Escribe un comentario..."></textarea>
+      <div class="actions">
+        <button *ngIf="!isCurrentUser(post.rutaViaje.creador)" (click)="favButton($event, post.rutaViaje)" class="favoritos" title="Mandar a favoritos">
+          <i class="fa fa-fw fa-star" aria-hidden="true"></i>
+          <span class="cantidad">{{post.rutaViaje.favoritos.length}}</span>
+        </button>
 
-              <button type="submit" class="btn-material btn-primary">
-                <span class="text">Publicar</span>
-              </button>
-            </form>
-          </div>
-
-          <div class="list-comments">
-            <apollo-comment *ngFor="let comentario of comentarios"
-                            [comment]="comentario"
-                            class="comment">
-            </apollo-comment>
-          </div>
-        </div>
-      </section>
+        <button (click)="focusComment($event)" class="comentarios" title="Comentar">
+          <i class="fa fa-fw fa-comment" aria-hidden="true"></i>
+          <span class="cantidad">{{post.rutaViaje.comentarios.length}}</span>
+        </button>
+      </div>
     </div>
-  </div>
-</div>
+
+    <div class="comments">
+      <div class="new-comment">
+        <form [formGroup]="form" (ngSubmit)="onSubmit($event, post.rutaViaje)" class="form">
+          <textarea class="input" rows="3" formControlName="contenido" placeholder="Escribe un comentario..."></textarea>
+
+          <button type="submit" class="btn-material btn-primary">
+            <span class="text">Publicar</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="list-comments">
+        <apollo-comment
+          *ngFor="let comentario of comentarios"
+          [comment]="comentario"
+          class="comment"
+        ></apollo-comment>
+      </div>
+    </div>
+  </section>
+</article>

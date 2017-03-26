@@ -1,21 +1,19 @@
 <apollo-navbar></apollo-navbar>
 
-<!--
-<button id="expand">
-  <i class="fa fa-chevron-left" aria-hidden="true"></i>
-</button>
--->
-
-<div class="contenido">
-  <apollo-profile-card class="profile-card" [user]="users$ | async"></apollo-profile-card>
-
-  <section id="publicaciones">
-    <apollo-message-create-rv class="publicacion"></apollo-message-create-rv>
-
-    <apollo-preview-rv *ngFor="let unPost of posts"
-                       [post]="unPost"
-                       class="publicacion"
-                       >
-    </apollo-preview-rv>
+<article class="contenido">
+  <section class="col-md-3 col-sm-6 profile-card">
+    <div class="row">
+      <apollo-profile-card [user]="users$ | async"></apollo-profile-card>
+    </div>
   </section>
-</div>
+
+  <section class="col-md-9 col-sm-6 publicaciones">
+    <div class="row">
+      <div *ngFor="let unPost of posts" class="col-md-6 publicacion">
+        <div class="row">
+          <apollo-preview-rv [post]="unPost"></apollo-preview-rv>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>

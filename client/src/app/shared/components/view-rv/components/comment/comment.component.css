@@ -1,34 +1,33 @@
-.comment-header {
+.info {
+  position: relative;
   width: 100%;
 }
 
-.username {
-  color: #696262;
+.metadata {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
-.wrapper-user-picture {
+.avatar {
   width: 50px;
   display: inline-block;
   margin-right: 8px;
 }
 
-.wrapper-user-picture .user-picture {
-  width: 100%;
+.user-info:hover {
+  text-decoration: none;
 }
 
-.comment-date-created {
+.username {
   display: block;
 }
 
-.comment-content {
+.content {
   margin-top: 10px;
   width: 100%;
 }
 
-.comment-content p:last-of-type {
-  margin-bottom: 5px;
-}
-
-.comment-content p:last-of-type {
+.content p:last-of-type {
   margin-bottom: 0;
 }

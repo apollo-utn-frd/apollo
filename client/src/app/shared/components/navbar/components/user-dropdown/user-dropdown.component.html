@@ -1,6 +1,6 @@
 <div class="dropdown user-dropdown">
-  <button type="button" class="show-dropdown align-vertical" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <div class="user-picture">
+  <button type="button" class="show-dropdown center-y" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <div class="user-picture radius">
       <img src="{{user.imagenUrl}}">
     </div>
     <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -10,13 +10,13 @@
     <ul class="dropdown-list" role="menu">
       <li>
         <a routerLink="/profile/{{user.username}}" class="link">
-          <i class="fa fa-user" aria-hidden="true"></i>Perfil
+          <i class="fa fa-fw fa-user" aria-hidden="true"></i>Perfil
         </a>
       </li>
 
       <li>
         <a routerLink="/settings" class="link">
-          <i class="fa fa-cogs" aria-hidden="true"></i>Configuración
+          <i class="fa fa-fw fa-cogs" aria-hidden="true"></i>Configuración
         </a>
       </li>
 
@@ -24,7 +24,7 @@
 
       <li>
         <button (click)="logout()" class="link">
-          <i class="fa fa-sign-out" aria-hidden="true"></i>Salir
+          <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>Salir
         </button>
       </li>
     </ul>

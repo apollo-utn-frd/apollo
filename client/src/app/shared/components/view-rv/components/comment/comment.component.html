@@ -1,16 +1,22 @@
-<div class="comment-header flex">
-  <div class="wrapper-user-picture">
-    <img class="user-picture" src="{{comment.usuario.imagenUrl}}">
-  </div>
-  <div class="comment-info">
-    <a routerLink="/profile/{{comment.usuario.username}}" class="user-info">
-      <strong class="user-nombre">{{comment.usuario.nombre}} {{comment.usuario.apellido}}</strong>
-      <span class="username">@{{comment.usuario.username}}</span>
-    </a>
-    <span class="comment-date-created">5 min</span>
-  </div>
-</div>
+<article class="comment">
+  <section class="info">
+    <div class="metadata hidden-xs">
+      <span class="date">{{comment.dateCreated}}</span>
+    </div>
 
-<div class="comment-content">
-  <p>{{comment.contenido}}</p>
-</div>
+    <div class="user flex">
+      <a routerLink="/profile/{{comment.usuario.username}}" class="avatar">
+        <img class="img-responsive" src="{{comment.usuario.imagenUrl}}" alt="Avatar @{{comment.usuario.username}}">
+      </a>
+
+      <a routerLink="/profile/{{comment.usuario.username}}" class="user-info">
+        <strong class="user-nombre">{{comment.usuario.nombre}} {{comment.usuario.apellido}}</strong>
+        <span class="username">@{{comment.usuario.username}}</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="content">
+    <p>{{comment.contenido}}</p>
+  </section>
+</article>

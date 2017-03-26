@@ -1,69 +1,27 @@
-.img-responsive {
+.pcard {
   width: 100%;
 }
 
-.pcard {
-  overflow: hidden;
-  background: #ffffff;
-  border-radius: 4px;
-  text-align: left;
-}
-
-.pcard-body {
+.user {
   width: 100%;
   background-color: #fff;
 }
 
 .info-user {
-  padding: 5px 15px 25px;
-  float: left;
-  background-color: #fff;
   width: 100%;
+  padding: 25px 16px;
 }
 
-.info-user h2 {
+.info-user h3 {
+  margin-top: 0;
   margin-bottom: 5px;
 }
 
-.info-user em {
-  padding-bottom: 10px;
-  float: left;
-}
-
-.info-user .description {
-  float: left;
-  width: 100%;
-}
-
-.info-user .description p:last-of-type {
+.description p:last-of-type {
   margin: 0;
 }
 
-.seguir:not([hidden]) {
+.seguir {
   width: 100%;
-  display: flex;
-  justify-content: center;
   padding-bottom: 20px;
-}
-
-.panel-statistics {
-  float: left;
-  width: 100%;
-  margin-bottom: 0;
-}
-
-.statistics {
-  float: left;
-  width: 100%;
-  margin-bottom: 0;
-  padding: 10px 15px;
-  background-color: #f3f3f3;
-}
-
-.statistics + .statistics {
-  border-top: 1px solid #ddd;
-}
-
-.fa {
-  margin-right: 7px;
 }

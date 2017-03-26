@@ -1,24 +1,15 @@
 .preview-user {
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.background {
   background-color: #fff;
   display: flex;
   justify-content: space-between;
 }
 
-.wrapper-picture {
-  width: 35%;
-  display: inline-block;
+.avatar {
+  width: 70px;
+  margin-right: 10px;
 }
 
-.wrapper-picture .user-picture {
-  width: 100%;
-}
-
-.user-info {
+.info {
   padding: 5px 10px;
   width: 65%;
   display: flex;
@@ -26,15 +17,15 @@
   justify-content: space-between;
 }
 
-.username-nombre {
+.data {
   width: 100%;
 }
 
-.rv-creadas {
+.creados {
   display: block;
 }
 
-.rv-creadas .fa {
+.creados .fa {
   margin-right: 6px;
   position: relative;
   top: 1px;

@@ -1,35 +1,14 @@
 .preview-rv {
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.background {
   background-color: #fff;
 }
 
-.legend {
-  padding: 10px;
-}
-
-.legend .username {
-  display: inline;
-}
-
-.legend .fa {
-  margin: 0 5px;
-}
-
-.rv-map {
+.map {
   position: relative;
   cursor: pointer;
-  min-height: 200px;
+  min-height: 100px;
 }
 
-.rv-map .rv-picture {
-  width: 100%;
-}
-
-.rv-map .gradient {
+.map .gradient {
   background: linear-gradient(180deg, rgba(249,249,249,0), rgba(249,249,249,0),rgba(249,249,249,0), rgba(249,249,249,0.5), rgba(249,249,249,1));
   width: 100%;
   height: 100%;
@@ -37,61 +16,57 @@
   top: 0;
 }
 
-.rv-map .rv-name {
+.map .rv-name {
   margin: 0;
-  margin-left: 10px;
   position: absolute;
   bottom: 10px;
+  left: 10px;
 }
 
-.rv-body {
-  position: relative;
-}
-
-.rv-data {
-  position: absolute;
-  right: 0;
-  margin: 10px 15px;
-}
-
-.rv-user {
-  padding: 10px 10px 0;
-}
-
-.rv-user .wrapper-user-picture {
-  float: left;
-  width: 15%;
-  display: inline-block;
-}
-
-.rv-user .user-picture {
+.info {
   width: 100%;
-  padding-right: 10px;
+  position: relative;
+  padding: 12px;
 }
 
-.rv-user .user-info {
-  display: inline-block;
+.metadata {
+  position: absolute;
+  top: 12px;
+  right: 15px;
 }
 
-.rv-user .username {
-  display: block;
-  margin-bottom: 2px;
+.user .avatar {
+  width: 15%;
+  margin-right: 10px;
 }
 
-.rv-user .user-info:hover {
+.user .user-info {
+  align-self: flex-start;
+}
+
+.user .user-info:hover {
   text-decoration: none;
 }
 
+.user .username {
+  display: block;
+}
+
+.modal {
+  background-color: rgba(73, 75, 76, 0.75);
+  padding: 70px;
+}
+
 .actions {
-  display: inline-block;
-  float: left;
-  padding: 0 10px 5px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 3px;
 }
 
 .actions button {
-  height: 35px;
   margin: 0;
-  padding: 5px;
+  padding: 0;
+  margin-left: 15px;
   border: none;
   background-color: transparent;
 }
@@ -110,5 +85,5 @@
 }
 
 .actions button .fa {
-  margin-right: 7px;
+  margin-right: 2px;
 }

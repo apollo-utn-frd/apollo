@@ -4,8 +4,6 @@
 
 .user-picture {
   height: 34px;
-  border-radius: 4px;
-  overflow: hidden;
   margin-right: 5px;
 }
 
@@ -20,7 +18,6 @@
 
 .dropdown-list li {
   margin: 10px 12px;
-  margin-left: 7px;
 }
 
 .dropdown-list li.divider {

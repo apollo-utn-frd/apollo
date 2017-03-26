@@ -1,54 +1,45 @@
-<div class="preview-rv shadow">
-  <div class="background pull-left-100">
-    <div *ngIf="fueCompartida()" class="legend">
-      <i class="fa fa-share" aria-hidden="true"></i>
-      Compartido por <a href="#"><span class="username">{{nombresCompartidos()}}</span></a>
+<article class="preview-rv shadow radius">
+  <section (click)="showViewRV($event)" class="map">
+    <img class="img-responsive" src="{{post.rutaViaje.imagenUrl}}">
+    <div class="gradient"></div>
+    <h4 class="name">{{post.rutaViaje.nombre}}</h4>
+  </section>
+
+  <section class="info">
+    <div class="metadata hidden-xs">
+      <i *ngIf="post.rutaViaje.publico" class="fa fa-fw fa-globe" aria-hidden="true" title="Pública"></i>
+      <i *ngIf="!post.rutaViaje.publico" class="fa fa-fw fa-lock" aria-hidden="true" title="Privada"></i>
+      <span class="date"> · 10 min</span>
     </div>
 
-    <div (click)="showViewRV($event)" class="rv-map">
-      <img class="rv-picture" src="{{post.rutaViaje.imagenUrl}}">
-      <div class="gradient"></div>
-      <h4 class="rv-name">{{post.rutaViaje.nombre}}</h4>
+    <div class="user flex">
+      <a routerLink="/profile/{{post.creador.username}}" class="avatar">
+        <img class="img-responsive" src="{{post.creador.imagenUrl}}" alt="Avatar @{{post.creador.username}}">
+      </a>
+
+      <a routerLink="/profile/{{post.creador.username}}" class="user-info">
+        <strong class="user-nombre">
+          {{post.creador.nombre}} {{post.creador.apellido}}
+        </strong>
+
+        <span class="username">@{{post.creador.username}}</span>
+      </a>
     </div>
 
-    <div class="rv-body pull-left-100">
-      <div class="rv-data">
-        <i *ngIf="post.rutaViaje.publico" class="rv-visibilidad fa fa-globe" aria-hidden="true" title="Pública"></i>
-        <i *ngIf="!post.rutaViaje.publico" class="rv-visibilidad fa fa-lock" aria-hidden="true" title="Privada"></i>
-        <span class="rv-date-created"> · 10 min</span>
-      </div>
+    <div class="actions">
+      <button (click)="favButton($event, post.rutaViaje)" class="favoritos" title="Mandar a favoritos">
+        <i class="fa fa-fw fa-star" aria-hidden="true"></i>
+        <span class="cantidad">{{post.rutaViaje.favoritos.length}}</span>
+      </button>
 
-      <div class="rv-user pull-left-100">
-        <div class="wrapper-user-picture">
-          <img class="user-picture" src="{{post.creador.imagenUrl}}">
-        </div>
-
-        <a routerLink="/profile/{{post.creador.username}}" class="user-info">
-          <strong class="user-nombre">
-            {{post.creador.nombre}} {{post.creador.apellido}}
-          </strong>
-          <span class="username">@{{post.creador.username}}</span>
-        </a>
-      </div>
-
-      <div class="actions">
-        <button *ngIf="post.rutaViaje.publico && !isCurrentUser(post.rutaViaje.creador)" (click)="shareButton($event, post.rutaViaje)" class="compartir" title="Compartir con tus seguidores">
-          <i class="fa fa-share" aria-hidden="true"></i>
-          <span class="cantidad">{{post.rutaViaje.compartidos.length}}</span>
-        </button>
-
-        <button *ngIf="!isCurrentUser(post.rutaViaje.creador)" (click)="favButton($event, post.rutaViaje)" class="favoritos" title="Mandar a favoritos">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <span class="cantidad">{{post.rutaViaje.favoritos.length}}</span>
-        </button>
-
-        <button (click)="showViewRV($event)" class="comentar" title="Comentar">
-          <i class="fa fa-comment" aria-hidden="true"></i>
-          <span class="cantidad">{{post.rutaViaje.comentarios.length}}</span>
-        </button>
-      </div>
+      <button (click)="showViewRV($event)" class="comentarios" title="Comentar">
+        <i class="fa fa-fw fa-comment" aria-hidden="true"></i>
+        <span class="cantidad">{{post.rutaViaje.comentarios.length}}</span>
+      </button>
     </div>
-  </div>
+  </section>
+</article>
+
+<div (shown)="openView(post)" class="modal fade in">
+  <apollo-view-rv [post]="post"></apollo-view-rv>
 </div>
-
-<apollo-view-rv [post]="post" (shown)="openView(post)"></apollo-view-rv>

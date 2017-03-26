@@ -15,8 +15,6 @@ declare var $: any;
   styleUrls: ['./preview-rv.component.css']
 })
 export class PreviewRVComponent {
-  @Input() publica: boolean = true;
-  @Input() compartida: boolean = false;
   @Input() post: Post;
 
   currentUser: User;
@@ -26,14 +24,6 @@ export class PreviewRVComponent {
       .subscribe((user: User) => this.currentUser = user);
   }
 
-  nombresCompartidos(): string {
-    return this.post.compartidos.map(c => c.nombre).join(', ');
-  }
-
-  fueCompartida(): boolean {
-    return this.post.compartidos.length > 0;
-  }
-
   isCurrentUser(user: User): boolean {
     return user.id === this.currentUser.id;
   }
@@ -41,9 +31,9 @@ export class PreviewRVComponent {
   showViewRV(event: any) {
     $(event.target)
       .closest('apollo-preview-rv')
-      .find('apollo-view-rv .modal')
+      .find('.modal')
       .modal('show')
-      .find('.input-comment')
+      .find('.input')
       .first()
       .focus();
 

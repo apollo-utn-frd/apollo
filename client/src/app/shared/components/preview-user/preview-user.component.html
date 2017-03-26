@@ -1,16 +1,16 @@
-<div class="preview-user shadow">
-  <div class="background">
-    <div class="wrapper-picture">
-      <img class="user-picture" src="{{user.imagenUrl}}" alt="Avatar">
-    </div>
-    <div class="user-info">
-      <a routerLink="/profile/{{user.username}}" class="username-nombre">
-        <strong class="user-nombre">{{user.nombre}} {{user.apellido}}</strong>
-        <span class="username">@{{user.username}}</span>
-      </a>
-      <span class="rv-creadas">
-        <i class="fa fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
-      </span>
-    </div>
+<div class="preview-user shadow radius">
+  <div class="avatar">
+    <img class="img-responsive" src="{{user.imagenUrl}}" alt="Avatar @{{user.username}}">
+  </div>
+
+  <div class="info">
+    <a routerLink="/profile/{{user.username}}" class="data">
+      <strong class="nombre">{{user.nombre}} {{user.apellido}}</strong>
+      <span class="username">@{{user.username}}</span>
+    </a>
+
+    <span class="creados">
+      <i class="fa fa-fw fa-plane" aria-hidden="true"></i>{{user.rutasViaje.length}} viajes creados
+    </span>
   </div>
 </div>
