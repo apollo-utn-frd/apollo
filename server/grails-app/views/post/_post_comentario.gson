@@ -1,0 +1,15 @@
+model {
+  Comentario contenido
+}
+
+json {
+  comentario g.render(
+    template: '/comentario/comentario_min',
+    model: [comentario: contenido]
+  )
+
+  viaje g.render(
+    template: '/viaje/viaje_min',
+    model: [viaje: contenido.viaje]
+  )
+}

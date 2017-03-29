@@ -1,5 +1,9 @@
 model {
-  List<Autorizacion> autorizacionList
+  List<Autorizacion> autorizacionList = []
 }
 
-json tmpl.autorizacion(autorizacionList)
+json g.render(
+  template: '/autorizacion/autorizacion',
+  collection: autorizacionList,
+  var: 'autorizacion'
+)

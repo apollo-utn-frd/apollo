@@ -6,7 +6,7 @@ class Comentario {
     Date lastUpdated
 
     static belongsTo = [
-        rutaViaje: RutaViaje,
+        viaje: Viaje,
         usuario: Usuario
     ]
 
@@ -18,7 +18,7 @@ class Comentario {
      * Devuelve si el comentario puede ser leído por un determinado usuario.
      */
     boolean canReadBy(Usuario usuario) {
-        rutaViaje.canReadBy(usuario)
+        viaje.canReadBy(usuario)
     }
 
     /**

@@ -3,20 +3,16 @@ model {
 }
 
 json {
-  rutaViaje g.render(
-    template: '/rutaViaje/rutaViaje_min',
-    model: [rutaViaje: post.rutaViaje]
+  usuario g.render(
+    template: '/usuario/usuario_min',
+    model: [usuario: post.usuario]
   )
 
-  creador g.render(
-    template: '/usuario/usuario_min',
-    model: [usuario: post.creador]
-  )
+  tipo post.tipo
 
-  compartidos g.render(
-    template: '/usuario/usuario_min',
-    collection: post.compartidos,
-    var: 'usuario'
+  contenido g.render(
+    template: "/post/post_${post.contenido.class.getSimpleName().toLowerCase()}",
+    model: [contenido: post.contenido]
   )
 
   dateCreated post.dateCreated

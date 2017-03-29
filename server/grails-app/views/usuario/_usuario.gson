@@ -5,7 +5,6 @@ model {
 json {
   id usuario.id
   username usuario.username
-  email usuario.email
   nombre usuario.nombre
   apellido usuario.apellido
   descripcion usuario.descripcion
@@ -13,21 +12,21 @@ json {
   imagenUrl config.getProperty('grails.serverURL') + usuario.imagenLocalPath
 
   seguidos g.render(
-    template: '/usuario/seguido',
+    template: '/seguimiento/seguimiento_min',
     collection: usuario.seguidos,
     var: 'seguimiento'
   )
 
   seguidores g.render(
-    template: '/usuario/seguido',
+    template: '/seguimiento/seguimiento_min',
     collection: usuario.seguidores,
     var: 'seguimiento'
   )
 
-  rutasViaje g.render(
-    template: '/rutaViaje/rutaViaje_min',
-    collection: usuario.rutasViaje,
-    var: 'rutaViaje'
+  viajes g.render(
+    template: '/viaje/viaje_min',
+    collection: usuario.viajes,
+    var: 'viaje'
   )
 
   comentarios g.render(
@@ -37,15 +36,9 @@ json {
   )
 
   favoritos g.render(
-    template: '/usuario/action_ruta_viaje',
+    template: '/favorito/favorito_min',
     collection: usuario.favoritos,
-    var: 'action'
-  )
-
-  compartidos g.render(
-    template: '/usuario/action_ruta_viaje',
-    collection: usuario.compartidos,
-    var: 'action'
+    var: 'favorito'
   )
 
   dateCreated usuario.dateCreated

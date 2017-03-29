@@ -5,20 +5,18 @@ class Favorito {
     Date lastUpdated
 
     static belongsTo = [
-        rutaViaje: RutaViaje,
+        viaje: Viaje,
         usuario: Usuario
     ]
 
     static constraints = {
-        rutaViaje unique: 'usuario', validator: { rutaViaje, favorito ->
-            (rutaViaje.creador != favorito.usuario) ?: ['favorito.rutaViaje.faveoSuRV']
-        }
+        viaje unique: 'usuario'
     }
 
     /**
      * Devuelve si el favorito puede ser leído por un determinado usuario.
      */
     boolean canReadBy(Usuario usuario) {
-        rutaViaje.canReadBy(usuario)
+        viaje.canReadBy(usuario)
     }
 }

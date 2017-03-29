@@ -1,5 +1,9 @@
 model {
-  List<Post> postList
+  List<Post> postList = []
 }
 
-json(tmpl.post(postList) ?: [])
+json g.render(
+  template: '/post/post',
+  collection: postList,
+  var: 'post'
+)

@@ -5,27 +5,27 @@ class Autorizacion {
     Date lastUpdated
 
     static belongsTo = [
-        rutaViaje: RutaViaje,
+        viaje: Viaje,
         usuario: Usuario
     ]
 
     static constraints = {
-        usuario unique: 'rutaViaje', validator: { usuario, autorizacion ->
-            Seguimiento seguimiento = Seguimiento.findBySeguidoAndSeguidor(autorizacion.rutaViaje.creador, usuario)
+        usuario unique: 'viaje', validator: { usuario, autorizacion ->
+            Seguimiento seguimiento = Seguimiento.findBySeguidoAndSeguidor(autorizacion.viaje.usuario, usuario)
 
-            boolean seAutorizoASiMismo = autorizacion.rutaViaje.creador == usuario
+            boolean seAutorizoASiMismo = autorizacion.viaje.usuario == usuario
 
             seguimiento || seAutorizoASiMismo ?: ['autorizacion.usuario.noSeguidor']
         }
-        rutaViaje validator: { rutaViaje, autorizacion ->
-            (rutaViaje.creador != autorizacion.usuario) ?: ['autorizacion.rutaViaje.seAutorizoASiMismo']
+        viaje validator: { viaje, autorizacion ->
+            (viaje.usuario != autorizacion.usuario) ?: ['autorizacion.viaje.autorizoASiMismo']
         }
     }
 
     /**
-     * Devuelve si la autorización puede ser leída por un determinado usuario.
+     * Devuelve si la autorizacion puede ser leída por un determinado usuario.
      */
     boolean canReadBy(Usuario usuario) {
-        rutaViaje.canReadBy(usuario)
+        viaje.canReadBy(usuario)
     }
 }

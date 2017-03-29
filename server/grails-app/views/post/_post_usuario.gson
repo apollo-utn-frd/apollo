@@ -1,0 +1,10 @@
+model {
+  Usuario contenido
+}
+
+json {
+  usuario g.render(
+    template: '/usuario/usuario_min',
+    model: [usuario: contenido]
+  )
+}

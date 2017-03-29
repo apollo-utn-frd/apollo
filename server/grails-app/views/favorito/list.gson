@@ -1,5 +1,9 @@
 model {
-  List<Favorito> favoritoList
+  List<Favorito> favoritoList = []
 }
 
-json(tmpl.favorito(favoritoList) ?: [])
+json g.render(
+  template: '/favorito/favorito',
+  collection: favoritoList,
+  var: 'favorito'
+)

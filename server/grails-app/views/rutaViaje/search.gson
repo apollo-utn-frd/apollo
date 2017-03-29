@@ -1,5 +1,0 @@
-model {
-  List<RutaViaje> rutaViajeList
-}
-
-json(tmpl.rutaViaje(rutaViajeList) ?: [])

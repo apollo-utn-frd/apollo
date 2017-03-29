@@ -3,7 +3,6 @@ package apollo
 import groovy.transform.ToString
 
 @ToString(includes = 'latitud,longitud', includePackage = false)
-
 class Sitio {
     String latitud
     String longitud
@@ -11,7 +10,7 @@ class Sitio {
     Date lastUpdated
 
     static belongsTo = [
-        rutaViaje: RutaViaje
+        viaje: Viaje
     ]
 
     static constraints = {

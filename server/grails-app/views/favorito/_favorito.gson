@@ -5,9 +5,9 @@ model {
 json {
   id favorito.id
 
-  rutaViaje g.render(
-    template: '/rutaViaje/rutaViaje_min',
-    model: [rutaViaje: favorito.rutaViaje]
+  viaje g.render(
+    template: '/viaje/viaje_min',
+    model: [viaje: favorito.viaje]
   )
 
   usuario g.render(

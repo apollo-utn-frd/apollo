@@ -3,9 +3,16 @@ model {
 }
 
 json {
-  usuario g.render(
+  id seguimiento.id
+
+  seguido g.render(
     template: '/id',
     model: [object: seguimiento.seguido]
+  )
+
+  seguidor g.render(
+    template: '/id',
+    model: [object: seguimiento.seguidor]
   )
 
   dateCreated seguimiento.dateCreated

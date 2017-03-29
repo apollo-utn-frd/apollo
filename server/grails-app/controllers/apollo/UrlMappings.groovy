@@ -13,19 +13,18 @@ class UrlMappings {
             get    "/$id?"(controller: 'usuario', action: 'show')
             get    "/search"(controller: 'usuario', action: 'search')
             get    "/u/$username?"(controller: 'usuario', action: 'showByUsername')
+            get    "/posts/$id?"(controller: 'usuario', action: 'posts')
             post   "/seguir/$id?"(controller: 'seguimiento', action: 'create')
             delete "/seguir/$id?"(controller: 'seguimiento', action: 'delete')
         }
 
-        // Rutas de viajes.
-        group "/rutaviaje", {
-            post   "/"(controller: 'rutaViaje', action: 'create')
-            get    "/$id?"(controller: 'rutaViaje', action: 'show')
-            delete "/$id?"(controller: 'rutaViaje', action: 'delete')
-            get    "/search"(controller: 'rutaViaje', action: 'search')
+        // Viajes.
+        group "/viaje", {
+            post   "/"(controller: 'viaje', action: 'create')
+            get    "/$id?"(controller: 'viaje', action: 'show')
+            delete "/$id?"(controller: 'viaje', action: 'delete')
+            get    "/search"(controller: 'viaje', action: 'search')
             post   "/comentar/$id?"(controller: 'comentario', action: 'create')
-            post   "/compartir/$id?"(controller: 'compartido', action: 'create')
-            delete "/compartir/$id?"(controller: 'compartido', action: 'delete')
             post   "/favear/$id?"(controller: 'favorito', action: 'create')
             delete "/favear/$id?"(controller: 'favorito', action: 'delete')
         }
@@ -35,12 +34,6 @@ class UrlMappings {
             get    "/$id?"(controller: 'comentario', action: 'show')
             delete "/$id?"(controller: 'comentario', action: 'delete')
             get    "/search"(controller: 'comentario', action: 'search')
-        }
-
-        // Compartidos.
-        group "/compartido", {
-            get "/$id?"(controller: 'compartido', action: 'show')
-            get "/list"(controller: 'compartido', action: 'list')
         }
 
         // Seguimientos.
@@ -69,7 +62,7 @@ class UrlMappings {
         // Imagenes.
         group "/images", {
             "/usuario/$file?"(controller: 'usuario', action: 'images')
-            "/rutaviaje/$file?"(controller: 'rutaViaje', action: 'images')
+            "/viaje/$file?"(controller: 'viaje', action: 'images')
         }
 
         // Autenticación.

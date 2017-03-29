@@ -1,0 +1,9 @@
+model {
+  List<Viaje> viajeList = []
+}
+
+json g.render(
+  template: '/viaje/viaje',
+  collection: viajeList,
+  var: 'viaje'
+)

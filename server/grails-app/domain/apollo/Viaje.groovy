@@ -6,8 +6,7 @@ import grails.core.GrailsApplication
 
 @Slf4j
 @ToString(includes = 'nombre', includePackage = false)
-
-class RutaViaje {
+class Viaje {
     String nombre
     String descripcion = ''
     String imagenLocalPath
@@ -16,7 +15,6 @@ class RutaViaje {
     List autorizacionesUsuarios
     List comentariosUsuarios
     List favoritosUsuarios
-    List compartidosUsuarios
     Date dateCreated
     Date lastUpdated
 
@@ -29,15 +27,14 @@ class RutaViaje {
     ]
 
     static belongsTo = [
-        creador: Usuario
+        usuario: Usuario
     ]
 
     static hasMany = [
         sitios: Sitio,
         autorizacionesUsuarios: Autorizacion,
         comentariosUsuarios: Comentario,
-        favoritosUsuarios: Favorito,
-        compartidosUsuarios: Compartido
+        favoritosUsuarios: Favorito
     ]
 
     static constraints = {
@@ -45,7 +42,7 @@ class RutaViaje {
         descripcion size: 0..1000
         imagenLocalPath nullable: true
         sitios maxSize: 25, validator: { sitios ->
-            (sitios && !sitios.empty) ?: ['rutaViaje.sitios.vacio']
+            (sitios && !sitios.empty) ?: ['viaje.sitios.vacio']
         }
     }
 
@@ -58,29 +55,29 @@ class RutaViaje {
     }
 
     /**
-     * Devuelve una lista con los usuarios autorizados para ver la ruta de viajes privada. Si la
-     * ruta de viajes es pública el método devuelve una lista vacía.
+     * Devuelve una lista con los usuarios autorizados para ver el viaje privado. Si el
+     * viaje es público el método devuelve una lista vacía.
      */
     List<Usuario> usuariosAutorizados() {
         autorizacionesUsuarios.usuario
     }
 
     /**
-     * Devuelve si la ruta de viaje puede ser leída por un determinado usuario.
+     * Devuelve si el viaje puede ser leído por un determinado usuario.
      */
     boolean canReadBy(Usuario usuario) {
-        publico || (usuario == creador) || usuariosAutorizados().contains(usuario) || usuario?.isAdmin()
+        publico || (usuario == this.usuario) || usuariosAutorizados().contains(usuario) || usuario?.isAdmin()
     }
 
     /**
-     * Devuelve si la ruta de viaje puede ser eliminada por un determinado usuario.
+     * Devuelve si el viaje puede ser eliminado por un determinado usuario.
      */
     boolean canDeletedBy(Usuario usuario) {
-        (usuario == creador) || usuario?.isAdmin()
+        (usuario == this.usuario) || usuario?.isAdmin()
     }
 
     /**
-     * Devuelve la URL de la imagen de previsualización de una ruta de viaje dada.
+     * Devuelve la URL de la imagen de previsualización de unviaje dado.
      */
     String imagenGoogleUrl() {
         String url = "https://maps.googleapis.com/maps/api/staticmap"
@@ -108,12 +105,12 @@ class RutaViaje {
      * imagen.
      */
     protected void downloadPicture() {
-        imagenLocalPath = "/images/rutaviaje/${id}.jpg"
+        imagenLocalPath = "/images/viaje/${id}.jpg"
 
         try {
             fileService.download(imagenGoogleUrl(), imagenLocalPath)
         } catch (IOException e) {
-            log.warn "RutaViaje(${id}): No se pudo descargar la imagen de previsualizacion [${e}]."
+            log.warn "Viaje(${id}): No se pudo descargar la imagen de previsualizacion [${e}]."
             copyDefaultPicture()
         }
     }
@@ -122,8 +119,8 @@ class RutaViaje {
      * Asigna la imagen de previsualización por defecto.
      */
     protected void copyDefaultPicture() {
-        String defaultImage = "/images/rutaviaje/default.jpg"
+        String defaultImage = "/images/viaje/default.jpg"
         fileService.copy(defaultImage, imagenLocalPath)
-        log.debug "RutaViaje(${id}): Se le asigno la imagen de previsualizacion por defecto."
+        log.debug "Viaje(${id}): Se le asigno la imagen de previsualizacion por defecto."
     }
 }

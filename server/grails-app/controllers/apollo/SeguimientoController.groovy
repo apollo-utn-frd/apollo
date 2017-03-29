@@ -5,11 +5,10 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-
 class SeguimientoController implements AppTrait {
     static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
 
-    @Secured('ROLE_ADMIN')
+    @Secured('ROLE_USER')
     def show() {
         Seguimiento seguimiento = Seguimiento.get(params.id)
 

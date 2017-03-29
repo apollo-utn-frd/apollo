@@ -6,12 +6,11 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-
-class RutaViajeController implements AppTrait {
+class ViajeController implements AppTrait {
     static allowedMethods = [show: 'GET', search: 'GET', create: 'POST', delete: 'DELETE']
 
     SearchService searchService
-    RutaViajeService rutaViajeService
+    ViajeService viajeService
     GrailsApplication grailsApplication
 
     @Secured('permitAll')
@@ -21,7 +20,7 @@ class RutaViajeController implements AppTrait {
             return
         }
 
-        File image = new File("${grailsApplication.config.getProperty('app.files.path')}/images/rutaviaje/${params.file}")
+        File image = new File("${grailsApplication.config.getProperty('app.files.path')}/images/viaje/${params.file}")
 
         if (!image.exists()) {
             render(status: NOT_FOUND)
@@ -29,9 +28,9 @@ class RutaViajeController implements AppTrait {
         }
 
         /*
-        RutaViaje rutaViaje = RutaViaje.findByImagenLocalPath(request.forwardURI)
+        Viaje viaje = Viaje.findByImagenLocalPath(request.forwardURI)
 
-        if (!rutaViaje?.canReadBy(currentUser())) {
+        if (!viaje?.canReadBy(currentUser())) {
             render(status: NOT_FOUND)
             return
         }
@@ -45,24 +44,24 @@ class RutaViajeController implements AppTrait {
 
     @Secured('permitAll')
     def show() {
-        RutaViaje rutaViaje = RutaViaje.get(params.id)
+        Viaje viaje = Viaje.get(params.id)
 
-        if (!rutaViaje?.canReadBy(currentUser())) {
+        if (!viaje?.canReadBy(currentUser())) {
             render(status: NOT_FOUND)
             return
         }
 
-        respond rutaViaje
+        respond viaje
     }
 
     @Secured('permitAll')
     def search(String query, int offset, int max) {
         Search search = new Search(
-            classx: RutaViaje,
+            classx: Viaje,
             properties: ['nombre', 'descripcion'],
             query: query,
-            after: { rutasViaje ->
-                rutasViaje.findAll { it.canReadBy(currentUser()) }
+            after: { viajes ->
+                viajes.findAll { it.canReadBy(currentUser()) }
             },
             max: max,
             offset: offset
@@ -74,48 +73,48 @@ class RutaViajeController implements AppTrait {
     @Transactional
     @Secured('ROLE_USER')
     def create() {
-        RutaViaje rutaViaje = new RutaViaje(
-            creador: currentUser(),
+        Viaje viaje = new Viaje(
+            usuario: currentUser(),
             nombre: request.JSON?.nombre,
             descripcion: request.JSON?.descripcion ?: "",
             publico: (request.JSON?.publico != null) ? request.JSON?.publico : true,
             sitios: request.JSON?.sitios
         )
 
-        if (!rutaViaje.validate()) {
+        if (!viaje.validate()) {
             transactionStatus.setRollbackOnly()
-            respond rutaViaje.errors
+            respond viaje.errors
             return
         }
 
-        rutaViaje.save(flush: true)
+        viaje.save(flush: true)
 
-        if (!rutaViaje.publico) {
-            if (!rutaViajeService.authorize(rutaViaje, request.JSON?.autorizaciones.id)) {
+        if (!viaje.publico) {
+            if (!viajeService.authorize(viaje, request.JSON?.autorizaciones.id)) {
                 transactionStatus.setRollbackOnly()
-                respond rutaViaje.errors
+                respond viaje.errors
                 return
             }
         }
 
-        respond rutaViaje
+        respond viaje
     }
 
     @Transactional
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def delete() {
-        RutaViaje rutaViaje = RutaViaje.get(params.id)
+        Viaje viaje = Viaje.get(params.id)
 
-        if (!rutaViaje) {
+        if (!viaje) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return
         }
 
-        if (!rutaViaje.canDeletedBy(currentUser())) {
+        if (!viaje.canDeletedBy(currentUser())) {
             transactionStatus.setRollbackOnly()
 
-            if (rutaViaje.canReadBy(currentUser())) {
+            if (viaje.canReadBy(currentUser())) {
                 render(status: FORBIDDEN)
             } else {
                 render(status: NOT_FOUND)
@@ -124,7 +123,7 @@ class RutaViajeController implements AppTrait {
             return
         }
 
-        rutaViaje.delete(flush: true)
+        viaje.delete(flush: true)
 
         render(status: OK)
     }

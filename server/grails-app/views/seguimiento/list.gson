@@ -1,5 +1,9 @@
 model {
-  List<Seguimiento> seguimientoList
+  List<Seguimiento> seguimientoList = []
 }
 
-json(tmpl.seguimiento(seguimientoList) ?: [])
+json g.render(
+  template: '/seguimiento/seguimiento',
+  collection: seguimientoList,
+  var: 'seguimiento'
+)

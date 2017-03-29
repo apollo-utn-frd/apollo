@@ -5,9 +5,9 @@ model {
 json {
   id comentario.id
 
-  rutaViaje g.render(
+  viaje g.render(
     template: '/id',
-    model: [object: comentario.rutaViaje]
+    model: [object: comentario.viaje]
   )
 
   usuario g.render(

@@ -1,5 +1,9 @@
 model {
-  List<Usuario> usuarioList
+  List<Usuario> usuarioList = []
 }
 
-json(tmpl.usuario(usuarioList) ?: [])
+json g.render(
+  template: '/usuario/usuario',
+  collection: usuarioList,
+  var: 'usuario'
+)

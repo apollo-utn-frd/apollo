@@ -1,5 +1,9 @@
 model {
-  List<Comentario> comentarioList
+  List<Comentario> comentarioList = []
 }
 
-json(tmpl.comentario(comentarioList) ?: [])
+json g.render(
+  template: '/comentario/comentario',
+  collection: comentarioList,
+  var: 'comentario'
+)

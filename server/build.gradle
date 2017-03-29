@@ -55,9 +55,9 @@ dependencies {
     compile "org.grails:grails-logging"
     compile "org.grails.plugins:cache"
     compile "org.grails.plugins:hibernate5"
-    compile "org.hibernate:hibernate-core:5.1.2.Final"
-    compile "org.hibernate:hibernate-ehcache:5.1.2.Final"
-    compile "org.grails.plugins:views-json:1.2.0"
+    compile "org.hibernate:hibernate-core:5.1.3.Final"
+    compile "org.hibernate:hibernate-ehcache:5.1.3.Final"
+    compile "org.grails.plugins:views-json"
 
     // Propias de Apollo.
     compile "commons-io:commons-io:2.5"
@@ -76,4 +76,5 @@ dependencies {
 
 bootRun {
     jvmArgs('-Dspring.output.ansi.enabled=always')
+    addResources = true
 }

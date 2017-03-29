@@ -6,13 +6,13 @@ json {
   id autorizacion.id
 
   viaje g.render(
-    template: '/viaje/viaje_min',
-    model: [viaje: autorizacion.viaje]
+    template: '/id',
+    model: [object: autorizacion.viaje]
   )
 
   usuario g.render(
-    template: '/usuario/usuario_min',
-    model: [usuario: autorizacion.usuario]
+    template: '/id',
+    model: [object: autorizacion.usuario]
   )
 
   dateCreated autorizacion.dateCreated

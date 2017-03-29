@@ -10,7 +10,6 @@ import grails.plugin.springsecurity.rest.oauth.OauthUser
 import grails.plugin.springsecurity.rest.oauth.OauthUserDetailsService
 
 @Slf4j
-
 class SecurityService implements OauthUserDetailsService {
     static transactional = false
 

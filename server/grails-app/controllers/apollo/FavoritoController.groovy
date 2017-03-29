@@ -5,11 +5,10 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-
 class FavoritoController implements AppTrait {
     static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
 
-    @Secured('ROLE_ADMIN')
+    @Secured('ROLE_USER')
     def show() {
         Favorito favorito = Favorito.get(params.id)
 
@@ -29,9 +28,9 @@ class FavoritoController implements AppTrait {
     @Transactional
     @Secured('ROLE_USER')
     def create() {
-        RutaViaje rutaViaje = RutaViaje.get(params.id)
+        Viaje viaje = Viaje.get(params.id)
 
-        if (!rutaViaje?.canReadBy(currentUser())) {
+        if (!viaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return
@@ -39,7 +38,7 @@ class FavoritoController implements AppTrait {
 
         Favorito favorito = new Favorito(
             usuario: currentUser(),
-            rutaViaje: rutaViaje
+            viaje: viaje
         )
 
         if (!favorito.validate()) {
@@ -56,15 +55,15 @@ class FavoritoController implements AppTrait {
     @Transactional
     @Secured('ROLE_USER')
     def delete() {
-        RutaViaje rutaViaje = RutaViaje.get(params.id)
+        Viaje viaje = Viaje.get(params.id)
 
-        if (!rutaViaje?.canReadBy(currentUser())) {
+        if (!viaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return
         }
 
-        Favorito favorito = Favorito.findByUsuarioAndRutaViaje(currentUser(), rutaViaje)
+        Favorito favorito = Favorito.findByUsuarioAndViaje(currentUser(), viaje)
 
         if (!favorito) {
             transactionStatus.setRollbackOnly()
@@ -76,7 +75,7 @@ class FavoritoController implements AppTrait {
 
         // Fix para error de Grails cuando el favorito fue creado en el Bootstrap.
         currentUser().favoritos.removeAll([null])
-        rutaViaje.favoritosUsuarios.removeAll([null])
+        viaje.favoritosUsuarios.removeAll([null])
 
         render(status: OK)
     }

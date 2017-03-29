@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority
 
 @EqualsAndHashCode(includes = 'authority')
 @ToString(includes = 'authority', includeNames = true, includePackage = false)
-
 class Role implements Serializable, GrantedAuthority {
     private static final long serialVersionUID = 1
 

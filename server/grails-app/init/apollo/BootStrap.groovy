@@ -4,7 +4,7 @@ import grails.core.GrailsApplication
 import grails.util.Environment
 
 class BootStrap {
-    RutaViajeService rutaViajeService
+    ViajeService viajeService
     GrailsApplication grailsApplication
 
     def init = { servletContext ->
@@ -88,11 +88,11 @@ class BootStrap {
                 UsuarioRole.create arrow, Role.findByAuthority('ROLE_USER')
                 UsuarioRole.create raven, Role.findByAuthority('ROLE_USER')
 
-                RutaViaje rutaEntrenamiento = new RutaViaje(
+                Viaje rutaEntrenamiento = new Viaje(
                     id: 1,
                     nombre: 'Mi entrenamiento diario',
                     descripcion: 'Descripcion de prueba',
-                    creador: flash,
+                    usuario: flash,
                     sitios: [
                         [
                             'latitud': '40.716014',
@@ -105,11 +105,11 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                RutaViaje baticueva = new RutaViaje(
+                Viaje baticueva = new Viaje(
                     id: 2,
                     nombre: 'Ubicacion de la Baticueva',
                     descripcion: 'Una descripcion de prueba',
-                    creador: batman,
+                    usuario: batman,
                     publico: false,
                     sitios: [
                         [
@@ -119,11 +119,11 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                RutaViaje flashcueva = new RutaViaje(
+                Viaje flashcueva = new Viaje(
                     id: 3,
                     nombre: 'Ubicacion de la Flashcueva',
                     descripcion: 'Otra descripcion mas de prueba',
-                    creador: flash,
+                    usuario: flash,
                     publico: false,
                     sitios: [
                         [
@@ -133,13 +133,13 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                rutaViajeService.createAuthorization(flashcueva, batman)
+                viajeService.createAuthorization(flashcueva, batman)
 
-                RutaViaje arrowcueva = new RutaViaje(
+                Viaje arrowcueva = new Viaje(
                     id: 4,
                     nombre: 'Ubicacion de la Arrowcueva',
                     descripcion: 'La 4ta descripcion de prueba',
-                    creador: arrow,
+                    usuario: arrow,
                     publico: false,
                     sitios: [
                         [
@@ -149,13 +149,13 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                rutaViajeService.createAuthorization(arrowcueva, flash)
+                viajeService.createAuthorization(arrowcueva, flash)
 
-                RutaViaje trianguloBermudas = new RutaViaje(
+                Viaje trianguloBermudas = new Viaje(
                     id: 5,
                     nombre: 'Triangulo de las Bermudas',
                     descripcion: 'La 5ta descripcion de prueba',
-                    creador: raven,
+                    usuario: raven,
                     sitios: [
                         [
                             'latitud': '25.789106',
@@ -176,11 +176,11 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                RutaViaje lugaresEnergeticos = new RutaViaje(
+                Viaje lugaresEnergeticos = new Viaje(
                     id: 6,
                     nombre: 'Lugares con energia positiva',
                     descripcion: 'La 6ta descripcion de prueba',
-                    creador: raven,
+                    usuario: raven,
                     sitios: [
                         [
                             'latitud': '-33.9668613',
@@ -197,88 +197,63 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                new Compartido(
+                new Favorito(
                     usuario: batman,
-                    rutaViaje: rutaEntrenamiento
-                ).save(flush: true, failOnError: true)
-
-                new Compartido(
-                    usuario: batman,
-                    rutaViaje: lugaresEnergeticos
-                ).save(flush: true, failOnError: true)
-
-                new Compartido(
-                    usuario: arrow,
-                    rutaViaje: rutaEntrenamiento
-                ).save(flush: true, failOnError: true)
-
-                new Compartido(
-                    usuario: arrow,
-                    rutaViaje: lugaresEnergeticos
-                ).save(flush: true, failOnError: true)
-
-                new Compartido(
-                    usuario: flash,
-                    rutaViaje: trianguloBermudas
+                    viaje: rutaEntrenamiento
                 ).save(flush: true, failOnError: true)
 
                 new Favorito(
                     usuario: batman,
-                    rutaViaje: rutaEntrenamiento
+                    viaje: flashcueva
                 ).save(flush: true, failOnError: true)
 
                 new Favorito(
                     usuario: batman,
-                    rutaViaje: flashcueva
-                ).save(flush: true, failOnError: true)
-
-                new Favorito(
-                    usuario: batman,
-                    rutaViaje: lugaresEnergeticos
+                    viaje: lugaresEnergeticos
                 ).save(flush: true, failOnError: true)
 
                 new Favorito(
                     usuario: arrow,
-                    rutaViaje: rutaEntrenamiento
+                    viaje: rutaEntrenamiento
                 ).save(flush: true, failOnError: true)
 
                 new Favorito(
                     usuario: arrow,
-                    rutaViaje: trianguloBermudas
+                    viaje: trianguloBermudas
                 ).save(flush: true, failOnError: true)
 
                 new Favorito(
                     usuario: arrow,
-                    rutaViaje: lugaresEnergeticos
+                    viaje: lugaresEnergeticos
                 ).save(flush: true, failOnError: true)
 
                 new Favorito(
                     usuario: flash,
-                    rutaViaje: trianguloBermudas
+                    viaje: trianguloBermudas
                 ).save(flush: true, failOnError: true)
 
                 new Favorito(
                     usuario: flash,
-                    rutaViaje: lugaresEnergeticos
+                    viaje: lugaresEnergeticos
                 ).save(flush: true, failOnError: true)
 
                 new Comentario(
                     id: 1,
-                    rutaViaje: rutaEntrenamiento,
+                    viaje: rutaEntrenamiento,
                     usuario: flash,
                     contenido: 'Un buen dia para ejercitarse'
                 ).save(flush: true, failOnError: true)
 
                 new Comentario(
                     id: 2,
-                    rutaViaje: flashcueva,
+                    viaje: flashcueva,
                     usuario: batman,
                     contenido: 'Guardare el secreto'
                 ).save(flush: true, failOnError: true)
 
                 new Comentario(
                     id: 2,
-                    rutaViaje: arrowcueva,
+                    viaje: arrowcueva,
                     usuario: flash,
                     contenido: 'Voy corriendo para alla'
                 ).save(flush: true, failOnError: true)

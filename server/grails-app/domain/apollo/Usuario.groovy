@@ -7,7 +7,6 @@ import groovy.transform.ToString
 @Slf4j
 @EqualsAndHashCode(includes = 'username')
 @ToString(includes = 'username', includePackage = false)
-
 class Usuario implements Serializable {
     String username
     String password = ' '
@@ -25,10 +24,9 @@ class Usuario implements Serializable {
     boolean passwordExpired
     List seguidos
     List seguidores
-    List rutasViaje
+    List viajes
     List autorizaciones
     List favoritos
-    List compartidos
     List comentarios
     Date dateCreated
     Date lastUpdated
@@ -46,10 +44,9 @@ class Usuario implements Serializable {
     static hasMany = [
         seguidos: Seguimiento,
         seguidores: Seguimiento,
-        rutasViaje: RutaViaje,
+        viajes: Viaje,
         autorizaciones: Autorizacion,
         favoritos: Favorito,
-        compartidos: Compartido,
         comentarios: Comentario
     ]
 
@@ -95,14 +92,22 @@ class Usuario implements Serializable {
         downloadPicture()
     }
 
+    List<Post> posts() {
+        List<Post> posts = []
+
+        posts += viajes.collect { new Post(it) }
+        posts += comentarios.collect { new Post(it) }
+        posts += favoritos.collect { new Post(it) }
+        posts + seguidos.collect { new Post(it) }
+    }
+
     /**
-     * Devuelve al usuario habiéndole eliminado todas las referencias a rutas de viajes privadas
+     * Devuelve al usuario habiéndole eliminado todas las referencias a viajes privados
      * que un usuario dado como parámetro no puede acceder.
      */
     Usuario sanitize(Usuario usuario) {
-        rutasViaje = rutasViaje.findAll { it.canReadBy(usuario) }
+        viajes = viajes.findAll { it.canReadBy(usuario) }
         favoritos = favoritos.findAll { it.canReadBy(usuario) }
-        compartidos = compartidos.findAll { it.canReadBy(usuario) }
         comentarios = comentarios.findAll { it.canReadBy(usuario) }
         this
     }

@@ -1,0 +1,44 @@
+model {
+  Viaje viaje
+}
+
+json {
+  id viaje.id
+
+  usuario g.render(
+    template: '/id',
+    model: [object: viaje.usuario]
+  )
+
+  nombre viaje.nombre
+  descripcion viaje.descripcion
+  publico viaje.publico
+
+  imagenUrl config.getProperty('grails.serverURL') + viaje.imagenLocalPath
+
+  sitios g.render(
+    template: '/viaje/sitio',
+    collection: viaje.sitios,
+    var: 'sitio'
+  )
+
+  comentarios g.render(
+    template: '/id',
+    collection: viaje.comentariosUsuarios,
+    var: 'object'
+  )
+
+  favoritos g.render(
+    template: '/favorito/favorito_min',
+    collection: viaje.favoritosUsuarios,
+    var: 'favorito'
+  )
+
+  autorizaciones g.render(
+    template: '/autorizacion/autorizacion_min',
+    collection: viaje.autorizacionesUsuarios,
+    var: 'autorizacion'
+  )
+
+  dateCreated viaje.dateCreated
+}

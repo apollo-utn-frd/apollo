@@ -5,7 +5,6 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-
 class ComentarioController implements AppTrait {
     static allowedMethods = [show: 'GET', search: 'GET', create: 'POST', delete: 'DELETE']
 
@@ -42,9 +41,9 @@ class ComentarioController implements AppTrait {
     @Transactional
     @Secured('ROLE_USER')
     def create() {
-        RutaViaje rutaViaje = RutaViaje.get(params.id)
+        Viaje viaje = Viaje.get(params.id)
 
-        if (!rutaViaje?.canReadBy(currentUser())) {
+        if (!viaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return
@@ -52,7 +51,7 @@ class ComentarioController implements AppTrait {
 
         Comentario comentario = new Comentario(
             usuario: currentUser(),
-            rutaViaje: rutaViaje
+            viaje: viaje
         )
 
         bindData(comentario, request, [include: [

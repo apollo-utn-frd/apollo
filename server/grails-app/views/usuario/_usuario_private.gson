@@ -5,12 +5,13 @@ model {
 }
 
 json {
+  email usuario.email
   firstLogin usuario.firstLogin
   accountLocked usuario.accountLocked
 
   autorizaciones g.render(
-    template: '/usuario/action_ruta_viaje',
+    template: '/autorizacion/autorizacion_min',
     collection: usuario.autorizaciones,
-    var: 'action'
+    var: 'autorizacion'
   )
 }

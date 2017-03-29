@@ -6,10 +6,10 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-
 class UsuarioController implements AppTrait {
     static allowedMethods = [index: 'GET', show: 'GET', showByUsername: 'GET', search: 'GET', update: 'PUT']
 
+    CollectionService collectionService
     SearchService searchService
     GrailsApplication grailsApplication
 
@@ -66,6 +66,20 @@ class UsuarioController implements AppTrait {
         )
 
         respond searchService.findAll(search)
+    }
+
+    @Secured('permitAll')
+    def posts(int offset, int max) {
+        Usuario usuario = Usuario.get(params.id)
+
+        List<Post> posts = usuario?.posts()
+
+        if (posts) {
+            posts = collectionService.orderByDateCreated(posts, false)
+            posts = collectionService.paginate(posts, offset, max)
+        }
+
+        respond posts, view: '/post/show'
     }
 
     @Transactional
