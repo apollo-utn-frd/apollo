@@ -41,10 +41,7 @@ class SecurityService implements OauthUserDetailsService {
         log.debug "Buscando usuario con perfil: ${userProfile}."
 
         Usuario usuario = Usuario.findByIdGoogle(userProfile.id)
-
-        if (!usuario) {
-            usuario = createUsuario(userProfile, defaultRoles)
-        }
+        usuario = usuario ?: createUsuario(userProfile, defaultRoles)
 
         log.debug "Se obtuvo ${usuario}. Creando OauthUser."
 

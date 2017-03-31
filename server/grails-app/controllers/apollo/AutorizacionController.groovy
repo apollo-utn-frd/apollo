@@ -8,7 +8,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class AutorizacionController implements AppTrait {
     static allowedMethods = [show: 'GET', list: 'GET']
 
-    @Secured('ROLE_USER')
+    @Secured('ROLE_ADMIN')
     def show() {
         Autorizacion autorizacion = Autorizacion.get(params.id)
 

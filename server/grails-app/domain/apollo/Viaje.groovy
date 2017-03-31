@@ -18,8 +18,8 @@ class Viaje {
     Date dateCreated
     Date lastUpdated
 
-    transient fileService
-    transient grailsApplication
+    FileService fileService
+    GrailsApplication grailsApplication
 
     static transients = [
         'fileService',

@@ -8,7 +8,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class FavoritoController implements AppTrait {
     static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
 
-    @Secured('ROLE_USER')
+    @Secured('ROLE_ADMIN')
     def show() {
         Favorito favorito = Favorito.get(params.id)
 

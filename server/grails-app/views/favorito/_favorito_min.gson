@@ -3,8 +3,6 @@ model {
 }
 
 json {
-  id favorito.id
-
   viaje g.render(
     template: '/id',
     model: [object: favorito.viaje]

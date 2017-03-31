@@ -6,32 +6,41 @@ class CollectionService {
      * elementos a mostrar.
      */
     List paginate(List list, int offset, int max) {
+        int start, end
+        int sizeList = list.size()
+
         if (offset == null || offset < 0) {
-            offset = 0
+            start = 0
+        } else {
+            start = offset
         }
 
-        if (offset >= list.size()) {
+        if (start >= sizeList) {
             return []
         }
 
         if (max == null || max <= 0) {
-            max = list.size() - offset
+            end = sizeList - 1
+        } else {
+            end = start + max - 1
+
+            if (end >= sizeList) {
+                end = sizeList - 1
+            }
         }
 
-        int end = offset + max - 1
-
-        if (end >= list.size()) {
-            end = list.size() - 1
-        }
-
-        list[offset..end]
+        list[start..end]
     }
 
+    /**
+     * Ordena una lista de acuerdo a la fecha de creación de sus elementos. Si asc es
+     * 'true' se ordena de manera ascendente.
+     */
     List orderByDateCreated(List list, boolean asc) {
-        List orderList = list.sort { a, b ->
+        List sortList = list.sort(false) { a, b ->
             a.dateCreated <=> b.dateCreated
         }
 
-        asc ? orderList : orderList.reverse()
+        asc ? sortList : sortList.reverse()
     }
 }

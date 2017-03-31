@@ -28,7 +28,7 @@ Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
 POST | /usuario/seguir/:id_usr | Usuarios | Sigue al usuario.
 DELETE | /usuario/seguir/:id_usr | Usuarios | Deja de seguir al usuario.
-GET | /seguimiento/:id_sgm | Usuarios | Devuelve el seguimiento.
+GET | /seguimiento/:id_sgm | Administradores | Devuelve el seguimiento.
 GET | /seguimiento/list | Administradores | Devuelve todos los seguimientos.
 
 ### Viajes
@@ -52,13 +52,13 @@ Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
 POST | /viaje/favear/:id_rv | Usuarios | Marca al viaje como favorito.
 DELETE | /viaje/favear/:id_rv | Usuarios | Desmarca al viaje como favorito.
-GET | /favorito/:id_fvr | Usuarios | Devuelve el favorito.
+GET | /favorito/:id_fvr | Administradores | Devuelve el favorito.
 GET | /favorito/list | Administradores | Devuelve todos los favoritos.
 
 ### Autorizaciones
 Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
-GET | /autorizacion/:id_aut | Usuarios | Devuelve la autorización.
+GET | /autorizacion/:id_aut | Administradores | Devuelve la autorización.
 GET | /autorizacion/list | Administradores | Devuelve todos las autorizaciones.
 
 ### Notificaciones

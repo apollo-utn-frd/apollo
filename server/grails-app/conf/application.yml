@@ -7,14 +7,6 @@ grails:
     spring:
         transactionManagement:
             proxies: false
-    gorm:
-        # Whether to autowire entities.
-        # Disabled by default for performance reasons.
-        autowire: true
-        reactor:
-            # Whether to translate GORM events into Reactor events
-            # Disabled by default for performance reasons
-            events: true
 info:
     app:
         name: '@info.app.name@'

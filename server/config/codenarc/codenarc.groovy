@@ -161,7 +161,9 @@ ruleset {
     GrailsMassAssignment
     GrailsPublicControllerMethod
     GrailsServletContextReference
-    GrailsStatelessService
+    GrailsStatelessService {
+        addToIgnoreFieldNames = 'grailsApplication'
+    }
 
     // rulesets/groovyism.xml
     AssignCollectionSort
@@ -203,7 +205,7 @@ ruleset {
     ImportFromSunPackages
     MisorderedStaticImports
     UnnecessaryGroovyImport
-    UnusedImport
+    UnusedImport // Error en esta regla a partir de Conenarc 0.26.0
 
     // rulesets/junit.xml
     ChainedTest
@@ -260,7 +262,6 @@ ruleset {
 
     // rulesets/security.xml
     FileCreateTempFile
-    JavaIoPackageAccess
     NonFinalPublicField
     NonFinalSubclassOfSensitiveInterface
     ObjectFinalize
@@ -276,7 +277,7 @@ ruleset {
 
     // rulesets/size.xml
     AbcMetric {
-        doNotApplyToClassNames = 'UrlMappings'
+        doNotApplyToClassNames = 'UrlMappings,BootStrap'
     } // Requires the GMetrics jar
     ClassSize
     CrapMetric   // Requires the GMetrics jar and a Cobertura coverage file
@@ -318,9 +319,7 @@ ruleset {
     UnnecessaryModOne
     UnnecessaryNullCheck
     UnnecessaryNullCheckBeforeInstanceOf
-    UnnecessaryObjectReferences {
-        doNotApplyToClassNames = 'MarshallerService'
-    }
+    UnnecessaryObjectReferences
     UnnecessaryOverridingMethod
     UnnecessaryPackageReference
     UnnecessaryParenthesesForMethodCallWithClosure

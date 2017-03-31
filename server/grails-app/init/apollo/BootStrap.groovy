@@ -105,22 +105,8 @@ class BootStrap {
                     ]
                 ).save(flush: true, failOnError: true)
 
-                Viaje baticueva = new Viaje(
-                    id: 2,
-                    nombre: 'Ubicacion de la Baticueva',
-                    descripcion: 'Una descripcion de prueba',
-                    usuario: batman,
-                    publico: false,
-                    sitios: [
-                        [
-                            'latitud': '-34.368214',
-                            'longitud': '-58.779053'
-                        ]
-                    ]
-                ).save(flush: true, failOnError: true)
-
                 Viaje flashcueva = new Viaje(
-                    id: 3,
+                    id: 2,
                     nombre: 'Ubicacion de la Flashcueva',
                     descripcion: 'Otra descripcion mas de prueba',
                     usuario: flash,
@@ -136,7 +122,7 @@ class BootStrap {
                 viajeService.createAuthorization(flashcueva, batman)
 
                 Viaje arrowcueva = new Viaje(
-                    id: 4,
+                    id: 3,
                     nombre: 'Ubicacion de la Arrowcueva',
                     descripcion: 'La 4ta descripcion de prueba',
                     usuario: arrow,
@@ -152,7 +138,7 @@ class BootStrap {
                 viajeService.createAuthorization(arrowcueva, flash)
 
                 Viaje trianguloBermudas = new Viaje(
-                    id: 5,
+                    id: 4,
                     nombre: 'Triangulo de las Bermudas',
                     descripcion: 'La 5ta descripcion de prueba',
                     usuario: raven,
@@ -177,7 +163,7 @@ class BootStrap {
                 ).save(flush: true, failOnError: true)
 
                 Viaje lugaresEnergeticos = new Viaje(
-                    id: 6,
+                    id: 5,
                     nombre: 'Lugares con energia positiva',
                     descripcion: 'La 6ta descripcion de prueba',
                     usuario: raven,
@@ -193,6 +179,20 @@ class BootStrap {
                         [
                             'latitud': '-31.061510',
                             'longitud': '-71.613073'
+                        ]
+                    ]
+                ).save(flush: true, failOnError: true)
+
+                new Viaje(
+                    id: 6,
+                    nombre: 'Ubicacion de la Baticueva',
+                    descripcion: 'Una descripcion de prueba',
+                    usuario: batman,
+                    publico: false,
+                    sitios: [
+                        [
+                            'latitud': '-34.368214',
+                            'longitud': '-58.779053'
                         ]
                     ]
                 ).save(flush: true, failOnError: true)

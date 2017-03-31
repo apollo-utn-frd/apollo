@@ -22,6 +22,7 @@ apply plugin:"codenarc"
 
 codenarc {
     configFile = rootProject.file("server/config/codenarc/codenarc.groovy")
+    toolVersion = "0.25.2"
 }
 
 repositories {

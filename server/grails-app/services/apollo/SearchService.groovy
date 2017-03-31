@@ -8,7 +8,7 @@ class SearchService {
 
         List<String> tokens = query.split(' ')
 
-        List results = search.classx.createCriteria().list() {
+        List results = search.classx.createCriteria().list {
             for (token in tokens) {
                 or {
                     for (property in search.properties) {
