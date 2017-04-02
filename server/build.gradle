@@ -67,7 +67,7 @@ dependencies {
 
     console "org.grails:grails-console"
     profile "org.grails.profiles:angular2"
-    runtime "com.h2database:h2"
+    runtime "org.postgresql:postgresql:42.0.0"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testCompile "org.grails:grails-datastore-rest-client"
