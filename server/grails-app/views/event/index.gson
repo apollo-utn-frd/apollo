@@ -1,0 +1,9 @@
+model {
+  List<Event> eventList = []
+}
+
+json g.render(
+  template: '/event/event',
+  collection: eventList,
+  var: 'event'
+)

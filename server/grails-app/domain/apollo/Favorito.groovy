@@ -1,6 +1,6 @@
 package apollo
 
-class Favorito {
+class Favorito implements Eventable {
     Date dateCreated
     Date lastUpdated
 
@@ -11,6 +11,17 @@ class Favorito {
 
     static constraints = {
         viaje unique: 'usuario'
+    }
+
+    def afterInsert() {
+        Event.async.task {
+            eventService.createEventAndNotify(
+                usuario,
+                viaje,
+                'favorito',
+                [viaje.usuario] - usuario
+            )
+        }
     }
 
     /**

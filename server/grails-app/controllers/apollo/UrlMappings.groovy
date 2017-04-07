@@ -13,7 +13,7 @@ class UrlMappings {
             get    "/$id?"(controller: 'usuario', action: 'show')
             get    "/search"(controller: 'usuario', action: 'search')
             get    "/u/$username?"(controller: 'usuario', action: 'showByUsername')
-            get    "/posts/$id?"(controller: 'usuario', action: 'posts')
+            get    "/posts/$id?"(controller: 'post', action: 'showProfilePosts')
             post   "/seguir/$id?"(controller: 'seguimiento', action: 'create')
             delete "/seguir/$id?"(controller: 'seguimiento', action: 'delete')
         }
@@ -36,27 +36,15 @@ class UrlMappings {
             get    "/search"(controller: 'comentario', action: 'search')
         }
 
-        // Seguimientos.
-        group "/seguimiento", {
-            get "/$id?"(controller: 'seguimiento', action: 'show')
-            get "/list"(controller: 'seguimiento', action: 'list')
+        // Notificaciones.
+        group "/notification", {
+            get  "/"(controller: 'notification', action: 'index')
+            post "/read"(controller: 'notification', actio: 'read')
         }
 
-        // Favoritos.
-        group "/favorito", {
-            get "/$id?"(controller: 'favorito', action: 'show')
-            get "/list"(controller: 'favorito', action: 'list')
-        }
-
-        // Autorizaciones.
-        group "/autorizacion", {
-            get "/$id?"(controller: 'autorizacion', action: 'show')
-            get "/list"(controller: 'autorizacion', action: 'list')
-        }
-
-        // Posts.
-        group "/posts", {
-            get "/"(controller: 'post', action: 'show')
+        // Home.
+        group "/home", {
+            get "/"(controller: 'post', action: 'showHomePosts')
         }
 
         // Imagenes.

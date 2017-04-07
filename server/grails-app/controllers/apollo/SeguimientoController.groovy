@@ -4,28 +4,10 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
-@Transactional(readOnly = true)
+@Transactional
 class SeguimientoController implements AppTrait {
-    static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
+    static allowedMethods = [create: 'POST', delete: 'DELETE']
 
-    @Secured('ROLE_ADMIN')
-    def show() {
-        Seguimiento seguimiento = Seguimiento.get(params.id)
-
-        if (!seguimiento?.canReadBy(currentUser())) {
-            render(status: NOT_FOUND)
-            return
-        }
-
-        respond seguimiento
-    }
-
-    @Secured('ROLE_ADMIN')
-    def list() {
-        respond Seguimiento.list().findAll { it.canReadBy(currentUser()) }
-    }
-
-    @Transactional
     @Secured('ROLE_USER')
     def create() {
         Usuario seguido = Usuario.get(params.id)
@@ -52,7 +34,6 @@ class SeguimientoController implements AppTrait {
         respond seguimiento
     }
 
-    @Transactional
     @Secured('ROLE_USER')
     def delete() {
         Usuario seguido = Usuario.get(params.id)

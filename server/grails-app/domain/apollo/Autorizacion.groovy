@@ -1,6 +1,6 @@
 package apollo
 
-class Autorizacion {
+class Autorizacion implements Eventable {
     Date dateCreated
     Date lastUpdated
 
@@ -12,13 +12,23 @@ class Autorizacion {
     static constraints = {
         usuario unique: 'viaje', validator: { usuario, autorizacion ->
             Seguimiento seguimiento = Seguimiento.findBySeguidoAndSeguidor(autorizacion.viaje.usuario, usuario)
-
             boolean seAutorizoASiMismo = autorizacion.viaje.usuario == usuario
 
             seguimiento || seAutorizoASiMismo ?: ['autorizacion.usuario.noSeguidor']
         }
         viaje validator: { viaje, autorizacion ->
             (viaje.usuario != autorizacion.usuario) ?: ['autorizacion.viaje.autorizoASiMismo']
+        }
+    }
+
+    def afterInsert() {
+        Event.async.task {
+            eventService.createEventAndNotify(
+                viaje.usuario,
+                viaje,
+                'autorizacion',
+                [usuario]
+            )
         }
     }
 

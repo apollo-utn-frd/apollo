@@ -1,6 +1,6 @@
 package apollo
 
-class Seguimiento {
+class Seguimiento implements Eventable {
     Date dateCreated
     Date lastUpdated
 
@@ -17,6 +17,17 @@ class Seguimiento {
     static constraints = {
         seguido unique: 'seguidor', validator: { seguido, seguimiento ->
             (seguido != seguimiento.seguidor) ?: ['seguimiento.seguido.seSigueASiMismo']
+        }
+    }
+
+    def afterInsert() {
+        Event.async.task {
+            eventService.createEventAndNotify(
+                seguidor,
+                seguido,
+                'seguimiento',
+                [seguido]
+            )
         }
     }
 

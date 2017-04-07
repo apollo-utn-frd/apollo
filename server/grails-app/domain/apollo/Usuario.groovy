@@ -6,8 +6,8 @@ import groovy.transform.ToString
 
 @Slf4j
 @EqualsAndHashCode(includes = 'username')
-@ToString(includes = 'username', includePackage = false)
-class Usuario implements Serializable {
+@ToString(includes = 'id,username', includePackage = false)
+class Usuario implements Serializable, Eventable {
     String username
     String password = ' '
     String email
@@ -28,6 +28,7 @@ class Usuario implements Serializable {
     List autorizaciones
     List favoritos
     List comentarios
+    List notifications
     Date dateCreated
     Date lastUpdated
 
@@ -37,6 +38,7 @@ class Usuario implements Serializable {
     transient springSecurityService
 
     static transients = [
+        'eventService',
         'fileService',
         'springSecurityService'
     ]
@@ -47,7 +49,8 @@ class Usuario implements Serializable {
         viajes: Viaje,
         autorizaciones: Autorizacion,
         favoritos: Favorito,
-        comentarios: Comentario
+        comentarios: Comentario,
+        notifications: Notification
     ]
 
     static mappedBy = [
@@ -90,15 +93,23 @@ class Usuario implements Serializable {
 
     def afterInsert() {
         downloadPicture()
+
+        Event.async.task {
+            eventService.createEvent(this, this, 'usuario')
+        }
     }
 
-    List<Post> posts() {
-        List<Post> posts = []
+    void notify(Event event) {
+        Notification.async.task {
+            Notification notification = new Notification(
+                usuario: this,
+                event: event
+            )
 
-        posts += viajes.collect { new Post(it) }
-        posts += comentarios.collect { new Post(it) }
-        posts += favoritos.collect { new Post(it) }
-        posts + seguidos.collect { new Post(it) }
+            if (!notification.save(flush: true)) {
+                log.warn "Notification(${event}, ${this}): No se pudo crear por [${notification.errors}]."
+            }
+        }
     }
 
     /**
@@ -149,7 +160,7 @@ class Usuario implements Serializable {
         try {
             fileService.download(imagenGoogleUrl, imagenLocalPath)
         } catch (IOException e) {
-            log.warn "Usuario(${id}): No se pudo descargar la imagen de perfil [${e}]."
+            log.warn "${this}: No se pudo descargar la imagen de perfil [${e}]."
             copyDefaultPicture()
         }
     }
@@ -160,7 +171,7 @@ class Usuario implements Serializable {
     protected void copyDefaultPicture() {
         String defaultImage = "/images/usuario/default.jpg"
         fileService.copy(defaultImage, imagenLocalPath)
-        log.debug "Usuario(${id}): Se le asigno la imagen de perfil por defecto."
+        log.debug "${this}: Se le asigno la imagen de perfil por defecto."
     }
 
     protected void encodePassword() {

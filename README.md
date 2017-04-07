@@ -1,11 +1,13 @@
 ## Prerequisites
 To use this app, you should have Grails, Node, NPM, and the Angular CLI installed.
 
-* [Grails 3.2.6](http://docs.grails.org/latest/guide/single.html#gettingStarted)
+* [Grails 3.2.8](http://docs.grails.org/latest/guide/single.html#gettingStarted)
 
 * [Node 6.9.0 && NPM 3](https://docs.npmjs.com/getting-started/installing-node)
 
 * [Angular CLI](https://github.com/angular/angular-cli#installation)
+
+* [PostgreSQL 9.6](https://www.postgresql.org/docs/9.6/static/tutorial-install.html)
 
 ## Running The App
 

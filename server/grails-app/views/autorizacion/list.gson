@@ -1,9 +1,0 @@
-model {
-  List<Autorizacion> autorizacionList = []
-}
-
-json g.render(
-  template: '/autorizacion/autorizacion',
-  collection: autorizacionList,
-  var: 'autorizacion'
-)

@@ -1,9 +1,0 @@
-model {
-  List<Favorito> favoritoList = []
-}
-
-json g.render(
-  template: '/favorito/favorito',
-  collection: favoritoList,
-  var: 'favorito'
-)

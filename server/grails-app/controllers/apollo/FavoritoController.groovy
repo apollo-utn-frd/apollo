@@ -4,26 +4,9 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
-@Transactional(readOnly = true)
+@Transactional
 class FavoritoController implements AppTrait {
-    static allowedMethods = [show: 'GET', list: 'GET', create: 'POST', delete: 'DELETE']
-
-    @Secured('ROLE_ADMIN')
-    def show() {
-        Favorito favorito = Favorito.get(params.id)
-
-        if (!favorito?.canReadBy(currentUser())) {
-            render(status: NOT_FOUND)
-            return
-        }
-
-        respond favorito
-    }
-
-    @Secured('ROLE_ADMIN')
-    def list() {
-        respond Favorito.list().findAll { it.canReadBy(currentUser()) }
-    }
+    static allowedMethods = [create: 'POST', delete: 'DELETE']
 
     @Transactional
     @Secured('ROLE_USER')

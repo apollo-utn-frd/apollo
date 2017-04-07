@@ -1,9 +1,0 @@
-model {
-  List<Post> postList = []
-}
-
-json g.render(
-  template: '/post/post',
-  collection: postList,
-  var: 'post'
-)

@@ -5,8 +5,8 @@ import groovy.transform.ToString
 import grails.core.GrailsApplication
 
 @Slf4j
-@ToString(includes = 'nombre', includePackage = false)
-class Viaje {
+@ToString(includes = 'id,nombre', includePackage = false)
+class Viaje implements Eventable {
     String nombre
     String descripcion = ''
     String imagenLocalPath
@@ -22,6 +22,7 @@ class Viaje {
     GrailsApplication grailsApplication
 
     static transients = [
+        'eventService',
         'fileService',
         'grailsApplication'
     ]
@@ -52,6 +53,10 @@ class Viaje {
 
     def afterInsert() {
         downloadPicture()
+
+        Event.async.task {
+            eventService.createEvent(usuario, this, 'viaje')
+        }
     }
 
     /**
@@ -110,7 +115,7 @@ class Viaje {
         try {
             fileService.download(imagenGoogleUrl(), imagenLocalPath)
         } catch (IOException e) {
-            log.warn "Viaje(${id}): No se pudo descargar la imagen de previsualizacion [${e}]."
+            log.warn "${this}: No se pudo descargar la imagen de previsualizacion [${e}]."
             copyDefaultPicture()
         }
     }
@@ -121,6 +126,6 @@ class Viaje {
     protected void copyDefaultPicture() {
         String defaultImage = "/images/viaje/default.jpg"
         fileService.copy(defaultImage, imagenLocalPath)
-        log.debug "Viaje(${id}): Se le asigno la imagen de previsualizacion por defecto."
+        log.debug "${this}: Se le asigno la imagen de previsualizacion por defecto."
     }
 }

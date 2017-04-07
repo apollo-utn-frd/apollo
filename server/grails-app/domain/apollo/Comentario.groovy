@@ -1,6 +1,6 @@
 package apollo
 
-class Comentario {
+class Comentario implements Eventable {
     String contenido
     Date dateCreated
     Date lastUpdated
@@ -12,6 +12,17 @@ class Comentario {
 
     static constraints = {
         contenido size: 1..300, blank: false
+    }
+
+    def afterInsert() {
+        Event.async.task {
+            eventService.createEventAndNotify(
+                usuario,
+                this,
+                'comentario',
+                ([viaje.usuario] + viaje.comentariosUsuarios.usuario - usuario).unique()
+            )
+        }
     }
 
     /**

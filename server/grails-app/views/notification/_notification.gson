@@ -1,0 +1,12 @@
+model {
+  Notification notification
+}
+
+json {
+  read notification.read
+
+  event g.render(
+    template: '/event/event',
+    model: [event: notification.event]
+  )
+}

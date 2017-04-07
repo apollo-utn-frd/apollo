@@ -16,7 +16,6 @@ class BootStrap {
         if (Environment.current != Environment.PRODUCTION) {
             if (Usuario.count() == 0) {
                 Usuario batman = new Usuario(
-                    id: 1,
                     username: 'batman',
                     idGoogle: grailsApplication.config.getProperty('app.test.google.idUsuario') ?: 1235,
                     email: 'batman@gmail.com',
@@ -28,7 +27,6 @@ class BootStrap {
                 ).save(flush: true, failOnError: true)
 
                 Usuario flash = new Usuario(
-                    id: 2,
                     username: 'flash',
                     idGoogle: 1236,
                     email: 'flash@gmail.com',
@@ -40,7 +38,6 @@ class BootStrap {
                 ).save(flush: true, failOnError: true)
 
                 Usuario arrow = new Usuario(
-                    id: 3,
                     username: 'arrow',
                     idGoogle: 1237,
                     email: 'arrow@gmail.com',
@@ -52,7 +49,6 @@ class BootStrap {
                 ).save(flush: true, failOnError: true)
 
                 Usuario raven = new Usuario(
-                    id: 4,
                     username: 'raven',
                     idGoogle: 1238,
                     email: 'raven@gmail.com',
@@ -62,6 +58,11 @@ class BootStrap {
                     descripcion: 'Azarath Metreon Zinthos',
                     firstLogin: true
                 ).save(flush: true, failOnError: true)
+
+                UsuarioRole.create batman, Role.findByAuthority('ROLE_USER')
+                UsuarioRole.create flash, Role.findByAuthority('ROLE_USER')
+                UsuarioRole.create arrow, Role.findByAuthority('ROLE_USER')
+                UsuarioRole.create raven, Role.findByAuthority('ROLE_USER')
 
                 new Seguimiento(
                     seguido: flash,
@@ -83,13 +84,7 @@ class BootStrap {
                     seguidor: arrow
                 ).save(flush: true, failOnError: true)
 
-                UsuarioRole.create batman, Role.findByAuthority('ROLE_USER')
-                UsuarioRole.create flash, Role.findByAuthority('ROLE_USER')
-                UsuarioRole.create arrow, Role.findByAuthority('ROLE_USER')
-                UsuarioRole.create raven, Role.findByAuthority('ROLE_USER')
-
                 Viaje rutaEntrenamiento = new Viaje(
-                    id: 1,
                     nombre: 'Mi entrenamiento diario',
                     descripcion: 'Descripcion de prueba',
                     usuario: flash,
@@ -106,7 +101,6 @@ class BootStrap {
                 ).save(flush: true, failOnError: true)
 
                 Viaje flashcueva = new Viaje(
-                    id: 2,
                     nombre: 'Ubicacion de la Flashcueva',
                     descripcion: 'Otra descripcion mas de prueba',
                     usuario: flash,
@@ -122,7 +116,6 @@ class BootStrap {
                 viajeService.createAuthorization(flashcueva, batman)
 
                 Viaje arrowcueva = new Viaje(
-                    id: 3,
                     nombre: 'Ubicacion de la Arrowcueva',
                     descripcion: 'La 4ta descripcion de prueba',
                     usuario: arrow,
@@ -138,7 +131,6 @@ class BootStrap {
                 viajeService.createAuthorization(arrowcueva, flash)
 
                 Viaje trianguloBermudas = new Viaje(
-                    id: 4,
                     nombre: 'Triangulo de las Bermudas',
                     descripcion: 'La 5ta descripcion de prueba',
                     usuario: raven,
@@ -163,7 +155,6 @@ class BootStrap {
                 ).save(flush: true, failOnError: true)
 
                 Viaje lugaresEnergeticos = new Viaje(
-                    id: 5,
                     nombre: 'Lugares con energia positiva',
                     descripcion: 'La 6ta descripcion de prueba',
                     usuario: raven,
@@ -184,7 +175,6 @@ class BootStrap {
                 ).save(flush: true, failOnError: true)
 
                 new Viaje(
-                    id: 6,
                     nombre: 'Ubicacion de la Baticueva',
                     descripcion: 'Una descripcion de prueba',
                     usuario: batman,
@@ -229,6 +219,11 @@ class BootStrap {
 
                 new Favorito(
                     usuario: flash,
+                    viaje: rutaEntrenamiento
+                ).save(flush: true, failOnError: true)
+
+                new Favorito(
+                    usuario: flash,
                     viaje: trianguloBermudas
                 ).save(flush: true, failOnError: true)
 
@@ -238,21 +233,18 @@ class BootStrap {
                 ).save(flush: true, failOnError: true)
 
                 new Comentario(
-                    id: 1,
                     viaje: rutaEntrenamiento,
                     usuario: flash,
                     contenido: 'Un buen dia para ejercitarse'
                 ).save(flush: true, failOnError: true)
 
                 new Comentario(
-                    id: 2,
                     viaje: flashcueva,
                     usuario: batman,
                     contenido: 'Guardare el secreto'
                 ).save(flush: true, failOnError: true)
 
                 new Comentario(
-                    id: 2,
                     viaje: arrowcueva,
                     usuario: flash,
                     contenido: 'Voy corriendo para alla'

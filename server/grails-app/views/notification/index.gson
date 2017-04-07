@@ -1,0 +1,9 @@
+model {
+  List<Notification> notificationList = []
+}
+
+json g.render(
+  template: '/notification/notification',
+  collection: notificationList,
+  var: 'notification'
+)

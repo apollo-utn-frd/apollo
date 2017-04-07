@@ -6,17 +6,35 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 class PostController implements AppTrait {
+    static allowedMethods = [showProfilePosts: 'GET', showHomePosts: 'GET']
+
     CollectionService collectionService
+    EventService eventService
 
-    @Secured('ROLE_USER')
-    def show(int offset, int max) {
-        Usuario usuario = currentUser()
+    @Secured('permitAll')
+    def showProfilePosts(int offset, int max) {
+        Usuario usuario = Usuario.get(params.id)
 
-        List<Post> posts = usuario.posts() + usuario.seguidos.seguido*.posts().flatten()
+        if (!usuario) {
+            render(status: NOT_FOUND)
+            return
+        }
 
+        List<Event> posts = eventService.findProfilePosts(usuario)
         posts = collectionService.orderByDateCreated(posts, false)
         posts = collectionService.paginate(posts, offset, max)
 
-        respond posts
+        respond posts, view: '/event/index'
+    }
+
+    @Secured('ROLE_USER')
+    def showHomePosts(int offset, int max) {
+        Usuario usuario = currentUser()
+
+        List<Event> posts = eventService.findHomePosts(usuario)
+        posts = collectionService.orderByDateCreated(posts, false)
+        posts = collectionService.paginate(posts, offset, max)
+
+        respond posts, view: '/event/index'
     }
 }

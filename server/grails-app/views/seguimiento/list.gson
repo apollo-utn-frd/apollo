@@ -1,9 +1,0 @@
-model {
-  List<Seguimiento> seguimientoList = []
-}
-
-json g.render(
-  template: '/seguimiento/seguimiento',
-  collection: seguimientoList,
-  var: 'seguimiento'
-)
