@@ -18,13 +18,14 @@ class Seguimiento implements Eventable {
         seguido unique: 'seguidor', validator: { seguido, seguimiento ->
             (seguido != seguimiento.seguidor) ?: ['seguimiento.seguido.seSigueASiMismo']
         }
+        event nullable: true
     }
 
     def afterInsert() {
         Event.async.task {
-            eventService.createEventAndNotify(
+            event = eventService.createEventAndNotify(
                 seguidor,
-                seguido,
+                this,
                 'seguimiento',
                 [seguido]
             )

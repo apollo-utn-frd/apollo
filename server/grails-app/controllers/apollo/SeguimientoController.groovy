@@ -10,7 +10,7 @@ class SeguimientoController implements AppTrait {
 
     @Secured('ROLE_USER')
     def create() {
-        Usuario seguido = Usuario.get(params.id)
+        Usuario seguido = Usuario.read(params.id)
 
         if (!seguido) {
             transactionStatus.setRollbackOnly()
@@ -36,7 +36,7 @@ class SeguimientoController implements AppTrait {
 
     @Secured('ROLE_USER')
     def delete() {
-        Usuario seguido = Usuario.get(params.id)
+        Usuario seguido = Usuario.read(params.id)
 
         if (!seguido) {
             transactionStatus.setRollbackOnly()

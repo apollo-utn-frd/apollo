@@ -17,10 +17,20 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
             pattern = "%level %logger - %msg%n"
         }
     }
-    logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
+
+    /* Apollo */
     logger("apollo", DEBUG, ['STDOUT'], false)
-//    logger("org.springframework.security", DEBUG, ['STDOUT'], false)
-//    logger("grails.plugin.springsecurity", DEBUG, ['STDOUT'], false)
+
+    /* Hibernate SQL */
+    // logger("org.hibernate.SQL", DEBUG, ["STDOUT"], false)
+    // logger("org.hibernate.type.descriptor.sql.BasicBinder", TRACE, ["STDOUT"], false)
+
+    /* Spring Security */
+    // logger("org.springframework.security", DEBUG, ['STDOUT'], false)
+    // logger("grails.plugin.springsecurity", DEBUG, ['STDOUT'], false)
+
+    logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
+
     logger("org.pac4j", DEBUG, ['STDOUT'], false)
     root(ERROR, ['STDOUT', 'FULL_STACKTRACE'])
 }

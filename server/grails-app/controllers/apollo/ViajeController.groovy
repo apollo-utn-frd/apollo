@@ -44,7 +44,7 @@ class ViajeController implements AppTrait {
 
     @Secured('permitAll')
     def show() {
-        Viaje viaje = Viaje.get(params.id)
+        Viaje viaje = Viaje.read(params.id)
 
         if (!viaje?.canReadBy(currentUser())) {
             render(status: NOT_FOUND)
@@ -103,7 +103,7 @@ class ViajeController implements AppTrait {
     @Transactional
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def delete() {
-        Viaje viaje = Viaje.get(params.id)
+        Viaje viaje = Viaje.read(params.id)
 
         if (!viaje) {
             transactionStatus.setRollbackOnly()

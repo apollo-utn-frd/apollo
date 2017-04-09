@@ -12,11 +12,12 @@ class Comentario implements Eventable {
 
     static constraints = {
         contenido size: 1..300, blank: false
+        event nullable: true
     }
 
     def afterInsert() {
         Event.async.task {
-            eventService.createEventAndNotify(
+            event = eventService.createEventAndNotify(
                 usuario,
                 this,
                 'comentario',

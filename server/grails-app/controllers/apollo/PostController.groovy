@@ -13,7 +13,7 @@ class PostController implements AppTrait {
 
     @Secured('permitAll')
     def showProfilePosts(int offset, int max) {
-        Usuario usuario = Usuario.get(params.id)
+        Usuario usuario = Usuario.read(params.id)
 
         if (!usuario) {
             render(status: NOT_FOUND)

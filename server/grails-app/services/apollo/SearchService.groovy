@@ -3,6 +3,9 @@ package apollo
 class SearchService {
     CollectionService collectionService
 
+    /**
+     * Busca en un dominio dado una query.
+     */
     List findAll(Search search) {
         String query = search.query ?: ''
 

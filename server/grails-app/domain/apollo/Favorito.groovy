@@ -11,13 +11,14 @@ class Favorito implements Eventable {
 
     static constraints = {
         viaje unique: 'usuario'
+        event nullable: true
     }
 
     def afterInsert() {
         Event.async.task {
-            eventService.createEventAndNotify(
+            event = eventService.createEventAndNotify(
                 usuario,
-                viaje,
+                this,
                 'favorito',
                 [viaje.usuario] - usuario
             )

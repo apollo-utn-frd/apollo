@@ -45,6 +45,7 @@ class Viaje implements Eventable {
         sitios maxSize: 25, validator: { sitios ->
             (sitios && !sitios.empty) ?: ['viaje.sitios.vacio']
         }
+        event nullable: true
     }
 
     static mapping = {
@@ -55,7 +56,7 @@ class Viaje implements Eventable {
         downloadPicture()
 
         Event.async.task {
-            eventService.createEvent(usuario, this, 'viaje')
+            event = eventService.createEvent(this.usuario, this, 'viaje')
         }
     }
 

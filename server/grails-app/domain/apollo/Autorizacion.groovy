@@ -14,18 +14,19 @@ class Autorizacion implements Eventable {
             Seguimiento seguimiento = Seguimiento.findBySeguidoAndSeguidor(autorizacion.viaje.usuario, usuario)
             boolean seAutorizoASiMismo = autorizacion.viaje.usuario == usuario
 
-            seguimiento || seAutorizoASiMismo ?: ['autorizacion.usuario.noSeguidor']
+            (seguimiento || seAutorizoASiMismo) ?: ['autorizacion.usuario.noSeguidor']
         }
         viaje validator: { viaje, autorizacion ->
             (viaje.usuario != autorizacion.usuario) ?: ['autorizacion.viaje.autorizoASiMismo']
         }
+        event nullable: true
     }
 
     def afterInsert() {
         Event.async.task {
-            eventService.createEventAndNotify(
+            event = eventService.createEventAndNotify(
                 viaje.usuario,
-                viaje,
+                this,
                 'autorizacion',
                 [usuario]
             )

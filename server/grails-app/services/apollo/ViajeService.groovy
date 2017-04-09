@@ -11,7 +11,7 @@ class ViajeService {
      */
     boolean authorize(Viaje viaje, List idsUsuario) {
         for (idUsuario in idsUsuario) {
-            Usuario usuario = Usuario.get(idUsuario)
+            Usuario usuario = Usuario.read(idUsuario)
 
             if (usuario) {
                 Autorizacion autorizacion = createAuthorization(viaje, usuario)

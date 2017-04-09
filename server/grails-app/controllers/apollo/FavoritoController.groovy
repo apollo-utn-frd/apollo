@@ -11,7 +11,7 @@ class FavoritoController implements AppTrait {
     @Transactional
     @Secured('ROLE_USER')
     def create() {
-        Viaje viaje = Viaje.get(params.id)
+        Viaje viaje = Viaje.read(params.id)
 
         if (!viaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()
@@ -38,7 +38,7 @@ class FavoritoController implements AppTrait {
     @Transactional
     @Secured('ROLE_USER')
     def delete() {
-        Viaje viaje = Viaje.get(params.id)
+        Viaje viaje = Viaje.read(params.id)
 
         if (!viaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()

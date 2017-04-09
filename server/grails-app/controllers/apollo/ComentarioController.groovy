@@ -12,7 +12,7 @@ class ComentarioController implements AppTrait {
 
     @Secured('permitAll')
     def show() {
-        Comentario comentario = Comentario.get(params.id)
+        Comentario comentario = Comentario.read(params.id)
 
         if (!comentario?.canReadBy(currentUser())) {
             render(status: NOT_FOUND)
@@ -41,7 +41,7 @@ class ComentarioController implements AppTrait {
     @Transactional
     @Secured('ROLE_USER')
     def create() {
-        Viaje viaje = Viaje.get(params.id)
+        Viaje viaje = Viaje.read(params.id)
 
         if (!viaje?.canReadBy(currentUser())) {
             transactionStatus.setRollbackOnly()
@@ -72,7 +72,7 @@ class ComentarioController implements AppTrait {
     @Transactional
     @Secured('ROLE_ADMIN')
     def delete() {
-        Comentario comentario = Comentario.get(params.id)
+        Comentario comentario = Comentario.read(params.id)
 
         if (!comentario?.canDeletedBy(currentUser())) {
             transactionStatus.setRollbackOnly()

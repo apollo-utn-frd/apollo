@@ -5,14 +5,14 @@ model {
 json {
   source g.render(
     template: "/event/event_${event.sourceClass.toLowerCase()}",
-    model: [contenido: event.source]
+    model: [contenido: event.source()]
   )
 
   type event.type
 
-  object g.render(
-    template: "/event/event_${event.objectClass.toLowerCase()}",
-    model: [contenido: event.object]
+  resource g.render(
+    template: "/event/event_${event.resourceClass.toLowerCase()}",
+    model: [contenido: event.resource()]
   )
 
   dateCreated event.dateCreated

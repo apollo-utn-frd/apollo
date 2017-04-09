@@ -67,6 +67,7 @@ class Usuario implements Serializable, Eventable {
         imagenGoogleUrl url: true, blank: false
         imagenLocalPath nullable: true
         descripcion size: 0..150
+        event nullable: true
     }
 
     static mapping = {
@@ -95,7 +96,7 @@ class Usuario implements Serializable, Eventable {
         downloadPicture()
 
         Event.async.task {
-            eventService.createEvent(this, this, 'usuario')
+            event = eventService.createEvent(this, this, 'usuario')
         }
     }
 

@@ -39,7 +39,7 @@ class UsuarioController implements AppTrait {
 
     @Secured('permitAll')
     def show() {
-        Usuario usuario = Usuario.get(params.id)
+        Usuario usuario = Usuario.read(params.id)
 
         respond usuario?.sanitize(currentUser())
     }

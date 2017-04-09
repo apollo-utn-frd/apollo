@@ -1,0 +1,10 @@
+model {
+  Autorizacion contenido
+}
+
+json {
+  viaje g.render(
+    template: '/viaje/viaje_min',
+    model: [viaje: contenido.viaje]
+  )
+}
