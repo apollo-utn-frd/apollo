@@ -36,6 +36,6 @@ class Seguimiento implements Eventable {
      * Devuelve si el seguimiento puede ser leído por un determinado usuario.
      */
     boolean canReadBy(Usuario usuario) {
-        usuario?.isAdmin()
+        true
     }
 }

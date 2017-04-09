@@ -107,8 +107,7 @@ class Viaje implements Eventable {
     }
 
     /**
-     * Descarga la imagen de previsualización y ajusta la ruta de destino de la
-     * imagen.
+     * Descarga la imagen de previsualización y ajusta la ruta de destino de la imagen.
      */
     protected void downloadPicture() {
         imagenLocalPath = "/images/viaje/${id}.jpg"

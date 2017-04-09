@@ -48,14 +48,30 @@ class Event {
         'viaje'
     ]
 
+    /**
+     * Devuelve si el origen del evento.
+     */
     def source() {
         getObject(sourceClass, sourceId)
     }
 
+    /**
+     * Devuelve si el recurso del evento.
+     */
     def resource() {
         getObject(resourceClass, resourceId)
     }
 
+    /**
+     * Devuelve si el evento puede ser leído por un determinado usuario.
+     */
+    boolean canReadBy(Usuario usuario) {
+        source().canReadBy(usuario) && resource().canReadBy(usuario)
+    }
+
+    /**
+     * Devuelve un objeto dado su clase y su id.
+     */
     protected def getObject(objectClass, objectId) {
         String defaultPackage = grailsApplication.config.getProperty('grails.codegen.defaultPackage')
 

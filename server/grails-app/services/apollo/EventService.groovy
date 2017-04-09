@@ -78,7 +78,9 @@ class EventService {
     List<Event> findHomePosts(Usuario usuario) {
         findProfilePosts(usuario) + usuario.seguidos.seguido.collect {
             findProfilePosts(it)
-        }.flatten()
+        }.flatten().findAll {
+            it.canReadBy(usuario)
+        }
     }
 
     /**
@@ -95,7 +97,7 @@ class EventService {
         ])
 
         if (eventList.empty) {
-            log.warn "findProfilePosts(usuario): No se encontraron posts."
+            log.warn "findProfilePosts(${usuario}): No se encontraron posts."
         }
 
         eventList

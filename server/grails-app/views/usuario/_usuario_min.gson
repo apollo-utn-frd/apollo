@@ -5,7 +5,6 @@ model {
 json {
   id usuario.id
   username usuario.username
-  email usuario.email
   nombre usuario.nombre
   apellido usuario.apellido
   descripcion usuario.descripcion
