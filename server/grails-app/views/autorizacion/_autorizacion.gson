@@ -3,8 +3,6 @@ model {
 }
 
 json {
-  id autorizacion.id
-
   viaje g.render(
     template: '/viaje/viaje_min',
     model: [viaje: autorizacion.viaje]

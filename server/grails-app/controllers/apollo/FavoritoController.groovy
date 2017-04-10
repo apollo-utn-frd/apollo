@@ -11,16 +11,17 @@ class FavoritoController implements AppTrait {
     @Transactional
     @Secured('ROLE_USER')
     def create() {
+        Usuario usuario = currentUser()
         Viaje viaje = Viaje.read(params.id)
 
-        if (!viaje?.canReadBy(currentUser())) {
+        if (!viaje?.canReadBy(usuario)) {
             transactionStatus.setRollbackOnly()
             render(status: NOT_FOUND)
             return
         }
 
-        Favorito favorito = new Favorito(
-            usuario: currentUser(),
+        Favorito favorito = Favorito.findOrSaveWhere(
+            usuario: usuario,
             viaje: viaje
         )
 
@@ -29,8 +30,6 @@ class FavoritoController implements AppTrait {
             respond favorito.errors
             return
         }
-
-        favorito.save(flush: true)
 
         respond favorito
     }
@@ -46,20 +45,15 @@ class FavoritoController implements AppTrait {
             return
         }
 
-        Favorito favorito = Favorito.findByUsuarioAndViaje(currentUser(), viaje)
-
-        if (!favorito) {
-            transactionStatus.setRollbackOnly()
-            render(status: UNPROCESSABLE_ENTITY)
-            return
-        }
-
-        favorito.delete(flush: true)
+        Favorito.findWhere(
+            usuario: currentUser(),
+            viaje: viaje
+        )?.delete(flush: true)
 
         // Fix para error de Grails cuando el favorito fue creado en el Bootstrap.
         currentUser().favoritos.removeAll([null])
         viaje.favoritosUsuarios.removeAll([null])
 
-        render(status: OK)
+        render(status: NO_CONTENT)
     }
 }

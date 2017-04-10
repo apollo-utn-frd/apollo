@@ -14,7 +14,7 @@ class Event {
     Date lastUpdated
     List notificationsUsuario
 
-    transient grailsApplication
+    GrailsApplication grailsApplication
 
     static transients = [
         'grailsApplication'
@@ -72,11 +72,11 @@ class Event {
     /**
      * Devuelve un objeto dado su clase y su id.
      */
-    protected def getObject(objectClass, objectId) {
+    protected getObject(objectClass, objectId) {
         String defaultPackage = grailsApplication.config.getProperty('grails.codegen.defaultPackage')
 
         try {
-            Class.forName(defaultPackage + '.' + objectClass).read(objectId)
+            grailsApplication.classLoader.loadClass(defaultPackage + '.' + objectClass).read(objectId)
         } catch (ClassNotFoundException e) {
             null
         }

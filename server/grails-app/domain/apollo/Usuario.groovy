@@ -148,7 +148,7 @@ class Usuario implements Serializable, Eventable {
     /**
      * Devuelve si los datos del usuario pueden ser leídos por un determinado usuario.
      */
-    boolean canReadBy(Usuario usuario) {
+    boolean canReadBy(Usuario ignore) {
         true
     }
 

@@ -1,7 +1,7 @@
 package apollo
 
 class Notification {
-    boolean read = false
+    boolean readed = false
     Date dateCreated
     Date lastUpdated
 

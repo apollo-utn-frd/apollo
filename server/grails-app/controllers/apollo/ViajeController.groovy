@@ -16,7 +16,7 @@ class ViajeController implements AppTrait {
     @Secured('permitAll')
     def images() {
         if (!params.file.endsWith('.jpg')) {
-            render(status: UNPROCESSABLE_ENTITY)
+            render(status: NOT_FOUND)
             return
         }
 
@@ -90,7 +90,9 @@ class ViajeController implements AppTrait {
         viaje.save(flush: true)
 
         if (!viaje.publico) {
-            if (!viajeService.authorize(viaje, request.JSON?.autorizaciones.id)) {
+            List<Integer> usuariosId = request.JSON?.autorizaciones.id*.toInteger()
+
+            if (!viajeService.authorize(viaje, usuariosId)) {
                 transactionStatus.setRollbackOnly()
                 respond viaje.errors
                 return
@@ -125,6 +127,6 @@ class ViajeController implements AppTrait {
 
         viaje.delete(flush: true)
 
-        render(status: OK)
+        render(status: NO_CONTENT)
     }
 }

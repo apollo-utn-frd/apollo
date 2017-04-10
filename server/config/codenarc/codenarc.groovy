@@ -332,7 +332,6 @@ ruleset {
     UnnecessarySubstring
     UnnecessaryTernaryExpression
     UnnecessaryToString
-    UnnecessaryTransientModifier
 
     // rulesets/unused.xml
     UnusedArray

@@ -9,9 +9,11 @@ class ViajeService {
      * las autorizaciones se pudieron crear correctamente. Si hubo autorizaciones que no
      * se pudieron crear se registran los errores dentro del viaje.
      */
-    boolean authorize(Viaje viaje, List idsUsuario) {
-        for (idUsuario in idsUsuario) {
-            Usuario usuario = Usuario.read(idUsuario)
+    boolean authorize(Viaje viaje, List<Integer> usuariosId) {
+        List<Integer> uniqueUsuariosId = usuariosId.unique(false)
+
+        for (usuarioId in uniqueUsuariosId) {
+            Usuario usuario = Usuario.read(usuarioId)
 
             if (usuario) {
                 Autorizacion autorizacion = createAuthorization(viaje, usuario)
@@ -21,8 +23,8 @@ class ViajeService {
                 }
             } else {
                 viaje.errors.reject(
-                    'autorizacion.usuario.noExiste',
-                    [idUsuario.toString()] as Object[],
+                    'autorizacion.usuario.notFound',
+                    [usuarioId.toString()] as Object[],
                     'Error al autorizar viaje'
                 )
             }

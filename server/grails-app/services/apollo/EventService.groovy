@@ -11,9 +11,9 @@ class EventService {
      */
     Event createEvent(source, resource, String type) {
         Event newEvent = new Event(
-            sourceClass: source.class.getSimpleName(),
+            sourceClass: source.class.simpleName,
             sourceId: source.id,
-            resourceClass: resource.class.getSimpleName(),
+            resourceClass: resource.class.simpleName,
             resourceId: resource.id,
             type: type
         )
@@ -66,7 +66,7 @@ class EventService {
     List<Event> findEventsBySourceAndType(source, List<String> types) {
         Event.findAllBySourceIdAndSourceClassAndTypeInList(
             source.id,
-            source.class.getSimpleName(),
+            source.class.simpleName,
             types
         )
     }
@@ -76,9 +76,9 @@ class EventService {
      */
     @Transactional(readOnly = true)
     List<Event> findHomePosts(Usuario usuario) {
-        findProfilePosts(usuario) + usuario.seguidos.seguido.collect {
+        findProfilePosts(usuario) + usuario.seguidos.seguido.collectMany {
             findProfilePosts(it)
-        }.flatten().findAll {
+        }.findAll {
             it.canReadBy(usuario)
         }
     }
@@ -108,8 +108,8 @@ class EventService {
      * notificaciones están marcadas como leidas o no.
      */
     @Transactional(readOnly = true)
-    List findNotifications(Usuario usuario, boolean read) {
-        read == null ? Notification.findByUsuario(usuario) : Notification.findByUsuarioAndRead(usuario, read)
+    List findNotifications(Usuario usuario, boolean readed) {
+        readed == null ? Notification.findByUsuario(usuario) : Notification.findByUsuarioAndReaded(usuario, readed)
     }
 
     /**
@@ -117,7 +117,7 @@ class EventService {
      */
     void readNotifications(Usuario usuario) {
         Notification.executeUpdate(
-            'update Notification notif set notif.read = true where notif.usuario = ? and notif.read = false',
+            'update Notification notif set notif.readed = true where notif.usuario = ? and notif.readed = false',
             usuario
         )
     }

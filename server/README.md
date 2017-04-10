@@ -47,5 +47,5 @@ DELETE | /comentario/:id_cmn | Administradores | Borra el comentario.
 Método HTTP | URI | Autenticación | Descripción
 ----------- | --- | ------------- | -----------
 GET | /notification | Usuarios | Devuelve todas las notificaciones.
-GET | /notification?read=false | Usuarios | Devuelve las notificaciones no leídas.
+GET | /notification?readed=false | Usuarios | Devuelve las notificaciones no leídas.
 POST | /notification/read | Usuarios | Marca todas las notificaciones como leídas.

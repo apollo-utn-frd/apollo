@@ -3,8 +3,6 @@ model {
 }
 
 json {
-  id seguimiento.id
-
   seguido g.render(
     template: '/usuario/usuario_min',
     model: [usuario: seguimiento.seguido]

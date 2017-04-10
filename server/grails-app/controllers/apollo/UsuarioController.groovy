@@ -15,7 +15,7 @@ class UsuarioController implements AppTrait {
     @Secured('permitAll')
     def images() {
         if (!params.file.endsWith('.jpg')) {
-            render(status: UNPROCESSABLE_ENTITY)
+            render(status: NOT_FOUND)
             return
         }
 

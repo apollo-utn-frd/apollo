@@ -13,7 +13,7 @@ trait Eventable {
         event nullable: true
     }
 
-    abstract def afterInsert()
+    abstract afterInsert()
 
     def beforeDelete() {
         /* No funciona */

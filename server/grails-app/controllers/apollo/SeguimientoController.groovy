@@ -18,7 +18,7 @@ class SeguimientoController implements AppTrait {
             return
         }
 
-        Seguimiento seguimiento = new Seguimiento(
+        Seguimiento seguimiento = Seguimiento.findOrSaveWhere(
             seguido: seguido,
             seguidor: currentUser()
         )
@@ -28,8 +28,6 @@ class SeguimientoController implements AppTrait {
             respond seguimiento.errors
             return
         }
-
-        seguimiento.save(flush: true)
 
         respond seguimiento
     }
@@ -44,20 +42,15 @@ class SeguimientoController implements AppTrait {
             return
         }
 
-        Seguimiento seguimiento = Seguimiento.findBySeguidoAndSeguidor(seguido, currentUser())
-
-        if (!seguimiento) {
-            transactionStatus.setRollbackOnly()
-            render(status: UNPROCESSABLE_ENTITY)
-            return
-        }
-
-        seguimiento.delete(flush: true)
+        Seguimiento.findWhere(
+            seguido: seguido,
+            seguidor: currentUser()
+        )?.delete(flush: true)
 
         // Fix para error de Grails cuando el seguimiento fue creado en el Bootstrap.
         currentUser().seguidos.removeAll([null])
         seguido.seguidores.removeAll([null])
 
-        render(status: OK)
+        render(status: NO_CONTENT)
     }
 }

@@ -82,6 +82,6 @@ class ComentarioController implements AppTrait {
 
         comentario.delete(flush: true)
 
-        render(status: OK)
+        render(status: NO_CONTENT)
     }
 }

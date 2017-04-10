@@ -12,10 +12,10 @@ class NotificationController implements AppTrait {
     EventService eventService
 
     @Secured('ROLE_USER')
-    def index(boolean read, int offset, int max) {
+    def index(boolean readed, int offset, int max) {
         Usuario usuario = currentUser()
 
-        List<Notification> notifications = eventService.findNotifications(usuario, read)
+        List<Notification> notifications = eventService.findNotifications(usuario, readed)
         notifications = collectionService.orderByDateCreated(notifications, false)
         notifications = collectionService.paginate(notifications, offset, max)
 
@@ -27,6 +27,6 @@ class NotificationController implements AppTrait {
     def read() {
         eventService.readNotifications(currentUser())
 
-        render(status: OK)
+        render(status: NO_CONTENT)
     }
 }
