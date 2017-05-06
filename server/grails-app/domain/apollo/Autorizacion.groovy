@@ -23,7 +23,7 @@ class Autorizacion implements Eventable {
     }
 
     def afterInsert() {
-        Event.async.task {
+        Event.withNewSession {
             event = eventService.createEventAndNotify(
                 viaje.usuario,
                 this,

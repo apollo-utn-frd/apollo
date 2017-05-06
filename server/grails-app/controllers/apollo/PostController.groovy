@@ -16,7 +16,7 @@ class PostController implements AppTrait {
         Usuario usuario = Usuario.read(params.id)
 
         if (!usuario) {
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 

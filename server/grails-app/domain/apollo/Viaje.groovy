@@ -55,7 +55,7 @@ class Viaje implements Eventable {
     def afterInsert() {
         downloadPicture()
 
-        Event.async.task {
+        Event.withNewSession {
             event = eventService.createEvent(this.usuario, this, 'viaje')
         }
     }

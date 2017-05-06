@@ -6,14 +6,10 @@ class CollectionService {
      * elementos a mostrar.
      */
     List paginate(List list, int offset, int max) {
-        int start, end
-        int sizeList = list.size()
+        int start = (offset == null || offset < 0) ? 0 : offset
+        int end
 
-        if (offset == null || offset < 0) {
-            start = 0
-        } else {
-            start = offset
-        }
+        int sizeList = list.size()
 
         if (start >= sizeList) {
             return []

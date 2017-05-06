@@ -10,9 +10,7 @@ class ViajeService {
      * se pudieron crear se registran los errores dentro del viaje.
      */
     boolean authorize(Viaje viaje, List<Integer> usuariosId) {
-        List<Integer> uniqueUsuariosId = usuariosId.unique(false)
-
-        for (usuarioId in uniqueUsuariosId) {
+        for (usuarioId in usuariosId) {
             Usuario usuario = Usuario.read(usuarioId)
 
             if (usuario) {

@@ -15,7 +15,7 @@ class ComentarioController implements AppTrait {
         Comentario comentario = Comentario.read(params.id)
 
         if (!comentario?.canReadBy(currentUser())) {
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
@@ -41,16 +41,17 @@ class ComentarioController implements AppTrait {
     @Transactional
     @Secured('ROLE_USER')
     def create() {
+        Usuario usuario = currentUser()
         Viaje viaje = Viaje.read(params.id)
 
-        if (!viaje?.canReadBy(currentUser())) {
+        if (!viaje?.canReadBy(usuario)) {
             transactionStatus.setRollbackOnly()
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
         Comentario comentario = new Comentario(
-            usuario: currentUser(),
+            usuario: usuario,
             viaje: viaje
         )
 
@@ -76,12 +77,12 @@ class ComentarioController implements AppTrait {
 
         if (!comentario?.canDeletedBy(currentUser())) {
             transactionStatus.setRollbackOnly()
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
         comentario.delete(flush: true)
 
-        render(status: NO_CONTENT)
+        render status: NO_CONTENT
     }
 }

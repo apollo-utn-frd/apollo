@@ -16,14 +16,14 @@ class ViajeController implements AppTrait {
     @Secured('permitAll')
     def images() {
         if (!params.file.endsWith('.jpg')) {
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
         File image = new File("${grailsApplication.config.getProperty('app.files.path')}/images/viaje/${params.file}")
 
         if (!image.exists()) {
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
@@ -31,15 +31,12 @@ class ViajeController implements AppTrait {
         Viaje viaje = Viaje.findByImagenLocalPath(request.forwardURI)
 
         if (!viaje?.canReadBy(currentUser())) {
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
         */
 
-        render(
-            file: image,
-            contentType: 'image/jpeg'
-        )
+        render file: image, contentType: 'image/jpeg'
     }
 
     @Secured('permitAll')
@@ -47,7 +44,7 @@ class ViajeController implements AppTrait {
         Viaje viaje = Viaje.read(params.id)
 
         if (!viaje?.canReadBy(currentUser())) {
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
@@ -90,7 +87,7 @@ class ViajeController implements AppTrait {
         viaje.save(flush: true)
 
         if (!viaje.publico) {
-            List<Integer> usuariosId = request.JSON?.autorizaciones.id*.toInteger()
+            List<Integer> usuariosId = request.JSON?.autorizaciones.id*.toInteger().unique()
 
             if (!viajeService.authorize(viaje, usuariosId)) {
                 transactionStatus.setRollbackOnly()
@@ -105,21 +102,22 @@ class ViajeController implements AppTrait {
     @Transactional
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def delete() {
+        Usuario usuario = currentUser()
         Viaje viaje = Viaje.read(params.id)
 
         if (!viaje) {
             transactionStatus.setRollbackOnly()
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
-        if (!viaje.canDeletedBy(currentUser())) {
+        if (!viaje.canDeletedBy(usuario)) {
             transactionStatus.setRollbackOnly()
 
-            if (viaje.canReadBy(currentUser())) {
-                render(status: FORBIDDEN)
+            if (viaje.canReadBy(usuario)) {
+                render status: FORBIDDEN
             } else {
-                render(status: NOT_FOUND)
+                render status: NOT_FOUND
             }
 
             return
@@ -127,6 +125,6 @@ class ViajeController implements AppTrait {
 
         viaje.delete(flush: true)
 
-        render(status: NO_CONTENT)
+        render status: NO_CONTENT
     }
 }

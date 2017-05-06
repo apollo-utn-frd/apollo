@@ -3,7 +3,7 @@ model {
 }
 
 json {
-  read notification.read
+  readed notification.readed
 
   event g.render(
     template: '/event/event',

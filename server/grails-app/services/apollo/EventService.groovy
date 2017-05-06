@@ -24,7 +24,7 @@ class EventService {
             return
         }
 
-        newEvent.save(flush: true)
+        newEvent.merge(flush: true)
     }
 
     /**
@@ -35,22 +35,21 @@ class EventService {
 
         if (newEvent) {
             usuarios.each { Usuario usuario ->
-                // createEvent(newEvent, usuario, 'notificacion')
-
                 /*
                  * Por alguna razón al crear una notificacion acá se intenta guardar
                  * automaticamente al salir del método aunque no haya llamado a save(). Al
                  * guardarse se borra la referencia a newEvent y tira error de que se
                  * quiere guardar NULL en event_id.
+
                 Notification notification = new Notification(
                     usuario: usuario,
                     event: newEvent
                 )
 
                 if (!notification.validate()) {
-                    log.warn "Notification(${event}, ${this}): No se pudo crear por [${notification.errors}]."
+                    log.warn "Notification(${newEvent}, ${this}): No se pudo crear por [${notification.errors}]."
                 } else {
-                    notification.save(flush: true)
+                    notification.merge(flush: true)
                 }
                 */
             }
@@ -68,7 +67,7 @@ class EventService {
             source.id,
             source.class.simpleName,
             types
-        )
+        ).findAll { it.source && it.resource }
     }
 
     /**

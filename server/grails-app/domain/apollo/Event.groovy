@@ -51,14 +51,14 @@ class Event {
     /**
      * Devuelve si el origen del evento.
      */
-    def source() {
+    def getSource() {
         getObject(sourceClass, sourceId)
     }
 
     /**
      * Devuelve si el recurso del evento.
      */
-    def resource() {
+    def getResource() {
         getObject(resourceClass, resourceId)
     }
 

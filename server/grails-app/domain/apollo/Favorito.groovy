@@ -15,7 +15,7 @@ class Favorito implements Eventable {
     }
 
     def afterInsert() {
-        Event.async.task {
+        Event.withNewSession {
             event = eventService.createEventAndNotify(
                 usuario,
                 this,

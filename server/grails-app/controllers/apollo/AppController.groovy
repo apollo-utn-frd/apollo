@@ -11,6 +11,6 @@ class AppController {
      */
     @Secured(value = 'IS_AUTHENTICATED_ANONYMOUSLY', httpMethod = 'OPTIONS')
     def index() {
-        render(status: OK)
+        render status: OK
     }
 }

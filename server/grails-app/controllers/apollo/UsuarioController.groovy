@@ -15,21 +15,18 @@ class UsuarioController implements AppTrait {
     @Secured('permitAll')
     def images() {
         if (!params.file.endsWith('.jpg')) {
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
         File image = new File("${grailsApplication.config.getProperty('app.files.path')}/images/usuario/${params.file}")
 
         if (!image.exists()) {
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
-        render(
-            file: image,
-            contentType: 'image/jpeg'
-        )
+        render file: image, contentType: 'image/jpeg'
     }
 
     @Secured('ROLE_USER')
@@ -39,16 +36,12 @@ class UsuarioController implements AppTrait {
 
     @Secured('permitAll')
     def show() {
-        Usuario usuario = Usuario.read(params.id)
-
-        respond usuario?.sanitize(currentUser())
+        respond Usuario.read(params.id)
     }
 
     @Secured('permitAll')
     def showByUsername() {
-        Usuario usuario = Usuario.findByUsername(params.username)
-
-        respond usuario?.sanitize(currentUser())
+        respond Usuario.findByUsername(params.username)
     }
 
     @Secured('permitAll')
@@ -57,9 +50,6 @@ class UsuarioController implements AppTrait {
             classx: Usuario,
             properties: ['username', 'nombre', 'apellido', 'descripcion'],
             query: query,
-            after: { usuarios ->
-                usuarios*.sanitize(currentUser())
-            },
             max: max,
             offset: offset
         )

@@ -21,6 +21,8 @@ class SearchService {
             }
         }
 
+        results = search.after.call(results)
+
         collectionService.paginate(results, search.offset, search.max)
     }
 }

@@ -16,7 +16,7 @@ class FavoritoController implements AppTrait {
 
         if (!viaje?.canReadBy(usuario)) {
             transactionStatus.setRollbackOnly()
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
@@ -37,23 +37,25 @@ class FavoritoController implements AppTrait {
     @Transactional
     @Secured('ROLE_USER')
     def delete() {
+        Usuario usuario = currentUser()
         Viaje viaje = Viaje.read(params.id)
 
-        if (!viaje?.canReadBy(currentUser())) {
+        if (!viaje?.canReadBy(usuario)) {
             transactionStatus.setRollbackOnly()
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
-        Favorito.findWhere(
-            usuario: currentUser(),
+        Favorito favorito = Favorito.findWhere(
+            usuario: usuario,
             viaje: viaje
-        )?.delete(flush: true)
+        )
 
-        // Fix para error de Grails cuando el favorito fue creado en el Bootstrap.
-        currentUser().favoritos.removeAll([null])
-        viaje.favoritosUsuarios.removeAll([null])
+        // currentUser().favoritos.removeAll([favorito])
+        // viaje.favoritosUsuarios.removeAll([favorito])
 
-        render(status: NO_CONTENT)
+        favorito?.delete(flush: true)
+
+        render status: NO_CONTENT
     }
 }

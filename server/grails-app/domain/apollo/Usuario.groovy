@@ -3,6 +3,7 @@ package apollo
 import groovy.util.logging.Slf4j
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+import org.hibernate.engine.spi.Status
 
 @Slf4j
 @EqualsAndHashCode(includes = 'username')
@@ -34,11 +35,13 @@ class Usuario implements Serializable, Eventable {
 
     private static final long serialVersionUID = 1
 
+    transient securityService
     transient fileService
     transient springSecurityService
 
     static transients = [
         'eventService',
+        'securityService',
         'fileService',
         'springSecurityService'
     ]
@@ -86,19 +89,25 @@ class Usuario implements Serializable, Eventable {
         encodePassword()
     }
 
+    def afterInsert() {
+        downloadPicture()
+
+        Event.withNewSession {
+            event = eventService.createEvent(this, this, 'usuario')
+        }
+    }
+
     def beforeUpdate() {
         if (isDirty('password')) {
             encodePassword()
         }
     }
 
-    def afterInsert() {
-        downloadPicture()
-
-        Event.async.task {
-            event = eventService.createEvent(this, this, 'usuario')
-        }
+    /*
+    def afterLoad() {
+        sanitize(securityService.currentUser())
     }
+    */
 
     void notify(Event event) {
         Notification.async.task {
@@ -118,9 +127,30 @@ class Usuario implements Serializable, Eventable {
      * que un usuario dado como parámetro no puede acceder.
      */
     Usuario sanitize(Usuario usuario) {
-        viajes = viajes.findAll { it.canReadBy(usuario) }
-        favoritos = favoritos.findAll { it.canReadBy(usuario) }
-        comentarios = comentarios.findAll { it.canReadBy(usuario) }
+        viajes = viajes.findAll { viaje ->
+            /*
+            boolean notDeleted = Viaje.withSession { session ->
+                session.persistenceContext.getEntry(viaje).status != Status.DELETED
+            }
+            */
+
+            Viaje.exists(viaje.id) && viaje.canReadBy(usuario)
+        }
+
+        favoritos = favoritos.findAll { favorito ->
+            Favorito.exists(favorito.id) && favorito.canReadBy(usuario)
+        }
+
+        comentarios = comentarios.findAll { comentario ->
+            /*
+            boolean notDeleted = Comentario.withSession { session ->
+                session.persistenceContext.getEntry(comentario).status != Status.DELETED
+            }
+            */
+
+            Comentario.exists(comentario.id) && comentario.canReadBy(usuario)
+        }
+
         this
     }
 

@@ -15,10 +15,11 @@ trait Eventable {
 
     abstract afterInsert()
 
+    /* No funciona
     def beforeDelete() {
-        /* No funciona */
-        Event.async.task {
-            event?.delete(flush: true)
+        Event.withNewSession {
+            event?.delete()
         }
     }
+    */
 }

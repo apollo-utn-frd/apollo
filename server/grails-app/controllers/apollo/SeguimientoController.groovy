@@ -14,7 +14,7 @@ class SeguimientoController implements AppTrait {
 
         if (!seguido) {
             transactionStatus.setRollbackOnly()
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
@@ -38,7 +38,7 @@ class SeguimientoController implements AppTrait {
 
         if (!seguido) {
             transactionStatus.setRollbackOnly()
-            render(status: NOT_FOUND)
+            render status: NOT_FOUND
             return
         }
 
@@ -51,6 +51,6 @@ class SeguimientoController implements AppTrait {
         currentUser().seguidos.removeAll([null])
         seguido.seguidores.removeAll([null])
 
-        render(status: NO_CONTENT)
+        render status: NO_CONTENT
     }
 }

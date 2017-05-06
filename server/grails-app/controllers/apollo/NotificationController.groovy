@@ -27,6 +27,6 @@ class NotificationController implements AppTrait {
     def read() {
         eventService.readNotifications(currentUser())
 
-        render(status: NO_CONTENT)
+        render status: NO_CONTENT
     }
 }
